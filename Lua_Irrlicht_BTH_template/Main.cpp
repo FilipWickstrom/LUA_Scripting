@@ -1,9 +1,13 @@
 #include "LuaHandler.h"
 #include "Graphics.h"
 #include "Model.h"
+#include "SceneManager.h"
 
 int main()
 {
+	SceneManager sceneManager;
+	Scene* testScene = sceneManager.GetScene(0);
+
 	srand((unsigned int)time(nullptr));
 
 	while(Graphics::GetDevice()->run()) {

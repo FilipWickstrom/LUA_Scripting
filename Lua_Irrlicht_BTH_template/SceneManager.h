@@ -7,14 +7,13 @@ class SceneManager
 {
 private:
 
-	std::unordered_map<std::string, Scene> m_scenes;
-	SceneManager();
-	~SceneManager();
+	std::vector<Scene> m_scenes;
 
 public:
 
-	static auto& Get();
-	static void AddScene(const std::string& sceneName);
-	static Scene& GetScene(const std::string& sceneName);
+	SceneManager();
+	~SceneManager();
 
+	void AddScene();
+	Scene* GetScene(const size_t& scene_pos);
 };

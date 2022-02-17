@@ -2,25 +2,23 @@
 
 SceneManager::SceneManager()
 {
+    AddScene();
 }
 
 SceneManager::~SceneManager()
 {
+
 }
 
-auto& SceneManager::Get()
+void SceneManager::AddScene()
 {
-    static SceneManager instance;
-    return instance;
+    m_scenes.push_back(Scene());
 }
 
-void SceneManager::AddScene(const std::string& sceneName)
+Scene* SceneManager::GetScene(const size_t& scene_pos)
 {
-    Scene newScene;
-    Get().m_scenes.emplace(sceneName, newScene);
-}
+    Scene* p = nullptr;
+    p = &m_scenes[scene_pos];
 
-Scene& SceneManager::GetScene(const std::string& sceneName)
-{
-    return Get().m_scenes.at(sceneName);
+    return p;
 }
