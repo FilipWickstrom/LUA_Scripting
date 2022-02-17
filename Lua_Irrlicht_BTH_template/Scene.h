@@ -6,7 +6,7 @@ class Scene
 {
 private:
 
-	std::vector<Model*> m_models;
+	std::vector<Model> m_models;
 
 public:
 

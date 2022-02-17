@@ -4,7 +4,7 @@
 
 void Model::LoadMesh(std::string& meshName)
 {
-	meshName = "../Bin/Meshes/" + meshName;
+	meshName = "../../Bin/Meshes/" + meshName;
 
 	irr::scene::IMesh* mesh = Graphics::GetSceneManager()->getMesh(meshName.c_str());
 	if (mesh == nullptr)
@@ -27,7 +27,10 @@ Model::Model(std::string& meshName, irr::core::vector3df pos, irr::core::vector3
 
 void Model::Update()
 {
-	m_node->setPosition(m_position);
-	m_node->setRotation(m_rotation);
-	m_node->setScale(m_scale);
+	if (m_node)
+	{
+		m_node->setPosition(m_position);
+		m_node->setRotation(m_rotation);
+		m_node->setScale(m_scale);
+	}
 }
