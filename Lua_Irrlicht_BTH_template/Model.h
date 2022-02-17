@@ -7,6 +7,8 @@ class Model: public Object
 private:
 
 	irr::scene::ISceneNode* m_node;
+
+	// This could potentially be used with the script to identify which model is linked to which table.
 	unsigned int m_id;
 
 	void LoadMesh(std::string& meshName);
