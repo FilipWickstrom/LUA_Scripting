@@ -39,9 +39,6 @@
     <ClCompile Include="LuaHandler.cpp">
       <Filter>Header Files\Managers</Filter>
     </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Object.cpp">
       <Filter>Header Files\Object</Filter>
     </ClCompile>
@@ -53,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Header Files\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Header Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

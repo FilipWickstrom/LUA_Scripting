@@ -13,5 +13,6 @@ public:
 	~Camera();
 
 	void Setup();
+	void SetActive();
 
 };

@@ -21,4 +21,5 @@ public:
 
 	// Loop through all models and update them.
 	void Update();
+	void SetActive();
 };

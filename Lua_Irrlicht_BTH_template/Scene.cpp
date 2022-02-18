@@ -22,3 +22,8 @@ void Scene::Update()
 		m_models[i].Update();
 	}
 }
+
+void Scene::SetActive()
+{
+	m_camera.SetActive();
+}

@@ -18,3 +18,8 @@ void Camera::Setup()
 	orthoMatrix.buildProjectionMatrixOrthoLH(50, 26, 0, 20);
 	m_camera->setProjectionMatrix(orthoMatrix);
 }
+
+void Camera::SetActive()
+{
+	Graphics::GetSceneManager()->setActiveCamera(m_camera);
+}

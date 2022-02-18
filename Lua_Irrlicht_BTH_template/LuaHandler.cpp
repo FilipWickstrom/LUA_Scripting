@@ -37,3 +37,9 @@ lua_State*& LuaHandler::GetLua()
 {
 	return Get().m_state;
 }
+
+int LuaHandler::LoadScript(const std::string& script_name)
+{
+	int error = luaL_dofile(Get().m_state, script_name.c_str());
+	return error;
+}
