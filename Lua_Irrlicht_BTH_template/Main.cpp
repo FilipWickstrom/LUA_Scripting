@@ -9,6 +9,8 @@ int main()
 	Scene* testScene = sceneManager.GetScene(0);
 	testScene->AddObject("shitty_tree.obj", { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f },
 		{ 1.0f, 1.0f, 1.0f });
+	testScene->AddObject("shitty_tree.obj", { 2.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f },
+		{ 1.0f, 1.0f, 1.0f });
 
 	srand((unsigned int)time(nullptr));
 

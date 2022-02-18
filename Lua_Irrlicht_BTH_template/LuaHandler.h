@@ -9,6 +9,7 @@
 #include <lua.hpp>
 #include "lua.hpp"
 #include <thread>
+#include <string>
 
 class LuaHandler
 {
