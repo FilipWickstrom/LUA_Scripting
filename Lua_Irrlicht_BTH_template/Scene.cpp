@@ -2,7 +2,7 @@
 
 Scene::Scene()
 {
-
+	m_camera.Setup();
 }
 
 Scene::~Scene()

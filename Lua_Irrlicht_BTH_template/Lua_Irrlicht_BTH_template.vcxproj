@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="LuaHandler.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -149,6 +150,7 @@
     <ClCompile Include="SceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="LuaHandler.h" />
     <ClInclude Include="Model.h" />

@@ -10,8 +10,6 @@ int main()
 	testScene->AddObject("shitty_tree.obj", { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f },
 		{ 1.0f, 1.0f, 1.0f });
 
-
-
 	srand((unsigned int)time(nullptr));
 
 	while(Graphics::GetDevice()->run()) {

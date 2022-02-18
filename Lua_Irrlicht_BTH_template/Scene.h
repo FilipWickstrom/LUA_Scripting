@@ -1,12 +1,14 @@
 #pragma once
 #include <vector>
 #include "Model.h"
+#include "Camera.h"
 
 class Scene
 {
 private:
 
 	std::vector<Model> m_models;
+	Camera m_camera;
 
 public:
 
