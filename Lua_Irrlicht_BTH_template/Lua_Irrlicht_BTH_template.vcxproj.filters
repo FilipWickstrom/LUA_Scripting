@@ -28,6 +28,12 @@
     <Filter Include="Header Files\Camera">
       <UniqueIdentifier>{e8aa40a6-cc28-49d6-8937-0003db3bc8c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Input">
+      <UniqueIdentifier>{8f5f72f6-223a-4097-835f-f3b0de5524fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Lua Scripts">
+      <UniqueIdentifier>{b8dc139f-2000-41da-b654-ad6d8b42c87a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -54,6 +60,9 @@
     <ClCompile Include="SceneManager.cpp">
       <Filter>Header Files\Managers</Filter>
     </ClCompile>
+    <ClCompile Include="InputHandler.cpp">
+      <Filter>Header Files\Input</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Graphics.h">
@@ -77,5 +86,25 @@
     <ClInclude Include="Camera.h">
       <Filter>Header Files\Camera</Filter>
     </ClInclude>
+    <ClInclude Include="InputHandler.h">
+      <Filter>Header Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="Includer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\gameObject.lua">
+      <Filter>Resource Files\Lua Scripts</Filter>
+    </None>
+    <None Include="Scripts\Monster.lua">
+      <Filter>Resource Files\Lua Scripts</Filter>
+    </None>
+    <None Include="Scripts\Player.lua">
+      <Filter>Resource Files\Lua Scripts</Filter>
+    </None>
+    <None Include="SpawnScript.lua">
+      <Filter>Resource Files\Lua Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>

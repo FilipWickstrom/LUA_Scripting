@@ -27,5 +27,5 @@ public:
 	static lua_State*& GetLua();
 
 	// Load a script from file. Make sure its inside the "Scripts" Folder
-	static int LoadScript(const std::string& script_name);
+	static void LoadScript(const std::string& script_name);
 };

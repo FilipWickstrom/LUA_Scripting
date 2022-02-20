@@ -142,6 +142,7 @@
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Graphics.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="LuaHandler.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model.cpp" />
@@ -152,11 +153,19 @@
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Graphics.h" />
+    <ClInclude Include="Includer.h" />
+    <ClInclude Include="InputHandler.h" />
     <ClInclude Include="LuaHandler.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SceneManager.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Scripts\gameObject.lua" />
+    <None Include="Scripts\Monster.lua" />
+    <None Include="Scripts\Player.lua" />
+    <None Include="SpawnScript.lua" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

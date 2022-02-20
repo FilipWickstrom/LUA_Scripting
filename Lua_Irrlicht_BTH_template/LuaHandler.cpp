@@ -38,8 +38,19 @@ lua_State*& LuaHandler::GetLua()
 	return Get().m_state;
 }
 
-int LuaHandler::LoadScript(const std::string& script_name)
+void LuaHandler::LoadScript(const std::string& script_name)
 {
-	int error = luaL_dofile(Get().m_state, script_name.c_str());
-	return error;
+
+// Relative path is very scuffed in debug.
+#ifdef _DEBUG
+	std::string script = "../../Lua_Irrlicht_BTH_template/Scripts/" + script_name;
+#else
+	std::string script = "Scripts/" + script_name;
+#endif
+	int error = luaL_dofile(Get().m_state, script.c_str());
+
+	if (lua_isstring(Get().m_state, -1))
+	{
+		std::cout << "Error: " << lua_tostring(Get().m_state, -1) << "\n";
+	}
 }

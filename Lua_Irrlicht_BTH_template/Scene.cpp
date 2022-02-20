@@ -17,6 +17,8 @@ void Scene::AddObject(std::string modelPath, irr::core::vector3df pos, irr::core
 
 void Scene::Update()
 {
+	// Update everything in the scene.
+
 	for (int i = 0; i < (int)m_models.size(); i++)
 	{
 		m_models[i].Update();

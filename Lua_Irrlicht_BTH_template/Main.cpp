@@ -1,7 +1,5 @@
-#include "LuaHandler.h"
-#include "Graphics.h"
-#include "Model.h"
-#include "SceneManager.h"
+#include "Includer.h"
+#include <iostream>
 
 int main()
 {
@@ -14,12 +12,15 @@ int main()
 
 	srand((unsigned int)time(nullptr));
 
+	LuaHandler::LoadScript("SpawnScript.lua");
+
 	while(Graphics::GetDevice()->run()) {
 		// First begin draw.
 		Graphics::GetDriver()->beginScene(true, true, irr::video::SColor(255, 90, 101, 140));
 
 		Graphics::GetSceneManager()->drawAll();
 		Graphics::GetGUIEnvironment()->drawAll();
+
 
 
 		// Update on CPU while the GPU is busy drawing.
