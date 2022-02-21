@@ -25,6 +25,16 @@ Model::Model(std::string& meshName, irr::core::vector3df pos, irr::core::vector3
 	this->LoadMesh(meshName);
 }
 
+void Model::SetID(unsigned int id)
+{
+	m_id = id;
+}
+
+const unsigned int& Model::GetID() const
+{
+	return m_id;
+}
+
 void Model::Update()
 {
 	if (m_node)

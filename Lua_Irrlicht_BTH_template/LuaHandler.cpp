@@ -2,6 +2,15 @@
 #include <Windows.h>
 #include <iostream>
 
+void DumpStack(lua_State* L)
+{
+	std::cout << "------- STACK DUMP -------\n";
+	for (int i = lua_gettop(L); i > 0; i--)
+	{
+		std::cout << "Index " << i << ": " << lua_typename(L, lua_type(L, i)) << "\n";
+	}
+	std::cout << "--------------------------\n";
+}
 
 void ConsoleThread(lua_State* L) {
 	char command[1000];

@@ -10,10 +10,10 @@ Graphics::Graphics()
     }
 
     m_device->setWindowCaption(L"Budget Binding of Isaac");
-
     m_driver = m_device->getVideoDriver();
     m_sceneManager = m_device->getSceneManager();
     m_guiEnvironment = m_device->getGUIEnvironment();
+    dt = 0.0;
 }
 
 Graphics::~Graphics()
@@ -45,4 +45,9 @@ irr::scene::ISceneManager* Graphics::GetSceneManager()
 irr::gui::IGUIEnvironment* Graphics::GetGUIEnvironment()
 {
     return Get().m_guiEnvironment;
+}
+
+double& Graphics::GetDeltaTime()
+{
+    return Get().dt;
 }

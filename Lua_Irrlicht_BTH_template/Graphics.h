@@ -3,6 +3,7 @@
 #include <unordered_map>
 #include "InputHandler.h"
 
+
 class Graphics
 {
 private:
@@ -16,6 +17,9 @@ private:
 	// Memory Management
 	std::unordered_map<std::string, irr::scene::ISceneNode*> m_nodes;
 
+	// Delta time
+	double dt;
+
 	Graphics();
 	~Graphics();
 
@@ -27,4 +31,5 @@ public:
 	static irr::scene::ISceneManager* GetSceneManager();
 	static irr::gui::IGUIEnvironment* GetGUIEnvironment();
 
+	static double& GetDeltaTime();
 };

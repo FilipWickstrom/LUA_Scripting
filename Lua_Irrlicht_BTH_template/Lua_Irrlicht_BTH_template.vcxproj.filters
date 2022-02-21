@@ -34,6 +34,12 @@
     <Filter Include="Resource Files\Lua Scripts">
       <UniqueIdentifier>{b8dc139f-2000-41da-b654-ad6d8b42c87a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{4962bb19-d175-43fa-8347-4f2990523ccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Lua Managers">
+      <UniqueIdentifier>{51754632-c18a-4f99-af37-e7f668a52236}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -62,6 +68,12 @@
     </ClCompile>
     <ClCompile Include="InputHandler.cpp">
       <Filter>Header Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Header Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="BasicEnemyManager.cpp">
+      <Filter>Header Files\Lua Managers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,6 +104,15 @@
     <ClInclude Include="Includer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="BasicEnemyManager.h">
+      <Filter>Header Files\Lua Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Components.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\gameObject.lua">
@@ -101,9 +122,6 @@
       <Filter>Resource Files\Lua Scripts</Filter>
     </None>
     <None Include="Scripts\Player.lua">
-      <Filter>Resource Files\Lua Scripts</Filter>
-    </None>
-    <None Include="SpawnScript.lua">
       <Filter>Resource Files\Lua Scripts</Filter>
     </None>
   </ItemGroup>

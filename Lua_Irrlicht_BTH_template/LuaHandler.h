@@ -11,6 +11,11 @@
 #include <thread>
 #include <string>
 
+#define LUA LuaHandler::GetLua()
+
+// Dump the lua stack to console.
+void DumpStack(lua_State* L);
+
 class LuaHandler
 {
 private:
