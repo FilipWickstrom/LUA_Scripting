@@ -72,7 +72,7 @@
     <ClCompile Include="Game.cpp">
       <Filter>Header Files\Game</Filter>
     </ClCompile>
-    <ClCompile Include="BasicEnemyManager.cpp">
+    <ClCompile Include="EnemyManager.cpp">
       <Filter>Header Files\Lua Managers</Filter>
     </ClCompile>
   </ItemGroup>
@@ -107,11 +107,11 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files\Game</Filter>
     </ClInclude>
-    <ClInclude Include="BasicEnemyManager.h">
-      <Filter>Header Files\Lua Managers</Filter>
-    </ClInclude>
     <ClInclude Include="Components.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>Header Files\Lua Managers</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

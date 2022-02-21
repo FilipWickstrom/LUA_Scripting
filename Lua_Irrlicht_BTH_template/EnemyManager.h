@@ -1,30 +1,32 @@
 #pragma once
 #include "Components.h"
-#include "Model.h"
 #include <lua.hpp>
 
-constexpr int ENEMY_MAX_COUNT = 25;
+namespace enemyId
+{
+	static unsigned int s_freeIndex = 0;
+	void PopNextID();
+}
 
-class BasicEnemyManager
+class EnemyManager
 {
 private:
 
-	int ids[ENEMY_MAX_COUNT] = {-1};
-	int m_nrOfEnemies = 0;
+
+	void SetupBasicEnemy();
+	void LuaNewBasicEnemy();
 
 public:
 
-	void NewEnemy();
+	EnemyManager();
+	~EnemyManager() = default;
 
-	BasicEnemyManager();
-	~BasicEnemyManager() = default;
+	void NewBasicEnemy();
 
 };
 
 namespace basicEnemy
 {
-	static unsigned int s_freeIndex = 0;
-
 	class BasicEnemy
 	{
 	private:
@@ -38,6 +40,9 @@ namespace basicEnemy
 	public:
 
 		BasicEnemy(unsigned int index);
+
+		position_t GetPosition();
+		float GetAttack();
 
 	};
 
