@@ -8,7 +8,7 @@ class Scene
 {
 private:
 
-	std::unordered_map<unsigned int, Model> m_models;
+	std::unordered_map<unsigned int, Model*> m_models;
 
 	// Lua manager for all enemies.
 	EnemyManager m_enemyManager;

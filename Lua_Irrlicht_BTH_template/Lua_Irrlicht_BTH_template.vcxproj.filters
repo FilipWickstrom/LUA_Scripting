@@ -124,5 +124,8 @@
     <None Include="Scripts\Player.lua">
       <Filter>Resource Files\Lua Scripts</Filter>
     </None>
+    <None Include="Scripts\gameLoop.lua">
+      <Filter>Resource Files\Lua Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>

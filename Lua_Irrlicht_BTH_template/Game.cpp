@@ -3,13 +3,21 @@
 
 void Game::Update()
 {
-
+	m_currentScene->Update();
 }
 
 Game::Game()
 {
-	LuaHandler::LoadScript("SpawnScript.lua");
+	LuaHandler::LoadScript("gameLoop.lua");
 	m_currentScene = m_sceneManager.GetScene(0);
+	m_currentScene->AddBasicEnemy(0, 0);
+	m_currentScene->AddBasicEnemy(3, 1);
+	m_currentScene->AddBasicEnemy(6, 1);
+	m_currentScene->AddBasicEnemy(9, 1);
+
+	//if (lua_isstring(LUA, -2))
+	//	std::cout << "Error: " << lua_tostring(LUA, -2) << "\n";
+
 	DumpStack(LUA);
 }
 

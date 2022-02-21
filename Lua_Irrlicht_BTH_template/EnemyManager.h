@@ -5,7 +5,6 @@
 namespace enemyId
 {
 	static unsigned int s_freeIndex = 0;
-	void PopNextID();
 }
 
 class EnemyManager
@@ -21,7 +20,7 @@ public:
 	EnemyManager();
 	~EnemyManager() = default;
 
-	void NewBasicEnemy();
+	void NewBasicEnemy(float x, float y);
 
 };
 
@@ -41,7 +40,7 @@ namespace basicEnemy
 
 		BasicEnemy(unsigned int index);
 
-		position_t GetPosition();
+		position_t& GetPosition();
 		float GetAttack();
 
 	};

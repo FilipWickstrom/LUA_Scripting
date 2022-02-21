@@ -1,12 +1,6 @@
 #include "EnemyManager.h"
 #include "Includer.h"
 
-void enemyId::PopNextID()
-{
-	s_freeIndex++;
-}
-
-
 void EnemyManager::LuaNewBasicEnemy()
 {
 	lua_getglobal(LUA, "BasicMonster");
@@ -118,7 +112,7 @@ basicEnemy::BasicEnemy::BasicEnemy(unsigned int index)
 	m_speed = 5.0f;
 }
 
-position_t basicEnemy::BasicEnemy::GetPosition()
+position_t& basicEnemy::BasicEnemy::GetPosition()
 {
 	return m_pos;
 }
@@ -133,7 +127,17 @@ EnemyManager::EnemyManager()
 	SetupBasicEnemy();
 }
 
-void EnemyManager::NewBasicEnemy()
+void EnemyManager::NewBasicEnemy(float x, float y)
 {
 	LuaNewBasicEnemy();
+
+	void* ptr = luaL_testudata(LUA, -1, "BasicMonster");
+	if (ptr)
+	{
+		basicEnemy::BasicEnemy* enemy = *(basicEnemy::BasicEnemy**) ptr;
+
+		enemy->GetPosition().x = x;
+		enemy->GetPosition().y = y;
+	}
 }
+
