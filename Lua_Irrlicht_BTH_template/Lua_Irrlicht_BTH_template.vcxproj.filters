@@ -127,5 +127,8 @@
     <None Include="Scripts\gameLoop.lua">
       <Filter>Resource Files\Lua Scripts</Filter>
     </None>
+    <None Include="BasicBossEnemy.lua">
+      <Filter>Resource Files\Lua Scripts</Filter>
+    </None>
   </ItemGroup>
 </Project>

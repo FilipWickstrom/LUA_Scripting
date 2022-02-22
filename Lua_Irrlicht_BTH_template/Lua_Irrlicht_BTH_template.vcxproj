@@ -167,6 +167,7 @@
     <ClInclude Include="SceneManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="BasicBossEnemy.lua" />
     <None Include="Scripts\gameLoop.lua" />
     <None Include="Scripts\gameObject.lua" />
     <None Include="Scripts\Monster.lua" />

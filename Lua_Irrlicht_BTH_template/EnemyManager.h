@@ -50,4 +50,6 @@ namespace basicEnemy
 	int GetBasicMonsterPos(lua_State* L);
 
 	int BasicMonsterAttack(lua_State* L);
+
+	int ChasePlayerBasicMonster(lua_State* L);
 }

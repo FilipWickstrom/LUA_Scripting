@@ -9,7 +9,7 @@ void EnemyManager::LuaNewBasicEnemy()
 	//lua_remove(LUA, lua_gettop(LUA) - 1);
 
 	lua_getglobal(LUA, "addMonster");
-	lua_pcall(LUA, 0, 0, 0);
+	lua_pcall(LUA, 0, 1, 0);
 }
 
 void EnemyManager::SetupBasicEnemy()
@@ -23,8 +23,8 @@ void EnemyManager::SetupBasicEnemy()
 		luaL_Reg BasicMonsterFuncs[] =
 		{
 			{"new", basicEnemy::CreateBasicMonster},
-			{"pos", basicEnemy::GetBasicMonsterPos},
-			{"attack", basicEnemy::BasicMonsterAttack},
+			{"GetPos", basicEnemy::GetBasicMonsterPos},
+			{"AttackPlayer", basicEnemy::BasicMonsterAttack},
 			{NULL, NULL}
 		};
 
@@ -40,6 +40,22 @@ void EnemyManager::SetupBasicEnemy()
 		lua_setglobal(LUA, "BasicMonster");
 
 		lua_getglobal(LUA, "BasicMonster");
+
+		lua_pushnumber(LUA, 7.5f);
+		lua_setfield(LUA, -2, "attack");
+
+		lua_pushnumber(LUA, 5.0f);
+		lua_setfield(LUA, -2, "speed");
+
+		lua_pushnumber(LUA, 0);
+		lua_setfield(LUA, -2, "x");
+
+		lua_pushnumber(LUA, 0);
+		lua_setfield(LUA, -2, "y");
+
+		//lua_pushnumber(LUA, -1);
+		//lua_setfield(LUA, -2, "id");
+
 		// Pop out the table.
 		lua_pop(LUA, -1);
 	}
@@ -104,6 +120,12 @@ int basicEnemy::BasicMonsterAttack(lua_State* L)
 			}
 		}
 	}
+
+	return 0;
+}
+
+int basicEnemy::ChasePlayerBasicMonster(lua_State* L)
+{
 
 	return 0;
 }

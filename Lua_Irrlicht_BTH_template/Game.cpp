@@ -4,6 +4,16 @@
 void Game::Update()
 {
 	m_currentScene->Update();
+
+	lua_getglobal(LUA, "Update");
+	lua_pcall(LUA, 0, 1, 0);
+	int lua_return = lua_tonumber(LUA, -1);
+	lua_pop(LUA, 1);
+
+	if (lua_return > 0)
+	{
+		// Player died.
+	}
 }
 
 Game::Game()
@@ -11,15 +21,16 @@ Game::Game()
 	LuaHandler::LoadScript("gameLoop.lua");
 	m_currentScene = m_sceneManager.GetScene(0);
 	m_currentScene->AddBasicEnemy(0, 0);
-	m_currentScene->AddBasicEnemy(3, 1);
+	/*m_currentScene->AddBasicEnemy(3, 1);
 	m_currentScene->AddBasicEnemy(6, 1);
-	m_currentScene->AddBasicEnemy(9, 1);
+	m_currentScene->AddBasicEnemy(9, 1);*/
 
-	//if (lua_isstring(LUA, -2))
-	//	std::cout << "Error: " << lua_tostring(LUA, -2) << "\n";
+	if (lua_isstring(LUA, -1))
+		std::cout << "Error: " << lua_tostring(LUA, -1) << "\n";
 
-	lua_getglobal(LUA, "getMonsters");
-	lua_pcall(LUA, 0, 4, 0);
+	//lua_getglobal(LUA, "getMonsters");
+	//lua_pcall(LUA, 0, 4, 0);
+
 
 	DumpStack(LUA);
 }
