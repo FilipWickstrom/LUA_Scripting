@@ -8,6 +8,7 @@ end
 
 function addMonster()
 	local monster = refMonster:New()
+	--print(monster.id)
 	table.insert(monsters, monster)
 
 	for k, v in pairs(monsters) do

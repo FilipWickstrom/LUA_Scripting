@@ -8,6 +8,7 @@ end
 function gameObject:New(g)
 	g = g or {}
 	g.position = {x = 0, y = 0}
+	g.id = 0
 	self.__index = self
 	setmetatable(g, self)
 
