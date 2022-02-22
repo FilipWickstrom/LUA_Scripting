@@ -18,6 +18,9 @@ Game::Game()
 	//if (lua_isstring(LUA, -2))
 	//	std::cout << "Error: " << lua_tostring(LUA, -2) << "\n";
 
+	lua_getglobal(LUA, "getMonsters");
+	lua_pcall(LUA, 0, 4, 0);
+
 	DumpStack(LUA);
 }
 

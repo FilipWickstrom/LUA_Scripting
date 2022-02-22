@@ -3,10 +3,13 @@
 
 void EnemyManager::LuaNewBasicEnemy()
 {
-	lua_getglobal(LUA, "BasicMonster");
-	lua_getfield(LUA, -1, "new");
-	lua_pcall(LUA, 0, 1, 0);
-	lua_remove(LUA, lua_gettop(LUA) - 1);
+	//lua_getglobal(LUA, "BasicMonster");
+	//lua_getfield(LUA, -1, "new");
+	//lua_pcall(LUA, 0, 1, 0);
+	//lua_remove(LUA, lua_gettop(LUA) - 1);
+
+	lua_getglobal(LUA, "addMonster");
+	lua_pcall(LUA, 0, 0, 0);
 }
 
 void EnemyManager::SetupBasicEnemy()
