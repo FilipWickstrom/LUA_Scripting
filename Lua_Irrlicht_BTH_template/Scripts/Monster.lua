@@ -8,8 +8,11 @@ function Monster:New()
 	g.worth = 50
 	g.xp = 25
 	g.damage = 5
+	g.speed = 0.5
+	g.type = "Basic"
 	self.__index = Monster
 	setmetatable(g, self)
+
 	return g
 end
 
@@ -20,7 +23,6 @@ end
 
 function Monster:OnHit(playerHp)
 	playerHp = playerHp - self.damage
-	print("yo tengo un gato y perro en mi pantaloneeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeees amigoooooooooooooooo ppoooooooooorrr favoooooooooorrrrrrrrrrr")
 	return playerHp
 end
 

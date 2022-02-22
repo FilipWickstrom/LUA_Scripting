@@ -8,7 +8,8 @@ function BasicBoss:New()
 	g.worth = 50
 	g.xp = 25
 	g.damage = 25
-	g.speed = 0.5;
+	g.speed = 0.5
+	g.type = "Boss"
 	self.__index = BasicBoss
 	setmetatable(g, self)
 	return g
