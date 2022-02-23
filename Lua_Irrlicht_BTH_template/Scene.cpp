@@ -18,12 +18,12 @@ void Scene::AddBasicEnemy(float x, float y)
 	m_enemyManager.NewBasicEnemy(x, y);
 	this->AddObject("../Meshes/shitty_tree.obj", { x, 0.0f, y },
 		{ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
-	enemyId::s_freeIndex++;
+	EnemyManager::m_freeIndex++;
 }
 
 void Scene::AddObject(std::string modelPath, irr::core::vector3df pos, irr::core::vector3df rot, irr::core::vector3df scale)
 {
-	m_models[enemyId::s_freeIndex] = new Model(modelPath, pos, rot, scale);
+	m_models[EnemyManager::m_freeIndex] = new Model(modelPath, pos, rot, scale, EnemyManager::m_freeIndex);
 }
 
 void Scene::Update()

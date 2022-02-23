@@ -2,11 +2,6 @@
 #include "Components.h"
 #include <lua.hpp>
 
-namespace enemyId
-{
-	static unsigned int s_freeIndex = 0;
-}
-
 class EnemyManager
 {
 private:
@@ -22,6 +17,7 @@ public:
 
 	void NewBasicEnemy(float x, float y);
 
+	static unsigned int m_freeIndex;
 };
 
 namespace basicEnemy

@@ -13,7 +13,7 @@ function gameObject:New(g)
 	setmetatable(g, self)
 
 	-- Add effects here.
-	g:randomizePos()
+	--g:randomizePos()
 
 	return g
 end

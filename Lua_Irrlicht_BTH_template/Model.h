@@ -19,6 +19,10 @@ public:
 	Model(std::string& meshName, irr::core::vector3df pos,
 		irr::core::vector3df rot, irr::core::vector3df scale);
 
+	Model(std::string& meshName, irr::core::vector3df pos,
+		irr::core::vector3df rot, irr::core::vector3df scale,
+		unsigned int& id);
+
 	void SetID(unsigned int id);
 	const unsigned int& GetID() const;
 

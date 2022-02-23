@@ -1,6 +1,8 @@
 #include "EnemyManager.h"
 #include "Includer.h"
 
+unsigned int EnemyManager::m_freeIndex = 0;
+
 void EnemyManager::LuaNewBasicEnemy()
 {
 	//lua_getglobal(LUA, "BasicMonster");
@@ -9,7 +11,10 @@ void EnemyManager::LuaNewBasicEnemy()
 	//lua_remove(LUA, lua_gettop(LUA) - 1);
 
 	lua_getglobal(LUA, "addMonster");
-	lua_pcall(LUA, 0, 0, 0);
+	int id = (int)m_freeIndex;
+	lua_pushnumber(LUA, id);
+
+	lua_pcall(LUA, 1, 0, 0);
 }
 
 void EnemyManager::SetupBasicEnemy()
@@ -67,7 +72,7 @@ void EnemyManager::SetupBasicEnemy()
 int basicEnemy::CreateBasicMonster(lua_State* L)
 {
 	BasicEnemy** monster = reinterpret_cast<BasicEnemy**>(lua_newuserdata(L, sizeof(BasicEnemy*)));
-	*monster = new BasicEnemy(enemyId::s_freeIndex);
+	*monster = new BasicEnemy(EnemyManager::m_freeIndex);
 
 	luaL_getmetatable(L, "BasicMonster");
 	lua_setmetatable(L, -2);

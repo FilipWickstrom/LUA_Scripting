@@ -6,14 +6,21 @@ function GetPlayerPos()
 	return player:getPosition()
 end
 
-function addMonster()
+function addMonster(ind)
 	local monster = refMonster:New()
-	--print(monster.id)
+	monster.id = ind
+	print(ind)
 	table.insert(monsters, monster)
+end
 
+function getMonsterPosition(index)
 	for k, v in pairs(monsters) do
-		--print(v.type)
+		if v.id == index then
+			return v.position.x, v.position.y
+		end
 	end
+
+	return 0, 0
 end
 
 -- Returns all variables from the monsters table, in this case userdata.
