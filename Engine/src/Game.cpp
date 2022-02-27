@@ -7,7 +7,7 @@ void Game::Update()
 
 	lua_getglobal(LUA, "Update");
 	lua_pcall(LUA, 0, 1, 0);
-	int lua_return = lua_tonumber(LUA, -1);
+	int lua_return = static_cast<int>(lua_tonumber(LUA, -1));
 	lua_pop(LUA, 1);
 
 	if (lua_return > 0)

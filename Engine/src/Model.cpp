@@ -52,8 +52,8 @@ void Model::Update()
 
 	if (ret == 0)
 	{
-		m_position.X = lua_tonumber(LUA, -2);
-		m_position.Z = lua_tonumber(LUA, -1);
+		m_position.X = static_cast<irr::f32>(lua_tonumber(LUA, -2));
+		m_position.Z = static_cast<irr::f32>(lua_tonumber(LUA, -1));
 		lua_pop(LUA, 2);
 	}
 	else
