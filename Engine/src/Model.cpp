@@ -47,13 +47,13 @@ void Model::Update()
 {
 	// Gather the position from LUA
 	lua_getglobal(LUA, "getMonsterPosition");
-	lua_pushnumber(LUA, 1);
+	lua_pushnumber(LUA, m_id);
 	int ret = lua_pcall(LUA, 1, 2, 0);
 
 	if (ret == 0)
 	{
-		m_position.X = static_cast<irr::f32>(lua_tonumber(LUA, -2));
-		m_position.Z = static_cast<irr::f32>(lua_tonumber(LUA, -1));
+		m_position.X = static_cast<irr::f32>(lua_tonumber(LUA, -1));
+		m_position.Z = static_cast<irr::f32>(lua_tonumber(LUA, -2));
 		lua_pop(LUA, 2);
 	}
 	else
