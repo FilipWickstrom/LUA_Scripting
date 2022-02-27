@@ -8,8 +8,8 @@ project "Game"
 
 	
 	-- Define the location of pre-compiled header.
-    --pchheader "EnginePCH.h"
-	--pchsource "src/EnginePCH.cpp"
+    pchheader "PCH.h"
+		pchsource "src/PCH.cpp"
 
     -- Define the location(s) of files.
     files {
@@ -29,7 +29,7 @@ project "Game"
     }
 
     vpaths {
-		["Lua Scripts"] = { "**.lua" },
+		["Scripts"] 		= { "script/**.*" },
 		
 		["Camera"] 			= { "**Camera.*" },
 		

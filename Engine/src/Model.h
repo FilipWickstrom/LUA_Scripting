@@ -1,6 +1,5 @@
 #pragma once
 #include "Object.h"
-#include <string>
 
 class Model: public Object
 {

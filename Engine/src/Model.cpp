@@ -1,11 +1,9 @@
+#include "PCH.h"
 #include "Model.h"
-#include "Graphics.h"
-#include <iostream>
-#include "LuaHandler.h"
 
 void Model::LoadMesh(std::string& meshName)
 {
-	meshName = "../Assets/Models/" + meshName;
+	meshName = MODELPATH + meshName;
 
 	irr::scene::IMesh* mesh = Graphics::GetSceneManager()->getMesh(meshName.c_str());
 	if (mesh == nullptr)

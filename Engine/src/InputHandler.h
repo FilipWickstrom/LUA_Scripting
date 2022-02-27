@@ -1,7 +1,4 @@
 #pragma once
-#include <irrlicht.h>
-#include <string>
-#include <lua.hpp>
 
 /*
 	Internal input handler of keyboard or mouse events.

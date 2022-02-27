@@ -1,16 +1,4 @@
 #pragma once
-#pragma comment(lib, "Irrlicht.lib")
-#ifdef _DEBUG
-#pragma comment(lib, "LuaLibd.lib")
-#else
-#pragma comment(lib, "Lualib.lib")
-#endif
-
-#include <lua.hpp>
-#include "lua.hpp"
-#include <thread>
-#include <string>
-
 #define LUA LuaHandler::GetLua()
 
 // Dump the lua stack to console.

@@ -1,6 +1,5 @@
+#include "PCH.h"
 #include "LuaHandler.h"
-#include <Windows.h>
-#include <iostream>
 
 void DumpStack(lua_State* L)
 {
@@ -49,9 +48,7 @@ lua_State*& LuaHandler::GetLua()
 
 void LuaHandler::LoadScript(const std::string& script_name)
 {
-
-	// Relative path is very scuffed in debug.
-	std::string script = "script/" + script_name;
+	std::string script = SCRIPTSPATH + script_name;
 
 	int error = luaL_dofile(Get().m_state, script.c_str());
 

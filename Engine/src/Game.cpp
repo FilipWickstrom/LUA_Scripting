@@ -1,5 +1,5 @@
+#include "PCH.h"
 #include "Game.h"
-#include <iostream>
 
 void Game::Update()
 {

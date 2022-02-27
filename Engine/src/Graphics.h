@@ -1,8 +1,4 @@
 #pragma once
-#include <irrlicht.h>
-#include <unordered_map>
-#include "InputHandler.h"
-
 
 class Graphics
 {

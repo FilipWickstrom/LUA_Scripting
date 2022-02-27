@@ -22,6 +22,10 @@
 #include <bitset>
 #include <algorithm>
 #include <thread>
+#include <omp.h>
+
+// Windows
+#include <Windows.h>
 
 // Lua
 #ifdef _DEBUG
@@ -38,6 +42,7 @@
 // Singletons
 #include "Graphics.h"
 #include "LuaHandler.h"
+#include "InputHandler.h"
 
 // Paths
 const std::string MODELPATH		= "../Assets/Models/";

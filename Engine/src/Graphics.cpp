@@ -1,5 +1,5 @@
+#include "PCH.h"
 #include "Graphics.h"
-#include <iostream>
 
 Graphics::Graphics()
 {
