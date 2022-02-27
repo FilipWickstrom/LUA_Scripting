@@ -1,5 +1,5 @@
 -- require/include
-gameObject = require('gameObject')
+gameObject = require('script/gameObject')
 
 PlayerTable = {hp = 100, gold = 0, xp = 0, weapon = "Hands", damage = 5, speed = 12}
 Player = gameObject:New(PlayerTable)

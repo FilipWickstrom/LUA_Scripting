@@ -5,7 +5,7 @@
 
 void Model::LoadMesh(std::string& meshName)
 {
-	meshName = "../../Bin/Meshes/" + meshName;
+	meshName = "../Assets/Models/" + meshName;
 
 	irr::scene::IMesh* mesh = Graphics::GetSceneManager()->getMesh(meshName.c_str());
 	if (mesh == nullptr)

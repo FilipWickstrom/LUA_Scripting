@@ -16,8 +16,7 @@ void Scene::AddBasicEnemy(float x, float y)
 		Spawn an enemy in lua and an object to respresent it in game.
 	*/
 	m_enemyManager.NewBasicEnemy(x, y);
-	this->AddObject("../Meshes/shitty_tree.obj", { x, 0.0f, y },
-		{ 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
+	this->AddObject("cube.obj", { x, 0.0f, y }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
 	EnemyManager::m_freeIndex++;
 }
 

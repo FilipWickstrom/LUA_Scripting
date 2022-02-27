@@ -1,5 +1,5 @@
-player = require('Player')
-refMonster = require('Monster')
+player = require('script/Player')
+refMonster = require('script/Monster')
 monsters = {}
 
 function GetPlayerPos()

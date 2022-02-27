@@ -15,7 +15,7 @@ project "Game"
     files {
         "src/**.h",
 		"src/**.cpp",
-		"src/**.lua"
+		"script/**.*"
     }
 
 

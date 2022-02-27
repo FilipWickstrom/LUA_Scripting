@@ -1,4 +1,4 @@
-local gameObject = require('gameObject')
+local gameObject = require('script/gameObject')
 
 local Monster = gameObject:New()
 

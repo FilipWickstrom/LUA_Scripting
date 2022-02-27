@@ -25,7 +25,7 @@
 
 // Lua
 #ifdef _DEBUG
-#pragma comment(lib, "LuaLibd.lib")
+#pragma comment(lib, "LuaLibD.lib")
 #else
 #pragma comment(lib, "Lualib.lib")
 #endif
@@ -42,3 +42,4 @@
 // Paths
 const std::string MODELPATH		= "../Assets/Models/";
 const std::string TEXTUREPATH	= "../Assets/Textures/";
+const std::string SCRIPTSPATH	= "script/";
