@@ -31,6 +31,8 @@ end
 -- Update function for lua. return 0 if nothing happend, 1 if player died.
 function Update()
 
+	--print(player.position)
+
 	if player:getHealth() <= 0 then
 		return 1
 	end

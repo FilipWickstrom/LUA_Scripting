@@ -1,4 +1,5 @@
 local gameObject = {}
+vector = require("script/vector")
 
 function gameObject:randomizePos()
 	self.position.x = math.random(600) - math.random(600)
@@ -7,8 +8,8 @@ end
 
 function gameObject:New(g)
 	g = g or {}
-	g.position = {x = 0, y = 0}
 	g.id = 0
+	g.position = vector:new()
 	self.__index = self
 	setmetatable(g, self)
 
@@ -18,15 +19,7 @@ function gameObject:New(g)
 	return g
 end
 
-function gameObject:distance(other)
-	if type(other) == "table" then
-		local x = other.position.x - self.position.x
-		local y = other.position.y - self.position.y
-		return math.sqrt(math.pow(x, 2) + math.pow(y, 2))
-	end
-end
-
-function gameObject:newPosition(x, y)
+function gameObject:move(x, y)
 	if type(x) == "number" and type(y) == "number" then
 		self.position.x = self.position.x + x
 		self.position.y = self.position.y + y
@@ -43,10 +36,6 @@ function gameObject:setPosition(x, y)
 	else
 		error("Either both or one of the intakes were not a number!")
 	end
-end
-
-function gameObject:__tostring()
-	return self.position.x .. " " .. self.position.y
 end
 
 function gameObject:getPosition()

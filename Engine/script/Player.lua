@@ -52,11 +52,4 @@ function PlayerTable:getWeapon()
 	return self.weapon
 end
 
-function PlayerTable:move(x, y)
-	assert(type(x) == "number", "Invalid input, requires numbers")
-	assert(type(y) == "number", "Invalid input, requires numbers")
-
-	self:newPosition(x * self.speed, y * self.speed)
-end
-
 return (Player)
