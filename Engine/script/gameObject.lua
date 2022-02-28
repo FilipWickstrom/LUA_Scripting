@@ -2,8 +2,9 @@ local gameObject = {}
 vector = require("script/vector")
 
 function gameObject:randomizePos()
-	self.position.x = math.random(600) - math.random(600)
-	self.position.y = math.random(600) - math.random(600)
+	self.position.x = math.random(10)
+	self.position.y = math.random(10)
+	self.position.z = math.random(10)
 end
 
 function gameObject:New(g)
@@ -39,7 +40,7 @@ function gameObject:setPosition(x, y)
 end
 
 function gameObject:getPosition()
-	return self.position.x, self.position.y
+	return self.position.x, self.position.y, self.position.z
 end
 
 gameObject.__index = gameObject

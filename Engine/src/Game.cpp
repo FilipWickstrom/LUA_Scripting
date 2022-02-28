@@ -19,11 +19,14 @@ void Game::Update()
 Game::Game()
 {
 	LuaHandler::LoadScript("gameLoop.lua");
+	lua_getglobal(LUA, "Start");
+	lua_pcall(LUA, 0, 0, 0);
 	m_currentScene = m_sceneManager.GetScene(0);
 	m_currentScene->AddBasicEnemy(0, 0);
 	m_currentScene->AddBasicEnemy(3, 1);
 	m_currentScene->AddBasicEnemy(6, 1);
 	m_currentScene->AddBasicEnemy(9, 1);
+
 
 	if (lua_isstring(LUA, -1))
 		std::cout << "Error: " << lua_tostring(LUA, -1) << "\n";

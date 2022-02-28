@@ -2,14 +2,10 @@ player = require('script/Player')
 refMonster = require('script/Monster')
 monsters = {}
 
-function GetPlayerPos()
-	return player:getPosition()
-end
-
 function addMonster(ind)
 	local monster = refMonster:New()
 	monster.id = ind
-	print(ind)
+	--print(ind)
 	table.insert(monsters, monster)
 end
 
@@ -28,10 +24,18 @@ end
 	--return table.unpack(monsters)
 --end
 
+function Start()
+	math.randomseed(os.time())
+end
+
 -- Update function for lua. return 0 if nothing happend, 1 if player died.
 function Update()
 
 	--print(player.position)
+
+	for k, v in pairs(monsters) do
+		print(v.position)
+	end
 
 	if player:getHealth() <= 0 then
 		return 1
