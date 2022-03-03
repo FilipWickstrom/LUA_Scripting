@@ -19,7 +19,7 @@ end
 
 function gameObject:Move(vec)
 	self.position = self.position + vec
-	print(self.position)
+	--print(self.position)
 end
 
 function gameObject:SetPosition(x, y)

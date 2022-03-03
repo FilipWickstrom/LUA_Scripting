@@ -1,6 +1,11 @@
 player = require('script/Player')
 refMonster = require('script/Monster')
+
+-- Collect all monsters in this table
 monsters = {}
+
+-- Collect all other objects such as walls or floors in this table
+objects = {}
 
 deltatime = 0
 
@@ -8,6 +13,7 @@ function AddMonster(ind)
 	local monster = refMonster:New()
 	monster.id = ind
 	--print(ind)
+
 	table.insert(monsters, monster)
 end
 
@@ -38,9 +44,25 @@ function Update(dt)
 	deltatime = dt
 	--print(player.position)
 
+	-- Chase player
+	for k, v in pairs(monsters) do
+		v:Chase(player.position, dt)
+	end
+
+
 	if(player:IsAlive() == false) then
 		return 1
 	end
 
 	return 0
+end
+
+
+
+
+-- Communication between lua and c++
+
+-- Find the indexed object and return its position
+function GetObjectPosition(ind)
+	
 end
