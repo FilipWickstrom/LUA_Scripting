@@ -10,7 +10,7 @@ function Monster:New()
 	g.damage = 5
 	g.speed = 0.5
 	g.type = "Basic"
-	g.randomizePos(g)
+	g.RandomizePos(g)
 	self.__index = Monster
 	setmetatable(g, self)
 

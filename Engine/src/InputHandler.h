@@ -22,46 +22,43 @@ public:
 		{
 			// Here you can put in the communication with Lua is wanted.
 			keyIsDown[e.KeyInput.Key] = e.KeyInput.PressedDown;
+			return true;
 		}
 
 		return false;
 	}
 
-	// Gets the Axis (Horizontal or Vertical) and returns a mapped value between -1 to 1
-	float CheckKeyboard(const std::string& axis)
-	{
-		float value = 0.f;
-
-		if (axis == "Vertical")
-		{
-			if (keyIsDown[irr::KEY_KEY_W])
-			{
-				value = 1.f;
-			}
-			else if (keyIsDown[irr::KEY_KEY_S])
-			{
-				value = -1.f;
-			}
-		}
-		else if (axis == "Horizontal")
-		{
-			if (keyIsDown[irr::KEY_KEY_A])
-			{
-				value = 1.f;
-			}
-			else if (keyIsDown[irr::KEY_KEY_D])
-			{
-				value = -1.f;
-			}
-		}
-
-		return value;
-	}
-
-	// This is used to check whether a key is being held down
 	virtual bool IsKeyDown(irr::EKEY_CODE keyCode) const
 	{
 		return keyIsDown[keyCode];
+	}
+
+	void CheckKeyboard()
+	{
+		int x = 0, y = 0;
+
+		if (IsKeyDown(irr::KEY_KEY_W))
+		{
+			y = 1;
+		}
+		else if (IsKeyDown(irr::KEY_KEY_S))
+		{
+			y = -1;
+		}
+
+		if (IsKeyDown(irr::KEY_KEY_A))
+		{
+			x = 1;
+		}
+		else if (IsKeyDown(irr::KEY_KEY_D))
+		{
+			x = -1;
+		}
+
+		lua_getglobal(LUA, "OnInput");
+		lua_pushnumber(LUA, x);
+		lua_pushnumber(LUA, y);
+		lua_pcall(LUA, 2, 0, 0);
 	}
 };
 
@@ -81,7 +78,7 @@ public:
 	static auto& Get();
 
 	// Get the Axis mapped from -1 to 1.
-	static float GetAxis(const std::string& axis);
+	static void CheckKeyboard();
 
 	static bool IsKeyDown(irr::EKEY_CODE keyCode);
 

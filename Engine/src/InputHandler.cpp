@@ -16,9 +16,9 @@ auto& Input::Get()
     return instance;
 }
 
-float Input::GetAxis(const std::string& axis)
+void Input::CheckKeyboard()
 {
-    return Get().m_inputHandler.CheckKeyboard(axis);
+    return Get().m_inputHandler.CheckKeyboard();
 }
 
 bool Input::IsKeyDown(irr::EKEY_CODE keyCode)

@@ -10,7 +10,7 @@ void EnemyManager::LuaNewBasicEnemy()
 	//lua_pcall(LUA, 0, 1, 0);
 	//lua_remove(LUA, lua_gettop(LUA) - 1);
 
-	lua_getglobal(LUA, "addMonster");
+	lua_getglobal(LUA, "AddMonster");
 	int id = (int)m_freeIndex;
 	lua_pushnumber(LUA, id);
 

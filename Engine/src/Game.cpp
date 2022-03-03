@@ -3,16 +3,20 @@
 
 void Game::Update()
 {
+	Input::CheckKeyboard();
+
 	m_currentScene->Update();
 
 	lua_getglobal(LUA, "Update");
-	lua_pcall(LUA, 0, 1, 0);
+	lua_pushnumber(LUA, Graphics::GetDeltaTime());
+	lua_pcall(LUA, 1, 1, 0);
 	int lua_return = static_cast<int>(lua_tonumber(LUA, -1));
 	lua_pop(LUA, 1);
 
-	if (lua_return > 0)
+	if (lua_return == true)
 	{
 		// Player died.
+		printf("DED");
 	}
 }
 

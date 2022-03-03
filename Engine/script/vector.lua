@@ -3,7 +3,7 @@ local vector =
 	x = 0, y = 0, z = 0
 }
 
-function vector:new(origin)
+function vector:New(origin)
 
 	local vector = origin or { x = 0, y = 0, z = 0 }
 
@@ -13,7 +13,7 @@ function vector:new(origin)
 	return vector
 end
 
-function vector:length()
+function vector:Length()
 	return math.sqrt(self.x * self.x + self.y * self.y + self.z * self.z)
 end
 
@@ -22,7 +22,7 @@ function vector:__sub(other)
 		error("Error: not a vector")
 	end
 
-	local rv = vector:new()
+	local rv = vector:New()
 
 	rv.x = self.x - other.x
 	rv.y = self.y - other.y
@@ -37,7 +37,7 @@ function vector:__add(other)
 		return
 	end
 
-	local rv = vector:new()
+	local rv = vector:New()
 
 	rv.x = self.x + other.x
 	rv.y = self.y + other.y
@@ -50,7 +50,7 @@ function vector:__mul(other)
 	if(getmetatable(self) == vector and getmetatable(other) == vector) then
 		return self.x * other.x + self.y * other.y + self.z * other.z
 	elseif(type(other) == "number" and getmetatable(self) == vector) then
-		local rv = vector:new()
+		local rv = vector:New()
 		rv.x = self.x * other
 		rv.y = self.y * other
 		rv.z = self.z * other
@@ -60,7 +60,7 @@ function vector:__mul(other)
 	end
 end
 
-function vector:normalize()
+function vector:Normalize()
 	local length = self.length
 
 	if(length == 0) then
