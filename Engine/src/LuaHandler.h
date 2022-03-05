@@ -4,6 +4,9 @@
 // Dump the lua stack to console.
 void DumpStack(lua_State* L);
 
+// Lua function to load model into c++
+int LoadModelLua(lua_State* L);
+
 class LuaHandler
 {
 private:

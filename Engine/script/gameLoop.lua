@@ -24,6 +24,9 @@ end
 
 function Start()
 	math.randomseed(os.time())
+
+	-- Example of how to instantiate an models in LUA
+	index = LoadModel('cube.obj')
 end
 
 function OnInput(x, y)

@@ -1,5 +1,6 @@
 #include "PCH.h"
 #include "LuaHandler.h"
+#include "SceneManager.h"
 
 void DumpStack(lua_State* L)
 {
@@ -9,6 +10,14 @@ void DumpStack(lua_State* L)
 		std::cout << "Index " << i << ": " << lua_typename(L, lua_type(L, i)) << "\n";
 	}
 	std::cout << "--------------------------\n";
+}
+
+int LoadModelLua(lua_State* L)
+{
+	std::string filepath = lua_tostring(L, -1);
+
+	lua_pushnumber(L, SceneAccess::GetSceneManager()->GetCurrentScene()->AddModel(filepath));
+	return 1;
 }
 
 void ConsoleThread(lua_State* L) {
@@ -26,6 +35,7 @@ LuaHandler::LuaHandler()
 	m_state = luaL_newstate();
 	luaL_openlibs(m_state);
 
+	lua_register(m_state, "LoadModel", LoadModelLua);
 
 	m_conThread = std::thread(ConsoleThread, m_state);
 }
