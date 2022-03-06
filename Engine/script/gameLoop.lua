@@ -24,6 +24,8 @@ end
 function Start()
 	math.randomseed(os.time())
 	AddMonster('cube.obj')
+	AddMonster('cube.obj')
+	AddMonster('cube.obj')
 
 	player.position.x = 5
 end
@@ -44,7 +46,7 @@ end
 -- Update function for lua. return 0 if nothing happend, 1 if player died.
 function Update(dt)
 	deltatime = dt
-	--print(player.position)
+	print(dt)
 
 	-- Chase player
 	for k, v in pairs(monsters) do
