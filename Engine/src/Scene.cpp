@@ -29,20 +29,25 @@ int Scene::AddModel(std::string modelPath)
 	return ret;
 }
 
+void Scene::RemoveModel(unsigned int index)
+{
+	m_models.erase(index);
+}
+
 void Scene::AddObject(std::string modelPath, irr::core::vector3df pos, irr::core::vector3df rot, irr::core::vector3df scale)
 {
-	m_models[EnemyManager::m_freeIndex] = new Model(modelPath, pos, rot, scale, EnemyManager::m_freeIndex);
+	m_models[EnemyManager::m_freeIndex] = Model(modelPath, pos, rot, scale, EnemyManager::m_freeIndex);
 }
 
 void Scene::AddObject(std::string modelPath, irr::core::vector3df pos, irr::core::vector3df rot, irr::core::vector3df scale, unsigned int index)
 {
-	m_models[index] = new Model(modelPath, pos, rot, scale, index);
+	m_models[index] = Model(modelPath, pos, rot, scale, index);
 }
 
 void Scene::Update()
 {
 	for (auto& model : m_models)
-		model.second->Update();
+		model.second.Update();
 }
 
 void Scene::SetActive()

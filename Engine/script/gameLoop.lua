@@ -9,10 +9,9 @@ objects = {}
 
 deltatime = 0
 
-function AddMonster(ind)
+function AddMonster(modelfilepath)
 	local monster = refMonster:New()
-	monster.id = ind
-	--print(ind)
+	monster:LoadModel(modelfilepath)
 
 	table.insert(monsters, monster)
 end
@@ -24,9 +23,9 @@ end
 
 function Start()
 	math.randomseed(os.time())
+	AddMonster('cube.obj')
 
-	-- Example of how to instantiate an models in LUA
-	index = LoadModel('cube.obj')
+	player.position.x = 5
 end
 
 function OnInput(x, y)
@@ -67,5 +66,11 @@ end
 
 -- Find the indexed object and return its position
 function GetObjectPosition(ind)
-	
+	for k, v in pairs(monsters) do
+		if v.id == ind then
+			return v.position.x, v.position.y
+		end
+	end
+
+	return 'err', 'err'
 end

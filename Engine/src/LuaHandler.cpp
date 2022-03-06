@@ -20,6 +20,13 @@ int LoadModelLua(lua_State* L)
 	return 1;
 }
 
+int RemoveModelLua(lua_State* L)
+{
+	int id = lua_tonumber(L, -1);
+	SceneAccess::GetSceneManager()->GetCurrentScene()->RemoveModel(id);
+	return 0;
+}
+
 void ConsoleThread(lua_State* L) {
 	char command[1000];
 	while (GetConsoleWindow()) {
@@ -36,6 +43,7 @@ LuaHandler::LuaHandler()
 	luaL_openlibs(m_state);
 
 	lua_register(m_state, "LoadModel", LoadModelLua);
+	lua_register(m_state, "RemoveModel", RemoveModelLua);
 
 	m_conThread = std::thread(ConsoleThread, m_state);
 }

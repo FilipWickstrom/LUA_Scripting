@@ -7,6 +7,9 @@ void DumpStack(lua_State* L);
 // Lua function to load model into c++
 int LoadModelLua(lua_State* L);
 
+// Lua function to remove model from c++
+int RemoveModelLua(lua_State* L);
+
 class LuaHandler
 {
 private:

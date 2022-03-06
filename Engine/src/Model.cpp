@@ -44,25 +44,33 @@ const unsigned int& Model::GetID() const
 void Model::Update()
 {
 	// Gather the position from LUA
-	lua_getglobal(LUA, "getMonsterPosition");
+	lua_getglobal(LUA, "GetObjectPosition");
 	lua_pushnumber(LUA, m_id);
 	int ret = lua_pcall(LUA, 1, 2, 0);
 
+
 	if (ret == 0)
 	{
-		m_position.X = static_cast<irr::f32>(lua_tonumber(LUA, -1));
-		m_position.Z = static_cast<irr::f32>(lua_tonumber(LUA, -2));
+		if (lua_isnumber(LUA, -1))
+		{
+			m_position.X = static_cast<irr::f32>(lua_tonumber(LUA, -1));
+			m_position.Z = static_cast<irr::f32>(lua_tonumber(LUA, -2));
+
+			if (m_node)
+			{
+				m_node->setPosition(m_position);
+			}
+		}
+		else
+		{
+			// 'Err' was returned, do something like delete this object or something idk.
+		}
 		lua_pop(LUA, 2);
 	}
 	else
 	{
+		std::cout << lua_tostring(LUA, -1) << "\n";
 		lua_pop(LUA, 1);
 	}
 
-	if (m_node)
-	{
-		m_node->setPosition(m_position);
-		m_node->setRotation(m_rotation);
-		m_node->setScale(m_scale);
-	}
 }

@@ -17,6 +17,10 @@ function gameObject:New(g)
 	return g
 end
 
+function gameObject:LoadModel(filepath)
+	self.id = LoadModel(filepath)
+end
+
 function gameObject:Move(vec)
 	self.position = self.position + vec
 	--print(self.position)
