@@ -5,7 +5,7 @@ class Model: public Object
 {
 private:
 
-	irr::scene::ISceneNode* m_node;
+	irr::scene::ISceneNode* m_node = nullptr;
 
 	// This could potentially be used with the script to identify which model is linked to which table.
 	unsigned int m_id = 0;
@@ -27,4 +27,6 @@ public:
 	const unsigned int& GetID() const;
 
 	void Update();
+
+	void Drop();
 };

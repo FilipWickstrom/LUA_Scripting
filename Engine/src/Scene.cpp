@@ -23,7 +23,7 @@ void Scene::AddBasicEnemy(float x, float y)
 
 int Scene::AddModel(std::string modelPath)
 {
-	this->AddObject("cube.obj", { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, m_freeIndex);
+	this->AddObject(modelPath, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, m_freeIndex);
 	int ret = m_freeIndex;
 	m_freeIndex++;
 	return ret;
@@ -31,12 +31,13 @@ int Scene::AddModel(std::string modelPath)
 
 void Scene::RemoveModel(unsigned int index)
 {
+	m_models[index].Drop();
 	m_models.erase(index);
 }
 
 void Scene::AddObject(std::string modelPath, irr::core::vector3df pos, irr::core::vector3df rot, irr::core::vector3df scale)
 {
-	m_models[EnemyManager::m_freeIndex] = Model(modelPath, pos, rot, scale, EnemyManager::m_freeIndex);
+	//m_models[EnemyManager::m_freeIndex] = Model(modelPath, pos, rot, scale, EnemyManager::m_freeIndex);
 }
 
 void Scene::AddObject(std::string modelPath, irr::core::vector3df pos, irr::core::vector3df rot, irr::core::vector3df scale, unsigned int index)

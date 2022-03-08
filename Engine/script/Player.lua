@@ -13,6 +13,8 @@ function PlayerTable:New(g)
 	g.position.x = 0
 	g.position.y = 0
 
+	g.id = LoadModel('clue_mask.obj')
+
 	return self
 end
 

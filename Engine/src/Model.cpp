@@ -74,3 +74,9 @@ void Model::Update()
 	}
 
 }
+
+void Model::Drop()
+{
+	if (m_node)
+		m_node->drop();
+}

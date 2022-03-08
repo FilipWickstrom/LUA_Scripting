@@ -1,4 +1,5 @@
-player = require('script/Player')
+Player = require('script/Player')
+player = Player:New()
 refMonster = require('script/Monster')
 
 -- Collect all monsters in this table
@@ -25,9 +26,6 @@ function Start()
 	math.randomseed(os.time())
 	AddMonster('cube.obj')
 	AddMonster('cube.obj')
-	AddMonster('cube.obj')
-
-	player.position.x = 5
 end
 
 function OnInput(x, y)
@@ -46,7 +44,7 @@ end
 -- Update function for lua. return 0 if nothing happend, 1 if player died.
 function Update(dt)
 	deltatime = dt
-	print(dt)
+	--print(dt)
 
 	-- Chase player
 	for k, v in pairs(monsters) do
@@ -68,6 +66,11 @@ end
 
 -- Find the indexed object and return its position
 function GetObjectPosition(ind)
+
+	if player.id == ind then
+		return player.position.x, player.position.y
+	end
+
 	for k, v in pairs(monsters) do
 		if v.id == ind then
 			return v.position.x, v.position.y
