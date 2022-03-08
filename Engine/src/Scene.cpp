@@ -8,7 +8,8 @@ Scene::Scene()
 
 Scene::~Scene()
 {
-
+	for (auto model : m_models)
+		model.second.Drop();
 }
 
 void Scene::AddBasicEnemy(float x, float y)
