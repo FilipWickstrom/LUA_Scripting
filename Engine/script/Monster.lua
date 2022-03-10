@@ -3,14 +3,19 @@ local Vector = require('script/vector')
 
 local Monster = gameObject:New()
 
+local COOLDOWN_TIME = 5.0
+
+
 function Monster:New()
 	local g = gameObject:New()
 	g.hp = 100
 	g.worth = 50
 	g.xp = 25
 	g.damage = 5
-	g.speed = 0.5
+	g.speed = math.random(3) + 1
 	g.type = "Basic"
+	g.reach = 2
+	g.cooldown = 0.0
 	g.RandomizePos(g)
 	self.__index = Monster
 	setmetatable(g, self)
@@ -30,15 +35,15 @@ function Monster:Chase(point, dt)
 
 	-- Manipulate vector so that it follows the player.
 	if(self.position.x < point.x) then
-		vec.x = 1 * dt
+		vec.x = 1 * dt * self.speed
 	else
-		vec.x = -1 * dt
+		vec.x = -1 * dt * self.speed
 	end
 
 	if(self.position.y < point.y) then
-		vec.y = 1 * dt
+		vec.y = 1 * dt * self.speed
 	else
-		vec.y = -1 * dt
+		vec.y = -1 * dt * self.speed
 	end
 
 	-- Add vector to monster
@@ -49,6 +54,20 @@ end
 function Monster:OnHit(playerHp)
 	playerHp = playerHp - self.damage
 	return playerHp
+end
+
+function Monster:Hit(player, dt)
+
+	local x = math.abs(player.position.x - self.position.x)
+	local y = math.abs(player.position.y - self.position.y)
+
+	self.cooldown = self.cooldown - dt
+
+	if x < self.reach and y < self.reach and self.cooldown <= 0.0 then
+		player.hp = player.hp - self.damage
+		self.cooldown = COOLDOWN_TIME
+		--print('Hit!')
+	end
 end
 
 return Monster

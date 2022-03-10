@@ -49,6 +49,7 @@ function Update(dt)
 	-- Chase player
 	for k, v in pairs(monsters) do
 		v:Chase(player.position, dt)
+		v:Hit(player, dt)
 	end
 
 
