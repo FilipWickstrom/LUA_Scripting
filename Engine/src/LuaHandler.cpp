@@ -27,6 +27,18 @@ int RemoveModelLua(lua_State* L)
 	return 0;
 }
 
+int GetWindowWidthLua(lua_State* L)
+{
+	lua_pushnumber(L, window_width);
+	return 1;
+}
+
+int GetWindowHeightLua(lua_State* L)
+{
+	lua_pushnumber(L, window_height);
+	return 1;
+}
+
 void ConsoleThread(lua_State* L) {
 	char command[1000];
 	while (GetConsoleWindow()) {
@@ -44,6 +56,8 @@ LuaHandler::LuaHandler()
 
 	lua_register(m_state, "LoadModel", LoadModelLua);
 	lua_register(m_state, "RemoveModel", RemoveModelLua);
+	lua_register(m_state, "WinWidth", GetWindowWidthLua);
+	lua_register(m_state, "WinHeight", GetWindowHeightLua);
 
 	m_conThread = std::thread(ConsoleThread, m_state);
 }

@@ -1,5 +1,8 @@
 #pragma once
 
+constexpr unsigned int window_width = 1024;
+constexpr unsigned int window_height = 720;
+
 class Graphics
 {
 private:

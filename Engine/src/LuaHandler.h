@@ -10,6 +10,9 @@ int LoadModelLua(lua_State* L);
 // Lua function to remove model from c++
 int RemoveModelLua(lua_State* L);
 
+int GetWindowWidthLua(lua_State* L);
+int GetWindowHeightLua(lua_State* L);
+
 class LuaHandler
 {
 private:

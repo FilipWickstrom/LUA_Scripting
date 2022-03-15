@@ -2,6 +2,8 @@ Player = require('script/Player')
 player = Player:New()
 refMonster = require('script/Monster')
 
+boss = require('script/BasicBossEnemy'):New()
+
 -- Collect all monsters in this table
 monsters = {}
 
@@ -44,14 +46,16 @@ end
 -- Update function for lua. return 0 if nothing happend, 1 if player died.
 function Update(dt)
 	deltatime = dt
-	--print(dt)
 
-	-- Chase player
+	-- Loop through all enemies
 	for k, v in pairs(monsters) do
 		v:Chase(player.position, dt)
 		v:Hit(player, dt)
 	end
 
+	if boss ~= nil then
+		boss:Chase(dt)
+	end
 
 	if(player:IsAlive() == false) then
 		return 1
@@ -70,6 +74,10 @@ function GetObjectPosition(ind)
 
 	if player.id == ind then
 		return player.position.x, player.position.y
+	end
+
+	if boss.id == ind then
+		return boss.position.x, boss.position.y
 	end
 
 	for k, v in pairs(monsters) do

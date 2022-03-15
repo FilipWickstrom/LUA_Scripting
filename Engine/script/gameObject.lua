@@ -17,6 +17,12 @@ function gameObject:New(g)
 	return g
 end
 
+function gameObject:Delete()
+	
+	RemoveModel(g.id)
+	g.id = 0
+end
+
 function gameObject:LoadModel(filepath)
 	self.id = LoadModel(filepath)
 end
