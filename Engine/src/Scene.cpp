@@ -9,7 +9,8 @@ Scene::Scene()
 
 Scene::~Scene()
 {
-	Graphics::GetSceneManager()->getActiveCamera()->drop();
+	//Graphics::GetSceneManager()->getActiveCamera()->drop();
+	RemoveCamera();
 }
 
 unsigned int Scene::AddModel(std::string& file)

@@ -52,10 +52,11 @@ void GameScene::Load()
 void GameScene::Clean()
 {
 	//Clear all the models
-	for (auto& model : m_models)
+	auto it = m_models.begin();
+	while (it != m_models.end())
 	{
-		model.second.Drop();
-		m_models.erase(model.second.GetID());
+		it->second.Drop();
+		it = m_models.erase(it);
 	}
 
 	Graphics::GetSceneManager()->clear();

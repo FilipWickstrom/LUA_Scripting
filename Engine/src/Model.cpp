@@ -75,5 +75,8 @@ void Model::Update()
 void Model::Drop()
 {
 	if (m_node)
-		m_node->drop();
+	{
+		m_node->remove();
+		m_node = nullptr;
+	}
 }
