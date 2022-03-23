@@ -55,6 +55,7 @@ function Update(dt)
 
 	if boss ~= nil then
 		boss:Chase(dt)
+		boss:Attack(player, dt)
 	end
 
 	if(player:IsAlive() == false) then
