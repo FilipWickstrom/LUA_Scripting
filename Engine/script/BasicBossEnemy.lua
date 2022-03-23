@@ -54,5 +54,12 @@ function BasicBoss:Attack(player, dt)
 
 end
 
+function BasicBoss:Update(player, dt)
+	
+	self:Chase(dt)
+	self:Attack(player, dt)
+	self:GUpdate()
+end
+
 
 return BasicBoss

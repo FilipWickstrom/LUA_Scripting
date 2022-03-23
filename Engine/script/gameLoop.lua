@@ -28,6 +28,8 @@ function Start()
 	math.randomseed(os.time())
 	AddMonster('cube.obj')
 	AddMonster('cube.obj')
+
+	table.insert(monsters, boss)
 end
 
 function OnInput(x, y)
@@ -51,12 +53,6 @@ function Update(dt)
 	-- Loop through all enemies
 	for k, v in pairs(monsters) do
 		v:Update(player, dt)
-	end
-
-	if boss ~= nil then
-		boss:Chase(dt)
-		boss:Attack(player, dt)
-		boss:GUpdate()
 	end
 
 	if(player:IsAlive() == false) then
