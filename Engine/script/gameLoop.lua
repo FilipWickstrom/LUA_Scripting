@@ -1,7 +1,6 @@
 Player = require('script/Player')
 player = Player:New()
 refMonster = require('script/Monster')
-
 boss = require('script/BasicBossEnemy'):New()
 
 -- Collect all monsters in this table
@@ -10,7 +9,7 @@ monsters = {}
 -- Collect all other objects such as walls or floors in this table
 objects = {}
 
-deltatime = 0
+local deltatime = 0
 
 function AddMonster(modelfilepath)
 	local monster = refMonster:New()
