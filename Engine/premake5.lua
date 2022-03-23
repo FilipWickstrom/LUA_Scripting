@@ -44,6 +44,8 @@ project "Game"
 		["Main"]			= { "**Main.*", "**Renderer.*", "**PCH.*" },
 		
 		["LUA"]				= { "**CppToLua.*", "**LuaToCpp.*" },
+		
+		["User Interface"]  = { "**Graphics2D.*", "**Element2D.*"}
     }
 
     filter {"system:windows"}

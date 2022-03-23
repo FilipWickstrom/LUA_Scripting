@@ -28,6 +28,7 @@ void Renderer::Render()
 
 	Graphics::GetSceneManager()->drawAll();
 	Graphics::GetGUIEnvironment()->drawAll();
+	Graphics2D::Draw();
 
 	Graphics::GetDriver()->endScene();
 }

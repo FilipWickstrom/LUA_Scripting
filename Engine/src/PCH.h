@@ -41,6 +41,7 @@
 
 // Singletons
 #include "Graphics.h"
+#include "Graphics2D.h"
 #include "LuaState.h"
 #include "InputHandler.h"
 #include "SceneManager.h"
