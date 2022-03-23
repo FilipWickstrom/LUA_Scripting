@@ -1,6 +1,8 @@
 #include "PCH.h"
 #include "Model.h"
 
+unsigned int Model::s_idCounter = 0;
+
 void Model::LoadMesh(std::string& meshName)
 {
 	meshName = MODELPATH + meshName;
@@ -15,20 +17,15 @@ void Model::LoadMesh(std::string& meshName)
 Model::Model(std::string& meshName)
 	:Object()
 {
+	m_id = s_idCounter++;
 	this->LoadMesh(meshName);
 }
 
 Model::Model(std::string& meshName, irr::core::vector3df pos, irr::core::vector3df rot, irr::core::vector3df scale)
 	:Object(pos, rot, scale)
 {
+	m_id = s_idCounter++;
 	this->LoadMesh(meshName);
-}
-
-Model::Model(std::string& meshName, irr::core::vector3df pos, irr::core::vector3df rot, irr::core::vector3df scale, unsigned int& id)
-	:Object(pos, rot, scale)
-{
-	this->LoadMesh(meshName);
-	m_id = id;
 }
 
 void Model::SetID(unsigned int id)

@@ -1,28 +1,29 @@
 #pragma once
 #include "Scene.h"
 
-class SceneManager
+//Fix a better place for it
+enum class EScene
+{
+	None,
+	Menu,
+	Game,
+	Editor
+};
+
+class SceneHandler
 {
 private:
-
-	std::vector<Scene> m_scenes;
-	size_t m_currentScene = 0;
+	//irrlicht scene?
+	std::unique_ptr<Scene>	m_currentScene;
+	EScene					m_currentSceneType;
 
 public:
+	SceneHandler();
+	~SceneHandler();
 
-	SceneManager();
-	~SceneManager();
-
-	void AddScene();
-
-	/*
-		Use this if you want to switch to another scene.
-		The game will now actively use this scenes camera
-		and models.
-	*/
-	Scene* GetScene(const size_t& scene_pos);
-
-	Scene* GetCurrentScene();
+	Scene* GetScene();
+	void UpdateScene();
+	void SetScene(const EScene& scene);
 };
 
 /*
@@ -31,17 +32,14 @@ public:
 class SceneAccess
 {
 private:
-
 	SceneAccess() = default;
 	~SceneAccess() = default;
 
-	SceneManager* m_sceneManager = nullptr;
-
-public:
-
+	SceneHandler* m_sceneHandler = nullptr;
 	static auto& Get();
 
-	static void SetSceneManager(SceneManager* man);
-	static SceneManager* GetSceneManager();
+public:
+	static void SetSceneHandler(SceneHandler* handler);
+	static SceneHandler* GetSceneHandler();
 
 };

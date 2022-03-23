@@ -1,38 +1,29 @@
 #pragma once
 #include "Model.h"
-#include "Camera.h"
-#include "EnemyManager.h"
+#include "CppToLua.h"
 
 class Scene
 {
 private:
+	//Register? with ENTT?
 
+protected:
 	std::unordered_map<unsigned int, Model> m_models;
-
-	// Lua manager for all enemies.
-	EnemyManager m_enemyManager;
-	unsigned int m_freeIndex = 0;
-
-	// Adds an object with an attached model.
-	void AddObject(std::string modelPath, irr::core::vector3df pos,
-		irr::core::vector3df rot, irr::core::vector3df scale);
-
-	void AddObject(std::string modelPath, irr::core::vector3df pos,
-		irr::core::vector3df rot, irr::core::vector3df scale, unsigned int index);
-
-	Camera m_camera;
+	irr::scene::ICameraSceneNode* m_camera;
 
 public:
-
 	Scene();
-	~Scene();
+	virtual ~Scene();
 
-	void AddBasicEnemy(float x, float y);
+	virtual void Load() = 0;
+	virtual void Clean() = 0;
+	virtual void Update() = 0;
 
-	int AddModel(std::string modelPath);
-	void RemoveModel(unsigned int index);
+	// Models
+	unsigned int AddModel(std::string& file);
+	void RemoveModel(unsigned int id);
 
-	// Loop through all models and update them.
-	void Update();
-	void SetActive();
+	// Camera
+	bool RemoveCamera();
+
 };

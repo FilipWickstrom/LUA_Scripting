@@ -3,6 +3,18 @@
 
 Graphics::Graphics()
 {
+    /*
+        LoadScript("window.lua")
+
+        Load a windowfile or luacode.
+        Need:
+            - Window Name
+            - Window Width
+            - Window Height
+            - Fullscreen
+            - VSYNC
+            - Drivertype: DirectX, Opengl, EDT_SOFTWARE
+    */
     m_device = irr::createDevice(irr::video::EDT_SOFTWARE, irr::core::dimension2d<irr::u32>(window_width, window_height), 16, false, false, true, &Input::GetInputHandler());
     if (!m_device)
     {

@@ -31,21 +31,19 @@ project "Game"
     vpaths {
 		["Scripts"] 		= { "script/**.*" },
 		
-		["Camera"] 			= { "**Camera.*" },
+		["Singletons"]		= { "**Graphics.*", "**LuaState.*", "**SceneManager.*", "**InputHandler.*" },
 		
-		["Game"] 			= { "**Game.*" },
-		
-		["Input"]			= { "**InputHandler.*"},
-		
-		["Lua Managers"] 	= { "**EnemyManager.*" },
-		
-		["Managers"]		= { "**Graphics.*", "**LuaHandler.*", "**SceneManager.*" },
+		["Enemies"] 		= { "**EnemyManager.*" },
 		
 		["Modules"] 		= {},
 			
 		["Object"]			= { "**Model.*", "**Object.*" },
 		
-		["Scene"]			= { "**Scene.*" },
+		["Scenes"]			= { "**Scene.*" },
+		
+		["Main"]			= { "**Main.*", "**Renderer.*", "**PCH.*" },
+		
+		["LUA"]				= { "**CppToLua.*", "**LuaToCpp.*" },
     }
 
     filter {"system:windows"}

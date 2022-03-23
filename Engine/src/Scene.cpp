@@ -3,56 +3,38 @@
 
 Scene::Scene()
 {
-	m_camera.Setup();
+	//Default camera
+	m_camera = Graphics::GetSceneManager()->addCameraSceneNode();
 }
 
 Scene::~Scene()
 {
-	for (auto model : m_models)
-		model.second.Drop();
+	Graphics::GetSceneManager()->getActiveCamera()->drop();
 }
 
-void Scene::AddBasicEnemy(float x, float y)
+unsigned int Scene::AddModel(std::string& file)
 {
-	/*
-		Spawn an enemy in lua and an object to respresent it in game.
-	*/
-	m_enemyManager.NewBasicEnemy(x, y);
-	this->AddObject("cube.obj", { x, 0.0f, y }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f });
-	EnemyManager::m_freeIndex++;
+	Model model(file, { 0.f, 0.f, 0.f }, { 0.f,0.f,0.f }, { 1.f, 1.f, 1.f });
+	unsigned int id = model.GetID();
+	m_models[id] = model;
+	return id;
 }
 
-int Scene::AddModel(std::string modelPath)
+void Scene::RemoveModel(unsigned int id)
 {
-	this->AddObject(modelPath, { 0.0f, 0.0f, 0.0f }, { 0.0f, 0.0f, 0.0f }, { 1.0f, 1.0f, 1.0f }, m_freeIndex);
-	int ret = m_freeIndex;
-	m_freeIndex++;
-	return ret;
+	m_models.at(id).Drop();
+	m_models.erase(id);
 }
 
-void Scene::RemoveModel(unsigned int index)
+bool Scene::RemoveCamera()
 {
-	m_models[index].Drop();
-	m_models.erase(index);
-}
-
-void Scene::AddObject(std::string modelPath, irr::core::vector3df pos, irr::core::vector3df rot, irr::core::vector3df scale)
-{
-	//m_models[EnemyManager::m_freeIndex] = Model(modelPath, pos, rot, scale, EnemyManager::m_freeIndex);
-}
-
-void Scene::AddObject(std::string modelPath, irr::core::vector3df pos, irr::core::vector3df rot, irr::core::vector3df scale, unsigned int index)
-{
-	m_models[index] = Model(modelPath, pos, rot, scale, index);
-}
-
-void Scene::Update()
-{
-	for (auto& model : m_models)
-		model.second.Update();
-}
-
-void Scene::SetActive()
-{
-	m_camera.SetActive();
+	bool removed = false;
+	irr::scene::ICameraSceneNode* oldCam = Graphics::GetSceneManager()->getActiveCamera();
+	if (oldCam)
+	{
+		Graphics::GetSceneManager()->setActiveCamera(0);
+		oldCam->remove();
+		removed = true;
+	}
+	return removed;
 }

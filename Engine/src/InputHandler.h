@@ -72,10 +72,10 @@ private:
 	InputHandler m_inputHandler;
 	Input();
 	~Input();
+	static auto& Get();
 
 public:
 
-	static auto& Get();
 
 	// Get the Axis mapped from -1 to 1.
 	static void CheckKeyboard();

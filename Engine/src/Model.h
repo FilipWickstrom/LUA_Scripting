@@ -1,9 +1,11 @@
 #pragma once
 #include "Object.h"
 
-class Model: public Object
+class Model : public Object
 {
 private:
+	//ID counter that increases for every added model
+	static unsigned int s_idCounter;
 
 	irr::scene::ISceneNode* m_node = nullptr;
 
@@ -18,10 +20,6 @@ public:
 	Model(std::string& meshName);
 	Model(std::string& meshName, irr::core::vector3df pos,
 		irr::core::vector3df rot, irr::core::vector3df scale);
-
-	Model(std::string& meshName, irr::core::vector3df pos,
-		irr::core::vector3df rot, irr::core::vector3df scale,
-		unsigned int& id);
 
 	void SetID(unsigned int id);
 	const unsigned int& GetID() const;

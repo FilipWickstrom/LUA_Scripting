@@ -1,53 +1,81 @@
 #include "PCH.h"
 #include "SceneManager.h"
 
-SceneManager::SceneManager()
+//#include "MenuScene.h"
+#include "GameScene.h"
+//#include "EditorScene.h"
+
+SceneHandler::SceneHandler()
 {
-    AddScene();
+	m_currentSceneType = EScene::None;
 }
 
-SceneManager::~SceneManager()
+SceneHandler::~SceneHandler()
 {
-
 }
 
-void SceneManager::AddScene()
+Scene* SceneHandler::GetScene()
 {
-    m_scenes.push_back(Scene());
+	return m_currentScene.get();
 }
 
-Scene* SceneManager::GetScene(const size_t& scene_pos)
+void SceneHandler::UpdateScene()
 {
-    Scene* p = nullptr;
-    p = &m_scenes[scene_pos];
-    
-    // Set this to the active scene.
-    if (p)
-    {
-        m_currentScene = scene_pos;
-        p->SetActive();
-    }
-
-    return p;
+	m_currentScene->Update();
 }
 
-Scene* SceneManager::GetCurrentScene()
+void SceneHandler::SetScene(const EScene& scene)
 {
-    return &m_scenes[m_currentScene];
+	// Current scene - just return
+	if (scene == m_currentSceneType) return;
+
+	// Unload/clean current scene
+	if (m_currentScene)
+		m_currentScene->Clean();
+
+	// Set active scene
+	m_currentSceneType = scene;
+
+	switch (scene)
+	{
+	case EScene::Menu:
+	{
+		// Do stuff
+		break;
+	}
+	case EScene::Game:
+	{
+		m_currentScene = std::make_unique<GameScene>();
+		break;
+	}
+	case EScene::Editor:
+	{
+		// Do stuff
+		break;
+	}
+	default:
+		break;
+	};
+
+	// Load in the scene
+	m_currentScene->Load();
 }
 
+/*
+*	Accesser
+*/
 auto& SceneAccess::Get()
 {
-    static SceneAccess instance;
-    return instance;
+	static SceneAccess instance;
+	return instance;
 }
 
-void SceneAccess::SetSceneManager(SceneManager* man)
+void SceneAccess::SetSceneHandler(SceneHandler* handler)
 {
-    SceneAccess::Get().m_sceneManager = man;
+	SceneAccess::Get().m_sceneHandler = handler;
 }
 
-SceneManager* SceneAccess::GetSceneManager()
+SceneHandler* SceneAccess::GetSceneHandler()
 {
-    return SceneAccess::Get().m_sceneManager;
+	return SceneAccess::Get().m_sceneHandler;
 }

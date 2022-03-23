@@ -41,8 +41,9 @@
 
 // Singletons
 #include "Graphics.h"
-#include "LuaHandler.h"
+#include "LuaState.h"
 #include "InputHandler.h"
+#include "SceneManager.h"
 
 // Paths
 const std::string MODELPATH		= "../Assets/Models/";
