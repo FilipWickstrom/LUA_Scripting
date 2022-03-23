@@ -18,6 +18,8 @@ int RemoveModelLua(lua_State* L);
 int GetWindowWidthLua(lua_State* L);
 int GetWindowHeightLua(lua_State* L);
 
+
+int UpdatePosLua(lua_State* L);
 /*
 	Add scopes for specific functions
 */

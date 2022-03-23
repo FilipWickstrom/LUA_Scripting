@@ -25,6 +25,7 @@ LuaHandler::LuaHandler()
 	lua_register(m_state, "RemoveModel", RemoveModelLua);
 	lua_register(m_state, "WinWidth", GetWindowWidthLua);
 	lua_register(m_state, "WinHeight", GetWindowHeightLua);
+	lua_register(m_state, "UpdatePos", UpdatePosLua);
 
 	m_conThread = std::thread(ConsoleThread, m_state);
 }

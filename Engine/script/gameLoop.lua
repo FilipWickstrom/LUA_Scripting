@@ -14,7 +14,7 @@ deltatime = 0
 
 function AddMonster(modelfilepath)
 	local monster = refMonster:New()
-	monster:LoadModel(modelfilepath)
+	monster.id = LoadModel(modelfilepath)
 
 	table.insert(monsters, monster)
 end
@@ -40,6 +40,7 @@ function OnInput(x, y)
 
 	if(player:IsAlive()) then
 		player:Move(vec)
+		player:Update()
 	end
 end
 
@@ -49,13 +50,13 @@ function Update(dt)
 
 	-- Loop through all enemies
 	for k, v in pairs(monsters) do
-		v:Chase(player.position, dt)
-		v:Hit(player, dt)
+		v:Update(player, dt)
 	end
 
 	if boss ~= nil then
 		boss:Chase(dt)
 		boss:Attack(player, dt)
+		boss:GUpdate()
 	end
 
 	if(player:IsAlive() == false) then

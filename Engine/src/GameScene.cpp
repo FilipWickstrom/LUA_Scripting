@@ -41,9 +41,9 @@ void GameScene::Load()
 	if (RemoveCamera())
 	{
 		//Orthographic camera
-		m_camera = Graphics::GetSceneManager()->addCameraSceneNode(0, { 0,20,0 }, { 0,0,0 });
+		m_camera = Graphics::GetSceneManager()->addCameraSceneNode(0, { 0, 40,0 }, { 0, 0 , 1 });
 		irr::core::matrix4 orthoMatrix;
-		orthoMatrix.buildProjectionMatrixOrthoLH(50, 26, 0, 20);
+		orthoMatrix.buildProjectionMatrixOrthoLH(50, 26, 0, 50);
 		m_camera->setProjectionMatrix(orthoMatrix);
 		Graphics::GetSceneManager()->setActiveCamera(m_camera);
 	}
@@ -75,11 +75,11 @@ void GameScene::Update()
 	if (lua_return)
 	{
 		// Player died.
-		printf("DED");
+		//printf("DED");
 	}
 
 	//Go through the models and update them
-	for (auto& model : m_models)
-		model.second.Update();
+	//for (auto& model : m_models)
+		//model.second.Update();
 
 }

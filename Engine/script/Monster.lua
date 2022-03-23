@@ -28,6 +28,8 @@ function Monster:OnDeath(playerGold)
 	return playerGold
 end
 
+
+
 function Monster:Chase(point, dt)
 
 	-- Create a new vector.
@@ -68,6 +70,13 @@ function Monster:Hit(player, dt)
 		self.cooldown = COOLDOWN_TIME
 		--print('Hit!')
 	end
+end
+
+function Monster:Update(player, dt)
+	self:Chase(player.position, dt)
+	self:Hit(player, dt)
+	self:GUpdate()
+	--print('test')
 end
 
 return Monster

@@ -1,7 +1,7 @@
 -- require/include
 gameObject = require('script/gameObject')
 
-PlayerTable = {hp = 100, gold = 0, xp = 0, weapon = "Hands", damage = 5, speed = 12}
+PlayerTable = {hp = 10000, gold = 0, xp = 0, weapon = "Hands", damage = 5, speed = 12}
 Player = gameObject:New(PlayerTable)
 
 function PlayerTable:New(g)
@@ -16,6 +16,11 @@ function PlayerTable:New(g)
 	g.id = LoadModel('clue_mask.obj')
 
 	return self
+end
+
+function PlayerTable:Update()
+	self:GUpdate()
+	--print('x: ' .. self.position.x .. 'y: ' .. self.position.y)
 end
 
 function PlayerTable:IsAlive()

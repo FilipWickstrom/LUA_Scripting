@@ -27,6 +27,12 @@ void Scene::RemoveModel(unsigned int id)
 	m_models.erase(id);
 }
 
+void Scene::UpdatePosition(unsigned int id, const irr::core::vector3df& pos)
+{
+	if(m_models.find(id) != m_models.end())
+		m_models.at(id).SetPosition(pos);
+}
+
 bool Scene::RemoveCamera()
 {
 	bool removed = false;
