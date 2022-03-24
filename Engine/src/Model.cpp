@@ -38,6 +38,15 @@ const unsigned int& Model::GetID() const
 	return m_id;
 }
 
+void Model::SetPosition(const irr::core::vector3df& pos)
+{
+	m_position = pos;
+	if (m_node)
+	{
+		m_node->setPosition(m_position);
+	}
+}
+
 void Model::Update()
 {
 	// Gather the position from LUA

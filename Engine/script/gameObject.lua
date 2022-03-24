@@ -17,14 +17,9 @@ function gameObject:New(g)
 	return g
 end
 
-function gameObject:Delete()
-	
-	RemoveModel(g.id)
-	g.id = 0
-end
+function gameObject:GUpdate()
 
-function gameObject:LoadModel(filepath)
-	self.id = LoadModel(filepath)
+	UpdatePos(self.id, self.position.x, self.position.y)
 end
 
 function gameObject:Move(vec)

@@ -24,6 +24,8 @@ public:
 	void SetID(unsigned int id);
 	const unsigned int& GetID() const;
 
+	void SetPosition(const irr::core::vector3df& pos);
+
 	void Update();
 
 	void Drop();

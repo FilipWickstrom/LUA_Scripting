@@ -1,7 +1,6 @@
 Player = require('script/Player')
 player = Player:New()
 refMonster = require('script/Monster')
-
 boss = require('script/BasicBossEnemy'):New()
 
 -- Collect all monsters in this table
@@ -10,11 +9,11 @@ monsters = {}
 -- Collect all other objects such as walls or floors in this table
 objects = {}
 
-deltatime = 0
+local deltatime = 0
 
 function AddMonster(modelfilepath)
 	local monster = refMonster:New()
-	monster:LoadModel(modelfilepath)
+	monster.id = LoadModel(modelfilepath)
 
 	table.insert(monsters, monster)
 end
@@ -28,6 +27,8 @@ function Start()
 	math.randomseed(os.time())
 	AddMonster('cube.obj')
 	AddMonster('cube.obj')
+
+	table.insert(monsters, boss)
 end
 
 function OnInput(x, y)
@@ -40,6 +41,7 @@ function OnInput(x, y)
 
 	if(player:IsAlive()) then
 		player:Move(vec)
+		player:Update()
 	end
 end
 
@@ -49,12 +51,7 @@ function Update(dt)
 
 	-- Loop through all enemies
 	for k, v in pairs(monsters) do
-		v:Chase(player.position, dt)
-		v:Hit(player, dt)
-	end
-
-	if boss ~= nil then
-		boss:Chase(dt)
+		v:Update(player, dt)
 	end
 
 	if(player:IsAlive() == false) then

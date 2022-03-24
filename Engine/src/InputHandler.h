@@ -48,11 +48,11 @@ public:
 
 		if (IsKeyDown(irr::KEY_KEY_A))
 		{
-			x = 1;
+			x = -1;
 		}
 		else if (IsKeyDown(irr::KEY_KEY_D))
 		{
-			x = -1;
+			x = 1;
 		}
 
 		lua_getglobal(LUA, "OnInput");

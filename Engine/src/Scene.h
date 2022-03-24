@@ -20,6 +20,8 @@ public:
 	unsigned int AddModel(std::string& file);
 	void RemoveModel(unsigned int id);
 
+	void UpdatePosition(unsigned int id, const irr::core::vector3df& pos);
+
 	// Camera
 	bool RemoveCamera();
 
