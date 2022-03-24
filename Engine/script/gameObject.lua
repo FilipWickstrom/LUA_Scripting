@@ -10,6 +10,7 @@ end
 function gameObject:New(g)
 	g = g or {}
 	g.id = 0
+	g.gid = 0
 	g.position = vector:New()
 	self.__index = self
 	setmetatable(g, self)
@@ -17,8 +18,12 @@ function gameObject:New(g)
 	return g
 end
 
-function gameObject:GUpdate()
+function gameObject:OnEnd()
+	RemoveUI(self.gid)
+	RemoveModel(self.id)
+end
 
+function gameObject:GUpdate()
 	UpdatePos(self.id, self.position.x, self.position.y)
 end
 

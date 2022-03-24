@@ -26,6 +26,10 @@ LuaHandler::LuaHandler()
 	lua_register(m_state, "WinWidth", GetWindowWidthLua);
 	lua_register(m_state, "WinHeight", GetWindowHeightLua);
 	lua_register(m_state, "UpdatePos", UpdatePosLua);
+	lua_register(m_state, "AddHealthbar", AddHealthbarUILua);
+	lua_register(m_state, "UpdateUI", UpdateGraphicalInterfaceLua);
+	lua_register(m_state, "UpdatePosUI", UpdatePosUILua);
+	lua_register(m_state, "RemoveUI", RemoveUILua);
 
 	m_conThread = std::thread(ConsoleThread, m_state);
 }

@@ -1,5 +1,6 @@
 #include "PCH.h"
 #include "Element2D.h"
+#include <utility>
 
 Element2D::Element2D()
 {
@@ -51,10 +52,10 @@ void Healthbar::Update(void* buff)
 {
 	m_current = *(float*)buff;
 
-	float scale = m_current / m_max;
+	float scale = min((m_current / m_max), 1.0f);
 	irr::s32 width = m_background.getWidth();
-	m_foreground.UpperLeftCorner = irr::core::vector2di(m_background.UpperLeftCorner.X + width * scale, m_background.UpperLeftCorner.Y);
-	m_foreground.LowerRightCorner = irr::core::vector2di(m_background.LowerRightCorner.X, m_background.LowerRightCorner.Y);
+	m_foreground.UpperLeftCorner = irr::core::vector2di(m_background.UpperLeftCorner.X , m_background.UpperLeftCorner.Y);
+	m_foreground.LowerRightCorner = irr::core::vector2di((m_background.LowerRightCorner.X - width) + width * scale, m_background.LowerRightCorner.Y);
 }
 
 void Healthbar::SetPosition(irr::core::recti pos)

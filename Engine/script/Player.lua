@@ -1,29 +1,36 @@
 -- require/include
 gameObject = require('script/gameObject')
 
-PlayerTable = {hp = 10000, gold = 0, xp = 0, weapon = "Hands", damage = 5, speed = 12}
-Player = gameObject:New(PlayerTable)
+Player = gameObject:New()
 
-function PlayerTable:New(g)
-	g = g or {}
-	setmetatable(g, self)
-	self.__index = self
-
+function Player:New()
+	local g = gameObject:New()
+	
+	g.hp = 100.0
+	g.gold = 0
+	g.xp = 0
+	g.weapon = "Hands"
+	g.damage = 5
+	g.speed = 12
 	-- Add effects here.
 	g.position.x = 0
 	g.position.y = 0
 
 	g.id = LoadModel('clue_mask.obj')
+	g.gid = AddHealthbar(0.0, 0.0, 250.0, 50.0)
 
-	return self
+	self.__index = Player
+	setmetatable(g, self)
+	return g
 end
 
-function PlayerTable:Update()
+function Player:Update()
 	self:GUpdate()
-	--print('x: ' .. self.position.x .. 'y: ' .. self.position.y)
+
+	UpdateUI(self.gid, self.hp)
 end
 
-function PlayerTable:IsAlive()
+function Player:IsAlive()
 	if(self.hp > 0) then
 		return true
 	end
@@ -31,7 +38,7 @@ function PlayerTable:IsAlive()
 	return false
 end
 
-function PlayerTable:TakeDamage(hurt)
+function Player:TakeDamage(hurt)
 	if type(hurt) == "number" then
 		self.hp = self.hp - hurt
 		--print(self.hp)
@@ -40,7 +47,7 @@ function PlayerTable:TakeDamage(hurt)
 	end
 end
 
-function PlayerTable:ReceiveHealth(health)
+function Player:ReceiveHealth(health)
 	if type(health) == "number" then
 		self.hp = self.hp + health
 		print(self.hp)
@@ -49,7 +56,7 @@ function PlayerTable:ReceiveHealth(health)
 	end
 end
 
-function PlayerTable:ReceiveGold(wealth)
+function Player:ReceiveGold(wealth)
 	if type(wealth) == "number" then
 		self.gold = self.gold + wealth
 		print(self.gold)
@@ -58,7 +65,7 @@ function PlayerTable:ReceiveGold(wealth)
 	end
 end
 
-function PlayerTable:ReceiveExperience(xp)
+function Player:ReceiveExperience(xp)
 	if type(xp) == "number" then
 		self.xp = self.xp + xp
 		print(self.xp)
@@ -67,7 +74,7 @@ function PlayerTable:ReceiveExperience(xp)
 	end
 end
 
-function PlayerTable:GetWeapon()
+function Player:GetWeapon()
 	print("Weapon is" .. " " .. self.weapon .. ".")
 	return self.weapon
 end
