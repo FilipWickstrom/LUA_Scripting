@@ -4,6 +4,9 @@
 
 class Scene
 {
+private:
+	static unsigned int s_GUI_ID;
+
 protected:
 	std::unordered_map<unsigned int, Model> m_models;
 	irr::scene::ICameraSceneNode* m_defaultCamera;
@@ -25,4 +28,15 @@ public:
 	// Camera
 	bool RemoveCamera();
 
+
+	/*
+		GUI
+	*/
+	unsigned int AddText(const std::string& text, const std::string& font,
+						irr::core::vector2di pos, irr::core::vector2di size);
+	unsigned int AddButton(const std::string& text, const std::string& font,
+						irr::core::vector2di pos, irr::core::vector2di size);
+
+	void RemoveGUI(unsigned int id);
+	bool IsButtonPressed(unsigned int id);
 };

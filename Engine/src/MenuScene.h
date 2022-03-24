@@ -4,9 +4,7 @@
 class MenuScene : public Scene
 {
 private:
-	irr::gui::IGUIStaticText* m_title;
-	std::vector<irr::gui::IGUIButton*> m_buttons;
-
+	
 public:
 	MenuScene() = default;
 	~MenuScene() = default;

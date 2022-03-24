@@ -13,10 +13,19 @@ LuaHandler::LuaHandler()
 	lua_register(m_state, "WinWidth", GetWindowWidthLua);
 	lua_register(m_state, "WinHeight", GetWindowHeightLua);
 	lua_register(m_state, "UpdatePos", UpdatePosLua);
+
+	lua_register(m_state, "ChangeScene", ChangeScene);
+
+	//GUI
+	lua_register(m_state, "AddText", GUI::AddText);
+	lua_register(m_state, "AddButton", GUI::AddButton);
+	lua_register(m_state, "RemoveGUI", GUI::RemoveGUI);
+	lua_register(m_state, "IsButtonPressed", GUI::IsButtonPressed);
 }
 
 LuaHandler::~LuaHandler()
 {
+	lua_close(m_state);
 }
 
 auto& LuaHandler::Get()
