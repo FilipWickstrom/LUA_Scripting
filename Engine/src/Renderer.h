@@ -3,10 +3,11 @@
 class Renderer
 {
 private:
+	std::thread  m_conThread;
 	SceneHandler m_sceneHandler;
 
 private:
-	void Update();
+	bool Update();
 	void Render();
 
 public:

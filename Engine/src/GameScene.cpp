@@ -38,15 +38,20 @@ void GameScene::Load()
 	
 
 	//Remove current camera and replace with gamecamera
-	if (RemoveCamera())
-	{
-		//Orthographic camera
-		m_camera = Graphics::GetSceneManager()->addCameraSceneNode(0, { 0,20,0 }, { 0,0,0 });
-		irr::core::matrix4 orthoMatrix;
-		orthoMatrix.buildProjectionMatrixOrthoLH(50, 26, 0, 20);
-		m_camera->setProjectionMatrix(orthoMatrix);
-		Graphics::GetSceneManager()->setActiveCamera(m_camera);
-	}
+	RemoveCamera();
+
+	//Orthographic camera
+	m_gameCamera = Graphics::GetSceneManager()->addCameraSceneNode(0, { 0,20,0 }, { 0,0,0 });
+	irr::core::matrix4 orthoMatrix;
+	/*
+		-25 <= X <= 25
+		-13 <= Y <= 13
+		0	<= z <= 20
+	*/
+	orthoMatrix.buildProjectionMatrixOrthoLH(50, 26, 0, 20);
+	m_gameCamera->setProjectionMatrix(orthoMatrix);
+	Graphics::GetSceneManager()->setActiveCamera(m_gameCamera);
+	
 }
 
 void GameScene::Clean()

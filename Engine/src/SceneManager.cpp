@@ -1,9 +1,9 @@
 #include "PCH.h"
 #include "SceneManager.h"
 
-//#include "MenuScene.h"
+#include "MenuScene.h"
 #include "GameScene.h"
-//#include "EditorScene.h"
+#include "EditorScene.h"
 
 SceneHandler::SceneHandler()
 {
@@ -40,7 +40,7 @@ void SceneHandler::SetScene(const EScene& scene)
 	{
 	case EScene::Menu:
 	{
-		// Do stuff
+		m_currentScene = std::make_unique<MenuScene>();
 		break;
 	}
 	case EScene::Game:
@@ -50,7 +50,7 @@ void SceneHandler::SetScene(const EScene& scene)
 	}
 	case EScene::Editor:
 	{
-		// Do stuff
+		m_currentScene = std::make_unique<EditorScene>();
 		break;
 	}
 	default:
@@ -59,6 +59,11 @@ void SceneHandler::SetScene(const EScene& scene)
 
 	// Load in the scene
 	m_currentScene->Load();
+}
+
+const EScene& SceneHandler::GetSceneType() const
+{
+	return m_currentSceneType;
 }
 
 /*

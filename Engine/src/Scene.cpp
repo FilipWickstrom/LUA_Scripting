@@ -3,13 +3,11 @@
 
 Scene::Scene()
 {
-	//Default camera
-	m_camera = Graphics::GetSceneManager()->addCameraSceneNode();
+	m_defaultCamera = Graphics::GetSceneManager()->addCameraSceneNode();
 }
 
 Scene::~Scene()
 {
-	//Graphics::GetSceneManager()->getActiveCamera()->drop();
 	RemoveCamera();
 }
 

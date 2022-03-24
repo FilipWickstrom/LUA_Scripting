@@ -4,12 +4,9 @@
 
 class Scene
 {
-private:
-	//Register? with ENTT?
-
 protected:
 	std::unordered_map<unsigned int, Model> m_models;
-	irr::scene::ICameraSceneNode* m_camera;
+	irr::scene::ICameraSceneNode* m_defaultCamera;
 
 public:
 	Scene();

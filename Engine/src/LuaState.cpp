@@ -2,19 +2,6 @@
 #include "LuaState.h"
 #include "LuaToCpp.h"
 
-// Run the console
-void ConsoleThread(lua_State* L)
-{
-	char command[1000];
-	while (GetConsoleWindow())
-	{
-		memset(command, 0, 1000);
-		std::cin.getline(command, 1000);
-		if (luaL_loadstring(L, command) || lua_pcall(L, 0, 0, 0))
-			std::cout << lua_tostring(L, -1) << '\n';
-	}
-}
-
 LuaHandler::LuaHandler()
 {
 	m_state = luaL_newstate();
@@ -25,13 +12,10 @@ LuaHandler::LuaHandler()
 	lua_register(m_state, "RemoveModel", RemoveModelLua);
 	lua_register(m_state, "WinWidth", GetWindowWidthLua);
 	lua_register(m_state, "WinHeight", GetWindowHeightLua);
-
-	m_conThread = std::thread(ConsoleThread, m_state);
 }
 
 LuaHandler::~LuaHandler()
 {
-	m_conThread.join();
 }
 
 auto& LuaHandler::Get()
