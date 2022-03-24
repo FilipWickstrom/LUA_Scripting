@@ -38,7 +38,7 @@ void Text::SetPosition(irr::core::recti pos)
 
 Healthbar::Healthbar(const irr::core::rect<irr::s32>& pos)
 {
-	m_foreground = pos;
+	//m_foreground = pos;
 	m_background = pos;
 }
 
