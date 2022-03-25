@@ -16,6 +16,7 @@ public:
 	// Specific functions for this scene
 	void AddBasicEnemy(float x, float y);
 
+	void UpdateCamera();
 
 	// Inherited via Scene
 	virtual void Load() override;

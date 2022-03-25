@@ -34,9 +34,9 @@ int UpdatePosLua(lua_State* L)
 {
 	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -3));
 	float x = static_cast<float>(lua_tonumber(L, -2));
-	float y = static_cast<float>(lua_tonumber(L, -1));
+	float z = static_cast<float>(lua_tonumber(L, -1));
 	//float z = static_cast<float>(lua_tonumber(L, -1));
-	SceneAccess::GetSceneHandler()->GetScene()->UpdatePosition(id, { x, 0, y });
+	SceneAccess::GetSceneHandler()->GetScene()->UpdatePosition(id, { x, 0, z });
 
 	return 0;
 }

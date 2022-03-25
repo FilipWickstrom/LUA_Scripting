@@ -3,7 +3,7 @@ vector = require("script/vector")
 
 function gameObject:RandomizePos()
 	self.position.x = math.random(10)
-	self.position.y = math.random(10)
+	self.position.y = 0
 	self.position.z = math.random(10)
 end
 
@@ -24,7 +24,7 @@ function gameObject:OnEnd()
 end
 
 function gameObject:GUpdate()
-	UpdatePos(self.id, self.position.x, self.position.y)
+	UpdatePos(self.id, self.position.x, self.position.z)
 end
 
 function gameObject:Move(vec)

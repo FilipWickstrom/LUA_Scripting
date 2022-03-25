@@ -3,6 +3,7 @@ player = Player:New()
 refMonster = require('script/Monster')
 refMonkey = require('script/ThrowingEnemy')
 boss = require('script/BasicBossEnemy'):New()
+refThrowBoss = require('script/ThrowingBoss')
 
 -- Collect all monsters in this table
 monsters = {}
@@ -30,9 +31,12 @@ function Start()
 	AddMonster('cube.obj')
 
 	local newMonkey = refMonkey:New()
+	local throwBoss = refThrowBoss:New()
 
+	
 	table.insert(monsters, newMonkey)
 	table.insert(monsters, boss)
+	table.insert(monsters, throwBoss)
 end
 
 function OnInput(x, y)
@@ -41,12 +45,9 @@ function OnInput(x, y)
 
 	local vec = vector:New()
 	vec.x = x * deltatime * player.speed
-	vec.y = y * deltatime * player.speed
+	vec.z = y * deltatime * player.speed
 
-	if(player:IsAlive()) then
-		player:Move(vec)
-		player:Update()
-	end
+	player:Move(vec)
 end
 
 -- Update function for lua. return 0 if nothing happend, 1 if player died.
@@ -62,6 +63,8 @@ function Update(dt)
 		return 1
 	end
 
+	player:Update()
+
 	return 0
 end
 
@@ -74,16 +77,16 @@ end
 function GetObjectPosition(ind)
 
 	if player.id == ind then
-		return player.position.x, player.position.y
+		return player.position.x, player.position.z
 	end
 
 	if boss.id == ind then
-		return boss.position.x, boss.position.y
+		return boss.position.x, boss.position.z
 	end
 
 	for k, v in pairs(monsters) do
 		if v.id == ind then
-			return v.position.x, v.position.y
+			return v.position.x, v.position.z
 		end
 	end
 

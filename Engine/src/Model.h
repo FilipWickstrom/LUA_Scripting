@@ -22,7 +22,7 @@ public:
 		irr::core::vector3df rot, irr::core::vector3df scale);
 
 	void SetID(unsigned int id);
-	const unsigned int& GetID() const;
+	unsigned int GetID() const;
 
 	void SetPosition(const irr::core::vector3df& pos);
 
