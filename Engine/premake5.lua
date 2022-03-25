@@ -29,21 +29,24 @@ project "Game"
     }
 
     vpaths {
-		["Scripts"] 		= { "script/**.*" },
+		["Singletons"]		= { "src/**Graphics.*", "src/**LuaState.*", "src/**SceneManager.*", "**InputHandler.*" },
 		
-		["Singletons"]		= { "**Graphics.*", "**LuaState.*", "**SceneManager.*", "**InputHandler.*" },
-		
-		["Enemies"] 		= { "**EnemyManager.*" },
+		["Enemies"] 		= { "src/**EnemyManager.*" },
 		
 		["Modules"] 		= {},
 			
-		["Object"]			= { "**Model.*", "**Object.*" },
+		["Object"]			= { "src/**Model.*", "src/**Object.*" },
 		
-		["Scenes"]			= { "**Scene.*" },
+		["Scenes"]			= { "src/**Scene.*" },
 		
-		["Main"]			= { "**Main.*", "**Renderer.*", "**PCH.*" },
+		["Main"]			= { "src/**Main.*", "src/**Renderer.*", "src/**PCH.*" },
 		
-		["LUA"]				= { "**CppToLua.*", "**LuaToCpp.*" },
+        ["LUA"]				= { "src/**CppToLua.*", "src/**LuaToCpp.*" },
+
+        ["User Interface"]  = { "src/**Graphics2D.*", "src/**Element2D.*"},
+		
+		["Scripts"] 		= { "script/**.*" },
+
     }
 
     filter {"system:windows"}

@@ -1,7 +1,9 @@
 Player = require('script/Player')
 player = Player:New()
 refMonster = require('script/Monster')
+refMonkey = require('script/ThrowingEnemy')
 boss = require('script/BasicBossEnemy'):New()
+refThrowBoss = require('script/ThrowingBoss')
 
 -- Collect all monsters in this table
 monsters = {}
@@ -28,7 +30,13 @@ function Start()
 	AddMonster('cube.obj')
 	AddMonster('cube.obj')
 
+	local newMonkey = refMonkey:New()
+	local throwBoss = refThrowBoss:New()
+
+	
+	table.insert(monsters, newMonkey)
 	table.insert(monsters, boss)
+	table.insert(monsters, throwBoss)
 end
 
 function OnInput(x, y)

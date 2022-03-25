@@ -41,6 +41,7 @@
 
 // Singletons
 #include "Graphics.h"
+#include "Graphics2D.h"
 #include "LuaState.h"
 #include "InputHandler.h"
 #include "SceneManager.h"
@@ -48,4 +49,5 @@
 // Paths
 const std::string MODELPATH		= "../Assets/Models/";
 const std::string TEXTUREPATH	= "../Assets/Textures/";
+const std::string FONTPATH		= "../Assets/Fonts/";
 const std::string SCRIPTSPATH	= "script/";
