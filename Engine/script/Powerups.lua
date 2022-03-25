@@ -7,14 +7,15 @@ local types =
 {
 	[1] = "Money",
 	[2] = "Attack",
-	[3] = "Speed"
+	[3] = "Speed",
+	[4] = "Health"
 }
 
 local RESPAWN_TIME = 5.0
 
 function Powerup:Initiate()
 
-	return types[math.random(3)]
+	return types[math.random(4)]
 
 end
 
@@ -39,10 +40,13 @@ function Powerup:Gain(player)
 		player.gold = player.gold + 15
 	end
 	if self.type == "Attack" then
-		player.damage = player.damage + 5
+		player.damage = player.damage + 5.0
 	end
 	if self.type == "Speed" then
 		player.speed = player.speed + 2.5
+	end
+	if self.type == "Health" then
+		player.health = player.health + 15.0
 	end
 
 	-- Hide from player.
