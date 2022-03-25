@@ -11,24 +11,23 @@ Scene =
 
 
 function Start()
-	local winWidth	= WinWidth()
-	local winHeight	= WinHeight()
+	local window = { X = WinWidth(), Y = WinHeight() }
+	local btnSize	= { X = 250, Y = 100 }
+
+	-- Space between the GUI
+	local verticalSpace	= btnSize.Y * 1.5
 	
-	-- TODO: Tweak layout depending on resolution
+	yDistance = 0.20 * window.Y
+	GUI["Title"]= AddText("Budget Binding of Isaac", "roboto_48.xml", window.X/2, yDistance, 800, 200)
 
-	btnSize			= { X = 250, Y = 100 }
-	verticalSpace	= btnSize.Y * 1.5 
-
-	GUI["Title"]= AddText("Scripting project", "roboto_48.xml", winWidth/2, 200, 800, 200)
-
-	yDistance	= (-verticalSpace * 0.5)
-	GUI["Play"] = AddButton("Play", "roboto_28.xml", winWidth/2, winHeight/2 + yDistance, btnSize.X, btnSize.Y)
+	yDistance	= yDistance + verticalSpace
+	GUI["Play"] = AddButton("Play", "roboto_28.xml", window.X/2, yDistance, btnSize.X, btnSize.Y)
 	
 	yDistance	= yDistance + verticalSpace
-	GUI["Edit"] = AddButton("Edit", "roboto_28.xml", winWidth/2, winHeight/2 + yDistance, btnSize.X, btnSize.Y)
+	GUI["Edit"] = AddButton("Edit", "roboto_28.xml", window.X/2, yDistance, btnSize.X, btnSize.Y)
 	
 	yDistance	= yDistance + verticalSpace
-	GUI["Quit"] = AddButton("Quit", "roboto_28.xml", winWidth/2, winHeight/2 + yDistance, btnSize.X, btnSize.Y)
+	GUI["Quit"] = AddButton("Quit", "roboto_28.xml", window.X/2, yDistance, btnSize.X, btnSize.Y)
 
 end
 
