@@ -30,3 +30,11 @@ namespace GUI
 	int IsButtonPressed(lua_State* L);
 
 };
+
+// Graphical Interface wrapper
+int UpdateGraphicalInterfaceLua(lua_State* L);
+int	AddHealthbarUILua(lua_State* L);
+int UpdatePosUILua(lua_State* L);
+int RemoveUILua(lua_State* L);
+
+

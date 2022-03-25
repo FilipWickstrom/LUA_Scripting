@@ -18,6 +18,7 @@ function BasicBoss:New()
 	g.reach = 3.5
 
 	g.id = LoadModel('clue_toy.obj')
+	g.gid = AddHealthbar(0.0, 0.0, 100.0, 50.0)
 
 	self.__index = BasicBoss
 	setmetatable(g, self)
@@ -49,7 +50,7 @@ function BasicBoss:Attack(player, dt)
 	if x < self.reach and y < self.reach and self.cooldown <= 0.0 then
 		player.hp = player.hp - self.damage
 		self.cooldown = COOLDOWN_TIME
-		print('Hit!')
+		--print('Hit!')
 	end
 
 end
@@ -59,6 +60,8 @@ function BasicBoss:Update(player, dt)
 	self:Chase(dt)
 	self:Attack(player, dt)
 	self:GUpdate()
+	UpdatePosUI(self.gid, self.position.x, self.position.y, 100.0, 50.0)
+	UpdateUI(self.gid, self.hp)
 end
 
 

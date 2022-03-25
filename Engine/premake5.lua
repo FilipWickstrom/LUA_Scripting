@@ -41,9 +41,12 @@ project "Game"
 		
 		["Main"]			= { "src/**Main.*", "src/**Renderer.*", "src/**PCH.*" },
 		
-		["LUA"]				= { "src/**CppToLua.*", "src/**LuaToCpp.*" },
+        ["LUA"]				= { "src/**CppToLua.*", "src/**LuaToCpp.*" },
+
+        ["User Interface"]  = { "src/**Graphics2D.*", "src/**Element2D.*"},
 		
 		["Scripts"] 		= { "script/**.*" },
+
     }
 
     filter {"system:windows"}

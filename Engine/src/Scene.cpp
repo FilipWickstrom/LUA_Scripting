@@ -27,6 +27,10 @@ void Scene::RemoveModel(unsigned int id)
 	m_models.erase(id);
 }
 
+const irr::scene::ICameraSceneNode* Scene::GetCamera() const
+{
+	return m_camera;
+}
 
 void Scene::UpdatePosition(unsigned int id, const irr::core::vector3df& pos)
 {

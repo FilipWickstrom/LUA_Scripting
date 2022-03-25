@@ -22,6 +22,7 @@ public:
 	// Models
 	unsigned int AddModel(std::string& file);
 	void RemoveModel(unsigned int id);
+	const irr::scene::ICameraSceneNode* GetCamera() const;
 
 	void UpdatePosition(unsigned int id, const irr::core::vector3df& pos);
 
