@@ -8,17 +8,20 @@ function Start()
 	GUI["Title"] = AddText("Level editor", "roboto_28.xml", window.X/2, 25, 400, 100)
 
 	-- Buttons: Create, Load, Save
-	local btnSize	= { X = 100, Y = 50 }
+	local editBtn = { X = 100, Y = 50 }
 	local xSpace = 0;
-	GUI["Create"] = AddButton("Create", "roboto_12.xml", btnSize.X/2, btnSize.Y/2, btnSize.X, btnSize.Y)
-	xSpace = xSpace + btnSize.X
-	GUI["Load"] = AddButton("Load", "roboto_12.xml", btnSize.X/2 + xSpace, btnSize.Y/2, btnSize.X, btnSize.Y)
-	xSpace = xSpace + btnSize.X
-	GUI["Save"] = AddButton("Save", "roboto_12.xml", btnSize.X/2 + xSpace, btnSize.Y/2, btnSize.X, btnSize.Y)
+	GUI["Create"] = AddButton("Create", "roboto_12.xml", editBtn.X/2, editBtn.Y/2, editBtn.X, editBtn.Y)
+	xSpace = xSpace + editBtn.X
+	GUI["Load"] = AddButton("Load", "roboto_12.xml", editBtn.X/2 + xSpace, editBtn.Y/2, editBtn.X, editBtn.Y)
+	xSpace = xSpace + editBtn.X
+	GUI["Save"] = AddButton("Save", "roboto_12.xml", editBtn.X/2 + xSpace, editBtn.Y/2, editBtn.X, editBtn.Y)
+
+	-- Buttons: Back to menu
+	local menuBtn = { X = 150, Y = 50 }
+	GUI["Menu"] = AddButton("Back to menu", "roboto_12.xml", window.X-(menuBtn.X/2), menuBtn.Y/2, menuBtn.X, menuBtn.Y)
 
 	-- Other stuff
 
-	GUI["Menu"] = AddButton("Back to menu", "roboto_12.xml", window.X, btnSize.Y/2, btnSize.X, btnSize.Y)
 
 end
 
@@ -41,7 +44,6 @@ function Update()
 
 	elseif(IsButtonPressed(GUI["Save"])) then
 		--Call c++ save map
-
 
 	elseif(IsButtonPressed(GUI["Menu"])) then
 		ChangeScene(Scene.MENU)

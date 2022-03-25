@@ -3,8 +3,6 @@
 
 void EditorScene::Load()
 {
-	Graphics::GetSceneManager()->setActiveCamera(m_defaultCamera);
-
 	//Read the lua-script
 	LoadScript("EditorScene.lua");
 
@@ -13,8 +11,6 @@ void EditorScene::Load()
 	lua_pcall(LUA, 0, 0, 0);
 	if (lua_isstring(LUA, -1))
 		std::cout << "Error: " << lua_tostring(LUA, -1) << "\n";
-
-	LuaHandler::DumpStack();
 }
 
 void EditorScene::Clean()

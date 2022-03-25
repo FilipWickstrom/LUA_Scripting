@@ -35,11 +35,11 @@ void GameScene::UpdateCamera()
 			irr::f32 x = static_cast<irr::f32>(lua_tonumber(LUA, -2));
 			irr::f32 z = static_cast<irr::f32>(lua_tonumber(LUA, -1));
 
-			if (m_gameCamera)
+			if (m_camera)
 			{
 				// + 1 to look in the correct direction, z positive
-				m_gameCamera->setTarget({ x, 0, z + 1 });
-				m_gameCamera->setPosition({ x, 40.f, z });
+				m_camera->setTarget({ x, 0, z + 1 });
+				m_camera->setPosition({ x, 40.f, z });
 			}
 		}
 		else
@@ -71,11 +71,11 @@ void GameScene::Load()
 	//Read the map
 
 
-	//Remove current camera and replace with gamecamera
-	RemoveCamera();
+	//Remove active camera and replace with game-specific camera
+	RemoveActiveCam();
 
 	//Orthographic camera
-	m_gameCamera = Graphics::GetSceneManager()->addCameraSceneNode(0, { 0,40,0 }, { 0,0,1 });
+	m_camera = Graphics::GetSceneManager()->addCameraSceneNode(0, { 0,40,0 }, { 0,0,1 });
 	irr::core::matrix4 orthoMatrix;
 	/*
 		-25 <= X <= 25
@@ -83,8 +83,8 @@ void GameScene::Load()
 		0	<= z <= 20
 	*/
 	orthoMatrix.buildProjectionMatrixOrthoLH(50, 26, 0, 50);
-	m_gameCamera->setProjectionMatrix(orthoMatrix);
-	Graphics::GetSceneManager()->setActiveCamera(m_gameCamera);
+	m_camera->setProjectionMatrix(orthoMatrix);
+	Graphics::GetSceneManager()->setActiveCamera(m_camera);
 	
 }
 
