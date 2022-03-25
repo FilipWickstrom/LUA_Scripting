@@ -13,7 +13,6 @@ enum class EScene
 class SceneHandler
 {
 private:
-	//irrlicht scene?
 	std::unique_ptr<Scene>	m_currentScene;
 	EScene					m_currentSceneType;
 
@@ -24,6 +23,7 @@ public:
 	Scene* GetScene();
 	void UpdateScene();
 	void SetScene(const EScene& scene);
+	const EScene& GetSceneType() const;
 };
 
 /*

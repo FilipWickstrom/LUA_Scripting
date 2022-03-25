@@ -5,7 +5,6 @@ class LuaHandler
 {
 private:
 	lua_State* m_state;
-	std::thread m_conThread;
 
 	LuaHandler();
 	~LuaHandler();

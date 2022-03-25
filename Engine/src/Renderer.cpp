@@ -1,25 +1,46 @@
 #include "PCH.h"
 #include "Renderer.h"
 
+// Run the console
+void ConsoleThread(lua_State* L)
+{
+	char command[1000];
+	while (GetConsoleWindow())
+	{
+		memset(command, 0, 1000);
+		std::cin.getline(command, 1000);
+		if (luaL_loadstring(L, command) || lua_pcall(L, 0, 0, 0))
+			std::cout << lua_tostring(L, -1) << '\n';
+	}
+}
+
 Renderer::Renderer()
 {
 	//Superweird, only works when m_sceneHandler exist in Renderer
 	SceneAccess::SetSceneHandler(&m_sceneHandler);
-	
-	//[TODO]: Always start in menu
-	SceneAccess::GetSceneHandler()->SetScene(EScene::Game);
+	SceneAccess::GetSceneHandler()->SetScene(EScene::Menu);
+
+#ifdef _DEBUG
+	m_conThread = std::thread(ConsoleThread, LUA);
+#endif // _DEBUG
 }
 
 Renderer::~Renderer()
 {
+#ifdef _DEBUG
+	m_conThread.join();
+#endif // _DEBUG
 }
 
-void Renderer::Update()
+bool Renderer::Update()
 {
 	Input::CheckKeyboard();
 
 	//Update all the objects in the scene
 	SceneAccess::GetSceneHandler()->UpdateScene();
+	
+	//Return false when we switch scene to none
+	return (SceneAccess::GetSceneHandler()->GetSceneType() == EScene::None ? false : true);
 }
 
 void Renderer::Render()
@@ -44,9 +65,11 @@ void Renderer::Run()
 		start = omp_get_wtime();
 		Graphics::GetDeltaTime() = end;
 		
-		this->Update();
-		this->Render();
-		
+		if (this->Update())
+			this->Render();
+		else
+			Graphics::GetDevice()->closeDevice();
+
 		end = omp_get_wtime() - start;
 	}
 }

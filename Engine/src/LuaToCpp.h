@@ -5,7 +5,7 @@
 
 	structure:
 		parameter: lua_State
-		return: int
+		return: int				- amount of results to return
 */
 
 // Lua function to load model into c++
@@ -18,8 +18,18 @@ int RemoveModelLua(lua_State* L);
 int GetWindowWidthLua(lua_State* L);
 int GetWindowHeightLua(lua_State* L);
 
-
 int UpdatePosLua(lua_State* L);
+
+int ChangeScene(lua_State* L);
+
+namespace GUI
+{
+	int AddText(lua_State* L);
+	int AddButton(lua_State* L);
+	int RemoveGUI(lua_State* L);
+	int IsButtonPressed(lua_State* L);
+
+};
 
 // Graphical Interface wrapper
 int UpdateGraphicalInterfaceLua(lua_State* L);
@@ -27,6 +37,4 @@ int	AddHealthbarUILua(lua_State* L);
 int UpdatePosUILua(lua_State* L);
 int RemoveUILua(lua_State* L);
 
-/*
-	Add scopes for specific functions
-*/
+
