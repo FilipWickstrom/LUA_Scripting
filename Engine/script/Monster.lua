@@ -77,7 +77,7 @@ function Monster:Update(player, dt)
 	self:Chase(player.position, dt)
 	self:Hit(player, dt)
 	self:GUpdate()
-	UpdatePosUI(self.gid, self.position.x, self.position.y, 75.0, 25.0)
+	UpdatePosUI(self.gid, self.position.x, self.position.z, 75.0, 25.0)
 	UpdateUI(self.gid, self.hp)
 end
 

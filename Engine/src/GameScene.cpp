@@ -22,6 +22,39 @@ void GameScene::AddBasicEnemy(float x, float y)
 	EnemyManager::m_freeIndex = m_models[EnemyManager::m_freeIndex].GetID();
 }
 
+void GameScene::UpdateCamera()
+{
+	lua_getglobal(LUA, "GetObjectPosition");
+	lua_pushnumber(LUA, 0);
+	int ret = lua_pcall(LUA, 1, 2, 0);
+
+	if (ret == 0)
+	{
+		if (lua_isnumber(LUA, -1) && lua_isnumber(LUA, -2))
+		{
+			irr::f32 x = static_cast<irr::f32>(lua_tonumber(LUA, -2));
+			irr::f32 z = static_cast<irr::f32>(lua_tonumber(LUA, -1));
+
+			if (m_gameCamera)
+			{
+				// + 1 to look in the correct direction, z positive
+				m_gameCamera->setTarget({ x, 0, z + 1 });
+				m_gameCamera->setPosition({ x, 40.f, z });
+			}
+		}
+		else
+		{
+			// 'Err' was returned, do something like delete this object or something idk.
+		}
+		lua_pop(LUA, 2);
+	}
+	else
+	{
+		std::cout << lua_tostring(LUA, -1) << "\n";
+		lua_pop(LUA, 1);
+	}
+}
+
 void GameScene::Load()
 {
 	//Read the lua-script
