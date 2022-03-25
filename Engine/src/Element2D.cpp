@@ -55,7 +55,7 @@ void Healthbar::Update(void* buff)
 	float scale = min((m_current / m_max), 1.0f);
 	irr::s32 width = m_background.getWidth();
 	m_foreground.UpperLeftCorner = irr::core::vector2di(m_background.UpperLeftCorner.X , m_background.UpperLeftCorner.Y);
-	m_foreground.LowerRightCorner = irr::core::vector2di((m_background.LowerRightCorner.X - width) + width * scale, m_background.LowerRightCorner.Y);
+	m_foreground.LowerRightCorner = irr::core::vector2di(static_cast<int>((m_background.LowerRightCorner.X - width) + width * scale), m_background.LowerRightCorner.Y);
 }
 
 void Healthbar::SetPosition(irr::core::recti pos)

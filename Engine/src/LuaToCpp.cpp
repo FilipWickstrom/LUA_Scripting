@@ -63,8 +63,8 @@ int AddHealthbarUILua(lua_State* L)
 	float x = static_cast<float>(lua_tonumber(L, -4));
 
 	irr::core::rect<irr::s32> rect;
-	rect.LowerRightCorner = irr::core::vector2di(x2, y2);
-	rect.UpperLeftCorner = irr::core::vector2di(x, y);
+	rect.LowerRightCorner	= irr::core::vector2di(static_cast<int>(x2), static_cast<int>(y2));
+	rect.UpperLeftCorner	= irr::core::vector2di(static_cast<int>(x), static_cast<int>(y));
 
 	const unsigned int ret = Graphics2D::AddHealthbar(rect);
 
@@ -87,8 +87,8 @@ int UpdatePosUILua(lua_State* L)
 	irr::core::rect<irr::s32> rect;
 	irr::scene::ISceneCollisionManager* m = Graphics::GetSceneManager()->getSceneCollisionManager();
 	irr::core::vector2d<irr::s32> pos = m->getScreenCoordinatesFrom3DPosition({ x, 0, y});
-	rect.LowerRightCorner = irr::core::vector2di(pos.X + x2, pos.Y + y2);
-	rect.UpperLeftCorner = irr::core::vector2di(pos.X, pos.Y);
+	rect.LowerRightCorner	= irr::core::vector2di(static_cast<int>(pos.X + x2), static_cast<int>(pos.Y + y2));
+	rect.UpperLeftCorner	= irr::core::vector2di(static_cast<int>(pos.X), static_cast<int>(pos.Y));
 
 	Graphics2D::SetPosition(id, rect);
 	return 0;

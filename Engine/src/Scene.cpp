@@ -29,7 +29,7 @@ void Scene::RemoveModel(unsigned int id)
 
 const irr::scene::ICameraSceneNode* Scene::GetCamera() const
 {
-	return m_camera;
+	return Graphics::GetSceneManager()->getActiveCamera();
 }
 
 void Scene::UpdatePosition(unsigned int id, const irr::core::vector3df& pos)
@@ -121,5 +121,6 @@ bool Scene::IsButtonPressed(unsigned int id)
 		if (button->isPressed())
 			return true;
 	}
+
 	return false;
 }
