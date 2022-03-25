@@ -4,6 +4,7 @@ refMonster = require('script/Monster')
 refMonkey = require('script/ThrowingEnemy')
 boss = require('script/BasicBossEnemy'):New()
 refThrowBoss = require('script/ThrowingBoss')
+powerup = require('script/Powerups'):New()
 
 -- Collect all monsters in this table
 monsters = {}
@@ -60,6 +61,10 @@ function Update(dt)
 	-- Loop through all enemies
 	for k, v in pairs(monsters) do
 		v:Update(player, dt)
+	end
+
+	if powerup ~= nil then
+		powerup:Update(player)
 	end
 
 	if(player:IsAlive() == false) then
