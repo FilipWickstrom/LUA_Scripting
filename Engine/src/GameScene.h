@@ -6,6 +6,7 @@ class GameScene : public Scene
 {
 private:
 	// Lua manager for all enemies.
+	irr::scene::ICameraSceneNode* m_gameCamera;
 	EnemyManager m_enemyManager;
 
 public:
