@@ -47,6 +47,12 @@ void Model::SetPosition(const irr::core::vector3df& pos)
 	}
 }
 
+void Model::SetScale(const float& scale)
+{
+	m_scale = { scale, scale, scale };
+	m_node->setScale(m_scale);
+}
+
 void Model::Update()
 {
 	// Gather the position from LUA

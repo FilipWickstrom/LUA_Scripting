@@ -14,18 +14,19 @@ local RESPAWN_TIME = 5.0
 
 function Powerup:Initiate()
 
-	self.type = types[math.random(3)]
+	return types[math.random(3)]
 
 end
 
 function Powerup:New()
 	local g = gameObject:New()
-	g.type = "Money"
-	self:Initiate()
+	g.type = self:Initiate()
 
 	g.respawntimer = 0.0
 	g.RandomizePos(g)
 	g.id = LoadModel("clue_knife.obj")
+	g.reach = 1.5
+	SetModelScale(g.id, 0.1)
 	
 	self.__index = Powerup
 	setmetatable(g, self)
@@ -54,7 +55,7 @@ function Powerup:Update(player)
 	-- player is close enough to the powerup
 	local x = math.abs(player.position.x - self.position.x)
 	local y = math.abs(player.position.y - self.position.y)
-	if x <= 5 and y <= 5 then
+	if x <= self.reach and y <= self.reach then
 		self:Gain(player)
 	end
 	

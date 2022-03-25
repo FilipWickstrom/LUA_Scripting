@@ -11,6 +11,16 @@ int LoadModelLua(lua_State* L)
 	return 1;
 }
 
+int SetScaleLua(lua_State* L)
+{
+	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+	float scalefactor = static_cast<float>(lua_tonumber(L, -1));
+
+	SceneAccess::GetSceneHandler()->GetScene()->SetModelScale(id, scalefactor);
+
+	return 0;
+}
+
 int RemoveModelLua(lua_State* L)
 {
 	int id = static_cast<int>(lua_tonumber(L, -1));

@@ -25,6 +25,7 @@ public:
 	const irr::scene::ICameraSceneNode* GetCamera() const;
 
 	void UpdatePosition(unsigned int id, const irr::core::vector3df& pos);
+	void SetModelScale(unsigned int id, const float& scale);
 
 	// Camera
 	bool RemoveCamera();

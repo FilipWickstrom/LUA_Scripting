@@ -25,6 +25,7 @@ public:
 	const unsigned int& GetID() const;
 
 	void SetPosition(const irr::core::vector3df& pos);
+	void SetScale(const float& scale);
 
 	void Update();
 
