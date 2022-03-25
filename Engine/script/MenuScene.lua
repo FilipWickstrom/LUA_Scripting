@@ -1,14 +1,6 @@
+require('script/SceneHelp')
 
 GUI	= {}
-
-Scene = 
-{
-   NONE		= 0,
-   MENU		= 1,
-   GAME		= 2,
-   EDITOR	= 3
-}
-
 
 function Start()
 	local window = { X = WinWidth(), Y = WinHeight() }
