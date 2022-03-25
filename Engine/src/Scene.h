@@ -25,6 +25,9 @@ public:
 
 	void UpdatePosition(unsigned int id, const irr::core::vector3df& pos);
 
+	// Camera will follow the players position
+	void UpdateCamera();
+
 	// Camera
 	bool RemoveCamera();
 

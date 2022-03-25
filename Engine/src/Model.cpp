@@ -33,7 +33,7 @@ void Model::SetID(unsigned int id)
 	m_id = id;
 }
 
-const unsigned int& Model::GetID() const
+unsigned int Model::GetID() const
 {
 	return m_id;
 }
@@ -54,12 +54,12 @@ void Model::Update()
 	lua_pushnumber(LUA, m_id);
 	int ret = lua_pcall(LUA, 1, 2, 0);
 
-
 	if (ret == 0)
 	{
 		if (lua_isnumber(LUA, -1))
 		{
 			m_position.X = static_cast<irr::f32>(lua_tonumber(LUA, -1));
+			m_position.Y = 0.f;
 			m_position.Z = static_cast<irr::f32>(lua_tonumber(LUA, -2));
 
 			if (m_node)

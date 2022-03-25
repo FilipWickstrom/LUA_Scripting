@@ -42,10 +42,10 @@ function Monster:Chase(point, dt)
 		vec.x = -1 * dt * self.speed
 	end
 
-	if(self.position.y < point.y) then
-		vec.y = 1 * dt * self.speed
+	if(self.position.z < point.z) then
+		vec.z = 1 * dt * self.speed
 	else
-		vec.y = -1 * dt * self.speed
+		vec.z = -1 * dt * self.speed
 	end
 
 	-- Add vector to monster

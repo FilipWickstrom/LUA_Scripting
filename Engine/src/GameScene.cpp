@@ -35,16 +35,17 @@ void GameScene::Load()
 
 	//Read the scene basics from a file
 	//Read the map
-	
+
 
 	//Remove current camera and replace with gamecamera
 	if (RemoveCamera())
 	{
 		//Orthographic camera
-		m_camera = Graphics::GetSceneManager()->addCameraSceneNode(0, { 0, 40,0 }, { 0, 0 , 1 });
+		m_camera = Graphics::GetSceneManager()->addCameraSceneNode(0, { 0, 40.f, 0.f }, { 0.f, 0.f, 0.0f });
+
 		irr::core::matrix4 orthoMatrix;
-		orthoMatrix.buildProjectionMatrixOrthoLH(50, 26, 0, 50);
-		m_camera->setProjectionMatrix(orthoMatrix);
+		orthoMatrix.buildProjectionMatrixOrthoLH(50, 26, 0.1f, 50);
+		m_camera->setProjectionMatrix(orthoMatrix, true);
 		Graphics::GetSceneManager()->setActiveCamera(m_camera);
 	}
 }
@@ -71,15 +72,5 @@ void GameScene::Update()
 	int lua_return = static_cast<int>(lua_tonumber(LUA, -1));
 	lua_pop(LUA, 1);
 
-	// Feels hardcoded?
-	if (lua_return)
-	{
-		// Player died.
-		//printf("DED");
-	}
-
-	//Go through the models and update them
-	//for (auto& model : m_models)
-		//model.second.Update();
-
+	UpdateCamera();
 }
