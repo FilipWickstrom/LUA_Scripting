@@ -6,7 +6,6 @@ class GameScene : public Scene
 {
 private:
 	// Lua manager for all enemies.
-	irr::scene::ICameraSceneNode* m_gameCamera;
 	EnemyManager m_enemyManager;
 
 public:
@@ -16,6 +15,7 @@ public:
 	// Specific functions for this scene
 	void AddBasicEnemy(float x, float y);
 
+	void UpdateCamera();
 
 	// Inherited via Scene
 	virtual void Load() override;

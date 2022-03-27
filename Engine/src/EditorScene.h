@@ -4,8 +4,6 @@
 class EditorScene : public Scene
 {
 private:
-	//UI
-
 
 public:
 	EditorScene() = default;

@@ -43,10 +43,10 @@ function Monster:Chase(point, dt)
 		vec.x = -1 * dt * self.speed
 	end
 
-	if(self.position.y < point.y) then
-		vec.y = 1 * dt * self.speed
+	if(self.position.z < point.z) then
+		vec.z = 1 * dt * self.speed
 	else
-		vec.y = -1 * dt * self.speed
+		vec.z = -1 * dt * self.speed
 	end
 
 	-- Add vector to monster
@@ -77,7 +77,7 @@ function Monster:Update(player, dt)
 	self:Chase(player.position, dt)
 	self:Hit(player, dt)
 	self:GUpdate()
-	UpdatePosUI(self.gid, self.position.x, self.position.y, 75.0, 25.0)
+	UpdatePosUI(self.gid, self.position.x, self.position.z, 75.0, 25.0)
 	UpdateUI(self.gid, self.hp)
 end
 

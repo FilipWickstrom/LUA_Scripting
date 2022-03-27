@@ -5,12 +5,22 @@ unsigned int Scene::s_GUI_ID = 0;
 
 Scene::Scene()
 {
-	m_defaultCamera = Graphics::GetSceneManager()->addCameraSceneNode();
+	m_camera = Graphics::GetSceneManager()->addCameraSceneNode();
+	Graphics::GetSceneManager()->setActiveCamera(m_camera);
 }
 
 Scene::~Scene()
 {
-	RemoveCamera();
+	//Clearing up the scene and gui
+	Graphics::GetSceneManager()->clear();
+	Graphics::GetSceneManager()->getMeshCache()->clear();
+	Graphics::GetGUIEnvironment()->clear();
+
+	for (unsigned int i = 0; i < static_cast<unsigned int>(m_models.size()); i++)
+	{
+		m_models.at(i).Drop();
+	}
+	m_models.clear();
 }
 
 unsigned int Scene::AddModel(std::string& file)
@@ -44,7 +54,7 @@ void Scene::SetModelScale(unsigned int id, const float& scale)
 		m_models.at(id).SetScale(scale);
 }
 
-bool Scene::RemoveCamera()
+bool Scene::RemoveActiveCam()
 {
 	bool removed = false;
 	irr::scene::ICameraSceneNode* oldCam = Graphics::GetSceneManager()->getActiveCamera();

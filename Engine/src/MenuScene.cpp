@@ -7,8 +7,6 @@
 
 void MenuScene::Load()
 {
-	Graphics::GetSceneManager()->setActiveCamera(m_defaultCamera);
-
 	//Read the lua-script
 	LoadScript("MenuScene.lua");
 
@@ -16,9 +14,7 @@ void MenuScene::Load()
 	lua_getglobal(LUA, "Start");
 	lua_pcall(LUA, 0, 0, 0);
 	if (lua_isstring(LUA, -1))
-		std::cout << "Error: " << lua_tostring(LUA, -1) << "\n";
-	
-	LuaHandler::DumpStack();
+		std::cout << "Error: " << lua_tostring(LUA, -1) << "\n";	
 }
 
 void MenuScene::Clean()

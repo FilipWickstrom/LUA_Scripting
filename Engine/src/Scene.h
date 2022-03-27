@@ -9,7 +9,7 @@ private:
 
 protected:
 	std::unordered_map<unsigned int, Model> m_models;
-	irr::scene::ICameraSceneNode* m_defaultCamera;
+	irr::scene::ICameraSceneNode* m_camera;
 
 public:
 	Scene();
@@ -27,8 +27,7 @@ public:
 	void UpdatePosition(unsigned int id, const irr::core::vector3df& pos);
 	void SetModelScale(unsigned int id, const float& scale);
 
-	// Camera
-	bool RemoveCamera();
+	bool RemoveActiveCam();
 
 
 	/*
