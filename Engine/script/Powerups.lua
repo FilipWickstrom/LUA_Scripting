@@ -27,6 +27,7 @@ function Powerup:New()
 	g.RandomizePos(g)
 	g.id = LoadModel("clue_knife.obj")
 	g.reach = 1.5
+	g.shouldrespawn = false
 	SetModelScale(g.id, 0.1)
 	
 	self.__index = Powerup
@@ -52,9 +53,12 @@ function Powerup:Gain(player)
 	-- Hide from player.
 	self.position.x = 100000
 
+	self.respawntimer = RESPAWN_TIME
+	self.shouldrespawn = true
+
 end
 
-function Powerup:Update(player)
+function Powerup:Update(player, dt)
 	
 	-- player is close enough to the powerup
 	local x = math.abs(player.position.x - self.position.x)
@@ -64,6 +68,15 @@ function Powerup:Update(player)
 	end
 	
 	self:GUpdate()
+
+	if self.shouldrespawn == true then
+		self.respawntimer = self.respawntimer - dt
+
+		if self.respawntimer < 0 then
+			self.shouldrespawn = false
+			self.RandomizePos(self)
+		end
+	end
 
 end
 

@@ -62,7 +62,7 @@ function Update(dt)
 	end
 
 	if powerup ~= nil then
-		powerup:Update(player)
+		powerup:Update(player, dt)
 	end
 
 	if(player:IsAlive() == false) then
