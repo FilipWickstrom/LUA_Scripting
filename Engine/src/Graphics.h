@@ -1,13 +1,19 @@
 #pragma once
 
-constexpr unsigned int window_width = 1600;
-constexpr unsigned int window_height = 900;
-
 class Graphics
 {
 private:
+	struct window 
+	{
+		std::string name;
+		unsigned int width;
+		unsigned int height;
+		bool fullscreen;
+		bool vsync;
+		irr::video::E_DRIVER_TYPE driverType;
+	} m_window;
 
-	// General Devices
+	// General Irrlicht Devices
 	irr::IrrlichtDevice* m_device;
 	irr::video::IVideoDriver* m_driver;
 	irr::scene::ISceneManager* m_sceneManager;
@@ -24,6 +30,8 @@ private:
 	~Graphics();
 	static auto& Get();
 
+	void LoadOptionsLUA(const std::string& luafile);
+
 public:
 
 	static irr::IrrlichtDevice* GetDevice();
@@ -32,4 +40,6 @@ public:
 	static irr::gui::IGUIEnvironment* GetGUIEnvironment();
 
 	static double& GetDeltaTime();
+	static unsigned int& GetWindowWidth();
+	static unsigned int& GetWindowHeight();
 };

@@ -20,13 +20,13 @@ int RemoveModelLua(lua_State* L)
 
 int GetWindowWidthLua(lua_State* L)
 {
-	lua_pushnumber(L, window_width);
+	lua_pushnumber(L, Graphics::GetWindowWidth());
 	return 1;
 }
 
 int GetWindowHeightLua(lua_State* L)
 {
-	lua_pushnumber(L, window_height);
+	lua_pushnumber(L, Graphics::GetWindowHeight());
 	return 1;
 }
 

@@ -57,19 +57,18 @@ void Renderer::Render()
 void Renderer::Run()
 {
 	srand((unsigned int)time(nullptr));
-	double start = omp_get_wtime();
-	double end = omp_get_wtime() - start;
+	double current	= 0;
+	double last		= 0;
 
 	while (Graphics::GetDevice()->run()) 
 	{
-		start = omp_get_wtime();
-		Graphics::GetDeltaTime() = end;
-		
+		current = omp_get_wtime();
+		Graphics::GetDeltaTime() = current - last;
+		last = current;
+
 		if (this->Update())
 			this->Render();
 		else
 			Graphics::GetDevice()->closeDevice();
-
-		end = omp_get_wtime() - start;
 	}
 }
