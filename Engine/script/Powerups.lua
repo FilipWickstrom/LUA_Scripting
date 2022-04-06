@@ -62,8 +62,8 @@ function Powerup:Update(player, dt)
 	
 	-- player is close enough to the powerup
 	local x = math.abs(player.position.x - self.position.x)
-	local y = math.abs(player.position.y - self.position.y)
-	if x <= self.reach and y <= self.reach then
+	local z = math.abs(player.position.z - self.position.z)
+	if x <= self.reach and z <= self.reach and self.shouldrespawn == false then
 		self:Gain(player)
 	end
 	
