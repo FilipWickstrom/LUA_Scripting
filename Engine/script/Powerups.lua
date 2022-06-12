@@ -25,10 +25,10 @@ function Powerup:New()
 
 	g.respawntimer = 0.0
 	g.RandomizePos(g)
-	g.id = LoadModel("clue_knife.obj")
+	g.id = LoadModel("clue_mask.obj")
 	g.reach = 1.5
 	g.shouldrespawn = false
-	SetModelScale(g.id, 0.1)
+	--SetModelScale(g.id, 0.1)
 	
 	self.__index = Powerup
 	setmetatable(g, self)

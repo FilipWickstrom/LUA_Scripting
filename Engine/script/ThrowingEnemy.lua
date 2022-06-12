@@ -23,10 +23,11 @@ function ThrowMonkey:New()
 
 	g.projectile = gameObject:New()
 
-	g.projectile.id = LoadModel('clue_mask.obj')
+	g.projectile.id = LoadModel('clue_knife.obj')
 	g.projectile.position.x = 1000
 	g.projectile.target = Vector:New()
 	g.projectile.speed = 2
+	SetModelScale(g.projectile.id, 0.1)
 
 	return g
 end
