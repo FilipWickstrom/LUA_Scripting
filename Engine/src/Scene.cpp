@@ -48,6 +48,12 @@ void Scene::UpdatePosition(unsigned int id, const irr::core::vector3df& pos)
 		m_models.at(id).SetPosition(pos);
 }
 
+void Scene::SetModelScale(unsigned int id, const float& scale)
+{
+	if (m_models.find(id) != m_models.end())
+		m_models.at(id).SetScale(scale);
+}
+
 bool Scene::RemoveActiveCam()
 {
 	bool removed = false;

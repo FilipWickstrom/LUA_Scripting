@@ -9,6 +9,7 @@ LuaHandler::LuaHandler()
 
 	//Add functions to LUA
 	lua_register(m_state, "LoadModel", LoadModelLua);
+	lua_register(m_state, "SetModelScale", SetScaleLua);
 	lua_register(m_state, "RemoveModel", RemoveModelLua);
 	lua_register(m_state, "WinWidth", GetWindowWidthLua);
 	lua_register(m_state, "WinHeight", GetWindowHeightLua);

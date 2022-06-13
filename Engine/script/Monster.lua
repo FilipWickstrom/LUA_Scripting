@@ -62,7 +62,7 @@ end
 function Monster:Hit(player, dt)
 
 	local x = math.abs(player.position.x - self.position.x)
-	local y = math.abs(player.position.y - self.position.y)
+	local y = math.abs(player.position.z - self.position.z)
 
 	self.cooldown = self.cooldown - dt
 

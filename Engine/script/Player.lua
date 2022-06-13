@@ -27,6 +27,10 @@ end
 function Player:Update()
 	self:GUpdate()
 
+	if self.hp > 100.0 then
+		self.hp = 100.0
+	end
+
 	UpdateUI(self.gid, self.hp)
 end
 

@@ -11,6 +11,9 @@
 // Lua function to load model into c++
 int LoadModelLua(lua_State* L);
 
+// Set the scale of the object through lua.
+int SetScaleLua(lua_State* L);
+
 // Lua function to remove model from c++
 int RemoveModelLua(lua_State* L);
 

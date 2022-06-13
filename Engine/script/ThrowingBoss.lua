@@ -23,10 +23,11 @@ function ThrowBoss:New()
 
 	g.projectile = gameObject:New()
 
-	g.projectile.id = LoadModel('clue_mask.obj')
+	g.projectile.id = LoadModel('clue_knife.obj')
 	g.projectile.position.x = 1000
 	g.projectile.target = Vector:New()
 	g.projectile.speed = 2
+	SetModelScale(g.projectile.id, 0.1)
 
 	self.__index = ThrowBoss
 	setmetatable(g, self)
@@ -41,11 +42,11 @@ function ThrowBoss:Throw(point)
 
 		-- player position as target
 		self.projectile.target.x = point.x
-		self.projectile.target.y = point.y
+		self.projectile.target.z = point.z
 
 		-- set start position at enemy position
 		self.projectile.position.x = self.position.x
-		self.projectile.position.y = self.position.y
+		self.projectile.position.z = self.position.z
 	end
 end
 
@@ -54,7 +55,7 @@ function ThrowBoss:UpdateThrow(dt)
 	if self.inhand == false then
 
 		local x = math.abs(self.projectile.position.x - self.projectile.target.x)
-		local y = math.abs(self.projectile.position.y - self.projectile.target.y)
+		local y = math.abs(self.projectile.position.z - self.projectile.target.z)
 
 		if self.projectile.position.x > self.projectile.target.x then
 			self.projectile.position.x = self.projectile.position.x - x * dt * self.projectile.speed
@@ -62,10 +63,10 @@ function ThrowBoss:UpdateThrow(dt)
 			self.projectile.position.x = self.projectile.position.x + x * dt * self.projectile.speed
 		end
 
-		if self.projectile.position.y > self.projectile.target.y then
-			self.projectile.position.y = self.projectile.position.y - y * dt * self.projectile.speed
+		if self.projectile.position.z > self.projectile.target.z then
+			self.projectile.position.z = self.projectile.position.z - y * dt * self.projectile.speed
 		else
-			self.projectile.position.y = self.projectile.position.y + y * dt * self.projectile.speed
+			self.projectile.position.z = self.projectile.position.z + y * dt * self.projectile.speed
 		end
 
 		self.cooldown = self.cooldown - dt
@@ -105,7 +106,7 @@ function ThrowBoss:Update(player, dt)
 	self:GUpdate()
 	self.projectile:GUpdate()
 	UpdateUI(self.gid, self.hp)
-	UpdatePosUI(self.gid, self.position.x, self.position.y, 145.0, 50.0)
+	UpdatePosUI(self.gid, self.position.x, self.position.z, 145.0, 50.0)
 end
 
 return ThrowBoss

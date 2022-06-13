@@ -59,7 +59,7 @@ function BasicBoss:Update(player, dt)
 	self:Chase(dt)
 	self:Attack(player, dt)
 	self:GUpdate()
-	UpdatePosUI(self.gid, self.position.x, self.position.y, 100.0, 50.0)
+	UpdatePosUI(self.gid, self.position.x, self.position.z, 100.0, 50.0)
 	UpdateUI(self.gid, self.hp)
 end
 
