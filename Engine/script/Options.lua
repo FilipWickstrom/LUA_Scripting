@@ -11,11 +11,8 @@ local Window =
 	width		= 1920,
 	height		= 1080,
 	fullscreen	= false,
-	vsync		= false,
+	vsync		= true,
 	driverType	= DriverType.EDT_SOFTWARE
-	--Future work
-	-- Clearcolor
-	-- Refreshrate 
 }
 
 return Window

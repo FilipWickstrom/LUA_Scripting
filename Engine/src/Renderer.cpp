@@ -4,13 +4,20 @@
 // Run the console
 void ConsoleThread(lua_State* L)
 {
-	char command[1000];
+	std::string command = "";
 	while (GetConsoleWindow())
 	{
-		memset(command, 0, 1000);
-		std::cin.getline(command, 1000);
-		if (luaL_loadstring(L, command) || lua_pcall(L, 0, 0, 0))
-			std::cout << lua_tostring(L, -1) << '\n';
+		std::cout << "> ";
+		std::getline(std::cin, command);
+
+		if (luaL_dostring(L, command.c_str()) != LUA_OK)
+		{
+			if (lua_gettop(L) && lua_isstring(L, -1))
+			{
+				std::cout << "Lua error: " << lua_tostring(L, -1) << '\n';
+				lua_pop(L, 1);
+			}
+		}
 	}
 }
 
@@ -57,18 +64,24 @@ void Renderer::Render()
 void Renderer::Run()
 {
 	srand((unsigned int)time(nullptr));
-	double current	= 0;
-	double last		= 0;
+	
+	std::chrono::high_resolution_clock::time_point currentTime;
+	std::chrono::high_resolution_clock::time_point lastTime;
+	float deltaTime = 0.f;
 
 	while (Graphics::GetDevice()->run()) 
 	{
-		current = omp_get_wtime();
-		Graphics::GetDeltaTime() = current - last;
-		last = current;
+		currentTime = std::chrono::high_resolution_clock::now();
+		deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
+		lastTime = currentTime;
 
+		Graphics::GetDeltaTime() = deltaTime;
 		if (this->Update())
 			this->Render();
 		else
 			Graphics::GetDevice()->closeDevice();
+
+		//Update window caption text
+		Graphics::UpdateWindowCaption();
 	}
 }

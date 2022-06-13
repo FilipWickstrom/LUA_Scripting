@@ -12,6 +12,7 @@ void Model::LoadMesh(std::string& meshName)
 		std::cout << "Failed to get: " << meshName << std::endl;
 
 	m_node = Graphics::GetSceneManager()->addMeshSceneNode(mesh);
+	m_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
 }
 
 Model::Model(std::string& meshName)

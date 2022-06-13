@@ -27,7 +27,9 @@ Graphics::Graphics()
     m_driver = m_device->getVideoDriver();
     m_sceneManager = m_device->getSceneManager();
     m_guiEnvironment = m_device->getGUIEnvironment();
-    dt = 0.0;
+    m_dt = 0.0;
+
+    m_sceneManager->setAmbientLight(irr::video::SColorf(255.0, 255.0, 255.0));
 }
 
 Graphics::~Graphics()
@@ -110,7 +112,7 @@ irr::gui::IGUIEnvironment* Graphics::GetGUIEnvironment()
 
 double& Graphics::GetDeltaTime()
 {
-    return Get().dt;
+    return Get().m_dt;
 }
 
 unsigned int& Graphics::GetWindowWidth()
@@ -121,4 +123,25 @@ unsigned int& Graphics::GetWindowWidth()
 unsigned int& Graphics::GetWindowHeight()
 {
     return Get().m_window.height;
+}
+
+void Graphics::UpdateWindowCaption()
+{
+    static int lastFPS = 0;
+
+    //Update the title when in window mode
+    if (!Get().m_window.fullscreen)
+    {
+        int currentFPS = Graphics::GetDriver()->getFPS();
+        if (currentFPS != lastFPS)
+        {
+            std::string title = Get().m_window.name;
+            irr::core::stringw caption;
+            caption.reserve(static_cast<irr::u32>(title.size() + 15));
+            caption.append(title.c_str());
+            caption.append(" | FPS: ");
+            caption.append(std::to_string(currentFPS).c_str());
+            Graphics::GetDevice()->setWindowCaption(caption.c_str());
+        }
+    }
 }

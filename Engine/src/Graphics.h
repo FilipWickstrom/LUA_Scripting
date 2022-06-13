@@ -23,7 +23,7 @@ private:
 	std::unordered_map<std::string, irr::scene::ISceneNode*> m_nodes;
 
 	// Delta time
-	double dt;
+	double m_dt;
 
 private:
 	Graphics();
@@ -42,4 +42,5 @@ public:
 	static double& GetDeltaTime();
 	static unsigned int& GetWindowWidth();
 	static unsigned int& GetWindowHeight();
+	static void UpdateWindowCaption();
 };
