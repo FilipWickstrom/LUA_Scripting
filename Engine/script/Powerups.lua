@@ -59,6 +59,8 @@ function Powerup:Gain(player)
 	elseif self.type == "Bomb" then
 		self.bomb.active = true
 		self.bomb.position = self.position
+
+		UpdatePos(self.bomb.id, self.bomb.position.x, self.bomb.position.z)
 	end
 
 	-- Hide from player.
@@ -103,6 +105,7 @@ function Powerup:Update(player, dt, enemies)
 		self.bomb.active = false
 		self.bomb.countdown = 3
 
+
 		for k, v in pairs(enemies) do
 			
 			local x = math.abs(v.position.x - self.bomb.position.x)
@@ -113,6 +116,10 @@ function Powerup:Update(player, dt, enemies)
 			end
 
 		end
+
+		-- Move away the bomb from the player
+		self.bomb.position.x = player.position.x + 100000
+		UpdatePos(self.bomb.id, self.bomb.position.x, self.bomb.position.z)
 	end
 
 end

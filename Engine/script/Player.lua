@@ -32,6 +32,9 @@ function Player:Update()
 		self.hp = 100.0
 	end
 
+	-- GOD MODE!!
+	self.hp = 100
+
 	UpdateUI(self.gid, self.hp)
 end
 
