@@ -15,6 +15,7 @@ function Player:New()
 	-- Add effects here.
 	g.position.x = 0
 	g.position.y = 0
+	g.lastpickup = "None"
 
 	g.id = LoadModel('clue_mask.obj')
 	g.gid = AddHealthbar(0.0, 0.0, 250.0, 50.0)

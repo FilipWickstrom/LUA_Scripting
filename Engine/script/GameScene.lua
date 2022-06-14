@@ -75,7 +75,7 @@ function Update(dt)
 	end
 
 	if powerup ~= nil then
-		powerup:Update(player, dt)
+		powerup:Update(player, dt, monsters)
 	end
 
 	if(player:IsAlive() == false) then
