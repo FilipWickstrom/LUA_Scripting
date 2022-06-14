@@ -11,15 +11,11 @@ Scene::Scene()
 
 Scene::~Scene()
 {
-	//Clearing up the scene and gui
+	//Clearing up the scene and gui in Irrlicht 
 	Graphics::GetSceneManager()->clear();
 	Graphics::GetSceneManager()->getMeshCache()->clear();
 	Graphics::GetGUIEnvironment()->clear();
-
-	for (unsigned int i = 0; i < static_cast<unsigned int>(m_models.size()); i++)
-	{
-		m_models.at(i).Drop();
-	}
+	//All nodes are gone now
 	m_models.clear();
 }
 
@@ -33,8 +29,11 @@ unsigned int Scene::AddModel(std::string& file)
 
 void Scene::RemoveModel(unsigned int id)
 {
-	m_models.at(id).Drop();
-	m_models.erase(id);
+	if (m_models.find(id) != m_models.end())
+	{
+		m_models.at(id).Drop();
+		m_models.erase(id);
+	}
 }
 
 const irr::scene::ICameraSceneNode* Scene::GetCamera() const

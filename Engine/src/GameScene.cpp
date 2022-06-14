@@ -26,10 +26,11 @@ void GameScene::UpdateCamera()
 {
 	lua_getglobal(LUA, "GetObjectPosition");
 	lua_pushnumber(LUA, 0);
-	int ret = lua_pcall(LUA, 1, 2, 0);
 
-	if (ret == 0)
+	if (!LuaHandler::CheckErrors(1, 2))
 	{
+		// Did not get any errors
+		
 		if (lua_isnumber(LUA, -1) && lua_isnumber(LUA, -2))
 		{
 			irr::f32 x = static_cast<irr::f32>(lua_tonumber(LUA, -2));
@@ -48,24 +49,15 @@ void GameScene::UpdateCamera()
 		}
 		lua_pop(LUA, 2);
 	}
-	else
-	{
-		std::cout << lua_tostring(LUA, -1) << "\n";
-		lua_pop(LUA, 1);
-	}
 }
 
 void GameScene::Load()
 {
 	//Read the lua-script
-	LoadScript("gameLoop.lua");
+	LoadScript("GameScene.lua");
 
 	lua_getglobal(LUA, "Start");
-	lua_pcall(LUA, 0, 0, 0);
-	if (lua_isstring(LUA, -1))
-		std::cout << "Error: " << lua_tostring(LUA, -1) << "\n";
-	LuaHandler::DumpStack();
-
+	LuaHandler::CheckErrors(0, 0);
 
 	//Read the scene basics from a file
 	//Read the map
@@ -90,15 +82,9 @@ void GameScene::Load()
 
 void GameScene::Clean()
 {
-	//Clear all the models
-	auto it = m_models.begin();
-	while (it != m_models.end())
-	{
-		it->second.Drop();
-		it = m_models.erase(it);
-	}
-
-	Graphics::GetSceneManager()->clear();
+	//Execute the start-function
+	lua_getglobal(LUA, "Clean");
+	LuaHandler::CheckErrors(0, 0);
 }
 
 void GameScene::Update()
@@ -106,8 +92,10 @@ void GameScene::Update()
 	//Update from lua-scrips
 	lua_getglobal(LUA, "Update");
 	lua_pushnumber(LUA, Graphics::GetDeltaTime());
-	lua_pcall(LUA, 1, 1, 0);
-	int lua_return = static_cast<int>(lua_tonumber(LUA, -1));
+	LuaHandler::CheckErrors(1, 1);
+
+	// [NOT IN USE FOR NOW]
+	bool isAlive = static_cast<int>(lua_toboolean(LUA, -1));
 	lua_pop(LUA, 1);
 
 	UpdateCamera();

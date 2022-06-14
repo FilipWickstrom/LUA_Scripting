@@ -39,19 +39,17 @@ function Powerup:Gain(player)
 	
 	if self.type == "Money" then
 		player.gold = player.gold + 15
-	end
-	if self.type == "Attack" then
+	elseif self.type == "Attack" then
 		player.damage = player.damage + 5.0
-	end
-	if self.type == "Speed" then
+	elseif self.type == "Speed" then
 		player.speed = player.speed + 2.5
-	end
-	if self.type == "Health" then
+	elseif self.type == "Health" then
 		player.health = player.health + 15.0
 	end
 
 	-- Hide from player.
 	self.position.x = 100000
+	--self.OnEnd()
 
 	self.respawntimer = RESPAWN_TIME
 	self.shouldrespawn = true

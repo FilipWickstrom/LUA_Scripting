@@ -51,7 +51,36 @@ void LuaHandler::DumpStack()
 	std::cout << "------- STACK DUMP -------\n";
 	for (int i = lua_gettop(L); i > 0; i--)
 	{
-		std::cout << "Index " << i << ": " << lua_typename(L, lua_type(L, i)) << "\n";
+		std::cout << "Index " << i << ": " << lua_typename(L, lua_type(L, i));
+		
+		//Print out more info about the data in the stack
+		switch (lua_type(L, i))
+		{
+		case LUA_TNUMBER:
+			std::cout << " '" << lua_tonumber(L, i) << "'";
+			break;
+		case LUA_TSTRING:
+			std::cout << " '" << lua_tostring(L, i) << "'";
+			break;
+		case LUA_TBOOLEAN:
+			std::cout << " '" << lua_toboolean(L, i) << "'";
+			break;
+		default:
+			break;
+		}
+		std::cout << '\n';
 	}
 	std::cout << "--------------------------\n";
+}
+
+bool LuaHandler::CheckErrors(const int& nrOfArgs, const int& nrOfReturns)
+{
+	lua_State* L = Get().m_state;
+	if (lua_pcall(L, nrOfArgs, nrOfReturns, 0) != LUA_OK)
+	{
+		std::cout << "LUA Error: " << lua_tostring(L, -1) << '\n';
+		lua_pop(L, 1);
+		return true;
+	}
+	return false;
 }

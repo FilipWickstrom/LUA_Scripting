@@ -20,6 +20,7 @@ public:
 	Model(std::string& meshName);
 	Model(std::string& meshName, irr::core::vector3df pos,
 		irr::core::vector3df rot, irr::core::vector3df scale);
+	~Model() = default;
 
 	void SetID(unsigned int id);
 	unsigned int GetID() const;

@@ -9,8 +9,9 @@ end
 
 function gameObject:New(g)
 	g = g or {}
-	g.id = 0
-	g.gid = 0
+	g.name = "default"
+	g.id = -1 --model id? [rename]
+	g.gid = -1 --id for ui? [rename]
 	g.position = vector:New()
 	self.__index = self
 	setmetatable(g, self)
@@ -20,6 +21,7 @@ end
 
 function gameObject:OnEnd()
 	RemoveUI(self.gid)
+	print("[LUA]: Removing model: " .. self.id)
 	RemoveModel(self.id)
 end
 

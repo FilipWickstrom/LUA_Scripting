@@ -59,9 +59,8 @@ void Model::Update()
 	// Gather the position from LUA
 	lua_getglobal(LUA, "GetObjectPosition");
 	lua_pushnumber(LUA, m_id);
-	int ret = lua_pcall(LUA, 1, 2, 0);
-
-	if (ret == 0)
+	
+	if (!LuaHandler::CheckErrors(1, 2))
 	{
 		if (lua_isnumber(LUA, -1))
 		{
@@ -80,12 +79,6 @@ void Model::Update()
 		}
 		lua_pop(LUA, 2);
 	}
-	else
-	{
-		std::cout << lua_tostring(LUA, -1) << "\n";
-		lua_pop(LUA, 1);
-	}
-
 }
 
 void Model::Drop()

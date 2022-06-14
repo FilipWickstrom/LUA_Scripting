@@ -5,10 +5,18 @@
 void ConsoleThread(lua_State* L)
 {
 	std::string command = "";
-	while (GetConsoleWindow())
+	bool keepLooping = true;
+	
+	while (GetConsoleWindow() && keepLooping)
 	{
 		std::cout << "> ";
 		std::getline(std::cin, command);
+
+		if (command == "stop")
+		{
+			keepLooping = false;
+			break;
+		}
 
 		if (luaL_dostring(L, command.c_str()) != LUA_OK)
 		{
@@ -84,4 +92,8 @@ void Renderer::Run()
 		//Update window caption text
 		Graphics::UpdateWindowCaption();
 	}
+
+	std::cout << "Application closed down. Dumping LUA stack: " << std::endl;
+	LuaHandler::DumpStack();
+	std::cout << "Close console with the command 'stop'" << std::endl;
 }

@@ -1,6 +1,7 @@
 require('script/SceneHelp')
+local gameObject = require('script/gameObject') --temp
 
-GUI = {}
+local GUI = {}
 
 function Start()
 	local window = { X = WinWidth(), Y = WinHeight() }
@@ -22,6 +23,11 @@ function Start()
 
 	-- Other stuff
 
+	local g = gameObject:New()
+	g.id = LoadModel('plane.obj')
+	g.position.x = 0
+	g.position.y = 0
+	setmetatable(g, self)
 
 end
 
@@ -33,8 +39,13 @@ function Clean()
 	end
 end
 
+-- Handle input from keyboard
+function OnInput(x, y)
 
-function Update()
+end
+
+
+function Update(dt)
 	-- Check if any of the buttons is clicked
 	if (IsButtonPressed(GUI["Create"])) then
 		--Call c++ create map

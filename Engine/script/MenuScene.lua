@@ -1,6 +1,6 @@
 require('script/SceneHelp')
 
-GUI	= {}
+local GUI	= {}
 
 function Start()
 	local window = { X = WinWidth(), Y = WinHeight() }
@@ -9,7 +9,7 @@ function Start()
 	-- Space between the GUI
 	local verticalSpace	= btnSize.Y * 1.5
 	
-	yDistance = 0.20 * window.Y
+	local yDistance = 0.20 * window.Y
 	GUI["Title"]= AddText("Budget Binding of Isaac", "roboto_48.xml", window.X/2, yDistance, 800, 200)
 
 	yDistance	= yDistance + verticalSpace
@@ -23,6 +23,7 @@ function Start()
 
 end
 
+
 function Clean()
 	-- Go through all the GUI and remove it
 	for key, value in next, GUI do
@@ -30,7 +31,15 @@ function Clean()
 	end
 end
 
-function Update()
+
+-- Handle input from keyboard
+function OnInput(x, y)
+
+end
+
+
+function Update(dt)
+
 	-- Check if any of the buttons is clicked
 	if (IsButtonPressed(GUI["Play"])) then
 		ChangeScene(Scene.GAME)

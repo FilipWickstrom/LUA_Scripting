@@ -39,26 +39,25 @@ public:
 
 		if (IsKeyDown(irr::KEY_KEY_W))
 		{
-			y = 1;
+			y += 1;
 		}
-		else if (IsKeyDown(irr::KEY_KEY_S))
+		if (IsKeyDown(irr::KEY_KEY_S))
 		{
-			y = -1;
+			y += -1;
 		}
-
 		if (IsKeyDown(irr::KEY_KEY_A))
 		{
-			x = -1;
+			x += -1;
 		}
-		else if (IsKeyDown(irr::KEY_KEY_D))
+		if (IsKeyDown(irr::KEY_KEY_D))
 		{
-			x = 1;
+			x += 1;
 		}
 
 		lua_getglobal(LUA, "OnInput");
 		lua_pushnumber(LUA, x);
 		lua_pushnumber(LUA, y);
-		lua_pcall(LUA, 2, 0, 0);
+		LuaHandler::CheckErrors(2, 0);
 	}
 };
 

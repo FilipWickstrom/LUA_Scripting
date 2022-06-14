@@ -6,11 +6,8 @@ boss = require('script/BasicBossEnemy'):New()
 refThrowBoss = require('script/ThrowingBoss')
 powerup = require('script/Powerups')
 
--- Collect all monsters in this table
+-- Collect separate types in different tables
 monsters = {}
-
--- Collect all other objects such as walls or floors in this table
-objects = {}
 
 local deltatime = 0
 
@@ -41,10 +38,26 @@ function Start()
 	table.insert(monsters, throwBoss)
 end
 
+-- Destroying everything
+function Clean()
+	print("### Removing player ###")
+	player:OnEnd()
+
+	print("### Removing monsters ###")
+	for k, v in pairs(monsters) do
+		v:OnEnd()
+	end
+
+	--print("### Removing powerups ###")
+	--for k, v in pairs(powerups) do
+	--	v:OnEnd()
+	--end
+end
+
 function OnInput(x, y)
 	assert(type(x) == "number", "OnInput: Value is not a number")
 	assert(type(y) == "number", "OnInput: Value is not a number")
-
+	
 	local vec = vector:New()
 	vec.x = x * deltatime * player.speed
 	vec.z = y * deltatime * player.speed
@@ -52,7 +65,7 @@ function OnInput(x, y)
 	player:Move(vec)
 end
 
--- Update function for lua. return 0 if nothing happend, 1 if player died.
+-- Update function for lua. return true if nothing happend, false if player died.
 function Update(dt)
 	deltatime = dt
 
@@ -66,12 +79,12 @@ function Update(dt)
 	end
 
 	if(player:IsAlive() == false) then
-		return 1
+		return false
 	end
 
 	player:Update()
 
-	return 0
+	return true
 end
 
 

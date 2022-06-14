@@ -52,12 +52,19 @@ void SceneHandler::SetScene(const EScene& scene)
 		m_currentScene = std::make_unique<EditorScene>();
 		break;
 	}
+	case EScene::None:
+	{
+		Graphics::GetDevice()->closeDevice();
+		m_currentScene = nullptr;
+		break;
+	}
 	default:
 		break;
 	};
 
 	// Load in the scene
-	m_currentScene->Load();
+	if (m_currentScene)
+		m_currentScene->Load();
 }
 
 const EScene& SceneHandler::GetSceneType() const

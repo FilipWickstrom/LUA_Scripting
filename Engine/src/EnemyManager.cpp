@@ -13,8 +13,7 @@ void EnemyManager::LuaNewBasicEnemy()
 	lua_getglobal(LUA, "AddMonster");
 	int id = (int)m_freeIndex;
 	lua_pushnumber(LUA, id);
-
-	lua_pcall(LUA, 1, 0, 0);
+	LuaHandler::CheckErrors(1, 0);
 }
 
 void EnemyManager::SetupBasicEnemy()
@@ -113,11 +112,7 @@ int basicEnemy::BasicMonsterAttack(lua_State* L)
 		int type = lua_isfunction(L, -2);
 		if (type)
 		{
-			if (lua_pcall(L, 1, 0, 0) != 0)
-			{
-				lua_pop(L, 1);
-			}
-			else
+			if (!LuaHandler::CheckErrors(1, 0))
 			{
 #ifdef _DEBUG
 				//std::cout << "Player got Hurt!" << std::endl;

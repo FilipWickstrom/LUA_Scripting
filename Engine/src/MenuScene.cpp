@@ -12,22 +12,19 @@ void MenuScene::Load()
 
 	//Execute the start-function
 	lua_getglobal(LUA, "Start");
-	lua_pcall(LUA, 0, 0, 0);
-	if (lua_isstring(LUA, -1))
-		std::cout << "Error: " << lua_tostring(LUA, -1) << "\n";	
+	LuaHandler::CheckErrors(0, 0);
 }
 
 void MenuScene::Clean()
 {
 	//Execute the start-function
 	lua_getglobal(LUA, "Clean");
-	lua_pcall(LUA, 0, 0, 0);
-	if (lua_isstring(LUA, -1))
-		std::cout << "Error: " << lua_tostring(LUA, -1) << "\n";
+	LuaHandler::CheckErrors(0, 0);
 }
 
 void MenuScene::Update()
 {
 	lua_getglobal(LUA, "Update");
-	lua_pcall(LUA, 0, 0, 0);
+	lua_pushnumber(LUA, Graphics::GetDeltaTime());
+	LuaHandler::CheckErrors(1, 0);
 }

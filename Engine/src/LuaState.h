@@ -15,4 +15,7 @@ public:
 
 	// Dump the lua stack to console.
 	static void DumpStack();
+
+	// Writing out errors from pcall. Return when receiving errors 
+	static bool CheckErrors(const int& nrOfArgs, const int& nrOfReturns);
 };
