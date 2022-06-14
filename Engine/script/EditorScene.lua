@@ -21,14 +21,6 @@ function Start()
 	local menuBtn = { X = 150, Y = 50 }
 	GUI["Menu"] = AddButton("Back to menu", "roboto_12.xml", window.X-(menuBtn.X/2), menuBtn.Y/2, menuBtn.X, menuBtn.Y)
 
-	-- Other stuff
-
-	local g = gameObject:New()
-	g.id = LoadModel('plane.obj')
-	g.position.x = 0
-	g.position.y = 0
-	setmetatable(g, self)
-
 end
 
 

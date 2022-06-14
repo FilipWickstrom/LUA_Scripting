@@ -46,6 +46,7 @@ void GameScene::UpdateCamera()
 		else
 		{
 			// 'Err' was returned, do something like delete this object or something idk.
+			std::cout << "Error: Player is not on index 0" << std::endl;
 		}
 		lua_pop(LUA, 2);
 	}
