@@ -23,6 +23,7 @@ LuaHandler::LuaHandler()
 
 	//GUI
 	lua_register(m_state, "AddText", GUI::AddText);
+	lua_register(m_state, "UpdateText", GUI::UpdateText);
 	lua_register(m_state, "AddButton", GUI::AddButton);
 	lua_register(m_state, "RemoveGUI", GUI::RemoveGUI);
 	lua_register(m_state, "IsButtonPressed", GUI::IsButtonPressed);

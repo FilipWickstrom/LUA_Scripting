@@ -5,6 +5,7 @@ refMonkey = require('script/ThrowingEnemy')
 boss = require('script/BasicBossEnemy'):New()
 refThrowBoss = require('script/ThrowingBoss')
 powerup = require('script/Powerups')
+goldText = require('script/GoldText')
 
 -- Collect separate types in different tables
 monsters = {}
@@ -32,6 +33,7 @@ function Start()
 	local throwBoss = refThrowBoss:New()
 
 	powerup = require('script/Powerups'):New()
+	goldText:Initialize()
 	
 	table.insert(monsters, newMonkey)
 	table.insert(monsters, boss)
@@ -58,6 +60,7 @@ function OnInput(x, y)
 	assert(type(x) == "number", "OnInput: Value is not a number")
 	assert(type(y) == "number", "OnInput: Value is not a number")
 	
+	-- Update input depending on the input from keyboard
 	local vec = vector:New()
 	vec.x = x * deltatime * player.speed
 	vec.z = y * deltatime * player.speed
@@ -74,14 +77,22 @@ function Update(dt)
 		v:Update(player, dt)
 	end
 
+	-- Update powerup
 	if powerup ~= nil then
 		powerup:Update(player, dt, monsters)
 	end
 
+	-- Update gold text
+	if goldText ~= nil then
+		goldText:Update(player)
+	end
+
+	-- Check if player is dead or alive
 	if(player:IsAlive() == false) then
 		return false
 	end
 
+	-- Update player
 	player:Update()
 
 	return true

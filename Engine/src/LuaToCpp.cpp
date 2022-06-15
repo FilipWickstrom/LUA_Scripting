@@ -156,6 +156,24 @@ int GUI::AddText(lua_State* L)
 	return 1;
 }
 
+int GUI::UpdateText(lua_State* L)
+{
+	std::string text = "";
+	unsigned int id = 0;
+
+	if (lua_type(L, -2) == LUA_TNUMBER)
+		id = lua_tonumber(L, -2);
+
+	if (lua_type(L, -1) == LUA_TSTRING)
+		text = lua_tostring(L, -1);
+
+
+
+	SceneAccess::GetSceneHandler()->GetScene()->UpdateText(id, text);
+
+	return 0;
+}
+
 int GUI::AddButton(lua_State* L)
 {
 	/*

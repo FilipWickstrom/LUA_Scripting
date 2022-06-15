@@ -8,8 +8,8 @@ local DriverType =
 local Window = 
 {
 	name		= "Budget Binding of Isaac",
-	width		= 720,
-	height		= 480,
+	width		= 1920,
+	height		= 1080,
 	fullscreen	= false,
 	vsync		= false,
 	driverType	= DriverType.EDT_OPENGL

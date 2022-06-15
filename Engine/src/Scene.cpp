@@ -92,7 +92,15 @@ unsigned int Scene::AddText(const std::string& text, const std::string& font, ir
 	if (irrfont)
 		irrText->setOverrideFont(irrfont);
 
+	m_texts[id] = irrText;
+
 	return id;
+}
+
+void Scene::UpdateText(unsigned int& id, const std::string& text)
+{
+	std::wstring widestr = std::wstring(text.begin(), text.end());
+	m_texts[id]->setText(widestr.c_str());
 }
 
 unsigned int Scene::AddButton(const std::string& text, const std::string& font, irr::core::vector2di pos, irr::core::vector2di size)

@@ -9,6 +9,7 @@ private:
 
 protected:
 	std::unordered_map<unsigned int, Model> m_models;
+	std::unordered_map<unsigned int, irr::gui::IGUIStaticText*> m_texts;
 	irr::scene::ICameraSceneNode* m_camera;
 
 public:
@@ -35,6 +36,7 @@ public:
 	*/
 	unsigned int AddText(const std::string& text, const std::string& font,
 						irr::core::vector2di pos, irr::core::vector2di size);
+	void UpdateText(unsigned int& id, const std::string& text);
 	unsigned int AddButton(const std::string& text, const std::string& font,
 						irr::core::vector2di pos, irr::core::vector2di size);
 
