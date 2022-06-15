@@ -79,12 +79,7 @@ function Update(dt)
 
 	-- Update powerup
 	if powerup ~= nil then
-		powerup:Update(player, dt, monsters)
-	end
-
-	-- Update gold text
-	if goldText ~= nil then
-		goldText:Update(player)
+		powerup:Update(player, dt, monsters, goldText)
 	end
 
 	-- Check if player is dead or alive

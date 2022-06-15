@@ -3,7 +3,7 @@ local goldText = {}
 
 function goldText:Initialize()
 
-	goldText.text = AddText("Gold: ", "roboto_48.xml", 100, 100, 800, 200)
+	goldText.text = AddText("Gold: 0", "roboto_48.xml", 100, 100, 800, 200)
 
 end
 

@@ -48,10 +48,13 @@ function Powerup:New()
 	return g
 end
 
-function Powerup:Gain(player)
+function Powerup:Gain(player, goldText)
 
 	if self.type == "Money" then
-		player.gold = player.gold + 15
+		player.gold = player.gold + 5
+
+		-- Update gold text
+		goldText:Update(player)
 	elseif self.type == "Attack" then
 		player.damage = player.damage + 5.0
 	elseif self.type == "Speed" then
@@ -76,13 +79,13 @@ function Powerup:Gain(player)
 
 end
 
-function Powerup:Update(player, dt, enemies)
+function Powerup:Update(player, dt, enemies, goldText)
 	
 	-- player is close enough to the powerup
 	local x = math.abs(player.position.x - self.position.x)
 	local z = math.abs(player.position.z - self.position.z)
 	if x <= POWERUP_REACH and z <= POWERUP_REACH and self.shouldrespawn == false then
-		self:Gain(player)
+		self:Gain(player, goldText)
 	end
 	
 	self:GUpdate()
