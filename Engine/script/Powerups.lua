@@ -20,7 +20,8 @@ local RESPAWN_TIME = 5.0
 
 function Powerup:Initiate()
 	
-	return types[math.random(#types)]
+	--return types[math.random(#types)]
+	return "Bomb"
 
 end
 
@@ -40,6 +41,7 @@ function Powerup:New()
 	g.bomb.countdown = 3.0
 	g.bomb.active = false
 	UpdatePos(g.bomb.id, g.bomb.position.x, g.bomb.position.z)
+	SetModelScale(g.bomb.id, 0.1)
 	
 	self.__index = Powerup
 	setmetatable(g, self)
@@ -58,7 +60,9 @@ function Powerup:Gain(player)
 		player.hp = player.hp + 15.0
 	elseif self.type == "Bomb" then
 		self.bomb.active = true
-		self.bomb.position = self.position
+
+		self.bomb.position.x = self.position.x
+		self.bomb.position.z = self.position.z
 
 		UpdatePos(self.bomb.id, self.bomb.position.x, self.bomb.position.z)
 	end
