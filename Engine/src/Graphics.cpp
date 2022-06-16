@@ -14,8 +14,13 @@ Graphics::Graphics()
     //Load in options from file
     LoadOptionsLUA("Options.lua");
     
-    m_device = irr::createDevice(m_window.driverType, irr::core::dimension2d<irr::u32>(m_window.width, m_window.height), 
-                                16, m_window.fullscreen, false, m_window.vsync, &Input::GetInputHandler());
+    m_device = irr::createDevice(m_window.driverType, 
+                                irr::core::dimension2d<irr::u32>(m_window.width, m_window.height), 
+                                16, 
+                                m_window.fullscreen, 
+                                false, 
+                                m_window.vsync, 
+                                &Input::GetInputHandler());
     
     if (!m_device)
     {
@@ -24,12 +29,12 @@ Graphics::Graphics()
     
     std::wstring winCap(m_window.name.begin(), m_window.name.end());
     m_device->setWindowCaption(winCap.c_str());
-    m_driver = m_device->getVideoDriver();
-    m_sceneManager = m_device->getSceneManager();
-    m_guiEnvironment = m_device->getGUIEnvironment();
-    m_dt = 0.0;
 
-    m_sceneManager->setAmbientLight(irr::video::SColorf(255.0, 255.0, 255.0));
+    m_driver            = m_device->getVideoDriver();
+    m_sceneManager      = m_device->getSceneManager();
+    m_guiEnvironment    = m_device->getGUIEnvironment();
+    m_geoCreator        = m_sceneManager->getGeometryCreator();
+    m_dt = 0.0;
 }
 
 Graphics::~Graphics()
@@ -108,6 +113,11 @@ irr::scene::ISceneManager* Graphics::GetSceneManager()
 irr::gui::IGUIEnvironment* Graphics::GetGUIEnvironment()
 {
     return Get().m_guiEnvironment;
+}
+
+const irr::scene::IGeometryCreator* Graphics::GetGeometryCreator()
+{
+    return Get().m_geoCreator;
 }
 
 double& Graphics::GetDeltaTime()

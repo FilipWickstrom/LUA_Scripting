@@ -19,15 +19,15 @@ function ThrowBoss:New()
 	g.direction = {x = 1, y = 1}
 	g.gid = AddHealthbar(0.0, 0.0, 145.0, 50.0)
 
-	g.id = LoadModel('cube.obj')
+	g.id = LoadModel('ogre.png')
 
 	g.projectile = gameObject:New()
 
-	g.projectile.id = LoadModel('clue_knife.obj')
+	g.projectile.id = LoadModel('sword_huge.png')
 	g.projectile.position.x = 1000
 	g.projectile.target = Vector:New()
 	g.projectile.speed = 2
-	SetModelScale(g.projectile.id, 0.1)
+	--SetModelScale(g.projectile.id, 0.1)
 
 	self.__index = ThrowBoss
 	setmetatable(g, self)

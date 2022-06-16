@@ -1,25 +1,22 @@
 #pragma once
-#include "Object.h"
 
-class Model : public Object
+class Model
 {
 private:
 	//ID counter that increases for every added model
 	static unsigned int s_idCounter;
 
-	irr::scene::ISceneNode* m_node = nullptr;
+	irr::scene::ISceneNode* m_node;
 
 	// This could potentially be used with the script to identify which model is linked to which table.
 	unsigned int m_id = 0;
 
-	void LoadMesh(std::string& meshName);
+	void LoadMesh(const std::string& meshName);
 
 public:
 
-	Model() = default;
-	Model(std::string& meshName);
-	Model(std::string& meshName, irr::core::vector3df pos,
-		irr::core::vector3df rot, irr::core::vector3df scale);
+	Model();
+	Model(const std::string& meshName);
 	~Model() = default;
 
 	void SetID(unsigned int id);

@@ -18,9 +18,7 @@ private:
 	irr::video::IVideoDriver* m_driver;
 	irr::scene::ISceneManager* m_sceneManager;
 	irr::gui::IGUIEnvironment* m_guiEnvironment;
-
-	// Memory Management - not in use?
-	std::unordered_map<std::string, irr::scene::ISceneNode*> m_nodes;
+	const irr::scene::IGeometryCreator* m_geoCreator;
 
 	// Delta time
 	double m_dt;
@@ -38,6 +36,7 @@ public:
 	static irr::video::IVideoDriver* GetDriver();
 	static irr::scene::ISceneManager* GetSceneManager();
 	static irr::gui::IGUIEnvironment* GetGUIEnvironment();
+	static const irr::scene::IGeometryCreator* GetGeometryCreator();
 
 	static double& GetDeltaTime();
 	static unsigned int& GetWindowWidth();

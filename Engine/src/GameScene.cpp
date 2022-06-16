@@ -17,9 +17,10 @@ void GameScene::AddBasicEnemy(float x, float y)
 		Spawn an enemy in lua and an object to respresent it in game.
 	*/
 	m_enemyManager.NewBasicEnemy(x, y);
-	std::string modelname = "cube.obj";
-	m_models[EnemyManager::m_freeIndex] = Model(modelname, { x, 0.f, y }, { 0.f,0.f,0.f }, { 1.f, 1.f, 1.f });
-	EnemyManager::m_freeIndex = m_models[EnemyManager::m_freeIndex].GetID();
+
+	m_models.emplace(EnemyManager::m_freeIndex, std::make_unique<Model>("skeleton.png"));
+	m_models.at(EnemyManager::m_freeIndex)->SetPosition({ x,0.f,y });
+	EnemyManager::m_freeIndex = m_models[EnemyManager::m_freeIndex]->GetID();
 }
 
 void GameScene::UpdateCamera()
@@ -70,12 +71,14 @@ void GameScene::Load()
 	//Orthographic camera
 	m_camera = Graphics::GetSceneManager()->addCameraSceneNode(0, { 0,40,0 }, { 0,0,1 });
 	irr::core::matrix4 orthoMatrix;
+	float aspectRatio = static_cast<float>(Graphics::GetWindowWidth()) /
+						static_cast<float>(Graphics::GetWindowHeight());
 	/*
 		-25 <= X <= 25
 		-13 <= Y <= 13
 		0	<= z <= 20
 	*/
-	orthoMatrix.buildProjectionMatrixOrthoLH(50, 26, 0, 50);
+	orthoMatrix.buildProjectionMatrixOrthoLH(50 * aspectRatio, 50, 0, 50);
 	m_camera->setProjectionMatrix(orthoMatrix);
 	Graphics::GetSceneManager()->setActiveCamera(m_camera);
 	

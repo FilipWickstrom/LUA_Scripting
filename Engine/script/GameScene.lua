@@ -25,8 +25,8 @@ end
 
 function Start()
 	math.randomseed(os.time())
-	AddMonster('cube.obj')
-	AddMonster('cube.obj')
+	AddMonster('skeleton.png')
+	AddMonster('skeleton.png')
 
 	local newMonkey = refMonkey:New()
 	local throwBoss = refThrowBoss:New()

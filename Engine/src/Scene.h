@@ -8,7 +8,7 @@ private:
 	static unsigned int s_GUI_ID;
 
 protected:
-	std::unordered_map<unsigned int, Model> m_models;
+	std::unordered_map<unsigned int, std::unique_ptr<Model>> m_models;
 	irr::scene::ICameraSceneNode* m_camera;
 
 public:

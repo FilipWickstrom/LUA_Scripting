@@ -19,15 +19,15 @@ function ThrowMonkey:New()
 	self.__index = ThrowMonkey
 	setmetatable(g, self)
 
-	g.id = LoadModel('cube.obj')
+	g.id = LoadModel('necromancer.png')
 
 	g.projectile = gameObject:New()
 
-	g.projectile.id = LoadModel('clue_knife.obj')
+	g.projectile.id = LoadModel('sword.png')
 	g.projectile.position.x = 1000
 	g.projectile.target = Vector:New()
 	g.projectile.speed = 2
-	SetModelScale(g.projectile.id, 0.1)
+	--SetModelScale(g.projectile.id, 0.1)
 
 	return g
 end

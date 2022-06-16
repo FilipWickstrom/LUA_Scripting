@@ -21,9 +21,10 @@ Scene::~Scene()
 
 unsigned int Scene::AddModel(std::string& file)
 {
-	Model model(file, { 0.f, 0.f, 0.f }, { 0.f,0.f,0.f }, { 1.f, 1.f, 1.f });
-	unsigned int id = model.GetID();
-	m_models[id] = model;
+	static unsigned int modelCounter = 0;
+	unsigned int id = modelCounter;
+	modelCounter++;
+	m_models.emplace(id, std::make_unique<Model>(file));
 	return id;
 }
 
@@ -31,7 +32,7 @@ void Scene::RemoveModel(unsigned int id)
 {
 	if (m_models.find(id) != m_models.end())
 	{
-		m_models.at(id).Drop();
+		m_models.at(id)->Drop();
 		m_models.erase(id);
 	}
 }
@@ -44,13 +45,13 @@ const irr::scene::ICameraSceneNode* Scene::GetCamera() const
 void Scene::UpdatePosition(unsigned int id, const irr::core::vector3df& pos)
 {
 	if(m_models.find(id) != m_models.end())
-		m_models.at(id).SetPosition(pos);
+		m_models.at(id)->SetPosition(pos);
 }
 
 void Scene::SetModelScale(unsigned int id, const float& scale)
 {
 	if (m_models.find(id) != m_models.end())
-		m_models.at(id).SetScale(scale);
+		m_models.at(id)->SetScale(scale);
 }
 
 bool Scene::RemoveActiveCam()

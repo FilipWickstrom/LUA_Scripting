@@ -22,10 +22,6 @@
 #include <bitset>
 #include <algorithm>
 #include <thread>
-#include <omp.h>
-
-// Windows
-#include <Windows.h>
 
 // Lua
 #ifdef _DEBUG
@@ -47,7 +43,9 @@
 #include "SceneManager.h"
 
 // Paths
-const std::string MODELPATH		= "../Assets/Models/";
-const std::string TEXTUREPATH	= "../Assets/Textures/";
+const std::string SPRITEPATH	= "../Assets/Sprites/";
 const std::string FONTPATH		= "../Assets/Fonts/";
 const std::string SCRIPTSPATH	= "script/";
+
+//Sprite modifier - larger value means smaller sprites
+const float SPRITE_SIZE_MODIFIER = 4.f;

@@ -7,7 +7,7 @@ void ConsoleThread(lua_State* L)
 	std::string command = "";
 	bool keepLooping = true;
 	
-	while (GetConsoleWindow() && keepLooping)
+	while (keepLooping)
 	{
 		std::cout << "> ";
 		std::getline(std::cin, command);

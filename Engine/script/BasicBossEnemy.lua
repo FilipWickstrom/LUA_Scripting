@@ -17,7 +17,7 @@ function BasicBoss:New()
 	g.cooldown = 0
 	g.reach = 3.5
 
-	g.id = LoadModel('clue_toy.obj')
+	g.id = LoadModel('zombie_big.png')
 	g.gid = AddHealthbar(0.0, 0.0, 100.0, 50.0)
 
 	self.__index = BasicBoss

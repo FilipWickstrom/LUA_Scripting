@@ -16,7 +16,7 @@ function Player:New()
 	g.position.x = 0
 	g.position.y = 0
 
-	g.id = LoadModel('clue_mask.obj')
+	g.id = LoadModel('knight.png')
 	g.gid = AddHealthbar(0.0, 0.0, 250.0, 50.0)
 
 	self.__index = Player

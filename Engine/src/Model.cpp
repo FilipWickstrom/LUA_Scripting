@@ -3,29 +3,44 @@
 
 unsigned int Model::s_idCounter = 0;
 
-void Model::LoadMesh(std::string& meshName)
+void Model::LoadMesh(const std::string& meshName)
 {
-	meshName = MODELPATH + meshName;
+	irr::video::ITexture* texture = Graphics::GetDriver()->getTexture((SPRITEPATH + meshName).c_str());
+	irr::core::dimension2df size = { 16.f, 16.f };
+	if (texture)
+		size = static_cast<irr::core::dimension2df>(texture->getSize());
 
-	irr::scene::IMesh* mesh = Graphics::GetSceneManager()->getMesh(meshName.c_str());
-	if (mesh == nullptr)
-		std::cout << "Failed to get: " << meshName << std::endl;
+	irr::scene::IMesh* mesh = Graphics::GetGeometryCreator()->createPlaneMesh({ size / SPRITE_SIZE_MODIFIER });
 
-	m_node = Graphics::GetSceneManager()->addMeshSceneNode(mesh);
-	m_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+	m_node = Graphics::GetSceneManager()->addMeshSceneNode(mesh, 0, s_idCounter);
+
+	if (!m_node)
+		std::cout << "ERROR: Node not correct..." << std::endl;
+
+	if (texture)
+		m_node->setMaterialTexture(0, texture);
+
+	//Make it possible to see using directX or openGL
+	m_node->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_LIGHTING, false);
+	//Possible to rotate the sprite
+	m_node->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_BACK_FACE_CULLING, false);
+	//Turn off filtering - no interpolation between pixels
+	m_node->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_BILINEAR_FILTER, false);
+	//Alpha value makes it transparent
+	m_node->setMaterialType(irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL);
 }
 
-Model::Model(std::string& meshName)
-	:Object()
+Model::Model()
 {
 	m_id = s_idCounter++;
-	this->LoadMesh(meshName);
+	m_node = nullptr;
+	this->LoadMesh("default.png");
 }
 
-Model::Model(std::string& meshName, irr::core::vector3df pos, irr::core::vector3df rot, irr::core::vector3df scale)
-	:Object(pos, rot, scale)
+Model::Model(const std::string& meshName)
 {
 	m_id = s_idCounter++;
+	m_node = nullptr;
 	this->LoadMesh(meshName);
 }
 
@@ -41,17 +56,14 @@ unsigned int Model::GetID() const
 
 void Model::SetPosition(const irr::core::vector3df& pos)
 {
-	m_position = pos;
 	if (m_node)
-	{
-		m_node->setPosition(m_position);
-	}
+		m_node->setPosition(pos);
 }
 
 void Model::SetScale(const float& scale)
 {
-	m_scale = { scale, scale, scale };
-	m_node->setScale(m_scale);
+	if (m_node)
+		m_node->setScale({ scale, scale, scale });
 }
 
 void Model::Update()
@@ -64,14 +76,13 @@ void Model::Update()
 	{
 		if (lua_isnumber(LUA, -1))
 		{
-			m_position.X = static_cast<irr::f32>(lua_tonumber(LUA, -1));
-			m_position.Y = 0.f;
-			m_position.Z = static_cast<irr::f32>(lua_tonumber(LUA, -2));
+			irr::core::vector3df vec;
+			vec.X = static_cast<irr::f32>(lua_tonumber(LUA, -1));
+			vec.Y = 0.f;
+			vec.Z = static_cast<irr::f32>(lua_tonumber(LUA, -2));
 
 			if (m_node)
-			{
-				m_node->setPosition(m_position);
-			}
+				m_node->setPosition(vec);
 		}
 		else
 		{
