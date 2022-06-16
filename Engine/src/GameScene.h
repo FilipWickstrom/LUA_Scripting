@@ -4,12 +4,11 @@
 class GameScene : public Scene
 {
 private:
+	void UpdateCamera();
 
 public:
-	GameScene();
-	~GameScene();
-
-	void UpdateCamera();
+	GameScene() = default;
+	~GameScene() = default;
 
 	// Inherited via Scene
 	virtual void Load() override;

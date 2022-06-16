@@ -5,6 +5,7 @@ refMonkey = require('script/ThrowingEnemy')
 boss = require('script/BasicBossEnemy'):New()
 refThrowBoss = require('script/ThrowingBoss')
 powerup = require('script/Powerups')
+require('script/SceneHelp')
 
 -- Collect separate types in different tables
 monsters = {}
@@ -85,13 +86,12 @@ function Update(dt)
 		powerup:Update(player, dt)
 	end
 
+	-- Go back to menu when player dies
 	if(player:IsAlive() == false) then
-		return false
+		C_ChangeScene(Scene.MENU)
 	end
 
 	player:Update()
-
-	return true
 end
 
 

@@ -17,7 +17,6 @@ void MenuScene::Load()
 
 void MenuScene::Clean()
 {
-	//Execute the start-function
 	lua_getglobal(LUA, "Clean");
 	LuaHandler::CheckErrors(0, 0);
 }

@@ -1,16 +1,6 @@
 #include "PCH.h"
 #include "GameScene.h"
 
-
-GameScene::GameScene()
-{
-}
-
-GameScene::~GameScene()
-{
-	this->Clean();
-}
-
 void GameScene::UpdateCamera()
 {
 	lua_getglobal(LUA, "GetObjectPosition");
@@ -74,21 +64,16 @@ void GameScene::Load()
 
 void GameScene::Clean()
 {
-	//Execute the start-function
 	lua_getglobal(LUA, "Clean");
 	LuaHandler::CheckErrors(0, 0);
 }
 
 void GameScene::Update()
 {
+	UpdateCamera();
+
 	//Update from lua-scrips
 	lua_getglobal(LUA, "Update");
 	lua_pushnumber(LUA, Graphics::GetDeltaTime());
-	LuaHandler::CheckErrors(1, 1);
-
-	// [NOT IN USE FOR NOW]
-	bool isAlive = static_cast<int>(lua_toboolean(LUA, -1));
-	lua_pop(LUA, 1);
-
-	UpdateCamera();
+	LuaHandler::CheckErrors(1, 0);
 }
