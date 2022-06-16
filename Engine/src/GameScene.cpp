@@ -11,18 +11,6 @@ GameScene::~GameScene()
 	this->Clean();
 }
 
-void GameScene::AddBasicEnemy(float x, float y)
-{
-	/*
-		Spawn an enemy in lua and an object to respresent it in game.
-	*/
-	m_enemyManager.NewBasicEnemy(x, y);
-
-	m_models.emplace(EnemyManager::m_freeIndex, std::make_unique<Model>("skeleton.png"));
-	m_models.at(EnemyManager::m_freeIndex)->SetPosition({ x,0.f,y });
-	EnemyManager::m_freeIndex = m_models[EnemyManager::m_freeIndex]->GetID();
-}
-
 void GameScene::UpdateCamera()
 {
 	lua_getglobal(LUA, "GetObjectPosition");

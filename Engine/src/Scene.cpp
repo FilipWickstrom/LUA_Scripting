@@ -1,6 +1,7 @@
 #include "PCH.h"
 #include "Scene.h"
 
+unsigned int Scene::s_Sprite_ID = 0;
 unsigned int Scene::s_GUI_ID = 0;
 
 Scene::Scene()
@@ -16,25 +17,24 @@ Scene::~Scene()
 	Graphics::GetSceneManager()->getMeshCache()->clear();
 	Graphics::GetGUIEnvironment()->clear();
 	//All nodes are gone now
-	m_models.clear();
+	m_sprites.clear();
+
+	//Reseting id's
+	s_Sprite_ID = 0;
+	s_GUI_ID = 0;
 }
 
-unsigned int Scene::AddModel(std::string& file)
+unsigned int Scene::AddSprite(const std::string& file)
 {
-	static unsigned int modelCounter = 0;
-	unsigned int id = modelCounter;
-	modelCounter++;
-	m_models.emplace(id, std::make_unique<Model>(file));
+	unsigned int id = s_Sprite_ID++;
+	m_sprites.emplace(id, std::make_unique<Sprite>(file));
 	return id;
 }
 
-void Scene::RemoveModel(unsigned int id)
+void Scene::RemoveSprite(const unsigned int& id)
 {
-	if (m_models.find(id) != m_models.end())
-	{
-		m_models.at(id)->Drop();
-		m_models.erase(id);
-	}
+	if (m_sprites.find(id) != m_sprites.end())
+		m_sprites.erase(id);
 }
 
 const irr::scene::ICameraSceneNode* Scene::GetCamera() const
@@ -42,16 +42,22 @@ const irr::scene::ICameraSceneNode* Scene::GetCamera() const
 	return Graphics::GetSceneManager()->getActiveCamera();
 }
 
-void Scene::UpdatePosition(unsigned int id, const irr::core::vector3df& pos)
+void Scene::SetSpritePosition(const unsigned int& id, const irr::core::vector3df& pos)
 {
-	if(m_models.find(id) != m_models.end())
-		m_models.at(id)->SetPosition(pos);
+	if(m_sprites.find(id) != m_sprites.end())
+		m_sprites.at(id)->SetPosition(pos);
 }
 
-void Scene::SetModelScale(unsigned int id, const float& scale)
+void Scene::SetSpriteScale(const unsigned int& id, const irr::core::vector3df& scl)
 {
-	if (m_models.find(id) != m_models.end())
-		m_models.at(id)->SetScale(scale);
+	if (m_sprites.find(id) != m_sprites.end())
+		m_sprites.at(id)->SetScale(scl);
+}
+
+void Scene::SetSpriteRotation(const unsigned int& id, const irr::core::vector3df& rot)
+{
+	if (m_sprites.find(id) != m_sprites.end())
+		m_sprites.at(id)->SetRotation(rot);
 }
 
 bool Scene::RemoveActiveCam()

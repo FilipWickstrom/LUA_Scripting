@@ -17,7 +17,7 @@ function Monster:New()
 	g.reach = 2
 	g.cooldown = 0.0
 	g.RandomizePos(g)
-	g.gid = AddHealthbar(0.0, 0.0, 75.0, 25.0)
+	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0)
 	self.__index = Monster
 	setmetatable(g, self)
 
@@ -77,8 +77,8 @@ function Monster:Update(player, dt)
 	self:Chase(player.position, dt)
 	self:Hit(player, dt)
 	self:GUpdate()
-	UpdatePosUI(self.gid, self.position.x, self.position.z, 75.0, 25.0)
-	UpdateUI(self.gid, self.hp)
+	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 75.0, 25.0)
+	C_UpdateUI(self.gid, self.hp)
 end
 
 return Monster

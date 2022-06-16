@@ -25,10 +25,10 @@ function Powerup:New()
 
 	g.respawntimer = 0.0
 	g.RandomizePos(g)
-	g.id = LoadModel("chest.png")
+	g.id = C_LoadSprite("chest.png")
 	g.reach = 1.5
 	g.shouldrespawn = false
-	--SetModelScale(g.id, 0.1)
+	--C_SetSpriteScale(g.id, 0.1)
 	
 	self.__index = Powerup
 	setmetatable(g, self)

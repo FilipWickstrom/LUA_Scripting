@@ -4,22 +4,22 @@ local gameObject = require('script/gameObject') --temp
 local GUI = {}
 
 function Start()
-	local window = { X = WinWidth(), Y = WinHeight() }
+	local window = { X = C_WinWidth(), Y = C_WinHeight() }
 
-	GUI["Title"] = AddText("Level editor", "roboto_28.xml", window.X/2, 25, 400, 100)
+	GUI["Title"] = C_AddText("Level editor", "roboto_28.xml", window.X/2, 25, 400, 100)
 
 	-- Buttons: Create, Load, Save
 	local editBtn = { X = 100, Y = 50 }
 	local xSpace = 0;
-	GUI["Create"] = AddButton("Create", "roboto_12.xml", editBtn.X/2, editBtn.Y/2, editBtn.X, editBtn.Y)
+	GUI["Create"] = C_AddButton("Create", "roboto_12.xml", editBtn.X/2, editBtn.Y/2, editBtn.X, editBtn.Y)
 	xSpace = xSpace + editBtn.X
-	GUI["Load"] = AddButton("Load", "roboto_12.xml", editBtn.X/2 + xSpace, editBtn.Y/2, editBtn.X, editBtn.Y)
+	GUI["Load"] = C_AddButton("Load", "roboto_12.xml", editBtn.X/2 + xSpace, editBtn.Y/2, editBtn.X, editBtn.Y)
 	xSpace = xSpace + editBtn.X
-	GUI["Save"] = AddButton("Save", "roboto_12.xml", editBtn.X/2 + xSpace, editBtn.Y/2, editBtn.X, editBtn.Y)
+	GUI["Save"] = C_AddButton("Save", "roboto_12.xml", editBtn.X/2 + xSpace, editBtn.Y/2, editBtn.X, editBtn.Y)
 
 	-- Buttons: Back to menu
 	local menuBtn = { X = 150, Y = 50 }
-	GUI["Menu"] = AddButton("Back to menu", "roboto_12.xml", window.X-(menuBtn.X/2), menuBtn.Y/2, menuBtn.X, menuBtn.Y)
+	GUI["Menu"] = C_AddButton("Back to menu", "roboto_12.xml", window.X-(menuBtn.X/2), menuBtn.Y/2, menuBtn.X, menuBtn.Y)
 
 end
 
@@ -27,7 +27,7 @@ end
 function Clean()
 	-- Go through all the GUI and remove it
 	for key, value in next, GUI do
-		RemoveGUI(value)
+		C_RemoveGUI(value)
 	end
 end
 
@@ -39,17 +39,17 @@ end
 
 function Update(dt)
 	-- Check if any of the buttons is clicked
-	if (IsButtonPressed(GUI["Create"])) then
+	if (C_IsButtonPressed(GUI["Create"])) then
 		--Call c++ create map
 
-	elseif(IsButtonPressed(GUI["Load"])) then
+	elseif(C_IsButtonPressed(GUI["Load"])) then
 		--Call c++ load map
 
-	elseif(IsButtonPressed(GUI["Save"])) then
+	elseif(C_IsButtonPressed(GUI["Save"])) then
 		--Call c++ save map
 
-	elseif(IsButtonPressed(GUI["Menu"])) then
-		ChangeScene(Scene.MENU)
+	elseif(C_IsButtonPressed(GUI["Menu"])) then
+		C_ChangeScene(Scene.MENU)
 
 	end
 

@@ -17,8 +17,8 @@ function BasicBoss:New()
 	g.cooldown = 0
 	g.reach = 3.5
 
-	g.id = LoadModel('zombie_big.png')
-	g.gid = AddHealthbar(0.0, 0.0, 100.0, 50.0)
+	g.id = C_LoadSprite('zombie_big.png')
+	g.gid = C_AddHealthbar(0.0, 0.0, 100.0, 50.0)
 
 	self.__index = BasicBoss
 	setmetatable(g, self)
@@ -59,8 +59,8 @@ function BasicBoss:Update(player, dt)
 	self:Chase(dt)
 	self:Attack(player, dt)
 	self:GUpdate()
-	UpdatePosUI(self.gid, self.position.x, self.position.z, 100.0, 50.0)
-	UpdateUI(self.gid, self.hp)
+	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 100.0, 50.0)
+	C_UpdateUI(self.gid, self.hp)
 end
 
 

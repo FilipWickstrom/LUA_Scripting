@@ -1,19 +1,13 @@
 #pragma once
 #include "Scene.h"
-#include "EnemyManager.h"
 
 class GameScene : public Scene
 {
 private:
-	// Lua manager for all enemies.
-	EnemyManager m_enemyManager;
 
 public:
 	GameScene();
 	~GameScene();
-
-	// Specific functions for this scene
-	void AddBasicEnemy(float x, float y);
 
 	void UpdateCamera();
 

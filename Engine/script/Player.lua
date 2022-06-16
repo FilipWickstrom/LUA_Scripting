@@ -16,8 +16,8 @@ function Player:New()
 	g.position.x = 0
 	g.position.y = 0
 
-	g.id = LoadModel('knight.png')
-	g.gid = AddHealthbar(0.0, 0.0, 250.0, 50.0)
+	g.id = C_LoadSprite('knight.png')
+	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0)
 
 	self.__index = Player
 	setmetatable(g, self)
@@ -31,7 +31,7 @@ function Player:Update()
 		self.hp = 100.0
 	end
 
-	UpdateUI(self.gid, self.hp)
+	C_UpdateUI(self.gid, self.hp)
 end
 
 function Player:IsAlive()

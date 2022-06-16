@@ -2,56 +2,63 @@
 #include "LuaToCpp.h"
 #include "LuaState.h"
 
-int LoadModelLua(lua_State* L)
+int L_LoadSprite(lua_State* L)
 {
 	std::string filepath = lua_tostring(L, -1);
-
-	lua_pushnumber(L, SceneAccess::GetSceneHandler()->GetScene()->AddModel(filepath));
-	//std::cout << "ID: " << lua_tostring(L, -1) << "\n";
+	lua_pushnumber(L, SceneAccess::GetSceneHandler()->GetScene()->AddSprite(filepath));
 	return 1;
 }
 
-int SetScaleLua(lua_State* L)
-{
-	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
-	float scalefactor = static_cast<float>(lua_tonumber(L, -1));
-
-	SceneAccess::GetSceneHandler()->GetScene()->SetModelScale(id, scalefactor);
-
-	return 0;
-}
-
-int RemoveModelLua(lua_State* L)
+int L_RemoveSprite(lua_State* L)
 {
 	int id = static_cast<int>(lua_tonumber(L, -1));
-	SceneAccess::GetSceneHandler()->GetScene()->RemoveModel(id);
+	SceneAccess::GetSceneHandler()->GetScene()->RemoveSprite(id);
 	return 0;
 }
 
-int GetWindowWidthLua(lua_State* L)
+int L_SetSpritePosition(lua_State* L)
+{
+	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -3));
+	irr::core::vector3df vec;
+	vec.X = static_cast<float>(lua_tonumber(L, -2));
+	//vec.Y = static_cast<float>(lua_tonumber(L, -2));
+	vec.Z = static_cast<float>(lua_tonumber(L, -1));
+	SceneAccess::GetSceneHandler()->GetScene()->SetSpritePosition(id, vec);
+	return 0;
+}
+
+int L_SetSpriteScale(lua_State* L)
+{
+	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+	float scl = static_cast<float>(lua_tonumber(L, -1));
+	SceneAccess::GetSceneHandler()->GetScene()->SetSpriteScale(id, { scl, scl, scl });
+	return 0;
+}
+
+int L_SetSpriteRotation(lua_State* L)
+{
+	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -4));
+	irr::core::vector3df vec;
+	vec.X = static_cast<float>(lua_tonumber(L, -3));
+	vec.Y = static_cast<float>(lua_tonumber(L, -2));
+	vec.Z = static_cast<float>(lua_tonumber(L, -1));
+	SceneAccess::GetSceneHandler()->GetScene()->SetSpriteRotation(id, vec);
+	return 0;
+}
+
+int L_GetWindowWidth(lua_State* L)
 {
 	lua_pushnumber(L, Graphics::GetWindowWidth());
 	return 1;
 }
 
-int GetWindowHeightLua(lua_State* L)
+int L_GetWindowHeight(lua_State* L)
 {
 	lua_pushnumber(L, Graphics::GetWindowHeight());
 	return 1;
 }
 
-int UpdatePosLua(lua_State* L)
-{
-	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -3));
-	float x = static_cast<float>(lua_tonumber(L, -2));
-	float z = static_cast<float>(lua_tonumber(L, -1));
-	//float z = static_cast<float>(lua_tonumber(L, -1));
-	SceneAccess::GetSceneHandler()->GetScene()->UpdatePosition(id, { x, 0, z });
-
-	return 0;
-}
-
-int UpdateGraphicalInterfaceLua(lua_State* L)
+int L_UpdateGraphicalInterface(lua_State* L)
 {
 	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
 	float update = static_cast<float>(lua_tonumber(L, -1));
@@ -65,7 +72,7 @@ int UpdateGraphicalInterfaceLua(lua_State* L)
 	return 0;
 }
 
-int AddHealthbarUILua(lua_State* L)
+int L_AddHealthbarUI(lua_State* L)
 {
 	float y2 = static_cast<float>(lua_tonumber(L, -1));
 	float x2 = static_cast<float>(lua_tonumber(L, -2));
@@ -83,7 +90,7 @@ int AddHealthbarUILua(lua_State* L)
 	return 1;
 }
 
-int UpdatePosUILua(lua_State* L)
+int L_UpdatePosUI(lua_State* L)
 {
 	/*
 		Convert the 3d world position to 2d screen space position.
@@ -104,14 +111,14 @@ int UpdatePosUILua(lua_State* L)
 	return 0;
 }
 
-int RemoveUILua(lua_State* L)
+int L_RemoveUI(lua_State* L)
 {
 	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
 	Graphics2D::RemoveElement(id);
 	return 0;
 }
 
-int ChangeScene(lua_State* L)
+int L_ChangeScene(lua_State* L)
 {
 	if (lua_type(L, -1) == LUA_TNUMBER)
 	{
@@ -122,7 +129,7 @@ int ChangeScene(lua_State* L)
 	return 0;
 }
 
-int GUI::AddText(lua_State* L)
+int GUI::L_AddText(lua_State* L)
 {
 	/*
 		Arguments:	Text[string], Font[string], Pos[vector2di], Size[vector2di]
@@ -156,7 +163,7 @@ int GUI::AddText(lua_State* L)
 	return 1;
 }
 
-int GUI::AddButton(lua_State* L)
+int GUI::L_AddButton(lua_State* L)
 {
 	/*
 		Arguments:	Text[string], Font[string], Pos[vector2di], Size[vector2di]
@@ -190,7 +197,7 @@ int GUI::AddButton(lua_State* L)
 	return 1;
 }
 
-int GUI::RemoveGUI(lua_State* L)
+int GUI::L_RemoveGUI(lua_State* L)
 {
 	/*
 		Arguments: ID[unsigned int]
@@ -203,7 +210,7 @@ int GUI::RemoveGUI(lua_State* L)
 	return 0;
 }
 
-int GUI::IsButtonPressed(lua_State* L)
+int GUI::L_IsButtonPressed(lua_State* L)
 {
 	/*
 		Arguments: ID[unsigned int]

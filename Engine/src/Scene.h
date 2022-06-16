@@ -1,14 +1,15 @@
 #pragma once
-#include "Model.h"
+#include "Sprite.h"
 #include "CppToLua.h"
 
 class Scene
 {
 private:
+	static unsigned int s_Sprite_ID;
 	static unsigned int s_GUI_ID;
 
 protected:
-	std::unordered_map<unsigned int, std::unique_ptr<Model>> m_models;
+	std::unordered_map<unsigned int, std::unique_ptr<Sprite>> m_sprites;
 	irr::scene::ICameraSceneNode* m_camera;
 
 public:
@@ -19,14 +20,14 @@ public:
 	virtual void Clean() = 0;
 	virtual void Update() = 0;
 
-	// Models
-	unsigned int AddModel(std::string& file);
-	void RemoveModel(unsigned int id);
+	// Sprites
+	unsigned int AddSprite(	const std::string& file);
+	void RemoveSprite(		const unsigned int& id);	
+	void SetSpritePosition(	const unsigned int& id, const irr::core::vector3df& pos);
+	void SetSpriteScale(	const unsigned int& id, const irr::core::vector3df& scl);
+	void SetSpriteRotation(	const unsigned int& id, const irr::core::vector3df& rot);
+
 	const irr::scene::ICameraSceneNode* GetCamera() const;
-
-	void UpdatePosition(unsigned int id, const irr::core::vector3df& pos);
-	void SetModelScale(unsigned int id, const float& scale);
-
 	bool RemoveActiveCam();
 
 

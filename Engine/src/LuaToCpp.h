@@ -8,36 +8,36 @@
 		return: int				- amount of results to return
 */
 
-// Lua function to load model into c++
-int LoadModelLua(lua_State* L);
+/*
+	Function that can be called in LUA
+	regarding sprites
+*/
+int L_LoadSprite(lua_State* L);
+int L_RemoveSprite(lua_State* L);
+int L_SetSpritePosition(lua_State* L);
+int L_SetSpriteScale(lua_State* L);
+int L_SetSpriteRotation(lua_State* L);
 
-// Set the scale of the object through lua.
-int SetScaleLua(lua_State* L);
+/*
+	Application window
+*/
+int L_GetWindowWidth(lua_State* L);
+int L_GetWindowHeight(lua_State* L);
 
-// Lua function to remove model from c++
-int RemoveModelLua(lua_State* L);
-
-// Lua function to get the size of the window from c++
-int GetWindowWidthLua(lua_State* L);
-int GetWindowHeightLua(lua_State* L);
-
-int UpdatePosLua(lua_State* L);
-
-int ChangeScene(lua_State* L);
+int L_ChangeScene(lua_State* L);
 
 namespace GUI
 {
-	int AddText(lua_State* L);
-	int AddButton(lua_State* L);
-	int RemoveGUI(lua_State* L);
-	int IsButtonPressed(lua_State* L);
-
+	int L_AddText(lua_State* L);
+	int L_AddButton(lua_State* L);
+	int L_RemoveGUI(lua_State* L);
+	int L_IsButtonPressed(lua_State* L);
 };
 
 // Graphical Interface wrapper
-int UpdateGraphicalInterfaceLua(lua_State* L);
-int	AddHealthbarUILua(lua_State* L);
-int UpdatePosUILua(lua_State* L);
-int RemoveUILua(lua_State* L);
+int L_UpdateGraphicalInterface(lua_State* L);
+int	L_AddHealthbarUI(lua_State* L);
+int L_UpdatePosUI(lua_State* L);
+int L_RemoveUI(lua_State* L);
 
 

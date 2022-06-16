@@ -13,7 +13,7 @@ local deltatime = 0
 
 function AddMonster(modelfilepath)
 	local monster = refMonster:New()
-	monster.id = LoadModel(modelfilepath)
+	monster.id = C_LoadSprite(modelfilepath)
 
 	table.insert(monsters, monster)
 end
@@ -58,6 +58,13 @@ function OnInput(x, y)
 	assert(type(x) == "number", "OnInput: Value is not a number")
 	assert(type(y) == "number", "OnInput: Value is not a number")
 	
+	
+	if x == -1 then
+		player:RotateLeft()
+	elseif x == 1 then
+		player:RotateRight()
+	end
+
 	local vec = vector:New()
 	vec.x = x * deltatime * player.speed
 	vec.z = y * deltatime * player.speed

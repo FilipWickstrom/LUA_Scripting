@@ -8,24 +8,29 @@ LuaHandler::LuaHandler()
 	luaL_openlibs(m_state);
 
 	//Add functions to LUA
-	lua_register(m_state, "LoadModel", LoadModelLua);
-	lua_register(m_state, "SetModelScale", SetScaleLua);
-	lua_register(m_state, "RemoveModel", RemoveModelLua);
-	lua_register(m_state, "WinWidth", GetWindowWidthLua);
-	lua_register(m_state, "WinHeight", GetWindowHeightLua);
-	lua_register(m_state, "UpdatePos", UpdatePosLua);
-	lua_register(m_state, "AddHealthbar", AddHealthbarUILua);
-	lua_register(m_state, "UpdateUI", UpdateGraphicalInterfaceLua);
-	lua_register(m_state, "UpdatePosUI", UpdatePosUILua);
-	lua_register(m_state, "RemoveUI", RemoveUILua);
+	lua_register(m_state, "C_LoadSprite", L_LoadSprite);
+	lua_register(m_state, "C_RemoveSprite", L_RemoveSprite);
+	lua_register(m_state, "C_SetSpritePosition", L_SetSpritePosition);
+	lua_register(m_state, "C_SetSpriteScale", L_SetSpriteScale);
+	lua_register(m_state, "C_SetSpriteRotation", L_SetSpriteRotation);
 
-	lua_register(m_state, "ChangeScene", ChangeScene);
-
+	
+	lua_register(m_state, "C_WinWidth", L_GetWindowWidth);
+	lua_register(m_state, "C_WinHeight", L_GetWindowHeight);
+	
+	lua_register(m_state, "C_ChangeScene", L_ChangeScene);
+	
+	
 	//GUI
-	lua_register(m_state, "AddText", GUI::AddText);
-	lua_register(m_state, "AddButton", GUI::AddButton);
-	lua_register(m_state, "RemoveGUI", GUI::RemoveGUI);
-	lua_register(m_state, "IsButtonPressed", GUI::IsButtonPressed);
+	lua_register(m_state, "C_AddHealthbar", L_AddHealthbarUI);
+	lua_register(m_state, "C_UpdateUI", L_UpdateGraphicalInterface);
+	lua_register(m_state, "C_UpdatePosUI", L_UpdatePosUI);
+	lua_register(m_state, "C_RemoveUI", L_RemoveUI);
+	
+	lua_register(m_state, "C_AddText", GUI::L_AddText);
+	lua_register(m_state, "C_AddButton", GUI::L_AddButton);
+	lua_register(m_state, "C_RemoveGUI", GUI::L_RemoveGUI);
+	lua_register(m_state, "C_IsButtonPressed", GUI::L_IsButtonPressed);
 }
 
 LuaHandler::~LuaHandler()

@@ -17,17 +17,17 @@ function ThrowBoss:New()
 	g.cooldown = 1
 	g.RandomizePos(g)
 	g.direction = {x = 1, y = 1}
-	g.gid = AddHealthbar(0.0, 0.0, 145.0, 50.0)
+	g.gid = C_AddHealthbar(0.0, 0.0, 145.0, 50.0)
 
-	g.id = LoadModel('ogre.png')
+	g.id = C_LoadSprite('ogre.png')
 
 	g.projectile = gameObject:New()
 
-	g.projectile.id = LoadModel('sword_huge.png')
+	g.projectile.id = C_LoadSprite('sword_huge.png')
 	g.projectile.position.x = 1000
 	g.projectile.target = Vector:New()
 	g.projectile.speed = 2
-	--SetModelScale(g.projectile.id, 0.1)
+	--C_SetSpriteScale(g.projectile.id, 0.1)
 
 	self.__index = ThrowBoss
 	setmetatable(g, self)
@@ -105,8 +105,8 @@ function ThrowBoss:Update(player, dt)
 	self:Chase(dt)
 	self:GUpdate()
 	self.projectile:GUpdate()
-	UpdateUI(self.gid, self.hp)
-	UpdatePosUI(self.gid, self.position.x, self.position.z, 145.0, 50.0)
+	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 145.0, 50.0)
+	C_UpdateUI(self.gid, self.hp)
 end
 
 return ThrowBoss
