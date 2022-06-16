@@ -49,3 +49,5 @@ const std::string SCRIPTSPATH	= "script/";
 
 //Sprite modifier - larger value means smaller sprites
 const float SPRITE_SIZE_MODIFIER = 4.f;
+// Option to show UI area
+#define DEBUG_UI 0

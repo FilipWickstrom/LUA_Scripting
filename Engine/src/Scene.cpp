@@ -86,6 +86,9 @@ unsigned int Scene::AddText(const std::string& text, const std::string& font, ir
 										pos.Y + (size.Y/2)),
 										false, false
 										);
+#if DEBUG_UI
+	irrText->setDrawBackground(true);
+#endif
 
 	//Center text
 	irrText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
@@ -99,7 +102,15 @@ unsigned int Scene::AddText(const std::string& text, const std::string& font, ir
 	if (irrfont)
 		irrText->setOverrideFont(irrfont);
 
+	m_texts[id] = irrText;
+
 	return id;
+}
+
+void Scene::UpdateText(unsigned int& id, const std::string& text)
+{
+	std::wstring widestr = std::wstring(text.begin(), text.end());
+	m_texts[id]->setText(widestr.c_str());
 }
 
 unsigned int Scene::AddButton(const std::string& text, const std::string& font, irr::core::vector2di pos, irr::core::vector2di size)

@@ -15,6 +15,7 @@ function Player:New()
 	-- Add effects here.
 	g.position.x = 0
 	g.position.y = 0
+	g.lastpickup = "None"
 
 	g.id = C_LoadSprite('knight.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0)
@@ -31,7 +32,10 @@ function Player:Update()
 		self.hp = 100.0
 	end
 
+	-- GOD MODE!!
+	self.hp = 100
 	C_UpdateUI(self.gid, self.hp)
+
 end
 
 function Player:IsAlive()

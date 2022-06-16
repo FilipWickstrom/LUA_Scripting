@@ -5,6 +5,7 @@ refMonkey = require('script/ThrowingEnemy')
 boss = require('script/BasicBossEnemy'):New()
 refThrowBoss = require('script/ThrowingBoss')
 powerup = require('script/Powerups')
+goldText = require('script/GoldText')
 require('script/SceneHelp')
 
 -- Collect separate types in different tables
@@ -33,6 +34,7 @@ function Start()
 	local throwBoss = refThrowBoss:New()
 
 	powerup = require('script/Powerups'):New()
+	goldText:Initialize()
 	
 	table.insert(monsters, newMonkey)
 	table.insert(monsters, boss)
@@ -82,8 +84,9 @@ function Update(dt)
 		v:Update(player, dt)
 	end
 
+	-- Update powerup
 	if powerup ~= nil then
-		powerup:Update(player, dt)
+		powerup:Update(player, dt, monsters, goldText)
 	end
 
 	-- Go back to menu when player dies
@@ -91,6 +94,7 @@ function Update(dt)
 		C_ChangeScene(Scene.MENU)
 	end
 
+	-- Update player
 	player:Update()
 end
 
