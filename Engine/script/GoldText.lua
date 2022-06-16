@@ -3,7 +3,7 @@ local goldText = {}
 
 function goldText:Initialize()
 
-	goldText.text = AddText("Gold: 0", "roboto_48.xml", 120, 100, 350, 100)
+	goldText.text = C_AddText("Gold: 0", "roboto_48.xml", 120, 100, 350, 100)
 	--Add functionality to set alignment to left, right and center
 
 end
@@ -11,7 +11,7 @@ end
 function goldText:Update(player)
 
 	-- Update the text here
-	UpdateText(goldText.text, 'Gold: ' .. player.gold)
+	C_UpdateText(goldText.text, 'Gold: ' .. player.gold)
 
 end
 
