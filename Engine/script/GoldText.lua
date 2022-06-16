@@ -3,7 +3,8 @@ local goldText = {}
 
 function goldText:Initialize()
 
-	goldText.text = AddText("Gold: 0", "roboto_48.xml", 100, 100, 800, 200)
+	goldText.text = AddText("Gold: 0", "roboto_48.xml", 120, 100, 350, 100)
+	--Add functionality to set alignment to left, right and center
 
 end
 

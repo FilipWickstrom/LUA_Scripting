@@ -79,6 +79,9 @@ unsigned int Scene::AddText(const std::string& text, const std::string& font, ir
 										pos.Y + (size.Y/2)),
 										false, false
 										);
+#if DEBUG_UI
+	irrText->setDrawBackground(true);
+#endif
 
 	//Center text
 	irrText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);

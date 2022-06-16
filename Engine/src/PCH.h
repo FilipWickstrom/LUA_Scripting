@@ -51,3 +51,6 @@ const std::string MODELPATH		= "../Assets/Models/";
 const std::string TEXTUREPATH	= "../Assets/Textures/";
 const std::string FONTPATH		= "../Assets/Fonts/";
 const std::string SCRIPTSPATH	= "script/";
+
+// Option to show UI area
+#define DEBUG_UI 0
