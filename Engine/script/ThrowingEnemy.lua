@@ -20,6 +20,7 @@ function ThrowMonkey:New()
 	setmetatable(g, self)
 
 	g.id = C_LoadSprite('necromancer.png')
+	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0)
 
 	g.projectile = gameObject:New()
 
@@ -83,6 +84,8 @@ function ThrowMonkey:Update(player, dt)
 	self:Throw(player.position)
 	self:UpdateThrow(dt)
 	self:GUpdate()
+	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 75.0, 25.0)
+	C_UpdateUI(self.gid, self.hp)
 	self.projectile:GUpdate()
 end
 
