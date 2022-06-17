@@ -34,7 +34,9 @@ unsigned int Scene::AddSprite(const std::string& file)
 void Scene::RemoveSprite(const unsigned int& id)
 {
 	if (m_sprites.find(id) != m_sprites.end())
+	{
 		m_sprites.erase(id);
+	}
 }
 
 const irr::scene::ICameraSceneNode* Scene::GetCamera() const

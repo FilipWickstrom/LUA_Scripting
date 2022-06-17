@@ -83,7 +83,12 @@ function Update(dt)
 
 	-- Loop through all enemies
 	for k, v in pairs(monsters) do
-		v:Update(player, dt)
+		
+		if v.hp > 0 then
+			v:Update(player, dt)
+		elseif v.hp <= 0 then
+			RemoveEnemy(k, v)
+		end
 	end
 
 	-- Update powerup
@@ -101,7 +106,14 @@ function Update(dt)
 end
 
 
+function RemoveEnemy(num, monster)
 
+	--monster:OnDeath(player.gold)
+	table.remove(monsters, num)
+	C_RemoveSprite(monster.id)
+	C_RemoveUI(monster.gid)
+
+end
 
 -- Communication between lua and c++
 

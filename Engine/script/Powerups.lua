@@ -4,7 +4,7 @@ gameObject = require('script/gameObject')
 Powerup = gameObject:New()
 
 local BOMB_RADIUS = 5.0
-local BOMB_DAMAGE = 25.0
+local BOMB_DAMAGE = 10000.0
 local POWERUP_REACH = 1.5
 
 local types = 
@@ -20,8 +20,8 @@ local RESPAWN_TIME = 5.0
 
 function Powerup:Initiate()
 	
-	return types[math.random(#types)]
-	--return "Bomb"
+	--return types[math.random(#types)]
+	return "Bomb"
 
 end
 
