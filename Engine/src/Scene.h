@@ -21,16 +21,22 @@ public:
 	virtual void Clean() = 0;
 	virtual void Update() = 0;
 
-	// Sprites
+	/*
+		Sprites
+	*/
 	unsigned int AddSprite(	const std::string& file);
 	void RemoveSprite(		const unsigned int& id);	
 	void SetSpritePosition(	const unsigned int& id, const irr::core::vector3df& pos);
 	void SetSpriteScale(	const unsigned int& id, const irr::core::vector3df& scl);
 	void SetSpriteRotation(	const unsigned int& id, const irr::core::vector3df& rot);
 
-	const irr::scene::ICameraSceneNode* GetCamera() const;
-	bool RemoveActiveCam();
-
+	/*
+		Camera
+	*/
+	void AddCamera();
+	void SetCameraPosition(const irr::core::vector3df& pos);
+	void SetCameraTarget(const irr::core::vector3df& tar);
+	void SetCameraFOV(const float& fov);
 
 	/*
 		GUI

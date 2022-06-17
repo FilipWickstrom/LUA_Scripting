@@ -14,12 +14,15 @@ LuaHandler::LuaHandler()
 	lua_register(m_state, "C_SetSpriteScale", 		L_SetSpriteScale);
 	lua_register(m_state, "C_SetSpriteRotation", 	L_SetSpriteRotation);
 
-	
 	lua_register(m_state, "C_WinWidth", 			L_GetWindowWidth);
 	lua_register(m_state, "C_WinHeight", 			L_GetWindowHeight);
 	
-	lua_register(m_state, "C_ChangeScene", 			L_ChangeScene);
-	
+	lua_register(m_state, "C_CreateCamera",			CAM::L_CreateCamera);
+	lua_register(m_state, "C_SetCameraPosition",	CAM::L_SetCameraPosition);
+	lua_register(m_state, "C_SetCameraTarget",		CAM::L_SetCameraTarget);
+	lua_register(m_state, "C_SetCameraFOV",			CAM::L_SetCameraFOV);
+
+	lua_register(m_state, "C_ChangeScene", 			L_ChangeScene);	
 	
 	//GUI
 	lua_register(m_state, "C_AddHealthbar", 		L_AddHealthbarUI);

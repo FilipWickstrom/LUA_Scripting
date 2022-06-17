@@ -24,6 +24,18 @@ int L_SetSpriteRotation(lua_State* L);
 int L_GetWindowWidth(lua_State* L);
 int L_GetWindowHeight(lua_State* L);
 
+/*
+	Camera
+*/
+namespace CAM
+{
+	int L_CreateCamera(lua_State* L);
+	int L_SetCameraPosition(lua_State* L);
+	int L_SetCameraTarget(lua_State* L);
+	int L_SetCameraFOV(lua_State* L);
+};
+
+
 int L_ChangeScene(lua_State* L);
 
 namespace GUI

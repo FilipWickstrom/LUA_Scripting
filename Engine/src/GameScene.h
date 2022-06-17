@@ -4,7 +4,6 @@
 class GameScene : public Scene
 {
 private:
-	void UpdateCamera();
 
 public:
 	GameScene() = default;
