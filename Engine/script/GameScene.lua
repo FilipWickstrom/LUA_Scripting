@@ -6,6 +6,7 @@ boss = require('script/BasicBossEnemy'):New()
 refThrowBoss = require('script/ThrowingBoss')
 powerup = require('script/Powerups')
 goldText = require('script/GoldText')
+lastpickupText = require('script/lastpickuptext')
 require('script/SceneHelp')
 
 -- Collect separate types in different tables
@@ -35,6 +36,7 @@ function Start()
 
 	powerup = require('script/Powerups'):New()
 	goldText:Initialize()
+	lastpickupText:Initialize(player)
 	
 	table.insert(monsters, newMonkey)
 	table.insert(monsters, boss)
@@ -86,7 +88,7 @@ function Update(dt)
 
 	-- Update powerup
 	if powerup ~= nil then
-		powerup:Update(player, dt, monsters, goldText)
+		powerup:Update(player, dt, monsters, goldText, lastpickupText)
 	end
 
 	-- Go back to menu when player dies

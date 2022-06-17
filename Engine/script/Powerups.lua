@@ -68,6 +68,8 @@ function Powerup:Gain(player, goldText)
 		C_SetSpritePosition(self.bomb.id, self.bomb.position.x, self.bomb.position.z)
 	end
 
+	player.lastpickup = self.type
+
 	-- Hide from player.
 	self.position.x = 100000
 	--self.OnEnd()
@@ -77,13 +79,18 @@ function Powerup:Gain(player, goldText)
 
 end
 
-function Powerup:Update(player, dt, enemies, goldText)
+function Powerup:Update(player, dt, enemies, goldText, lastpickupText)
 	
 	-- player is close enough to the powerup
 	local x = math.abs(player.position.x - self.position.x)
 	local z = math.abs(player.position.z - self.position.z)
 	if x <= POWERUP_REACH and z <= POWERUP_REACH and self.shouldrespawn == false then
 		self:Gain(player, goldText)
+
+			-- Update last pickup text
+		if lastpickupText ~= nil then
+			lastpickupText:Update()
+		end
 	end
 	
 	self:GUpdate()
