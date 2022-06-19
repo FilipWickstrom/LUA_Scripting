@@ -37,7 +37,6 @@ end
 
 function gameObject:Move(vec)
 	self.position = self.position + vec
-	--print(self.position)
 end
 
 function gameObject:RotateLeft()

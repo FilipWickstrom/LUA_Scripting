@@ -22,6 +22,14 @@ Scene::~Scene()
 	//Reseting id's
 	s_Sprite_ID = 0;
 	s_GUI_ID = 0;
+
+	//Removing active camera
+	irr::scene::ICameraSceneNode* oldCam = Graphics::GetSceneManager()->getActiveCamera();
+	if (oldCam)
+	{
+		Graphics::GetSceneManager()->setActiveCamera(0);
+		oldCam->remove();
+	}
 }
 
 unsigned int Scene::AddSprite(const std::string& file)
@@ -39,9 +47,44 @@ void Scene::RemoveSprite(const unsigned int& id)
 	}
 }
 
-const irr::scene::ICameraSceneNode* Scene::GetCamera() const
+void Scene::AddCamera()
 {
-	return Graphics::GetSceneManager()->getActiveCamera();
+	//Add a default camera
+	m_camera = Graphics::GetSceneManager()->addCameraSceneNode();
+	Graphics::GetSceneManager()->setActiveCamera(m_camera);
+
+	float aspectRatio = static_cast<float>(Graphics::GetWindowWidth()) /
+						static_cast<float>(Graphics::GetWindowHeight());
+	float fov = 50.f;
+
+	irr::core::matrix4 matrix;
+	matrix.buildProjectionMatrixOrthoLH(fov * aspectRatio, fov, 0.1f, 500.f);
+
+	m_camera->setProjectionMatrix(matrix, true);
+}
+
+void Scene::SetCameraPosition(const irr::core::vector3df& pos)
+{
+	if (m_camera)
+		m_camera->setPosition(pos);
+}
+
+void Scene::SetCameraTarget(const irr::core::vector3df& tar)
+{
+	if (m_camera)
+		m_camera->setTarget(tar);
+}
+
+void Scene::SetCameraFOV(const float& fov)
+{
+	if (!m_camera) return;
+
+	float thefov = fov;
+	//Fov should not go below 0
+	if (fov <= 0.f)
+		thefov = 1.f;
+
+	m_camera->setFOV(irr::core::degToRad(thefov));
 }
 
 void Scene::SetSpritePosition(const unsigned int& id, const irr::core::vector3df& pos)
@@ -60,19 +103,6 @@ void Scene::SetSpriteRotation(const unsigned int& id, const irr::core::vector3df
 {
 	if (m_sprites.find(id) != m_sprites.end())
 		m_sprites.at(id)->SetRotation(rot);
-}
-
-bool Scene::RemoveActiveCam()
-{
-	bool removed = false;
-	irr::scene::ICameraSceneNode* oldCam = Graphics::GetSceneManager()->getActiveCamera();
-	if (oldCam)
-	{
-		Graphics::GetSceneManager()->setActiveCamera(0);
-		oldCam->remove();
-		removed = true;
-	}
-	return removed;
 }
 
 unsigned int Scene::AddText(const std::string& text, const std::string& font, irr::core::vector2di pos, irr::core::vector2di size)

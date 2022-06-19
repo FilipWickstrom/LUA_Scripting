@@ -1,12 +1,13 @@
-Player = require('script/Player')
-player = Player:New()
-refMonster = require('script/Monster')
-refMonkey = require('script/ThrowingEnemy')
-boss = require('script/BasicBossEnemy'):New()
-refThrowBoss = require('script/ThrowingBoss')
-powerup = require('script/Powerups')
-goldText = require('script/GoldText')
-lastpickupText = require('script/lastpickuptext')
+Player			= require('script/Player')
+player			= Player:New()
+refMonster		= require('script/Monster')
+refMonkey		= require('script/ThrowingEnemy')
+boss			= require('script/BasicBossEnemy'):New()
+refThrowBoss	= require('script/ThrowingBoss')
+powerup			= require('script/Powerups')
+goldText		= require('script/GoldText')
+refCamera		= require('script/Camera')
+lastpickupText	= require('script/lastpickuptext')
 require('script/SceneHelp')
 
 -- Collect separate types in different tables
@@ -17,7 +18,6 @@ local deltatime = 0
 function AddMonster(modelfilepath)
 	local monster = refMonster:New()
 	monster.id = C_LoadSprite(modelfilepath)
-
 	table.insert(monsters, monster)
 end
 
@@ -41,6 +41,12 @@ function Start()
 	table.insert(monsters, newMonkey)
 	table.insert(monsters, boss)
 	table.insert(monsters, throwBoss)
+
+	--Camera setup
+	camera = refCamera:New()
+	camera:SetPosition(0,40,0)
+	camera:SetTarget(0,0,0.1)
+	camera:SetFOV(50)
 end
 
 -- Destroying everything
@@ -75,9 +81,10 @@ function OnInput(x, y)
 	vec.z = y * deltatime * player.speed
 
 	player:Move(vec)
+	camera:Move(vec)
 end
 
--- Update function for lua. return true if nothing happend, false if player died.
+-- Game loop
 function Update(dt)
 	deltatime = dt
 

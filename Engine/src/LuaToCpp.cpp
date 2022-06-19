@@ -118,6 +118,53 @@ int L_RemoveUI(lua_State* L)
 	return 0;
 }
 
+int CAM::L_CreateCamera(lua_State* L)
+{
+	SceneAccess::GetSceneHandler()->GetScene()->AddCamera();
+	return 0;
+}
+
+int CAM::L_SetCameraPosition(lua_State* L)
+{
+	irr::core::vector3df vec;
+	if (lua_isnumber(L, -3) &&
+		lua_isnumber(L, -2) &&
+		lua_isnumber(L, -1))
+	{
+		vec.X = static_cast<float>(lua_tonumber(L, -3));
+		vec.Y = static_cast<float>(lua_tonumber(L, -2));
+		vec.Z = static_cast<float>(lua_tonumber(L, -1));
+		SceneAccess::GetSceneHandler()->GetScene()->SetCameraPosition(vec);
+	}
+	return 0;
+}
+
+int CAM::L_SetCameraTarget(lua_State* L)
+{
+	irr::core::vector3df vec;
+	if (lua_isnumber(L, -3) &&
+		lua_isnumber(L, -2) &&
+		lua_isnumber(L, -1))
+	{
+		vec.X = static_cast<float>(lua_tonumber(L, -3));
+		vec.Y = static_cast<float>(lua_tonumber(L, -2));
+		vec.Z = static_cast<float>(lua_tonumber(L, -1));
+		SceneAccess::GetSceneHandler()->GetScene()->SetCameraTarget(vec);
+	}
+	return 0;
+}
+
+int CAM::L_SetCameraFOV(lua_State* L)
+{
+	float fov = 0.f;
+	if (lua_isnumber(L, -1))
+	{
+		fov = static_cast<float>(lua_tonumber(L, -1));
+		SceneAccess::GetSceneHandler()->GetScene()->SetCameraFOV(fov);
+	}
+	return 0;
+}
+
 int L_ChangeScene(lua_State* L)
 {
 	if (lua_type(L, -1) == LUA_TNUMBER)
