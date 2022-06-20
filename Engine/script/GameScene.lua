@@ -9,9 +9,11 @@ goldText		= require('script/GoldText')
 refCamera		= require('script/Camera')
 lastpickupText	= require('script/lastpickuptext')
 require('script/SceneHelp')
+require('script/File')
 
 -- Collect separate types in different tables
 monsters = {}
+objects = {}
 
 local deltatime = 0
 
@@ -28,25 +30,27 @@ end
 
 function Start()
 	math.randomseed(os.time())
-	AddMonster('skeleton.png')
-	AddMonster('skeleton.png')
+	--AddMonster('skeleton.png')
+	--AddMonster('skeleton.png')
 
-	local newMonkey = refMonkey:New()
-	local throwBoss = refThrowBoss:New()
+	--local newMonkey = refMonkey:New()
+	--local throwBoss = refThrowBoss:New()
 
 	powerup = require('script/Powerups'):New()
 	goldText:Initialize()
 	lastpickupText:Initialize(player)
 	
-	table.insert(monsters, newMonkey)
-	table.insert(monsters, boss)
-	table.insert(monsters, throwBoss)
+	--table.insert(monsters, newMonkey)
+	--table.insert(monsters, boss)
+	--table.insert(monsters, throwBoss)
 
 	--Camera setup
 	camera = refCamera:New()
 	camera:SetPosition(0,40,0)
 	camera:SetTarget(0,0,0.1)
 	camera:SetFOV(50)
+
+	Load_File('maps/test1.txt', objects)
 end
 
 -- Destroying everything

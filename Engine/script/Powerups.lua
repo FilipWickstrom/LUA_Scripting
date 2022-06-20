@@ -20,8 +20,8 @@ local RESPAWN_TIME = 5.0
 
 function Powerup:Initiate()
 	
-	--return types[math.random(#types)]
-	return "Bomb"
+	return types[math.random(#types)]
+	--return "Bomb"
 
 end
 
