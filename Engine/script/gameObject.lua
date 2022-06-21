@@ -66,6 +66,10 @@ function gameObject:GetPosition()
 	return self.position.x, self.position.y, self.position.z
 end
 
+function gameObject:ChangeSprite(sprite)
+	C_ChangeSprite(self.id, sprite)
+end
+
 gameObject.__index = gameObject
 
 setmetatable(gameObject, gameObject)

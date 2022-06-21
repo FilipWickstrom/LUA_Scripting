@@ -50,7 +50,9 @@ function Start()
 	camera:SetTarget(0,0,0.1)
 	camera:SetFOV(50)
 
-	Load_File('maps/test1.txt', objects)
+	objects = Load_File('maps/test1.txt')
+
+	print("Num of objects: " .. #objects)
 end
 
 -- Destroying everything
@@ -93,14 +95,24 @@ function Update(dt)
 	deltatime = dt
 
 	-- Loop through all enemies
+
+	
+	for num, obj in pairs(objects) do
+		if obj ~= nil then 
+			obj:Update(player, dt)
+		end
+	end
+	
+
+	--[[
 	for k, v in pairs(monsters) do
-		
 		if v.hp > 0 then
 			v:Update(player, dt)
 		elseif v.hp <= 0 then
 			RemoveEnemy(k, v)
 		end
 	end
+	]]
 
 	-- Update powerup
 	if powerup ~= nil then

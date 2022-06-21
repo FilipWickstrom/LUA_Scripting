@@ -13,6 +13,7 @@
 	regarding sprites
 */
 int L_LoadSprite(lua_State* L);
+int L_ChangeSprite(lua_State* L);
 int L_RemoveSprite(lua_State* L);
 int L_SetSpritePosition(lua_State* L);
 int L_SetSpriteScale(lua_State* L);

@@ -1,2 +1,11 @@
-name="skeleton.png"
-pos=0.5,76.4,0
+{
+type=monster
+name=skeleton.png
+pos=0.5,76.4
+}
+
+{
+type=monster
+name=skeleton.png
+pos=0.5,76.4
+}

@@ -25,6 +25,7 @@ public:
 		Sprites
 	*/
 	unsigned int AddSprite(	const std::string& file);
+	void ChangeSprite(		const unsigned int& id, const std::string& file);
 	void RemoveSprite(		const unsigned int& id);	
 	void SetSpritePosition(	const unsigned int& id, const irr::core::vector3df& pos);
 	void SetSpriteScale(	const unsigned int& id, const irr::core::vector3df& scl);
