@@ -1,5 +1,7 @@
 Monster = require('script/Monster')
+Monkey = require('script/ThrowingEnemy')
 gameObject = require('script/gameObject')
+Bouncy = require('script/BasicBossEnemy')
 
 -- Load objects from a file into a table
 function Load_File(path)
@@ -20,6 +22,7 @@ function Load_File(path)
 
 		if line:find('type') then Adjust_Object_Type(fileObjects, objNum, line) end
 		if line:find('name') then Adjust_Object_Name(fileObjects, objNum, line) end
+		if line:find('pos') then Adjust_Object_Pos(fileObjects, objNum, line) end
 		
 		-- current object end
 		if line:find('}') then
@@ -50,6 +53,21 @@ function Load_File_Lines(path)
 
 end
 
+function Adjust_Object_Pos(objects, num, line)
+
+	-- removes the pos= from the current line
+	local filepath = string.gsub(line, "pos=", "")
+
+	local x, y = string.match(filepath, '(%d+)%s(%d+)')
+
+	-- check if x and y is properly present in the text file
+	if x ~= nil and y ~= nil then
+		objects[num].position.x = tonumber(x)
+		objects[num].position.y = tonumber(y)
+	end
+
+end
+
 -- create the sprite from the instructions in the loaded file
 function Adjust_Object_Name(objects, num, line)
 
@@ -63,9 +81,19 @@ end
 -- create the specific type of object in the table of objects
 function Adjust_Object_Type(objects, num, line)
 
+	-- Spawn a normal following enemy
 	if line:find('monster') then 
 		objects[num] = Monster:New()
-		objects[num]:RandomizePos()
+	end
+
+	-- Spawn a throwing stationary enemy
+	if line:find('monkey') then
+		objects[num] = Monkey:New()
+	end
+
+	-- Spawns a basic boss that bounces across the room
+	if line:find('bouncy') then
+		objects[num] = Bouncy:New()
 	end
 
 end

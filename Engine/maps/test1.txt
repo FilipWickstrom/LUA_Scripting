@@ -1,11 +1,11 @@
 {
 type=monster
 name=skeleton.png
-pos=0.5,76.4
+pos=10 10
 }
 
 {
-type=monster
-name=skeleton.png
-pos=0.5,76.4
+type=bouncy
+name=necromancer.png
+pos=5 10
 }

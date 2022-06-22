@@ -19,7 +19,7 @@ function ThrowMonkey:New()
 	self.__index = ThrowMonkey
 	setmetatable(g, self)
 
-	g.id = C_LoadSprite('necromancer.png')
+	--g.id = C_LoadSprite('necromancer.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0)
 
 	g.projectile = gameObject:New()

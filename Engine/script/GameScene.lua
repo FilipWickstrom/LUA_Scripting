@@ -94,29 +94,20 @@ end
 function Update(dt)
 	deltatime = dt
 
-	-- Loop through all enemies
-
-	
+	-- Loop through all objects
 	for num, obj in pairs(objects) do
 		if obj ~= nil then 
-			obj:Update(player, dt)
+			if obj.hp > 0 then
+				obj:Update(player, dt)
+			else
+				RemoveEnemy(num, obj)
+			end
 		end
 	end
-	
-
-	--[[
-	for k, v in pairs(monsters) do
-		if v.hp > 0 then
-			v:Update(player, dt)
-		elseif v.hp <= 0 then
-			RemoveEnemy(k, v)
-		end
-	end
-	]]
 
 	-- Update powerup
 	if powerup ~= nil then
-		powerup:Update(player, dt, monsters, goldText, lastpickupText)
+		powerup:Update(player, dt, objects, goldText, lastpickupText)
 	end
 
 	-- Go back to menu when player dies
@@ -132,7 +123,7 @@ end
 function RemoveEnemy(num, monster)
 
 	--monster:OnDeath(player.gold)
-	table.remove(monsters, num)
+	table.remove(objects, num)
 	C_RemoveSprite(monster.id)
 	C_RemoveUI(monster.gid)
 

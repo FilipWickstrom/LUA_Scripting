@@ -27,6 +27,7 @@ end
 
 function BasicBoss:Chase(dt)
 	
+	-- these coordinates needs to be updated
 	if self.position.x > 18 or self.position.x < -22 then
 		self.direction.x = -self.direction.x
 	end
