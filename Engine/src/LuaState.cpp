@@ -35,6 +35,7 @@ LuaHandler::LuaHandler()
 	lua_register(m_state, "C_RemoveGUI", 			GUI::L_RemoveGUI);
 	lua_register(m_state, "C_IsButtonPressed", 		GUI::L_IsButtonPressed);
 	lua_register(m_state, "C_UpdateText", 			GUI::L_UpdateText);
+	lua_register(m_state, "C_SetTextAlignment",		GUI::L_SetTextAlignment);
 }
 
 LuaHandler::~LuaHandler()

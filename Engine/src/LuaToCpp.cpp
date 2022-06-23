@@ -228,6 +228,41 @@ int GUI::L_UpdateText(lua_State* L)
 	return 0;
 }
 
+int GUI::L_SetTextAlignment(lua_State* L)
+{
+	std::string text = "";
+	unsigned int id = 0;
+
+	if (lua_isnumber(L, -2) && lua_isstring(L,-1))
+	{
+		id = static_cast<unsigned int>(lua_tonumber(L, -2));
+		text = lua_tostring(L, -1);
+
+		irr::gui::EGUI_ALIGNMENT alignment;
+
+		if (text == "center")
+		{
+			alignment = irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER;
+		}
+		else if (text == "left")
+		{
+			alignment = irr::gui::EGUI_ALIGNMENT::EGUIA_UPPERLEFT;
+		}
+		else if (text == "right")
+		{
+			alignment = irr::gui::EGUI_ALIGNMENT::EGUIA_LOWERRIGHT;
+		}
+		else
+		{
+			//Default
+			alignment = irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER;
+		}
+		SceneAccess::GetSceneHandler()->GetScene()->SetTextAlignment(id, alignment);
+	}
+
+	return 0;
+}
+
 int GUI::L_AddButton(lua_State* L)
 {
 	/*

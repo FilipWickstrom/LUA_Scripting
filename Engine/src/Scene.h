@@ -43,6 +43,8 @@ public:
 	*/
 	unsigned int AddText(const std::string& text, const std::string& font,
 						irr::core::vector2di pos, irr::core::vector2di size);
+	void SetTextAlignment(const unsigned int& id, const irr::gui::EGUI_ALIGNMENT& alignment);
+
 	void UpdateText(unsigned int& id, const std::string& text);
 	unsigned int AddButton(const std::string& text, const std::string& font,
 						irr::core::vector2di pos, irr::core::vector2di size);

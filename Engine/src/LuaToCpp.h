@@ -45,6 +45,7 @@ namespace GUI
 	int L_RemoveGUI(lua_State* L);
 	int L_IsButtonPressed(lua_State* L);
 	int L_UpdateText(lua_State* L);
+	int L_SetTextAlignment(lua_State* L);
 };
 
 // Graphical Interface wrapper

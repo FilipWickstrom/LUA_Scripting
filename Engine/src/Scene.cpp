@@ -120,7 +120,7 @@ unsigned int Scene::AddText(const std::string& text, const std::string& font, ir
 	irrText->setDrawBackground(true);
 #endif
 
-	//Center text
+	//Center text by default
 	irrText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
 	
 	//Set an ID for the GUI
@@ -137,10 +137,21 @@ unsigned int Scene::AddText(const std::string& text, const std::string& font, ir
 	return id;
 }
 
+void Scene::SetTextAlignment(const unsigned int& id, const irr::gui::EGUI_ALIGNMENT& alignment)
+{
+	if (m_texts.find(id) != m_texts.end())
+	{
+		m_texts.at(id)->setTextAlignment(alignment, irr::gui::EGUIA_CENTER);
+	}
+}
+
 void Scene::UpdateText(unsigned int& id, const std::string& text)
 {
-	std::wstring widestr = std::wstring(text.begin(), text.end());
-	m_texts[id]->setText(widestr.c_str());
+	if (m_texts.find(id) != m_texts.end())
+	{
+		std::wstring widestr = std::wstring(text.begin(), text.end());
+		m_texts.at(id)->setText(widestr.c_str());
+	}
 }
 
 unsigned int Scene::AddButton(const std::string& text, const std::string& font, irr::core::vector2di pos, irr::core::vector2di size)
