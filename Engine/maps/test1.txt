@@ -1,11 +1,11 @@
 {
 type=bouncy
-name=necromancer.png
+sprite=necromancer.png
 pos=5 10
 }
 
 {
 type=monster
-name=skeleton.png
+sprite=skeleton.png
 pos=5 20
 }

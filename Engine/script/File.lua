@@ -21,7 +21,7 @@ function Load_File(path)
 		end
 
 		if line:find('type') then Adjust_Object_Type(fileObjects, objNum, line) end
-		if line:find('name') then Adjust_Object_Name(fileObjects, objNum, line) end
+		if line:find('sprite') then Adjust_Object_Name(fileObjects, objNum, line) end
 		if line:find('pos') then Adjust_Object_Pos(fileObjects, objNum, line) end
 		
 		-- current object end
@@ -71,8 +71,7 @@ end
 -- create the sprite from the instructions in the loaded file
 function Adjust_Object_Name(objects, num, line)
 
-	local i, j = line:find('name')
-	local filepath = string.gsub(line, "name=", "")
+	local filepath = string.gsub(line, "sprite=", "")
 
 	objects[num].id = C_LoadSprite(filepath)
 
