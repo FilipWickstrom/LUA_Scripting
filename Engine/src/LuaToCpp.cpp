@@ -9,16 +9,6 @@ int L_LoadSprite(lua_State* L)
 	return 1;
 }
 
-int L_ChangeSprite(lua_State* L)
-{
-	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
-	std::string filepath = lua_tostring(L, -1);
-
-	SceneAccess::GetSceneHandler()->GetScene()->ChangeSprite(id, filepath);
-
-	return 0;
-}
-
 int L_RemoveSprite(lua_State* L)
 {
 	if (lua_isnumber(L, -1))

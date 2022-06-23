@@ -11,7 +11,6 @@ LuaHandler::LuaHandler()
 	lua_register(m_state, "C_LoadSprite", 			L_LoadSprite);
 	lua_register(m_state, "C_ChangeSprite",			L_ChangeSprite);
 	lua_register(m_state, "C_RemoveSprite", 		L_RemoveSprite);
-	lua_register(m_state, "C_ChangeSprite",			L_ChangeSprite);
 	lua_register(m_state, "C_SetSpriteVisible",		L_SetSpriteVisible);
 	lua_register(m_state, "C_SetSpritePosition", 	L_SetSpritePosition);
 	lua_register(m_state, "C_SetSpriteScale", 		L_SetSpriteScale);
