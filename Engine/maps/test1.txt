@@ -2,10 +2,15 @@
 type=bouncy
 sprite=necromancer.png
 pos=5 10
+visible=1
+collision=1
 }
 
 {
 type=monster
 sprite=skeleton.png
 pos=5 20
+visible=1
+collision=1
 }
+

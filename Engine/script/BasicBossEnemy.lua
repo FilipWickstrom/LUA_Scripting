@@ -10,7 +10,7 @@ function BasicBoss:New()
 	g.xp = 25
 	g.damage = 25
 	g.speed = 5
-	g.type = "Boss"
+	g.type = "bouncy"
 	g.name = "enemy"
 	g.direction = {x = 1, z = 1}
 	g.position.x = 10

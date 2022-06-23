@@ -13,7 +13,7 @@ function Monster:New()
 	g.xp = 25
 	g.damage = 5
 	g.speed = math.random(3) + 1
-	g.type = "Basic"
+	g.type = "monster"
 	g.reach = 2
 	g.name = "enemy"
 	g.cooldown = 0.0

@@ -46,16 +46,22 @@ function Start()
 
 	objects = Load_File('maps/test1.txt')
 
-	print("Num of objects: " .. #objects)
+	-- write down file
+	Write_To_File(objects, 'maps/test1.txt')
+
+	--print("Num of objects: " .. #objects)
 end
 
 -- Destroying everything
 function Clean()
+
+
+
 	print("### Removing player ###")
 	player:OnEnd()
 
-	print("### Removing monsters ###")
-	for k, v in pairs(monsters) do
+	print("### Removing objects ###")
+	for k, v in pairs(objects) do
 		v:OnEnd()
 	end
 
