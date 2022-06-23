@@ -10,6 +10,7 @@ function Player:New()
 	g.gold = 0
 	g.xp = 0
 	g.weapon = "Hands"
+	g.name = "Player"
 	g.damage = 5
 	g.speed = 12
 	-- Add effects here.
@@ -33,7 +34,7 @@ function Player:Update()
 	end
 
 	-- GOD MODE!!
-	self.hp = 100
+	--self.hp = 100
 	C_UpdateUI(self.gid, self.hp)
 
 end

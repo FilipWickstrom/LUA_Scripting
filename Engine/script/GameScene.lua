@@ -39,10 +39,6 @@ function Start()
 	powerup = require('script/Powerups'):New()
 	goldText:Initialize()
 	lastpickupText:Initialize(player)
-	
-	--table.insert(monsters, newMonkey)
-	--table.insert(monsters, boss)
-	--table.insert(monsters, throwBoss)
 
 	--Camera setup
 	camera = refCamera:New()
@@ -100,7 +96,7 @@ function Update(dt)
 			if obj.hp > 0 then
 				obj:Update(player, dt)
 			else
-				RemoveEnemy(num, obj)
+				RemoveObject(num, obj)
 			end
 		end
 	end
@@ -120,12 +116,12 @@ function Update(dt)
 end
 
 
-function RemoveEnemy(num, monster)
+function RemoveObject(num, obj)
 
 	--monster:OnDeath(player.gold)
 	table.remove(objects, num)
-	C_RemoveSprite(monster.id)
-	C_RemoveUI(monster.gid)
+	C_RemoveSprite(obj.id)
+	C_RemoveUI(obj.gid)
 
 end
 
