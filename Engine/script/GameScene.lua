@@ -2,7 +2,7 @@ Player			= require('script/Player')
 player			= Player:New()
 refMonster		= require('script/Monster')
 refMonkey		= require('script/ThrowingEnemy')
-boss			= require('script/BasicBossEnemy'):New()
+boss			= require('script/BasicBossEnemy')
 refThrowBoss	= require('script/ThrowingBoss')
 powerup			= require('script/Powerups')
 goldText		= require('script/GoldText')
@@ -118,7 +118,10 @@ end
 
 function RemoveObject(num, obj)
 
-	--monster:OnDeath(player.gold)
+	if obj.name == "enemy" then
+		obj:OnDeath(player.gold)
+	end
+
 	table.remove(objects, num)
 	C_RemoveSprite(obj.id)
 	C_RemoveUI(obj.gid)
@@ -127,7 +130,7 @@ end
 
 -- Communication between lua and c++
 
--- Find the indexed object and return its position
+--[[ Find the indexed object and return its position
 function GetObjectPosition(ind)
 
 	if player.id == ind then
@@ -146,3 +149,4 @@ function GetObjectPosition(ind)
 
 	return 'err', 'err'
 end
+]]

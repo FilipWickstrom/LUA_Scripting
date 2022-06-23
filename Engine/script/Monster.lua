@@ -15,6 +15,7 @@ function Monster:New()
 	g.speed = math.random(3) + 1
 	g.type = "Basic"
 	g.reach = 2
+	g.name = "enemy"
 	g.cooldown = 0.0
 	g.RandomizePos(g)
 	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0)

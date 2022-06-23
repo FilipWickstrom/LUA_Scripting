@@ -13,6 +13,7 @@ function ThrowMonkey:New()
 	g.damage = 5
 	g.speed = math.random(3) + 1
 	g.type = "Basic"
+	g.name = "enemy"
 	g.inhand = true
 	g.cooldown = 1
 	g.RandomizePos(g)
