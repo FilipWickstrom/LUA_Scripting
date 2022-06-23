@@ -23,6 +23,8 @@ function Load_File(path)
 		if line:find('type') then Adjust_Object_Type(fileObjects, objNum, line) end
 		if line:find('sprite') then Adjust_Object_Name(fileObjects, objNum, line) end
 		if line:find('pos') then Adjust_Object_Pos(fileObjects, objNum, line) end
+		if line:find('collision') then Adjust_Object_Collision(fileObjects, objNum, line) end
+		if line:find('visible') then Adjust_Object_Visibility(fileObjects, objNum, line) end
 		
 		-- current object end
 		if line:find('}') then
@@ -53,6 +55,19 @@ function Load_File_Lines(path)
 
 end
 
+
+-- set the collision on the object
+function Adjust_Object_Collision(objects, num, line)
+
+end
+
+
+-- set the visibility of the object
+function Adjust_Object_Visibility(objects, num, line)
+
+end
+
+-- set the position of the current object in file
 function Adjust_Object_Pos(objects, num, line)
 
 	-- removes the pos= from the current line
