@@ -20,16 +20,16 @@ function ThrowMonkey:New()
 	self.__index = ThrowMonkey
 	setmetatable(g, self)
 
-	--g.id = C_LoadSprite('necromancer.png')
+	g.id = C_LoadSprite('necromancer.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0)
 
 	g.projectile = gameObject:New()
 
 	g.projectile.id = C_LoadSprite('sword.png')
-	g.projectile.position.x = 1000
+	g.projectile.position = Vector:New()
 	g.projectile.target = Vector:New()
 	g.projectile.speed = 2
-	--C_SetSpriteScale(g.projectile.id, 0.1)
+	C_SetSpriteVisible(g.projectile.id, false)
 
 	return g
 end
@@ -46,6 +46,8 @@ function ThrowMonkey:Throw(point)
 		-- set start position at enemy position
 		self.projectile.position.x = self.position.x
 		self.projectile.position.z = self.position.z
+
+		C_SetSpriteVisible(g.projectile.id, true)
 	end
 end
 
@@ -72,8 +74,7 @@ function ThrowMonkey:UpdateThrow(dt)
 
 		if x < 1.5 and y < 1.5 and self.cooldown < 0 then
 			-- hide the projectile from the screen
-			self.projectile.position.z = 10000000
-			self.projectile.position.x = 10000000
+			C_SetSpriteVisible(self.projectile.id, false)
 			self.inhand = true
 			self.cooldown = COOLDOWN
 		end

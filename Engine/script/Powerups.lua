@@ -36,11 +36,12 @@ function Powerup:New()
 
 	g.bomb = gameObject:New()
 	g.bomb.id = C_LoadSprite('bomb.png')
-	g.bomb.position.x = 1000
+	g.bomb.position.x = vector:New()
 	g.bomb.countdown = 3.0
 	g.bomb.active = false
 	C_SetSpritePosition(g.bomb.id, g.bomb.position.x, g.bomb.position.z)
-	
+	C_SetSpriteVisible(g.bomb.id, false)
+
 	self.__index = Powerup
 	setmetatable(g, self)
 	return g
@@ -64,14 +65,15 @@ function Powerup:Gain(player, goldText)
 
 		self.bomb.position.x = self.position.x
 		self.bomb.position.z = self.position.z
-
 		C_SetSpritePosition(self.bomb.id, self.bomb.position.x, self.bomb.position.z)
+		C_SetSpriteVisible(self.bomb.id, true)
+
 	end
 
 	player.lastpickup = self.type
 
 	-- Hide from player.
-	self.position.x = 100000
+	C_SetSpriteVisible(self.id, false)
 	--self.OnEnd()
 
 	self.respawntimer = RESPAWN_TIME
@@ -87,7 +89,7 @@ function Powerup:Update(player, dt, enemies, goldText, lastpickupText)
 	if x <= POWERUP_REACH and z <= POWERUP_REACH and self.shouldrespawn == false then
 		self:Gain(player, goldText)
 
-			-- Update last pickup text
+		-- Update last pickup text
 		if lastpickupText ~= nil then
 			lastpickupText:Update()
 		end
@@ -101,8 +103,10 @@ function Powerup:Update(player, dt, enemies, goldText, lastpickupText)
 
 		if self.respawntimer < 0 then
 			self.shouldrespawn = false
-			self.RandomizePos(self)
+			self:RandomizePos()
+			self:GUpdate()
 			self.type = self:Initiate()
+			C_SetSpriteVisible(self.id, true)
 		end
 	end
 
@@ -129,9 +133,7 @@ function Powerup:Update(player, dt, enemies, goldText, lastpickupText)
 
 		end
 
-		-- Move away the bomb from the player
-		self.bomb.position.x = player.position.x + 100000
-		C_SetSpritePosition(self.bomb.id, self.bomb.position.x, self.bomb.position.z)
+		C_SetSpriteVisible(self.bomb.id, false)
 	end
 
 end

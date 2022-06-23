@@ -25,10 +25,10 @@ function ThrowBoss:New()
 	g.projectile = gameObject:New()
 
 	g.projectile.id = C_LoadSprite('sword_huge.png')
-	g.projectile.position.x = 1000
+	g.projectile.position = Vector:New()
 	g.projectile.target = Vector:New()
 	g.projectile.speed = 2
-	--C_SetSpriteScale(g.projectile.id, 0.1)
+	C_SetSpriteVisible(g.projectile.id, false)
 
 	self.__index = ThrowBoss
 	setmetatable(g, self)
@@ -48,6 +48,8 @@ function ThrowBoss:Throw(point)
 		-- set start position at enemy position
 		self.projectile.position.x = self.position.x
 		self.projectile.position.z = self.position.z
+
+		C_SetSpriteVisible(g.projectile.id, true)
 	end
 end
 
@@ -74,8 +76,7 @@ function ThrowBoss:UpdateThrow(dt)
 
 		if x < 1.5 and y < 1.5 and self.cooldown < 0 then
 			-- hide the projectile from the screen
-			self.projectile.position.y = 10000000
-			self.projectile.position.x = 10000000
+			C_SetSpriteVisible(self.projectile.id, false)
 			self.inhand = true
 			self.cooldown = COOLDOWN
 		end
