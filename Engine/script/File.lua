@@ -76,7 +76,7 @@ function Adjust_Object_Pos(objects, num, line)
 	local x, y = string.match(filepath, '(%d+)%s(%d+)')
 
 	-- check if x and y is properly present in the text file
-	if x ~= nil and y ~= nil then
+	if x ~= nil and y ~= nil and objects[num] ~= nil then
 		objects[num].position.x = tonumber(x)
 		objects[num].position.y = tonumber(y)
 	end
@@ -88,7 +88,9 @@ function Adjust_Object_Name(objects, num, line)
 
 	local filepath = string.gsub(line, "sprite=", "")
 
-	objects[num].id = C_LoadSprite(filepath)
+	if objects[num] ~= nil then
+		objects[num].id = C_LoadSprite(filepath)
+	end
 
 end
 
