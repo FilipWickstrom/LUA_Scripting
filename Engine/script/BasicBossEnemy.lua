@@ -12,12 +12,13 @@ function BasicBoss:New()
 	g.damage = 25
 	g.speed = 5
 	g.type = "Boss"
+	g.name = "enemy"
 	g.direction = {x = 1, z = 1}
 	g.position.x = 10
 	g.cooldown = 0
 	g.reach = 3.5
 
-	g.id = C_LoadSprite('zombie_big.png')
+	--g.id = C_LoadSprite('zombie_big.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 100.0, 50.0)
 
 	self.__index = BasicBoss
@@ -27,6 +28,7 @@ end
 
 function BasicBoss:Chase(dt)
 	
+	-- these coordinates needs to be updated
 	if self.position.x > 18 or self.position.x < -22 then
 		self.direction.x = -self.direction.x
 	end

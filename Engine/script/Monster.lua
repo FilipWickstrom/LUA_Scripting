@@ -9,12 +9,13 @@ local COOLDOWN_TIME = 5.0
 function Monster:New()
 	local g = gameObject:New()
 	g.hp = 100
-	g.worth = 50
+	g.worth = 25
 	g.xp = 25
 	g.damage = 5
 	g.speed = math.random(3) + 1
 	g.type = "Basic"
 	g.reach = 2
+	g.name = "enemy"
 	g.cooldown = 0.0
 	g.RandomizePos(g)
 	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0)
@@ -26,7 +27,6 @@ end
 
 function Monster:OnDeath(playerGold)
 	playerGold = playerGold + self.worth
-	return playerGold
 end
 
 

@@ -1,0 +1,11 @@
+{
+type=bouncy
+sprite=necromancer.png
+pos=5 10
+}
+
+{
+type=monster
+sprite=skeleton.png
+pos=5 20
+}

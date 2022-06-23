@@ -39,6 +39,12 @@ unsigned int Scene::AddSprite(const std::string& file)
 	return id;
 }
 
+void Scene::ChangeSprite(const unsigned int& id, const std::string& file)
+{
+	if (m_sprites.find(id) != m_sprites.end())
+		m_sprites.at(id)->LoadTexture(file);
+}
+
 void Scene::RemoveSprite(const unsigned int& id)
 {
 	if (m_sprites.find(id) != m_sprites.end())
