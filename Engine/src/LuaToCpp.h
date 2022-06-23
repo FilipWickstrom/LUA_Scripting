@@ -56,4 +56,6 @@ int	L_AddHealthbarUI(lua_State* L);
 int L_UpdatePosUI(lua_State* L);
 int L_RemoveUI(lua_State* L);
 
-
+// Utilities
+int L_ScreenCoordsToWorld(lua_State* L);
+int L_IsKeyDown(lua_State* L);

@@ -1,6 +1,6 @@
 -- require/include
+require('script/vector')
 gameObject = require('script/gameObject')
-
 Player = gameObject:New()
 
 function Player:New()
@@ -17,6 +17,9 @@ function Player:New()
 	g.position.x = 0
 	g.position.y = 0
 	g.lastpickup = "None"
+	g.fireRate = 0.2
+	g.fireTimer = 0.0
+	g.canShoot = true
 
 	g.id = C_LoadSprite('knight.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0)
@@ -26,8 +29,42 @@ function Player:New()
 	return g
 end
 
-function Player:Update()
-	self:GUpdate()
+function Player:HandleMovement(camera)
+	x = 0
+	y = 0
+
+	if C_IsKeyDown(keys.W) then
+		y = 1
+	end
+	if C_IsKeyDown(keys.S) then
+		y = -1
+	end
+	if C_IsKeyDown(keys.A) then
+		x = -1
+		self:RotateLeft()
+	end
+	if C_IsKeyDown(keys.D) then
+		x = 1
+		self:RotateRight()
+	end
+	
+	local dir = vector:New()
+	dir.x = x
+	dir.z = y
+
+	self:Move(dir)
+	camera:Move(dir * self.speed * deltatime)
+end
+
+function Player:Shoot()
+	if C_IsKeyDown(keys.LBUTTON) then
+		print("Left mouse was clicked")
+	end
+end
+
+function Player:Update(camera)
+	self:HandleMovement(camera)
+	self:Shoot()
 
 	if self.hp > 100.0 then
 		self.hp = 100.0
@@ -36,6 +73,7 @@ function Player:Update()
 	-- GOD MODE!!
 	--self.hp = 100
 	C_UpdateUI(self.gid, self.hp)
+	self:GUpdate()
 
 end
 

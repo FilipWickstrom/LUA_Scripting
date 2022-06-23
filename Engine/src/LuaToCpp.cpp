@@ -105,8 +105,8 @@ int L_AddHealthbarUI(lua_State* L)
 	float x = static_cast<float>(lua_tonumber(L, -4));
 
 	irr::core::rect<irr::s32> rect;
-	rect.LowerRightCorner	= irr::core::vector2di(static_cast<int>(x2), static_cast<int>(y2));
-	rect.UpperLeftCorner	= irr::core::vector2di(static_cast<int>(x), static_cast<int>(y));
+	rect.LowerRightCorner = irr::core::vector2di(static_cast<int>(x2), static_cast<int>(y2));
+	rect.UpperLeftCorner = irr::core::vector2di(static_cast<int>(x), static_cast<int>(y));
 
 	const unsigned int ret = Graphics2D::AddHealthbar(rect);
 
@@ -128,9 +128,9 @@ int L_UpdatePosUI(lua_State* L)
 
 	irr::core::rect<irr::s32> rect;
 	irr::scene::ISceneCollisionManager* m = Graphics::GetSceneManager()->getSceneCollisionManager();
-	irr::core::vector2d<irr::s32> pos = m->getScreenCoordinatesFrom3DPosition({ x, 0, y});
-	rect.LowerRightCorner	= irr::core::vector2di(static_cast<int>(pos.X + x2), static_cast<int>(pos.Y + y2));
-	rect.UpperLeftCorner	= irr::core::vector2di(static_cast<int>(pos.X), static_cast<int>(pos.Y));
+	irr::core::vector2d<irr::s32> pos = m->getScreenCoordinatesFrom3DPosition({ x, 0, y });
+	rect.LowerRightCorner = irr::core::vector2di(static_cast<int>(pos.X + x2), static_cast<int>(pos.Y + y2));
+	rect.UpperLeftCorner = irr::core::vector2di(static_cast<int>(pos.X), static_cast<int>(pos.Y));
 
 	Graphics2D::SetPosition(id, rect);
 	return 0;
@@ -209,10 +209,10 @@ int GUI::L_AddText(lua_State* L)
 	*/
 
 	//Default values
-	std::string text			= "";
-	std::string fontfile		= "";
-	irr::core::vector2di pos	= { 0,0 };
-	irr::core::vector2di size	= { 100,50 };
+	std::string text = "";
+	std::string fontfile = "";
+	irr::core::vector2di pos = { 0,0 };
+	irr::core::vector2di size = { 100,50 };
 
 	// Get the data from LUA-stack
 	if (lua_type(L, -6) == LUA_TSTRING)
@@ -258,7 +258,7 @@ int GUI::L_SetTextAlignment(lua_State* L)
 	std::string text = "";
 	unsigned int id = 0;
 
-	if (lua_isnumber(L, -2) && lua_isstring(L,-1))
+	if (lua_isnumber(L, -2) && lua_isstring(L, -1))
 	{
 		id = static_cast<unsigned int>(lua_tonumber(L, -2));
 		text = lua_tostring(L, -1);
@@ -284,8 +284,51 @@ int GUI::L_SetTextAlignment(lua_State* L)
 		}
 		SceneAccess::GetSceneHandler()->GetScene()->SetTextAlignment(id, alignment);
 	}
-
 	return 0;
+}
+
+int L_ScreenCoordsToWorld(lua_State* L)
+{
+	/*
+		Arguments: Pos[vector2di]
+		Return: Pos[vector2di]
+	*/
+
+	irr::core::vector2di screenPos;
+
+	if (lua_type(L, -2) == LUA_TNUMBER)
+	{
+		screenPos.X = static_cast<int>(lua_tonumber(L, -2));
+	}
+	if (lua_type(L, -1) == LUA_TNUMBER)
+	{
+		screenPos.Y = static_cast<int>(lua_tonumber(L, -1));
+	}
+
+	irr::core::line3df ray = SceneAccess::GetSceneHandler()->GetScene()->GetRayFromScreenCoords(screenPos);
+
+	//printf("Ray: %f, %f, %f\n", ray.start.X, ray.start.Y, ray.start.Z);
+
+	lua_pushnumber(L, 1);
+	lua_pushnumber(L, 2);
+
+	return 2;
+}
+
+int L_IsKeyDown(lua_State* L)
+{
+	bool isKeyDown = false;
+
+	if (lua_type(L, -1) == LUA_TNUMBER)
+	{
+		irr::EKEY_CODE key = static_cast<irr::EKEY_CODE>(lua_tonumber(L, -1));
+
+		isKeyDown = Input::IsKeyDown(key);
+	}
+
+	lua_pushboolean(L, isKeyDown);
+
+	return 1;
 }
 
 int GUI::L_AddButton(lua_State* L)
@@ -346,7 +389,7 @@ int GUI::L_IsButtonPressed(lua_State* L)
 		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
 		isPressed = SceneAccess::GetSceneHandler()->GetScene()->IsButtonPressed(id);
 	}
-	
+
 	lua_pushboolean(L, isPressed);
 	return 1;
 }

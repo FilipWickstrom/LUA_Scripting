@@ -15,8 +15,6 @@ require('script/File')
 monsters = {}
 objects = {}
 
-local deltatime = 0
-
 function AddMonster(modelfilepath)
 	local monster = refMonster:New()
 	monster.id = C_LoadSprite(modelfilepath)
@@ -67,25 +65,6 @@ function Clean()
 	--end
 end
 
-function OnInput(x, y)
-	assert(type(x) == "number", "OnInput: Value is not a number")
-	assert(type(y) == "number", "OnInput: Value is not a number")
-	
-	
-	if x == -1 then
-		player:RotateLeft()
-	elseif x == 1 then
-		player:RotateRight()
-	end
-
-	local vec = vector:New()
-	vec.x = x * deltatime * player.speed
-	vec.z = y * deltatime * player.speed
-
-	player:Move(vec)
-	camera:Move(vec)
-end
-
 -- Game loop
 function Update(dt)
 	deltatime = dt
@@ -94,7 +73,7 @@ function Update(dt)
 	for num, obj in pairs(objects) do
 		if obj ~= nil then 
 			if obj.hp > 0 then
-				obj:Update(player, dt)
+				obj:Update(player)
 			else
 				RemoveObject(num, obj)
 			end
@@ -103,7 +82,7 @@ function Update(dt)
 
 	-- Update powerup
 	if powerup ~= nil then
-		powerup:Update(player, dt, objects, goldText, lastpickupText)
+		powerup:Update(player, objects, goldText, lastpickupText)
 	end
 
 	-- Go back to menu when player dies
@@ -112,7 +91,7 @@ function Update(dt)
 	end
 
 	-- Update player
-	player:Update()
+	player:Update(camera)
 end
 
 

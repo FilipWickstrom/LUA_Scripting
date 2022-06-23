@@ -31,15 +31,7 @@ function Clean()
 	end
 end
 
-
--- Handle input from keyboard
-function OnInput(x, y)
-
-end
-
-
 function Update(dt)
-
 	-- Check if any of the buttons is clicked
 	if (C_IsButtonPressed(GUI["Play"])) then
 		C_ChangeScene(Scene.GAME)
@@ -52,4 +44,3 @@ function Update(dt)
 	end
 
 end
-

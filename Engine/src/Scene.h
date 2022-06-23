@@ -2,6 +2,9 @@
 #include "Sprite.h"
 #include "CppToLua.h"
 
+
+class Graphics;
+
 class Scene
 {
 private:
@@ -53,4 +56,6 @@ public:
 
 	void RemoveGUI(unsigned int id);
 	bool IsButtonPressed(unsigned int id);
+
+	irr::core::line3df GetRayFromScreenCoords(irr::core::vector2di screenCoords);
 };

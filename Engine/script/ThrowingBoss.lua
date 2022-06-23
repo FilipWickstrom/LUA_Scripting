@@ -53,7 +53,7 @@ function ThrowBoss:Throw(point)
 	end
 end
 
-function ThrowBoss:UpdateThrow(dt)
+function ThrowBoss:UpdateThrow()
 	-- update only when thrown
 	if self.inhand == false then
 
@@ -61,18 +61,18 @@ function ThrowBoss:UpdateThrow(dt)
 		local y = math.abs(self.projectile.position.z - self.projectile.target.z)
 
 		if self.projectile.position.x > self.projectile.target.x then
-			self.projectile.position.x = self.projectile.position.x - x * dt * self.projectile.speed
+			self.projectile.position.x = self.projectile.position.x - x * deltatime * self.projectile.speed
 		else
-			self.projectile.position.x = self.projectile.position.x + x * dt * self.projectile.speed
+			self.projectile.position.x = self.projectile.position.x + x * deltatime * self.projectile.speed
 		end
 
 		if self.projectile.position.z > self.projectile.target.z then
-			self.projectile.position.z = self.projectile.position.z - y * dt * self.projectile.speed
+			self.projectile.position.z = self.projectile.position.z - y * deltatime * self.projectile.speed
 		else
-			self.projectile.position.z = self.projectile.position.z + y * dt * self.projectile.speed
+			self.projectile.position.z = self.projectile.position.z + y * deltatime * self.projectile.speed
 		end
 
-		self.cooldown = self.cooldown - dt
+		self.cooldown = self.cooldown - deltatime
 
 		if x < 1.5 and y < 1.5 and self.cooldown < 0 then
 			-- hide the projectile from the screen
@@ -84,27 +84,29 @@ function ThrowBoss:UpdateThrow(dt)
 	end
 end
 
-function ThrowBoss:Chase(dt)
-	
+function ThrowBoss:Chase()
+	local vec = vector:New()
 	if self.position.x > 18 or self.position.x < -22 then
-		self.direction.x = -self.direction.x
+		self.direction.x = self.direction.x * -1
 	end
 	
-	if self.position.y > 11 or self.position.y < -11 then
-		self.direction.y = -self.direction.y
+	if self.position.z > 11 or self.position.z < -11 then
+		self.direction.y = self.direction.y * -1
 	end
+
+	vec.x = self.direction.x;
+	vec.z = self.direction.y
 	
-	self.position.x = self.position.x + self.direction.x * dt * self.speed
-	self.position.y = self.position.y + self.direction.y * dt * self.speed
+	self:Move(vec)
 	
 end
 
-function ThrowBoss:Update(player, dt)
+function ThrowBoss:Update(player)
 	
 	self:Throw(player.position)
-	self:UpdateThrow(dt)
+	self:UpdateThrow()
 
-	self:Chase(dt)
+	self:Chase()
 	self:GUpdate()
 	self.projectile:GUpdate()
 	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 145.0, 50.0)

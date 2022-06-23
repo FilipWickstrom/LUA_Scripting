@@ -81,7 +81,7 @@ function Powerup:Gain(player, goldText)
 
 end
 
-function Powerup:Update(player, dt, enemies, goldText, lastpickupText)
+function Powerup:Update(player, enemies, goldText, lastpickupText)
 	
 	-- player is close enough to the powerup
 	local x = math.abs(player.position.x - self.position.x)
@@ -99,7 +99,7 @@ function Powerup:Update(player, dt, enemies, goldText, lastpickupText)
 
 	-- Powerup respawns
 	if self.shouldrespawn == true then
-		self.respawntimer = self.respawntimer - dt
+		self.respawntimer = self.respawntimer - deltatime
 
 		if self.respawntimer < 0 then
 			self.shouldrespawn = false
@@ -113,7 +113,7 @@ function Powerup:Update(player, dt, enemies, goldText, lastpickupText)
 
 	-- Update bomb timer
 	if(self.bomb.active == true) then
-		self.bomb.countdown = self.bomb.countdown - dt
+		self.bomb.countdown = self.bomb.countdown - deltatime
 	end
 
 	-- Bomb explodes

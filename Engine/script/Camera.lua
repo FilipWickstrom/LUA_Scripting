@@ -34,7 +34,7 @@ function Camera:SetFOV(fov)
 end
 
 function Camera:Move(vec)
-	local pos = self.position + vec
+    local pos = self.position + vec
 	local tar = self.target + vec
 	self:SetPosition(pos.x, pos.y, pos.z)
 	self:SetTarget(tar.x, tar.y, tar.z)

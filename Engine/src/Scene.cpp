@@ -213,3 +213,12 @@ bool Scene::IsButtonPressed(unsigned int id)
 
 	return false;
 }
+
+irr::core::line3df Scene::GetRayFromScreenCoords(irr::core::vector2di screenCoords)
+{
+	irr::core::line3df ray;
+
+	if (m_camera == nullptr) return ray;
+
+	return Graphics::GetSceneManager()->getSceneCollisionManager()->getRayFromScreenCoordinates(screenCoords, m_camera);
+}

@@ -5,6 +5,7 @@ void GameScene::Load()
 {
 	//Read the lua-script
 	LoadScript("GameScene.lua");
+	//ez
 
 	lua_getglobal(LUA, "Start");
 	LuaHandler::CheckErrors(0, 0);

@@ -49,8 +49,6 @@ Renderer::~Renderer()
 
 bool Renderer::Update()
 {
-	Input::CheckKeyboard();
-
 	//Update all the objects in the scene
 	SceneAccess::GetSceneHandler()->UpdateScene();
 	

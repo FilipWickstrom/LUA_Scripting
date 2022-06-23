@@ -29,29 +29,25 @@ function Monster:OnDeath(playerGold)
 	playerGold = playerGold + self.worth
 end
 
-
-
-function Monster:Chase(point, dt)
+function Monster:Chase(point)
 
 	-- Create a new vector.
 	local vec = Vector:New()
 
 	-- Manipulate vector so that it follows the player.
 	if(self.position.x < point.x) then
-		vec.x = 1 * dt * self.speed
+		vec.x = 1
 	else
-		vec.x = -1 * dt * self.speed
+		vec.x = -1
 	end
 
 	if(self.position.z < point.z) then
-		vec.z = 1 * dt * self.speed
+		vec.z = 1
 	else
-		vec.z = -1 * dt * self.speed
+		vec.z = -1
 	end
 
-	-- Add vector to monster
-	self.position = self.position + vec
-		
+	self:Move(vec)
 end
 
 function Monster:OnHit(playerHp)
@@ -59,12 +55,12 @@ function Monster:OnHit(playerHp)
 	return playerHp
 end
 
-function Monster:Hit(player, dt)
+function Monster:Hit(player)
 
 	local x = math.abs(player.position.x - self.position.x)
 	local y = math.abs(player.position.z - self.position.z)
 
-	self.cooldown = self.cooldown - dt
+	self.cooldown = self.cooldown - deltatime
 
 	if x < self.reach and y < self.reach and self.cooldown <= 0.0 then
 		player.hp = player.hp - self.damage
@@ -73,9 +69,9 @@ function Monster:Hit(player, dt)
 	end
 end
 
-function Monster:Update(player, dt)
-	self:Chase(player.position, dt)
-	self:Hit(player, dt)
+function Monster:Update(player)
+	self:Chase(player.position)
+	self:Hit(player)
 	self:GUpdate()
 	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 75.0, 25.0)
 	C_UpdateUI(self.gid, self.hp)

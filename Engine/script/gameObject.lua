@@ -1,5 +1,6 @@
 local gameObject = {}
 vector = require("script/vector")
+require('script/Utility')
 
 function gameObject:RandomizePos()
 	self.position.x = math.random(10)
@@ -18,6 +19,7 @@ function gameObject:New(g)
 	g.rotation = vector:New()
 	g.scale	   = vector:New()
 	g.scale = 1,1,1
+	g.speed = 0
 	
 	self.__index = self
 	setmetatable(g, self)
@@ -36,7 +38,7 @@ function gameObject:GUpdate()
 end
 
 function gameObject:Move(vec)
-	self.position = self.position + vec
+	self.position = self.position + (vec * self.speed * deltatime)
 end
 
 function gameObject:RotateLeft()

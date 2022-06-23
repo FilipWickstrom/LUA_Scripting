@@ -51,7 +51,7 @@ function ThrowMonkey:Throw(point)
 	end
 end
 
-function ThrowMonkey:UpdateThrow(dt)
+function ThrowMonkey:UpdateThrow()
 	-- update only when thrown
 	if self.inhand == false then
 
@@ -59,18 +59,18 @@ function ThrowMonkey:UpdateThrow(dt)
 		local y = math.abs(self.projectile.position.z - self.projectile.target.z)
 
 		if self.projectile.position.x > self.projectile.target.x then
-			self.projectile.position.x = self.projectile.position.x - x * dt * self.projectile.speed
+			self.projectile.position.x = self.projectile.position.x - x * deltatime * self.projectile.speed
 		else
-			self.projectile.position.x = self.projectile.position.x + x * dt * self.projectile.speed
+			self.projectile.position.x = self.projectile.position.x + x * deltatime * self.projectile.speed
 		end
 
 		if self.projectile.position.z > self.projectile.target.z then
-			self.projectile.position.z = self.projectile.position.z - y * dt * self.projectile.speed
+			self.projectile.position.z = self.projectile.position.z - y * deltatime * self.projectile.speed
 		else
-			self.projectile.position.z = self.projectile.position.z + y * dt * self.projectile.speed
+			self.projectile.position.z = self.projectile.position.z + y * deltatime * self.projectile.speed
 		end
 
-		self.cooldown = self.cooldown - dt
+		self.cooldown = self.cooldown - deltatime
 
 		if x < 1.5 and y < 1.5 and self.cooldown < 0 then
 			-- hide the projectile from the screen
@@ -82,9 +82,9 @@ function ThrowMonkey:UpdateThrow(dt)
 	end
 end
 
-function ThrowMonkey:Update(player, dt)
+function ThrowMonkey:Update(player)
 	self:Throw(player.position)
-	self:UpdateThrow(dt)
+	self:UpdateThrow()
 	self:GUpdate()
 	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 75.0, 25.0)
 	C_UpdateUI(self.gid, self.hp)
