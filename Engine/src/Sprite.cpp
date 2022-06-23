@@ -13,10 +13,6 @@ Sprite::Sprite(const std::string& textureName)
 	this->LoadTexture(textureName);
 }
 
-Sprite::~Sprite()
-{
-}
-
 void Sprite::SetPosition(const irr::core::vector3df& pos)
 {
 	m_node->setPosition(pos);
@@ -34,6 +30,9 @@ void Sprite::SetScale(const irr::core::vector3df& scl)
 
 void Sprite::LoadTexture(const std::string& filename)
 {
+	// Cleaning up before loading new
+	this->Remove();
+
 	irr::video::ITexture* texture = Graphics::GetDriver()->getTexture((SPRITEPATH + filename).c_str());
 	irr::core::dimension2df size = { 16.f, 16.f };
 	if (texture)
@@ -41,7 +40,7 @@ void Sprite::LoadTexture(const std::string& filename)
 	
 	irr::scene::IMesh* mesh = Graphics::GetGeometryCreator()->createPlaneMesh({ size / SPRITE_SIZE_MODIFIER });
 	
-	m_node = Graphics::GetSceneManager()->addMeshSceneNode(mesh, 0);
+	m_node = Graphics::GetSceneManager()->addMeshSceneNode(mesh);
 
 	if (!m_node)
 		std::cout << "ERROR: Node not correct..." << std::endl;
@@ -57,5 +56,17 @@ void Sprite::LoadTexture(const std::string& filename)
 	m_node->setMaterialType(irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL);
 	//Turn off filtering - no interpolation
 	m_node->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_BILINEAR_FILTER, false);
+}
+
+void Sprite::Remove()
+{
+	if (m_node)
+		m_node->remove();
+}
+
+void Sprite::SetVisible(const bool& isVisible)
+{
+	if (m_node)
+		m_node->setVisible(isVisible);
 }
 

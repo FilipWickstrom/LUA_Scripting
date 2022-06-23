@@ -42,7 +42,22 @@ unsigned int Scene::AddSprite(const std::string& file)
 void Scene::RemoveSprite(const unsigned int& id)
 {
 	if (m_sprites.find(id) != m_sprites.end())
+	{
+		m_sprites.at(id)->Remove();
 		m_sprites.erase(id);
+	}
+}
+
+void Scene::ChangeSprite(const unsigned int& id, const std::string& file)
+{
+	if (m_sprites.find(id) != m_sprites.end())
+		m_sprites.at(id)->LoadTexture(file);
+}
+
+void Scene::SetSpriteVisible(const unsigned int& id, const bool& isVisible)
+{
+	if (m_sprites.find(id) != m_sprites.end())
+		m_sprites.at(id)->SetVisible(isVisible);
 }
 
 void Scene::AddCamera()

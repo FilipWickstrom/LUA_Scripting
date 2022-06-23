@@ -11,8 +11,33 @@ int L_LoadSprite(lua_State* L)
 
 int L_RemoveSprite(lua_State* L)
 {
-	int id = static_cast<int>(lua_tonumber(L, -1));
-	SceneAccess::GetSceneHandler()->GetScene()->RemoveSprite(id);
+	if (lua_isnumber(L, -1))
+	{
+		int id = static_cast<int>(lua_tonumber(L, -1));
+		SceneAccess::GetSceneHandler()->GetScene()->RemoveSprite(id);
+	}
+	return 0;
+}
+
+int L_ChangeSprite(lua_State* L)
+{
+	if (lua_isnumber(L, -2) && lua_isstring(L, -1))
+	{
+		int id = static_cast<int>(lua_tonumber(L, -2));
+		std::string file = lua_tostring(L, -1);
+		SceneAccess::GetSceneHandler()->GetScene()->ChangeSprite(id, file);
+	}
+	return 0;
+}
+
+int L_SetSpriteVisible(lua_State* L)
+{
+	if (lua_isnumber(L, -2) && lua_isboolean(L, -1))
+	{
+		int id = static_cast<int>(lua_tonumber(L, -2));
+		bool trueOrFalse = lua_toboolean(L, -1);
+		SceneAccess::GetSceneHandler()->GetScene()->SetSpriteVisible(id, trueOrFalse);
+	}
 	return 0;
 }
 
