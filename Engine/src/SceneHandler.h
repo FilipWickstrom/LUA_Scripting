@@ -25,18 +25,17 @@ private:
 	SceneHandler& operator=(SceneHandler const&&) = delete;
 	static auto& Get();
 
-
+	//Help functions to make the code cleaner
 	void ResetScene();
 	bool LoadScene(const std::string& file);
 
 public:
+	/*
+		Adjust the scene
+	*/
 	static void LoadStartScene();
 	static void ChangeScene(const std::string& file);
 	static void UpdateScene();
-
-	/*
-		### Scene functionality ###
-	*/
 
 	/*
 		Sprites
@@ -61,11 +60,11 @@ public:
 		GUI
 	*/
 	static unsigned int AddText(const std::string& text, const std::string& font,
-		irr::core::vector2di pos, irr::core::vector2di size);
+								irr::core::vector2di pos, irr::core::vector2di size);
 	static void SetTextAlignment(const unsigned int& id, const irr::gui::EGUI_ALIGNMENT& alignment);
 	static void UpdateText(unsigned int& id, const std::string& text);
 	static unsigned int AddButton(const std::string& text, const std::string& font,
-		irr::core::vector2di pos, irr::core::vector2di size);
+								 irr::core::vector2di pos, irr::core::vector2di size);
 
 	static void RemoveGUI(unsigned int id);
 	static bool IsButtonPressed(unsigned int id);
