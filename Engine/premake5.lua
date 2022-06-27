@@ -44,6 +44,7 @@ project "Game"
         ["User Interface"]  = { "src/**Graphics2D.*", "src/**Element2D.*"},
 		
 		["Scripts"] 		= { "script/**.*" },
+		["Scripts/Scenes"]  = { "script/**Scene.*", "script/**AllScenes.*"},
 
     }
 
