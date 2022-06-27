@@ -1,4 +1,4 @@
-require('script/SceneHelp')
+require('script/AllScenes')
 
 local GUI	= {}
 
@@ -25,22 +25,22 @@ end
 
 
 function Clean()
-	-- Go through all the GUI and remove it
+	-- Cleaning up everything in LUA
 	for key, value in next, GUI do
-		C_RemoveGUI(value)
+		GUI[key] = nil	
 	end
 end
 
 function Update(dt)
+
 	-- Check if any of the buttons is clicked
 	if (C_IsButtonPressed(GUI["Play"])) then
-		C_ChangeScene(Scene.GAME)
+		C_ChangeScene(Scenes.GAME)
 
 	elseif(C_IsButtonPressed(GUI["Edit"])) then
-		C_ChangeScene(Scene.EDITOR)
+		C_ChangeScene(Scenes.EDITOR)
 
 	elseif(C_IsButtonPressed(GUI["Quit"])) then
-		C_ChangeScene(Scene.NONE)
+		C_ChangeScene(Scenes.NONE)
 	end
-
 end

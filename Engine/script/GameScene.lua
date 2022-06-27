@@ -8,7 +8,7 @@ powerup			= require('script/Powerups')
 goldText		= require('script/GoldText')
 refCamera		= require('script/Camera')
 lastpickupText	= require('script/lastpickuptext')
-require('script/SceneHelp')
+require('script/AllScenes')
 require('script/File')
 
 -- Collect separate types in different tables
@@ -87,7 +87,7 @@ function Update(dt)
 
 	-- Go back to menu when player dies
 	if(player:IsAlive() == false) then
-		C_ChangeScene(Scene.MENU)
+		C_ChangeScene(Scenes.MENU)
 	end
 
 	-- Update player

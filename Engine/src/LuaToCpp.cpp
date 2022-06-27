@@ -5,7 +5,7 @@
 int L_LoadSprite(lua_State* L)
 {
 	std::string filepath = lua_tostring(L, -1);
-	lua_pushnumber(L, SceneAccess::GetSceneHandler()->GetScene()->AddSprite(filepath));
+	lua_pushnumber(L, SceneHandler::AddSprite(filepath));
 	return 1;
 }
 
@@ -14,7 +14,7 @@ int L_RemoveSprite(lua_State* L)
 	if (lua_isnumber(L, -1))
 	{
 		int id = static_cast<int>(lua_tonumber(L, -1));
-		SceneAccess::GetSceneHandler()->GetScene()->RemoveSprite(id);
+		SceneHandler::RemoveSprite(id);
 	}
 	return 0;
 }
@@ -25,7 +25,7 @@ int L_ChangeSprite(lua_State* L)
 	{
 		int id = static_cast<int>(lua_tonumber(L, -2));
 		std::string file = lua_tostring(L, -1);
-		SceneAccess::GetSceneHandler()->GetScene()->ChangeSprite(id, file);
+		SceneHandler::ChangeSprite(id, file);
 	}
 	return 0;
 }
@@ -36,7 +36,7 @@ int L_SetSpriteVisible(lua_State* L)
 	{
 		int id = static_cast<int>(lua_tonumber(L, -2));
 		bool trueOrFalse = lua_toboolean(L, -1);
-		SceneAccess::GetSceneHandler()->GetScene()->SetSpriteVisible(id, trueOrFalse);
+		SceneHandler::SetSpriteVisible(id, trueOrFalse);
 	}
 	return 0;
 }
@@ -48,7 +48,7 @@ int L_SetSpritePosition(lua_State* L)
 	vec.X = static_cast<float>(lua_tonumber(L, -2));
 	//vec.Y = static_cast<float>(lua_tonumber(L, -2));
 	vec.Z = static_cast<float>(lua_tonumber(L, -1));
-	SceneAccess::GetSceneHandler()->GetScene()->SetSpritePosition(id, vec);
+	SceneHandler::SetSpritePosition(id, vec);
 	return 0;
 }
 
@@ -56,7 +56,7 @@ int L_SetSpriteScale(lua_State* L)
 {
 	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
 	float scl = static_cast<float>(lua_tonumber(L, -1));
-	SceneAccess::GetSceneHandler()->GetScene()->SetSpriteScale(id, { scl, scl, scl });
+	SceneHandler::SetSpriteScale(id, { scl, scl, scl });
 	return 0;
 }
 
@@ -67,7 +67,7 @@ int L_SetSpriteRotation(lua_State* L)
 	vec.X = static_cast<float>(lua_tonumber(L, -3));
 	vec.Y = static_cast<float>(lua_tonumber(L, -2));
 	vec.Z = static_cast<float>(lua_tonumber(L, -1));
-	SceneAccess::GetSceneHandler()->GetScene()->SetSpriteRotation(id, vec);
+	SceneHandler::SetSpriteRotation(id, vec);
 	return 0;
 }
 
@@ -145,7 +145,7 @@ int L_RemoveUI(lua_State* L)
 
 int CAM::L_CreateCamera(lua_State* L)
 {
-	SceneAccess::GetSceneHandler()->GetScene()->AddCamera();
+	SceneHandler::AddCamera();
 	return 0;
 }
 
@@ -159,7 +159,7 @@ int CAM::L_SetCameraPosition(lua_State* L)
 		vec.X = static_cast<float>(lua_tonumber(L, -3));
 		vec.Y = static_cast<float>(lua_tonumber(L, -2));
 		vec.Z = static_cast<float>(lua_tonumber(L, -1));
-		SceneAccess::GetSceneHandler()->GetScene()->SetCameraPosition(vec);
+		SceneHandler::SetCameraPosition(vec);
 	}
 	return 0;
 }
@@ -174,7 +174,7 @@ int CAM::L_SetCameraTarget(lua_State* L)
 		vec.X = static_cast<float>(lua_tonumber(L, -3));
 		vec.Y = static_cast<float>(lua_tonumber(L, -2));
 		vec.Z = static_cast<float>(lua_tonumber(L, -1));
-		SceneAccess::GetSceneHandler()->GetScene()->SetCameraTarget(vec);
+		SceneHandler::SetCameraTarget(vec);
 	}
 	return 0;
 }
@@ -185,18 +185,17 @@ int CAM::L_SetCameraFOV(lua_State* L)
 	if (lua_isnumber(L, -1))
 	{
 		fov = static_cast<float>(lua_tonumber(L, -1));
-		SceneAccess::GetSceneHandler()->GetScene()->SetCameraFOV(fov);
+		SceneHandler::SetCameraFOV(fov);
 	}
 	return 0;
 }
 
 int L_ChangeScene(lua_State* L)
 {
-	if (lua_type(L, -1) == LUA_TNUMBER)
+	if (lua_isstring(L, -1))
 	{
-		EScene scene = static_cast<EScene>(lua_tonumber(L, -1));
-		lua_pop(L, -1);
-		SceneAccess::GetSceneHandler()->SetScene(scene);
+		std::string file = lua_tostring(L, -1);
+		SceneHandler::ChangeScene(file);
 	}
 	return 0;
 }
@@ -228,7 +227,7 @@ int GUI::L_AddText(lua_State* L)
 	if (lua_type(L, -1) == LUA_TNUMBER)
 		size.Y = static_cast<int>(lua_tonumber(L, -1));
 
-	unsigned int id = SceneAccess::GetSceneHandler()->GetScene()->AddText(text, fontfile, pos, size);
+	unsigned int id = SceneHandler::AddText(text, fontfile, pos, size);
 
 	//Return the id to LUA
 	lua_pushnumber(L, id);
@@ -248,7 +247,7 @@ int GUI::L_UpdateText(lua_State* L)
 
 
 
-	SceneAccess::GetSceneHandler()->GetScene()->UpdateText(id, text);
+	SceneHandler::UpdateText(id, text);
 
 	return 0;
 }
@@ -282,7 +281,7 @@ int GUI::L_SetTextAlignment(lua_State* L)
 			//Default
 			alignment = irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER;
 		}
-		SceneAccess::GetSceneHandler()->GetScene()->SetTextAlignment(id, alignment);
+		SceneHandler::SetTextAlignment(id, alignment);
 	}
 	return 0;
 }
@@ -305,7 +304,7 @@ int L_ScreenCoordsToWorld(lua_State* L)
 		screenPos.Y = static_cast<int>(lua_tonumber(L, -1));
 	}
 
-	irr::core::line3df ray = SceneAccess::GetSceneHandler()->GetScene()->GetRayFromScreenCoords(screenPos);
+	irr::core::line3df ray = SceneHandler::GetRayFromScreenCoords(screenPos);
 
 	//printf("Ray: %f, %f, %f\n", ray.start.X, ray.start.Y, ray.start.Z);
 
@@ -358,7 +357,7 @@ int GUI::L_AddButton(lua_State* L)
 	if (lua_type(L, -1) == LUA_TNUMBER)
 		size.Y = static_cast<int>(lua_tonumber(L, -1));
 
-	unsigned int id = SceneAccess::GetSceneHandler()->GetScene()->AddButton(text, fontfile, pos, size);
+	unsigned int id = SceneHandler::AddButton(text, fontfile, pos, size);
 
 	//Return the id to LUA
 	lua_pushnumber(L, id);
@@ -373,7 +372,7 @@ int GUI::L_RemoveGUI(lua_State* L)
 	if (lua_type(L, -1) == LUA_TNUMBER)
 	{
 		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
-		SceneAccess::GetSceneHandler()->GetScene()->RemoveGUI(id);
+		SceneHandler::RemoveGUI(id);
 	}
 	return 0;
 }
@@ -387,7 +386,7 @@ int GUI::L_IsButtonPressed(lua_State* L)
 	if (lua_type(L, -1) == LUA_TNUMBER)
 	{
 		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
-		isPressed = SceneAccess::GetSceneHandler()->GetScene()->IsButtonPressed(id);
+		isPressed = SceneHandler::IsButtonPressed(id);
 	}
 
 	lua_pushboolean(L, isPressed);
