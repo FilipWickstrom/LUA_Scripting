@@ -40,7 +40,7 @@
 #include "Graphics2D.h"
 #include "LuaState.h"
 #include "InputHandler.h"
-#include "SceneManager.h"
+#include "SceneHandler.h"
 
 // Paths
 const std::string SPRITEPATH	= "../Assets/Sprites/";

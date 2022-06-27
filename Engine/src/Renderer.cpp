@@ -31,13 +31,11 @@ void ConsoleThread(lua_State* L)
 
 Renderer::Renderer()
 {
-	//Superweird, only works when m_sceneHandler exist in Renderer
-	SceneAccess::SetSceneHandler(&m_sceneHandler);
-	SceneAccess::GetSceneHandler()->SetScene(EScene::Menu);
-
 #ifdef _DEBUG
 	m_conThread = std::thread(ConsoleThread, LUA);
 #endif // _DEBUG
+
+	SceneHandler::LoadStartScene();
 }
 
 Renderer::~Renderer()
@@ -47,13 +45,9 @@ Renderer::~Renderer()
 #endif // _DEBUG
 }
 
-bool Renderer::Update()
+void Renderer::Update()
 {
-	//Update all the objects in the scene
-	SceneAccess::GetSceneHandler()->UpdateScene();
-	
-	//Return false when we switch scene to none
-	return (SceneAccess::GetSceneHandler()->GetSceneType() == EScene::None ? false : true);
+	SceneHandler::UpdateScene();
 }
 
 void Renderer::Render()
@@ -82,10 +76,9 @@ void Renderer::Run()
 		lastTime = currentTime;
 
 		Graphics::GetDeltaTime() = deltaTime;
-		if (this->Update())
-			this->Render();
-		else
-			Graphics::GetDevice()->closeDevice();
+		
+		this->Update();
+		this->Render();
 
 		//Update window caption text
 		Graphics::UpdateWindowCaption();

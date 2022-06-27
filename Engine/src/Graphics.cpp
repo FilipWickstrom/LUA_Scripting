@@ -1,5 +1,6 @@
 #include "PCH.h"
 #include "Graphics.h"
+#include "CppToLua.h"
 
 Graphics::Graphics()
 {

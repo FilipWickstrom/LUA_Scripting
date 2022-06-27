@@ -1,4 +1,4 @@
-require('script/SceneHelp')
+require('script/AllScenes')
 local gameObject = require('script/gameObject') --temp
 
 local GUI = {}
@@ -25,17 +25,11 @@ end
 
 
 function Clean()
-	-- Go through all the GUI and remove it
+	-- Cleaning up everything in LUA
 	for key, value in next, GUI do
-		C_RemoveGUI(value)
+		GUI[key] = nil	
 	end
 end
-
--- Handle input from keyboard
-function OnInput(x, y)
-
-end
-
 
 function Update(dt)
 	-- Check if any of the buttons is clicked
@@ -49,8 +43,7 @@ function Update(dt)
 		--Call c++ save map
 
 	elseif(C_IsButtonPressed(GUI["Menu"])) then
-		C_ChangeScene(Scene.MENU)
-
+		C_ChangeScene(Scenes.MENU)
 	end
 
 end
