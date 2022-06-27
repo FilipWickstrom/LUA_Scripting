@@ -33,8 +33,7 @@ void SceneHandler::LoadStartScene()
         std::string filename = lua_tostring(LUA, -1);
         lua_pop(LUA, 1);
 
-        if (Get().LoadScene(filename))
-            loadedScene = true;
+        loadedScene = Get().LoadScene(filename);
     }
 
     if (!loadedScene)
@@ -100,10 +99,10 @@ void SceneHandler::ResetScene()
     //Removing active camera
     irr::scene::ICameraSceneNode* oldCam = Graphics::GetSceneManager()->getActiveCamera();
     if (oldCam)
-    {
-        Graphics::GetSceneManager()->setActiveCamera(0);
         oldCam->remove();
-    }
+    
+    Graphics::GetSceneManager()->setActiveCamera(0);
+    m_camera = nullptr;
 }
 
 bool SceneHandler::LoadScene(const std::string& file)
@@ -301,7 +300,8 @@ irr::core::line3df SceneHandler::GetRayFromScreenCoords(irr::core::vector2di scr
 {
     irr::core::line3df ray;
 
-    if (Get().m_camera == nullptr) return ray;
+    //Camera does not exist
+    if (!Get().m_camera) return ray;
 
     return Graphics::GetSceneManager()->getSceneCollisionManager()->getRayFromScreenCoordinates(screenCoords, Get().m_camera);
 }

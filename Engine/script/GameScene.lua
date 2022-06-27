@@ -87,7 +87,7 @@ function Update(dt)
 
 	-- Go back to menu when player dies
 	if(player:IsAlive() == false) then
-		C_ChangeScene(Scenes.MENU)
+		C_ChangeScene(Scenes.GAMEOVER)
 	end
 
 	-- Update player
