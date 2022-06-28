@@ -29,13 +29,9 @@ project "Game"
     }
 
     vpaths {
-		["Singletons"]		= { "src/**Graphics.*", "src/**LuaState.*", "src/**SceneManager.*", "**InputHandler.*" },
-		
-		["Modules"] 		= {},
+		["Singletons"]		= { "src/**Graphics.*", "src/**LuaState.*", "src/**SceneHandler.*", "**InputHandler.*" },
 			
 		["GameObjects"]		= { "src/**Sprite.*" },
-		
-		["Scenes"]			= { "src/**Scene.*" },
 		
 		["Main"]			= { "src/**Main.*", "src/**Renderer.*", "src/**PCH.*" },
 		

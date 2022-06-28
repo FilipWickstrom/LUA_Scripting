@@ -71,6 +71,19 @@ int L_SetSpriteRotation(lua_State* L)
 	return 0;
 }
 
+int L_CheckSpriteCollision(lua_State* L)
+{
+	if (lua_isnumber(L, -2) && lua_isnumber(L, -1))
+	{
+		unsigned int obj1ID = static_cast<unsigned int>(lua_tonumber(L, -2));
+		unsigned int obj2ID = static_cast<unsigned int>(lua_tonumber(L, -1));
+		bool collided = SceneHandler::CheckSpriteCollision(obj1ID, obj2ID);
+		lua_pushboolean(L, collided);
+	}
+
+	return 1;
+}
+
 int L_GetWindowWidth(lua_State* L)
 {
 	lua_pushnumber(L, Graphics::GetWindowWidth());

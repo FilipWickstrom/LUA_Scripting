@@ -1,6 +1,5 @@
 local gameObject = require('script/gameObject')
 local Vector = require('script/vector')
-
 local Monster = gameObject:New()
 
 local COOLDOWN_TIME = 5.0
@@ -14,7 +13,6 @@ function Monster:New()
 	g.damage = 5
 	g.speed = math.random(3) + 1
 	g.type = "Basic"
-	g.reach = 2
 	g.name = "enemy"
 	g.cooldown = 0.0
 	g.RandomizePos(g)
@@ -62,10 +60,9 @@ function Monster:Hit(player)
 
 	self.cooldown = self.cooldown - deltatime
 
-	if x < self.reach and y < self.reach and self.cooldown <= 0.0 then
+	if C_CheckSpriteCollision(player.id, self.id) and self.cooldown <= 0.0 then
 		player.hp = player.hp - self.damage
 		self.cooldown = COOLDOWN_TIME
-		--print('Hit!')
 	end
 end
 

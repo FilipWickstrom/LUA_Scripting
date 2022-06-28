@@ -79,6 +79,7 @@ function Adjust_Object_Pos(objects, num, line)
 	if x ~= nil and y ~= nil and objects[num] ~= nil then
 		objects[num].position.x = tonumber(x)
 		objects[num].position.y = tonumber(y)
+		C_SetSpritePosition(objects[num].id, objects[num].position.x, objects[num].position.y)
 	end
 
 end

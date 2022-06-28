@@ -45,22 +45,6 @@ Renderer::~Renderer()
 #endif // _DEBUG
 }
 
-void Renderer::Update()
-{
-	SceneHandler::UpdateScene();
-}
-
-void Renderer::Render()
-{
-	Graphics::GetDriver()->beginScene(true, true, irr::video::SColor(255, 90, 101, 140));
-
-	Graphics::GetSceneManager()->drawAll();
-	Graphics::GetGUIEnvironment()->drawAll();
-	Graphics2D::Draw();
-
-	Graphics::GetDriver()->endScene();
-}
-
 void Renderer::Run()
 {
 	srand((unsigned int)time(nullptr));
@@ -71,17 +55,25 @@ void Renderer::Run()
 
 	while (Graphics::GetDevice()->run()) 
 	{
+		//Handle delta time
 		currentTime = std::chrono::high_resolution_clock::now();
 		deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
 		lastTime = currentTime;
-
 		Graphics::GetDeltaTime() = deltaTime;
-		
-		this->Update();
-		this->Render();
 
-		//Update window caption text
+
+		Graphics::GetDriver()->beginScene(true, true, irr::video::SColor(255, 90, 101, 140));
+		
+		//Update the scene from LUA
+		SceneHandler::UpdateScene();
 		Graphics::UpdateWindowCaption();
+
+		//Render everything to the screen
+		Graphics::GetSceneManager()->drawAll();
+		Graphics::GetGUIEnvironment()->drawAll();
+		Graphics2D::Draw();
+
+		Graphics::GetDriver()->endScene();
 	}
 
 	std::cout << "Application closed down. Dumping LUA stack: " << std::endl;

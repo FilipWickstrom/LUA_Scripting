@@ -162,6 +162,21 @@ void SceneHandler::SetSpriteRotation(const unsigned int& id, const irr::core::ve
         Get().m_sprites.at(id)->SetRotation(rot);
 }
 
+bool SceneHandler::CheckSpriteCollision(const unsigned int& firstObjID, const unsigned int& secondObjID)
+{
+    if (Get().m_sprites.find(firstObjID) != Get().m_sprites.end() &&
+        Get().m_sprites.find(secondObjID) != Get().m_sprites.end())
+    {
+        //Collision check between rectangles - AABB
+        //[OPTIMIZE] do sphere collision first before AABB
+        const auto& rect1 = Get().m_sprites.at(firstObjID)->GetBounds();
+        const auto& rect2 = Get().m_sprites.at(secondObjID)->GetBounds();
+
+        return rect1.isRectCollided(rect2);
+    }
+    return false;
+}
+
 void SceneHandler::AddCamera()
 {
     //Add a default camera
