@@ -33,8 +33,7 @@ void SceneHandler::LoadStartScene()
         std::string filename = lua_tostring(LUA, -1);
         lua_pop(LUA, 1);
 
-        if (Get().LoadScene(filename))
-            loadedScene = true;
+        loadedScene = Get().LoadScene(filename);
     }
 
     if (!loadedScene)
@@ -100,10 +99,10 @@ void SceneHandler::ResetScene()
     //Removing active camera
     irr::scene::ICameraSceneNode* oldCam = Graphics::GetSceneManager()->getActiveCamera();
     if (oldCam)
-    {
-        Graphics::GetSceneManager()->setActiveCamera(0);
         oldCam->remove();
-    }
+    
+    Graphics::GetSceneManager()->setActiveCamera(0);
+    m_camera = nullptr;
 }
 
 bool SceneHandler::LoadScene(const std::string& file)
@@ -161,6 +160,21 @@ void SceneHandler::SetSpriteRotation(const unsigned int& id, const irr::core::ve
 {
     if (Get().m_sprites.find(id) != Get().m_sprites.end())
         Get().m_sprites.at(id)->SetRotation(rot);
+}
+
+bool SceneHandler::CheckSpriteCollision(const unsigned int& firstObjID, const unsigned int& secondObjID)
+{
+    if (Get().m_sprites.find(firstObjID) != Get().m_sprites.end() &&
+        Get().m_sprites.find(secondObjID) != Get().m_sprites.end())
+    {
+        //Collision check between rectangles - AABB
+        //[OPTIMIZE] do sphere collision first before AABB
+        const auto& rect1 = Get().m_sprites.at(firstObjID)->GetBounds();
+        const auto& rect2 = Get().m_sprites.at(secondObjID)->GetBounds();
+
+        return rect1.isRectCollided(rect2);
+    }
+    return false;
 }
 
 void SceneHandler::AddCamera()
@@ -301,7 +315,8 @@ irr::core::line3df SceneHandler::GetRayFromScreenCoords(irr::core::vector2di scr
 {
     irr::core::line3df ray;
 
-    if (Get().m_camera == nullptr) return ray;
+    //Camera does not exist
+    if (!Get().m_camera) return ray;
 
     return Graphics::GetSceneManager()->getSceneCollisionManager()->getRayFromScreenCoordinates(screenCoords, Get().m_camera);
 }

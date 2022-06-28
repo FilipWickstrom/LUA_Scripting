@@ -13,11 +13,8 @@ function BasicBoss:New()
 	g.type = "bouncy"
 	g.name = "enemy"
 	g.direction = {x = 1, z = 1}
-	g.position.x = 10
 	g.cooldown = 0
-	g.reach = 3.5
 
-	--g.id = C_LoadSprite('zombie_big.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 100.0, 50.0)
 
 	self.__index = BasicBoss
@@ -48,10 +45,9 @@ function BasicBoss:Attack(player)
 
 	self.cooldown = self.cooldown - deltatime
 
-	if x < self.reach and z < self.reach and self.cooldown <= 0.0 then
+	if C_CheckSpriteCollision(player.id, self.id) and self.cooldown <= 0.0 then
 		player.hp = player.hp - self.damage
 		self.cooldown = COOLDOWN_TIME
-		--print('Hit!')
 	end
 
 end
