@@ -61,11 +61,23 @@ end
 -- set the collision on the object
 function Adjust_Object_Collision(objects, num, line)
 
+	local coll = string.gsub(line, "collision=", "")
+
+	if objects[num] ~= nil then
+		objects[num].hasCollision = tonumber(coll)
+	end
+
 end
 
 
 -- set the visibility of the object
 function Adjust_Object_Visibility(objects, num, line)
+
+	local visible = string.gsub(line, "visible=", "")
+
+	if objects[num] ~= nil then
+		objects[num].isVisible = tonumber(visible)
+	end
 
 end
 

@@ -112,26 +112,3 @@ function RemoveObject(num, obj)
 	C_RemoveUI(obj.gid)
 
 end
-
--- Communication between lua and c++
-
---[[ Find the indexed object and return its position
-function GetObjectPosition(ind)
-
-	if player.id == ind then
-		return player.position.x, player.position.z
-	end
-
-	if boss.id == ind then
-		return boss.position.x, boss.position.z
-	end
-
-	for k, v in pairs(monsters) do
-		if v.id == ind then
-			return v.position.x, v.position.z
-		end
-	end
-
-	return 'err', 'err'
-end
-]]
