@@ -13,7 +13,6 @@ function Monster:New()
 	g.damage = 5
 	g.speed = math.random(3) + 1
 	g.type = "monster"
-	g.reach = 2
 	g.name = "enemy"
 	g.cooldown = 0.0
 	g.RandomizePos(g)
@@ -55,9 +54,6 @@ function Monster:OnHit(playerHp)
 end
 
 function Monster:Hit(player)
-
-	local x = math.abs(player.position.x - self.position.x)
-	local y = math.abs(player.position.z - self.position.z)
 
 	self.cooldown = self.cooldown - deltatime
 
