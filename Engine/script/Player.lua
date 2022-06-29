@@ -14,8 +14,7 @@ function Player:New()
 	g.damage = 5
 	g.speed = 12
 	-- Add effects here.
-	g.position.x = 0
-	g.position.y = 0
+	g.position = vector:New()
 	g.lastpickup = "None"
 	g.fireRate = 0.2
 	g.fireTimer = 0.0
@@ -24,6 +23,7 @@ function Player:New()
 
 	g.id = C_LoadSprite('knight.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0)
+	C_SetSpritePosition(g.id, g.position.x, g.position.z)
 
 	self.__index = Player
 	setmetatable(g, self)
@@ -58,8 +58,8 @@ function Player:UpdateBullets()
 end
 
 function Player:HandleMovement(camera)
-	x = 0
-	y = 0
+	local x = 0
+	local y = 0
 
 	if C_IsKeyDown(keys.W) then
 		y = 1

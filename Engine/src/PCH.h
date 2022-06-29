@@ -40,7 +40,7 @@
 #include "Graphics2D.h"
 #include "LuaState.h"
 #include "InputHandler.h"
-#include "SceneManager.h"
+#include "SceneHandler.h"
 
 // Paths
 const std::string SPRITEPATH	= "../Assets/Sprites/";
@@ -51,3 +51,11 @@ const std::string SCRIPTSPATH	= "script/";
 const float SPRITE_SIZE_MODIFIER = 4.f;
 // Option to show UI area
 #define DEBUG_UI 0
+#define DEBUG_HITBOXES 0
+
+
+/*
+	Code comments
+*/
+// [TODO]		- Need to be done 
+// [OPTIMIZE]	- Code can be optimized for better performance

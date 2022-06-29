@@ -15,6 +15,7 @@ LuaHandler::LuaHandler()
 	lua_register(m_state, "C_SetSpritePosition", 	L_SetSpritePosition);
 	lua_register(m_state, "C_SetSpriteScale", 		L_SetSpriteScale);
 	lua_register(m_state, "C_SetSpriteRotation", 	L_SetSpriteRotation);
+	lua_register(m_state, "C_CheckSpriteCollision", L_CheckSpriteCollision);
 
 	lua_register(m_state, "C_WinWidth", 			L_GetWindowWidth);
 	lua_register(m_state, "C_WinHeight", 			L_GetWindowHeight);

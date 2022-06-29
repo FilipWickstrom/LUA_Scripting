@@ -9,5 +9,6 @@
 		Not limits
 */
 
-// Load a script from file. Make sure its inside the "Scripts" Folder
-void LoadScript(const std::string& script_name);
+// Load a script from file. Make sure its inside the "Scripts" folder.
+// Returns true when loaded correctly.
+bool LoadScript(const std::string& script_name);

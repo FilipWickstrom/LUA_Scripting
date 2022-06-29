@@ -3,6 +3,8 @@ Monkey = require('script/ThrowingEnemy')
 gameObject = require('script/gameObject')
 Bouncy = require('script/BasicBossEnemy')
 
+--[[LOAD TO FILE SECTION]]--
+
 -- Load objects from a file into a table
 function Load_File(path)
 
@@ -59,11 +61,23 @@ end
 -- set the collision on the object
 function Adjust_Object_Collision(objects, num, line)
 
+	local coll = string.gsub(line, "collision=", "")
+
+	if objects[num] ~= nil then
+		objects[num].hasCollision = tonumber(coll)
+	end
+
 end
 
 
 -- set the visibility of the object
 function Adjust_Object_Visibility(objects, num, line)
+
+	local visible = string.gsub(line, "visible=", "")
+
+	if objects[num] ~= nil then
+		objects[num].isVisible = tonumber(visible)
+	end
 
 end
 
@@ -79,6 +93,7 @@ function Adjust_Object_Pos(objects, num, line)
 	if x ~= nil and y ~= nil and objects[num] ~= nil then
 		objects[num].position.x = tonumber(x)
 		objects[num].position.y = tonumber(y)
+		C_SetSpritePosition(objects[num].id, objects[num].position.x, objects[num].position.y)
 	end
 
 end
@@ -90,6 +105,7 @@ function Adjust_Object_Name(objects, num, line)
 
 	if objects[num] ~= nil then
 		objects[num].id = C_LoadSprite(filepath)
+		objects[num].spritename = filepath
 	end
 
 end
@@ -113,3 +129,41 @@ function Adjust_Object_Type(objects, num, line)
 	end
 
 end
+
+--[[LOAD TO FILE SECTION]]--
+
+
+--[[WRITE TO FILE SECTION]]--
+
+-- Writes each relevant properties of the objects in table to file located in path
+function Write_To_File(objects, path)
+
+	-- clear the file if it already exists.
+	io.open(path, "w"):close()
+
+	-- Open the file in append mode. Creates the file if it doesn't exist
+	local file = io.open(path, "a")
+
+	for num, obj in pairs(objects) do
+
+		-- make sure the object isn't a nil value
+		if obj ~= nil then
+			file:write('{', "\n")
+			file:write('type=' .. obj.type, "\n")
+			file:write('sprite=' .. obj.spritename, "\n")
+			file:write('pos=' .. obj.position.x .. ' ' .. obj.position.y, "\n")
+			file:write('visible=' .. obj.isVisible, "\n")
+			file:write('collision=' .. obj.hasCollision, "\n")
+			file:write('}', "\n")
+
+			-- finishing newline between each object
+			file:write("\n")
+		end
+
+	end
+
+	file:close()
+
+end
+
+--[[WRITE TO FILE SECTION]]--

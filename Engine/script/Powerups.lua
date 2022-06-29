@@ -5,7 +5,6 @@ Powerup = gameObject:New()
 
 local BOMB_RADIUS = 5.0
 local BOMB_DAMAGE = 10000.0
-local POWERUP_REACH = 1.5
 
 local types = 
 {
@@ -30,13 +29,14 @@ function Powerup:New()
 	g.type = self:Initiate()
 
 	g.respawntimer = 0.0
-	g.RandomizePos(g)
-	g.id = C_LoadSprite("chest.png")
 	g.shouldrespawn = false
+	g.id = C_LoadSprite("chest.png")
+	g:RandomizePos()
+	C_SetSpritePosition(g.id, g.position.x, g.position.z)
 
 	g.bomb = gameObject:New()
 	g.bomb.id = C_LoadSprite('bomb.png')
-	g.bomb.position.x = vector:New()
+	g.bomb.position = vector:New()
 	g.bomb.countdown = 3.0
 	g.bomb.active = false
 	C_SetSpritePosition(g.bomb.id, g.bomb.position.x, g.bomb.position.z)
@@ -83,10 +83,9 @@ end
 
 function Powerup:Update(player, enemies, goldText, lastpickupText)
 	
-	-- player is close enough to the powerup
-	local x = math.abs(player.position.x - self.position.x)
-	local z = math.abs(player.position.z - self.position.z)
-	if x <= POWERUP_REACH and z <= POWERUP_REACH and self.shouldrespawn == false then
+	--Check if player and the powerup is colliding
+	if C_CheckSpriteCollision(player.id, self.id) and self.shouldrespawn == false then
+		
 		self:Gain(player, goldText)
 
 		-- Update last pickup text

@@ -12,7 +12,7 @@ function ThrowBoss:New()
 	g.xp = 25
 	g.damage = 5
 	g.speed = math.random(5) + 1
-	g.type = "Basic"
+	g.type = "shooty"
 	g.name = "enemy"
 	g.inhand = true
 	g.cooldown = 1

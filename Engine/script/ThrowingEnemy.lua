@@ -12,7 +12,7 @@ function ThrowMonkey:New()
 	g.xp = 25
 	g.damage = 5
 	g.speed = math.random(3) + 1
-	g.type = "Basic"
+	g.type = "monkey"
 	g.name = "enemy"
 	g.inhand = true
 	g.cooldown = 1

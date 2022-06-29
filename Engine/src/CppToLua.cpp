@@ -1,14 +1,17 @@
 #include "PCH.h"
 #include "CppToLua.h"
 
-void LoadScript(const std::string& script_name)
+bool LoadScript(const std::string& script_name)
 {
+	//No name on the file...
+	if (script_name.empty()) return false;
+
 	std::string script = SCRIPTSPATH + script_name;
 
-	int error = luaL_dofile(LUA, script.c_str());
-
-	if (lua_isstring(LUA, -1))
+	if (luaL_dofile(LUA, script.c_str()) != LUA_OK)
 	{
-		std::cout << "Error: " << lua_tostring(LUA, -1) << "\n";
+		std::cout << "Error: " << lua_tostring(LUA, -1) << '\n';
+		return false;
 	}
+	return true;
 }

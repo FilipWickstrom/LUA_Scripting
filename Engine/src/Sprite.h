@@ -4,6 +4,7 @@ class Sprite
 {
 private:
 	irr::scene::ISceneNode* m_node;
+	irr::core::vector2df	m_size;
 
 public:
 	Sprite();
@@ -20,4 +21,7 @@ public:
 	void SetPosition(const irr::core::vector3df& pos);
 	void SetRotation(const irr::core::vector3df& rot);
 	void SetScale(const irr::core::vector3df& scl);
+
+	//Get the rectangle around the sprite
+	const irr::core::rectf GetBounds() const;
 };

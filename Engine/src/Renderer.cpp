@@ -31,13 +31,11 @@ void ConsoleThread(lua_State* L)
 
 Renderer::Renderer()
 {
-	//Superweird, only works when m_sceneHandler exist in Renderer
-	SceneAccess::SetSceneHandler(&m_sceneHandler);
-	SceneAccess::GetSceneHandler()->SetScene(EScene::Menu);
-
 #ifdef _DEBUG
 	m_conThread = std::thread(ConsoleThread, LUA);
 #endif // _DEBUG
+
+	SceneHandler::LoadStartScene();
 }
 
 Renderer::~Renderer()
@@ -45,26 +43,6 @@ Renderer::~Renderer()
 #ifdef _DEBUG
 	m_conThread.join();
 #endif // _DEBUG
-}
-
-bool Renderer::Update()
-{
-	//Update all the objects in the scene
-	SceneAccess::GetSceneHandler()->UpdateScene();
-	
-	//Return false when we switch scene to none
-	return (SceneAccess::GetSceneHandler()->GetSceneType() == EScene::None ? false : true);
-}
-
-void Renderer::Render()
-{
-	Graphics::GetDriver()->beginScene(true, true, irr::video::SColor(255, 90, 101, 140));
-
-	Graphics::GetSceneManager()->drawAll();
-	Graphics::GetGUIEnvironment()->drawAll();
-	Graphics2D::Draw();
-
-	Graphics::GetDriver()->endScene();
 }
 
 void Renderer::Run()
@@ -77,18 +55,25 @@ void Renderer::Run()
 
 	while (Graphics::GetDevice()->run()) 
 	{
+		//Handle delta time
 		currentTime = std::chrono::high_resolution_clock::now();
 		deltaTime = std::chrono::duration<float>(currentTime - lastTime).count();
 		lastTime = currentTime;
-
 		Graphics::GetDeltaTime() = deltaTime;
-		if (this->Update())
-			this->Render();
-		else
-			Graphics::GetDevice()->closeDevice();
 
-		//Update window caption text
+
+		Graphics::GetDriver()->beginScene(true, true, irr::video::SColor(255, 90, 101, 140));
+		
+		//Update the scene from LUA
+		SceneHandler::UpdateScene();
 		Graphics::UpdateWindowCaption();
+
+		//Render everything to the screen
+		Graphics::GetSceneManager()->drawAll();
+		Graphics::GetGUIEnvironment()->drawAll();
+		Graphics2D::Draw();
+
+		Graphics::GetDriver()->endScene();
 	}
 
 	std::cout << "Application closed down. Dumping LUA stack: " << std::endl;
