@@ -14,8 +14,8 @@ function gameObject:New(g)
 	g.spritename = ""
 	g.id = -1 --model id? [rename]
 	g.gid = -1 --id for ui? [rename]
-	g.hasCollision = 1
-	g.isVisible = 1
+	g.hasCollision = true
+	g.isVisible = true
 	
 	--Transform
 	g.position = vector:New()
@@ -65,6 +65,14 @@ function gameObject:SetPosition(x, y)
 	else
 		error("Either both or one of the intakes were not a number!")
 	end
+end
+
+function gameObject:SetVisibility(set)
+
+	self.isVisible = set
+
+	C_SetSpriteVisible(self.id, self.isVisible)
+
 end
 
 function gameObject:GetPosition()

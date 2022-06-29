@@ -76,7 +76,7 @@ function Adjust_Object_Visibility(objects, num, line)
 	local visible = string.gsub(line, "visible=", "")
 
 	if objects[num] ~= nil then
-		objects[num].isVisible = tonumber(visible)
+		objects[num]:SetVisibility(tonumber(visible))
 	end
 
 end

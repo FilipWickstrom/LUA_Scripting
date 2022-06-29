@@ -6,7 +6,7 @@ local COOLDOWN_TIME = 3.0
 function BasicBoss:New()
 	local g = gameObject:New()
 	g.hp = 100
-	g.worth = 50
+	g.worth = 30
 	g.xp = 25
 	g.damage = 25
 	g.speed = 5
@@ -20,6 +20,10 @@ function BasicBoss:New()
 	self.__index = BasicBoss
 	setmetatable(g, self)
 	return g
+end
+
+function BasicBoss:OnDeath(playerGold)
+	playerGold = playerGold + self.worth
 end
 
 function BasicBoss:Chase()

@@ -8,7 +8,7 @@ local COOLDOWN = 1.5
 function ThrowMonkey:New()
 	local g = gameObject:New()
 	g.hp = 100
-	g.worth = 50
+	g.worth = 15
 	g.xp = 25
 	g.damage = 5
 	g.speed = math.random(3) + 1
@@ -32,6 +32,10 @@ function ThrowMonkey:New()
 	C_SetSpriteVisible(g.projectile.id, false)
 
 	return g
+end
+
+function ThrowMonkey:OnDeath(playerGold)
+	playerGold = playerGold + self.worth
 end
 
 function ThrowMonkey:Throw(point)

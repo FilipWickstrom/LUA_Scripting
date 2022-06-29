@@ -8,7 +8,7 @@ local COOLDOWN = 1.5
 function ThrowBoss:New()
 	local g = gameObject:New()
 	g.hp = 100
-	g.worth = 50
+	g.worth = 30
 	g.xp = 25
 	g.damage = 5
 	g.speed = math.random(5) + 1
@@ -34,6 +34,10 @@ function ThrowBoss:New()
 	setmetatable(g, self)
 
 	return g
+end
+
+function ThrowBoss:OnDeath(playerGold)
+	playerGold = playerGold + self.worth
 end
 
 function ThrowBoss:Throw(point)

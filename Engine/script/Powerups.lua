@@ -4,7 +4,7 @@ gameObject = require('script/gameObject')
 Powerup = gameObject:New()
 
 local BOMB_RADIUS = 5.0
-local BOMB_DAMAGE = 10000.0
+local BOMB_DAMAGE = 50.0
 
 local types = 
 {
