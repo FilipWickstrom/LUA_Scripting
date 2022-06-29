@@ -76,7 +76,13 @@ function Adjust_Object_Visibility(objects, num, line)
 	local visible = string.gsub(line, "visible=", "")
 
 	if objects[num] ~= nil then
-		objects[num]:SetVisibility(tonumber(visible))
+		if tonumber(visible) == 0 then
+			C_SetSpriteVisible(objects[num].id, false)
+		else
+			C_SetSpriteVisible(objects[num].id, true)
+		end
+
+		objects[num].isVisible = tonumber(visible)
 	end
 
 end

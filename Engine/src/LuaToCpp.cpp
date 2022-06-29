@@ -36,6 +36,7 @@ int L_SetSpriteVisible(lua_State* L)
 	{
 		int id = static_cast<int>(lua_tonumber(L, -2));
 		bool trueOrFalse = lua_toboolean(L, -1);
+
 		SceneHandler::SetSpriteVisible(id, trueOrFalse);
 	}
 	return 0;

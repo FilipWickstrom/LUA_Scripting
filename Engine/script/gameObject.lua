@@ -14,8 +14,8 @@ function gameObject:New(g)
 	g.spritename = ""
 	g.id = -1 --model id? [rename]
 	g.gid = -1 --id for ui? [rename]
-	g.hasCollision = true
-	g.isVisible = true
+	g.hasCollision = 1
+	g.isVisible = 1
 	
 	--Transform
 	g.position = vector:New()
