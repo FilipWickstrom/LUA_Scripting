@@ -129,6 +129,17 @@ int L_AddHealthbarUI(lua_State* L)
 	return 1;
 }
 
+int L_SetHealthbarVisibility(lua_State* L)
+{
+
+	const unsigned int id = lua_tonumber(L, -2);
+	const bool visible = lua_toboolean(L, -1);
+
+	Graphics2D::GetElement(id)->SetVisibility(visible);
+
+	return 0;
+}
+
 int L_UpdatePosUI(lua_State* L)
 {
 	/*

@@ -57,7 +57,7 @@ function Monster:Hit(player)
 
 	self.cooldown = self.cooldown - deltatime
 
-	if C_CheckSpriteCollision(player.id, self.id) and self.cooldown <= 0.0 then
+	if C_CheckSpriteCollision(player.id, self.id) and self.cooldown <= 0.0 and self.isVisible == 1 then
 		player.hp = player.hp - self.damage
 		self.cooldown = COOLDOWN_TIME
 	end

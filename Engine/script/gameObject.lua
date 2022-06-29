@@ -69,9 +69,19 @@ end
 
 function gameObject:SetVisibility(set)
 
-	self.isVisible = set
+	if set == 0 then
+		C_SetSpriteVisible(self.id, false)
+		C_SetVisibleUI(self.gid, false)
 
-	C_SetSpriteVisible(self.id, self.isVisible)
+		self.isVisible = 0
+	else
+		C_SetSpriteVisible(self.id, true)
+		C_SetVisibleUI(self.gid, true)
+
+		self.isVisible = 1
+	end
+
+
 
 end
 
