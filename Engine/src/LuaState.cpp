@@ -38,8 +38,9 @@ LuaHandler::LuaHandler()
 	lua_register(m_state, "C_IsButtonPressed", 		GUI::L_IsButtonPressed);
 	lua_register(m_state, "C_UpdateText", 			GUI::L_UpdateText);
 	lua_register(m_state, "C_SetTextAlignment",		GUI::L_SetTextAlignment);
-	lua_register(m_state, "C_ScreenCoordsToWorld",	L_ScreenCoordsToWorld);
+	lua_register(m_state, "C_GetScreenCoords",		L_GetScreenCoords);
 	lua_register(m_state, "C_IsKeyDown",			L_IsKeyDown);
+	lua_register(m_state, "C_GetWorldFromScreen",	L_GetWorldFromScreen);
 }
 
 LuaHandler::~LuaHandler()

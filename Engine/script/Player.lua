@@ -20,6 +20,7 @@ function Player:New()
 	g.fireRate = 0.2
 	g.fireTimer = 0.0
 	g.canShoot = true
+	g.bullets = {}
 
 	g.id = C_LoadSprite('knight.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0)
@@ -27,6 +28,33 @@ function Player:New()
 	self.__index = Player
 	setmetatable(g, self)
 	return g
+end
+
+function Player:AddBullet(pos, dir)
+	g = gameObject:New()
+	g.id = C_LoadSprite('sword.png')
+	g.position = pos
+	g.dir = dir
+	g.speed = 50
+	g.lifetime = 4
+	C_SetSpriteVisible(g.id, true)
+	table.insert(self.bullets, g)
+end
+
+function Player:UpdateBullets()
+	for i, obj in ipairs(self.bullets) do
+		removed = false
+		if obj.lifetime <= 0 then
+			obj:OnEnd()
+			table.remove(self.bullets, i)
+			removed = true
+		end
+		if not removed then
+			obj:Move(obj.dir)
+			obj:GUpdate()
+			obj.lifetime = obj.lifetime - deltatime
+		end
+	end
 end
 
 function Player:HandleMovement(camera)
@@ -57,9 +85,20 @@ function Player:HandleMovement(camera)
 end
 
 function Player:Shoot()
-	if C_IsKeyDown(keys.LBUTTON) then
-		print("Left mouse was clicked")
+	if self.fireTimer <= 0 then
+		if C_IsKeyDown(keys.LBUTTON) then
+			mousepoint = vector:New()
+			mousepoint.x, mousepoint.y, mousepoint.z = C_GetWorldFromScreen()
+			dir = mousepoint - self.position
+			dir:Normalize()
+			self:AddBullet(self.position, dir)
+			self.fireTimer = self.fireRate
+		end
 	end
+
+	self.fireTimer = self.fireTimer - deltatime
+
+	self:UpdateBullets()
 end
 
 function Player:Update(camera)
@@ -74,7 +113,6 @@ function Player:Update(camera)
 	--self.hp = 100
 	C_UpdateUI(self.gid, self.hp)
 	self:GUpdate()
-
 end
 
 function Player:IsAlive()

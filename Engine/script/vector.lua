@@ -61,7 +61,7 @@ function vector:__mul(other)
 end
 
 function vector:Normalize()
-	local length = self.length
+	local length = self:Length()
 
 	if(length == 0) then
 		return

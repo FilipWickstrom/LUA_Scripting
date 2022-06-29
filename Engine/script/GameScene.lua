@@ -42,7 +42,7 @@ function Start()
 	camera = refCamera:New()
 	camera:SetPosition(0,40,0)
 	camera:SetTarget(0,0,0.1)
-	camera:SetFOV(50)
+	camera:SetFOV(90)
 
 	objects = Load_File('maps/test1.txt')
 
