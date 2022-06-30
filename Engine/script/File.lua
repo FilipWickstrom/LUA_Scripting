@@ -2,6 +2,7 @@ Monster = require('script/Monster')
 Monkey = require('script/ThrowingEnemy')
 gameObject = require('script/gameObject')
 Bouncy = require('script/BasicBossEnemy')
+WallTile = require('script/WallTile')
 
 --[[LOAD TO FILE SECTION]]--
 
@@ -76,17 +77,7 @@ function Adjust_Object_Visibility(objects, num, line)
 	local visible = string.gsub(line, "visible=", "")
 
 	if objects[num] ~= nil then
-
 		objects[num]:SetVisibility(tonumber(visible))
-		--[[
-		if tonumber(visible) == 0 then
-			C_SetSpriteVisible(objects[num].id, false)
-		else
-			C_SetSpriteVisible(objects[num].id, true)
-		end
-
-		objects[num].isVisible = tonumber(visible)
-		]]--
 	end
 
 end
@@ -136,6 +127,10 @@ function Adjust_Object_Type(objects, num, line)
 	-- Spawns a basic boss that bounces across the room
 	if line:find('bouncy') then
 		objects[num] = Bouncy:New()
+	end
+
+	if line:find('wall') then
+		objects[num] = WallTile:New()
 	end
 
 end

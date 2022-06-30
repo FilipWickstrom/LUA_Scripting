@@ -135,7 +135,8 @@ int L_SetHealthbarVisibility(lua_State* L)
 	const unsigned int id = lua_tonumber(L, -2);
 	const bool visible = lua_toboolean(L, -1);
 
-	Graphics2D::GetElement(id)->SetVisibility(visible);
+	if (Graphics2D::GetElement(id))
+		Graphics2D::GetElement(id)->SetVisibility(visible);
 
 	return 0;
 }

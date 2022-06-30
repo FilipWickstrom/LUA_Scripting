@@ -7,10 +7,26 @@ collision=1
 }
 
 {
-type=monster
-sprite=skeleton.png
-pos=5 10
-visible=0
+type=wall
+sprite=wall_mid.png
+pos=10 10
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=12 10
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=0 0
+visible=1
 collision=1
 }
 

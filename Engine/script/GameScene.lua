@@ -12,19 +12,7 @@ require('script/AllScenes')
 require('script/File')
 
 -- Collect separate types in different tables
-monsters = {}
 objects = {}
-
-function AddMonster(modelfilepath)
-	local monster = refMonster:New()
-	monster.id = C_LoadSprite(modelfilepath)
-	table.insert(monsters, monster)
-end
-
--- Returns all variables from the monsters table, in this case userdata.
---function getMonsters()
-	--return table.unpack(monsters)
---end
 
 function Start()
 	math.randomseed(os.time())
