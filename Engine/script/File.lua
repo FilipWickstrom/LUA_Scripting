@@ -88,7 +88,7 @@ function Adjust_Object_Pos(objects, num, line)
 	-- removes the pos= from the current line
 	local filepath = string.gsub(line, "pos=", "")
 
-	local x, y = string.match(filepath, '(%d+)%s(%d+)')
+	local x, y = string.match(filepath, '(%-?%d+)%s(%-?%d+)')
 
 	-- check if x and y is properly present in the text file
 	if x ~= nil and y ~= nil and objects[num] ~= nil then
@@ -156,7 +156,7 @@ function Write_To_File(objects, path)
 			file:write('{', "\n")
 			file:write('type=' .. obj.type, "\n")
 			file:write('sprite=' .. obj.spritename, "\n")
-			file:write('pos=' .. obj.position.x .. ' ' .. obj.position.y, "\n")
+			file:write('pos=' .. tostring(obj.position.x) .. ' ' .. tostring(obj.position.y), "\n")
 			file:write('visible=' .. obj.isVisible, "\n")
 			file:write('collision=' .. obj.hasCollision, "\n")
 			file:write('}', "\n")
