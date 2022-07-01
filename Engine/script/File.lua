@@ -4,6 +4,7 @@ gameObject = require('script/gameObject')
 Bouncy = require('script/BasicBossEnemy')
 WallTile = require('script/WallTile')
 DoorTile = require('script/DoorTile')
+Shooter = require('script/ThrowingBoss')
 
 --[[LOAD TO FILE SECTION]]--
 
@@ -132,6 +133,10 @@ function Adjust_Object_Type(objects, num, line)
 
 	if line:find('wall') then
 		objects[num] = WallTile:New()
+	end
+
+	if line:find('shooter') then
+		objects[num] = Shooter:New()
 	end
 
 	if line:find('door') then
