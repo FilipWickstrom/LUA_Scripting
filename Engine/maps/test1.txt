@@ -30,3 +30,11 @@ visible=1
 collision=1
 }
 
+{
+type=door
+sprite=doors_leaf_closed.png
+pos=20 -10
+visible=1
+collision=1
+}
+
