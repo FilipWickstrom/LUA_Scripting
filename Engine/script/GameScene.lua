@@ -49,7 +49,6 @@ end
 -- Game loop
 function Update(dt)
 	deltatime = dt
-
 	-- Loop through all objects
 	for num, obj in pairs(objects) do
 		if obj ~= nil then 

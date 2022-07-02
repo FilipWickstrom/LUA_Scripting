@@ -2,6 +2,7 @@
 require('script/vector')
 gameObject = require('script/gameObject')
 Player = gameObject:New()
+require('script/Weapon')
 
 function Player:New()
 	local g = gameObject:New()
@@ -9,17 +10,12 @@ function Player:New()
 	g.hp = 100.0
 	g.gold = 0
 	g.xp = 0
-	g.weapon = "Hands"
+	g.weapon = Weapon.new("default")
 	g.name = "Player"
-	g.damage = 5
 	g.speed = 12
-	-- Add effects here.
 	g.position = vector:New()
+	-- Add effects here.
 	g.lastpickup = "None"
-	g.fireRate = 0.2
-	g.fireTimer = 0.0
-	g.canShoot = true
-	g.bullets = {}
 
 	g.id = C_LoadSprite('knight.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0)
@@ -28,40 +24,6 @@ function Player:New()
 	self.__index = Player
 	setmetatable(g, self)
 	return g
-end
-
-function Player:AddBullet(pos, dir)
-	g = gameObject:New()
-	g.id = C_LoadSprite('sword.png')
-	g.position = pos
-	g.dir = dir
-	g.speed = 50
-	g.lifetime = 4
-	C_SetSpriteVisible(g.id, true)
-	table.insert(self.bullets, g)
-end
-
-function Player:UpdateBullets(enemies)
-	for i, bullet in ipairs(self.bullets) do
-		removed = false
-		if bullet.lifetime <= 0 then
-			bullet:OnEnd()
-			table.remove(self.bullets, i)
-			removed = true
-		end
-		if not removed then
-			bullet:Move(bullet.dir)
-			bullet:GUpdate()
-			bullet.lifetime = bullet.lifetime - deltatime
-			for j, enemy in ipairs(enemies) do
-				if C_CheckSpriteCollision(bullet.id, enemy.id) and enemy.hp > 0 then
-					enemy.hp = enemy.hp - 5
-					bullet:OnEnd()
-					table.remove(self.bullets, i)
-				end
-			end
-		end
-	end
 end
 
 function Player:HandleMovement(camera)
@@ -91,26 +53,17 @@ function Player:HandleMovement(camera)
 	camera:Move(dir * self.speed * deltatime)
 end
 
-function Player:Shoot(enemies)
-	if self.fireTimer <= 0 then
-		if C_IsKeyDown(keys.LBUTTON) then
-			mousepoint = vector:New()
-			mousepoint.x, mousepoint.y, mousepoint.z = C_GetWorldFromScreen()
-			dir = mousepoint - self.position
-			dir:Normalize()
-			self:AddBullet(self.position, dir)
-			self.fireTimer = self.fireRate
-		end
+function Player:Shoot()
+	if C_IsKeyDown(keys.LBUTTON) then
+		self.weapon:Fire(self.position)
 	end
-
-	self.fireTimer = self.fireTimer - deltatime
-
-	self:UpdateBullets(enemies)
 end
 
 function Player:Update(camera, enemies)
+	self:GUpdate()
 	self:HandleMovement(camera)
-	self:Shoot(enemies)
+	self:Shoot()
+	self.weapon:Update(enemies)
 
 	if self.hp > 100.0 then
 		self.hp = 100.0
@@ -119,13 +72,14 @@ function Player:Update(camera, enemies)
 	-- GOD MODE!!
 	--self.hp = 100
 	C_UpdateUI(self.gid, self.hp)
-	self:GUpdate()
 end
 
 function Player:IsAlive()
 	if(self.hp > 0) then
 		return true
 	end
+
+	self:OnEnd()
 
 	return false
 end
@@ -167,7 +121,7 @@ function Player:ReceiveExperience(xp)
 end
 
 function Player:GetWeapon()
-	print("Weapon is" .. " " .. self.weapon .. ".")
+	print("Weapon is" .. " " .. self.weapon.type .. ".")
 	return self.weapon
 end
 
