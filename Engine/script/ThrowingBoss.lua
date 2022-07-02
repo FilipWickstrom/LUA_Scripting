@@ -38,6 +38,7 @@ end
 
 function ThrowBoss:OnDeath(playerGold)
 	playerGold = playerGold + self.worth
+	C_SetSpriteVisible(self.projectile.id, false)
 end
 
 function ThrowBoss:Throw(point)
@@ -114,7 +115,7 @@ function ThrowBoss:Chase()
 	
 end
 
-function ThrowBoss:Update(player)
+function ThrowBoss:Update()
 	
 	self:Throw(player.position)
 	self:UpdateThrow()

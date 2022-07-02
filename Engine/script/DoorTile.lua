@@ -26,7 +26,7 @@ end
 --[[ Check if player collides with the key, if so, 
 	 set itself and the key to invisible, or remove itself.
 ]]
-function DoorTile:Update(player)
+function DoorTile:Update()
 
 
 

@@ -41,18 +41,25 @@ function Player:AddBullet(pos, dir)
 	table.insert(self.bullets, g)
 end
 
-function Player:UpdateBullets()
-	for i, obj in ipairs(self.bullets) do
+function Player:UpdateBullets(enemies)
+	for i, bullet in ipairs(self.bullets) do
 		removed = false
-		if obj.lifetime <= 0 then
-			obj:OnEnd()
+		if bullet.lifetime <= 0 then
+			bullet:OnEnd()
 			table.remove(self.bullets, i)
 			removed = true
 		end
 		if not removed then
-			obj:Move(obj.dir)
-			obj:GUpdate()
-			obj.lifetime = obj.lifetime - deltatime
+			bullet:Move(bullet.dir)
+			bullet:GUpdate()
+			bullet.lifetime = bullet.lifetime - deltatime
+			for j, enemy in ipairs(enemies) do
+				if C_CheckSpriteCollision(bullet.id, enemy.id) and enemy.hp > 0 then
+					enemy.hp = enemy.hp - 5
+					bullet:OnEnd()
+					table.remove(self.bullets, i)
+				end
+			end
 		end
 	end
 end
@@ -84,7 +91,7 @@ function Player:HandleMovement(camera)
 	camera:Move(dir * self.speed * deltatime)
 end
 
-function Player:Shoot()
+function Player:Shoot(enemies)
 	if self.fireTimer <= 0 then
 		if C_IsKeyDown(keys.LBUTTON) then
 			mousepoint = vector:New()
@@ -98,12 +105,12 @@ function Player:Shoot()
 
 	self.fireTimer = self.fireTimer - deltatime
 
-	self:UpdateBullets()
+	self:UpdateBullets(enemies)
 end
 
-function Player:Update(camera)
+function Player:Update(camera, enemies)
 	self:HandleMovement(camera)
-	self:Shoot()
+	self:Shoot(enemies)
 
 	if self.hp > 100.0 then
 		self.hp = 100.0

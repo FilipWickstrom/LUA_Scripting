@@ -54,7 +54,7 @@ function Update(dt)
 	for num, obj in pairs(objects) do
 		if obj ~= nil then 
 			if obj.hp > 0 then
-				obj:Update(player)
+				obj:Update()
 			else
 				RemoveObject(num, obj)
 			end
@@ -72,7 +72,7 @@ function Update(dt)
 	end
 
 	-- Update player
-	player:Update(camera)
+	player:Update(camera, objects)
 end
 
 
