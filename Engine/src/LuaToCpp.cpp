@@ -36,6 +36,7 @@ int L_SetSpriteVisible(lua_State* L)
 	{
 		int id = static_cast<int>(lua_tonumber(L, -2));
 		bool trueOrFalse = lua_toboolean(L, -1);
+
 		SceneHandler::SetSpriteVisible(id, trueOrFalse);
 	}
 	return 0;
@@ -126,6 +127,18 @@ int L_AddHealthbarUI(lua_State* L)
 	lua_pushnumber(L, ret);
 
 	return 1;
+}
+
+int L_SetHealthbarVisibility(lua_State* L)
+{
+
+	const unsigned int id = lua_tonumber(L, -2);
+	const bool visible = lua_toboolean(L, -1);
+
+	if (Graphics2D::GetElement(id))
+		Graphics2D::GetElement(id)->SetVisibility(visible);
+
+	return 0;
 }
 
 int L_UpdatePosUI(lua_State* L)

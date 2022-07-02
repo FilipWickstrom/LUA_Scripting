@@ -88,6 +88,8 @@ void Sprite::Remove()
 void Sprite::SetVisible(const bool& isVisible)
 {
 	if (m_node)
+	{
 		m_node->setVisible(isVisible);
+	}
 }
 

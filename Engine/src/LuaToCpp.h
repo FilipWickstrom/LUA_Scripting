@@ -54,6 +54,7 @@ namespace GUI
 // Graphical Interface wrapper
 int L_UpdateGraphicalInterface(lua_State* L);
 int	L_AddHealthbarUI(lua_State* L);
+int L_SetHealthbarVisibility(lua_State* L);
 int L_UpdatePosUI(lua_State* L);
 int L_RemoveUI(lua_State* L);
 

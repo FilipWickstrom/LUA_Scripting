@@ -67,6 +67,24 @@ function gameObject:SetPosition(x, y)
 	end
 end
 
+function gameObject:SetVisibility(set)
+
+	if set == 0 then
+		C_SetSpriteVisible(self.id, false)
+		C_SetVisibleUI(self.gid, false)
+
+		self.isVisible = 0
+	else
+		C_SetSpriteVisible(self.id, true)
+		C_SetVisibleUI(self.gid, true)
+
+		self.isVisible = 1
+	end
+
+
+
+end
+
 function gameObject:GetPosition()
 	return self.position.x, self.position.y, self.position.z
 end

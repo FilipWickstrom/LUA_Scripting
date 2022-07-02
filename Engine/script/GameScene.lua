@@ -12,27 +12,10 @@ require('script/AllScenes')
 require('script/File')
 
 -- Collect separate types in different tables
-monsters = {}
 objects = {}
-
-function AddMonster(modelfilepath)
-	local monster = refMonster:New()
-	monster.id = C_LoadSprite(modelfilepath)
-	table.insert(monsters, monster)
-end
-
--- Returns all variables from the monsters table, in this case userdata.
---function getMonsters()
-	--return table.unpack(monsters)
---end
 
 function Start()
 	math.randomseed(os.time())
-	--AddMonster('skeleton.png')
-	--AddMonster('skeleton.png')
-
-	--local newMonkey = refMonkey:New()
-	--local throwBoss = refThrowBoss:New()
 
 	powerup = require('script/Powerups'):New()
 	goldText:Initialize()
@@ -48,14 +31,10 @@ function Start()
 
 	-- write down file
 	Write_To_File(objects, 'maps/test1.txt')
-
-	--print("Num of objects: " .. #objects)
 end
 
 -- Destroying everything
 function Clean()
-
-
 
 	print("### Removing player ###")
 	player:OnEnd()
@@ -65,10 +44,6 @@ function Clean()
 		v:OnEnd()
 	end
 
-	--print("### Removing powerups ###")
-	--for k, v in pairs(powerups) do
-	--	v:OnEnd()
-	--end
 end
 
 -- Game loop

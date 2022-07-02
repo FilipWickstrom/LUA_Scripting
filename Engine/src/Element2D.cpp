@@ -6,6 +6,11 @@ Element2D::Element2D()
 {
 }
 
+void Element2D::SetVisibility(const bool& set)
+{
+	m_visible = set;
+}
+
 Text::Text(std::string text)
 {
 	m_rect = irr::core::recti(0, 0, 1000, 500);
@@ -44,8 +49,11 @@ Healthbar::Healthbar(const irr::core::rect<irr::s32>& pos)
 
 void Healthbar::Draw()
 {
-	Graphics::GetDriver()->draw2DRectangle(irr::video::SColor(255, 255, 0, 0), m_background);
-	Graphics::GetDriver()->draw2DRectangle(irr::video::SColor(255, 0, 255, 0), m_foreground);
+	if (m_visible)
+	{
+		Graphics::GetDriver()->draw2DRectangle(irr::video::SColor(255, 255, 0, 0), m_background);
+		Graphics::GetDriver()->draw2DRectangle(irr::video::SColor(255, 0, 255, 0), m_foreground);
+	}
 }
 
 void Healthbar::Update(void* buff)

@@ -3,8 +3,9 @@
 
 class Element2D
 {
-private:
+protected:
 
+	bool m_visible = true;
 
 public:
 
@@ -14,6 +15,7 @@ public:
 	virtual void Draw() = 0;
 	virtual void Update(void* buff) = 0;
 	virtual void SetPosition(irr::core::recti pos) = 0;
+	void SetVisibility(const bool& set);
 };
 
 class Text : public Element2D

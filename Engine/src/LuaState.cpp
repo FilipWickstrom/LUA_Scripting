@@ -32,6 +32,7 @@ LuaHandler::LuaHandler()
 	lua_register(m_state, "C_UpdateUI", 			L_UpdateGraphicalInterface);
 	lua_register(m_state, "C_UpdatePosUI", 			L_UpdatePosUI);
 	lua_register(m_state, "C_RemoveUI", 			L_RemoveUI);
+	lua_register(m_state, "C_SetVisibleUI",			L_SetHealthbarVisibility);
 	
 	lua_register(m_state, "C_AddText", 				GUI::L_AddText);
 	lua_register(m_state, "C_AddButton", 			GUI::L_AddButton);

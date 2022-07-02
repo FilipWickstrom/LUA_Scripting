@@ -141,7 +141,9 @@ void SceneHandler::ChangeSprite(const unsigned int& id, const std::string& file)
 void SceneHandler::SetSpriteVisible(const unsigned int& id, const bool& isVisible)
 {
     if (Get().m_sprites.find(id) != Get().m_sprites.end())
+    {
         Get().m_sprites.at(id)->SetVisible(isVisible);
+    }
 }
 
 void SceneHandler::SetSpritePosition(const unsigned int& id, const irr::core::vector3df& pos)
