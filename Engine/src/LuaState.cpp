@@ -7,39 +7,58 @@ LuaHandler::LuaHandler()
 	m_state = luaL_newstate();
 	luaL_openlibs(m_state);
 
-	//Add functions to LUA
+	/*
+		Sprites
+	*/
 	lua_register(m_state, "C_LoadSprite", 			L_LoadSprite);
 	lua_register(m_state, "C_ChangeSprite",			L_ChangeSprite);
 	lua_register(m_state, "C_RemoveSprite", 		L_RemoveSprite);
 	lua_register(m_state, "C_SetSpriteVisible",		L_SetSpriteVisible);
 	lua_register(m_state, "C_SetSpritePosition", 	L_SetSpritePosition);
 	lua_register(m_state, "C_SetSpriteScale", 		L_SetSpriteScale);
+	// Param: 
 	lua_register(m_state, "C_SetSpriteRotation", 	L_SetSpriteRotation);
+	// Param: id1{uint}, id2{uint} & direction{string}[optional]
 	lua_register(m_state, "C_CheckSpriteCollision", L_CheckSpriteCollision);
+	lua_register(m_state, "C_CheckSpriteCircleCollision", L_CheckSpriteCircleCollision);
 
+	/*
+		Window
+	*/
 	lua_register(m_state, "C_WinWidth", 			L_GetWindowWidth);
 	lua_register(m_state, "C_WinHeight", 			L_GetWindowHeight);
 	
+	/*
+		Camera
+	*/
 	lua_register(m_state, "C_CreateCamera",			CAM::L_CreateCamera);
 	lua_register(m_state, "C_SetCameraPosition",	CAM::L_SetCameraPosition);
 	lua_register(m_state, "C_SetCameraTarget",		CAM::L_SetCameraTarget);
 	lua_register(m_state, "C_SetCameraFOV",			CAM::L_SetCameraFOV);
 
+	/*
+		Scene
+	*/
 	lua_register(m_state, "C_ChangeScene", 			L_ChangeScene);	
 	
-	//GUI
+	/*
+		GUI
+	*/
 	lua_register(m_state, "C_AddHealthbar", 		L_AddHealthbarUI);
 	lua_register(m_state, "C_UpdateUI", 			L_UpdateGraphicalInterface);
 	lua_register(m_state, "C_UpdatePosUI", 			L_UpdatePosUI);
 	lua_register(m_state, "C_RemoveUI", 			L_RemoveUI);
 	lua_register(m_state, "C_SetVisibleUI",			L_SetHealthbarVisibility);
-	
 	lua_register(m_state, "C_AddText", 				GUI::L_AddText);
 	lua_register(m_state, "C_AddButton", 			GUI::L_AddButton);
 	lua_register(m_state, "C_RemoveGUI", 			GUI::L_RemoveGUI);
 	lua_register(m_state, "C_IsButtonPressed", 		GUI::L_IsButtonPressed);
 	lua_register(m_state, "C_UpdateText", 			GUI::L_UpdateText);
 	lua_register(m_state, "C_SetTextAlignment",		GUI::L_SetTextAlignment);
+
+	/*
+		Input
+	*/
 	lua_register(m_state, "C_ScreenCoordsToWorld",	L_ScreenCoordsToWorld);
 	lua_register(m_state, "C_IsKeyDown",			L_IsKeyDown);
 }

@@ -116,6 +116,33 @@ bool SceneHandler::LoadScene(const std::string& file)
     return false;
 }
 
+irr::core::vector2di SceneHandler::Convert3DTo2DPositions(const irr::core::vector3df& pos3D)
+{
+    // Code from: https://irrlicht.sourceforge.io/forum/viewtopic.php?p=304427&hilit=2d+circle+node#p304427
+
+    irr::s32 sw = Graphics::GetWindowWidth() / 2;
+    irr::s32 sh = Graphics::GetWindowHeight() / 2;
+
+    irr::f32 transformedPos[4];
+    irr::core::matrix4 trans;
+    if (Graphics::GetSceneManager()->getActiveCamera())
+    {
+        trans *= Graphics::GetSceneManager()->getActiveCamera()->getProjectionMatrix();
+        trans *= Graphics::GetSceneManager()->getActiveCamera()->getViewMatrix();
+    }
+    transformedPos[0] = pos3D.X;
+    transformedPos[1] = pos3D.Y;
+    transformedPos[2] = pos3D.Z;
+    transformedPos[3] = 1.0f;
+    trans.multiplyWith1x4Matrix(transformedPos);
+    irr::f32 zDiv = transformedPos[3] == 0.0f ? 1.0f : (1.0f / transformedPos[3]);
+
+    irr::s32 screenx = (irr::s32)(sw * transformedPos[0] * zDiv) + sw;
+    irr::s32 screeny = ((irr::s32)(sh - (sh * (transformedPos[1] * zDiv))));
+
+    return irr::core::vector2di(screenx, screeny);
+}
+
 unsigned int SceneHandler::AddSprite(const std::string& file)
 {
     unsigned int id = Get().m_spriteUID++;
@@ -164,18 +191,64 @@ void SceneHandler::SetSpriteRotation(const unsigned int& id, const irr::core::ve
         Get().m_sprites.at(id)->SetRotation(rot);
 }
 
-bool SceneHandler::CheckSpriteCollision(const unsigned int& firstObjID, const unsigned int& secondObjID)
+bool SceneHandler::CheckSpriteCollision(const unsigned int& id1, const unsigned int& id2, const CollisionDir& dir)
 {
-    if (Get().m_sprites.find(firstObjID) != Get().m_sprites.end() &&
-        Get().m_sprites.find(secondObjID) != Get().m_sprites.end())
+    if (Get().m_sprites.find(id1) != Get().m_sprites.end() &&
+        Get().m_sprites.find(id2) != Get().m_sprites.end())
     {
-        //Collision check between rectangles - AABB
-        //[OPTIMIZE] do sphere collision first before AABB
-        const auto& rect1 = Get().m_sprites.at(firstObjID)->GetBounds();
-        const auto& rect2 = Get().m_sprites.at(secondObjID)->GetBounds();
+		const auto& rect1 = Get().m_sprites.at(id1)->GetBounds();
+		const auto& rect2 = Get().m_sprites.at(id2)->GetBounds();
+        
+		// AABB collisions
+		switch (dir)
+		{
+			// Only checking in Y-direction of the rectangles
+		case CollisionDir::vertical:
+			return (rect1.LowerRightCorner.Y > rect2.UpperLeftCorner.Y &&
+				    rect1.UpperLeftCorner.Y  < rect2.LowerRightCorner.Y);
+			break;
 
-        return rect1.isRectCollided(rect2);
+			// Only checking in X-direction of the rectangles
+		case CollisionDir::horizontal:
+			return (rect1.LowerRightCorner.X > rect2.UpperLeftCorner.X &&
+				    rect1.UpperLeftCorner.X  < rect2.LowerRightCorner.X);
+			break;
+
+			// Default - checking if one rectangle is inside on the other
+		case CollisionDir::both:
+			return rect1.isRectCollided(rect2);
+			break;
+
+		default:
+			break;
+		}
     }
+
+    return false;
+}
+
+bool SceneHandler::CheckSpriteCircleCollsion(const unsigned int& id1, const unsigned int& id2)
+{
+    if (Get().m_sprites.find(id1) != Get().m_sprites.end() &&
+        Get().m_sprites.find(id2) != Get().m_sprites.end())
+    {
+        const Sprite* sprite1 = Get().m_sprites.at(id1).get();
+        const Sprite* sprite2 = Get().m_sprites.at(id2).get();
+
+        irr::core::vector2df pos1 = sprite1->GetPosition2D();
+        float dist1 = sprite1->GetCollisionRadius();
+        irr::core::vector2df pos2 = sprite2->GetPosition2D();
+        float dist2 = sprite2->GetCollisionRadius();
+
+        // [OPTIMIZE] Can use getDistanceFromSQ() to avoid square root for better performance
+
+        // Distance between the two points
+        float posDist = pos1.getDistanceFrom(pos2);
+
+        // Checking if any of the distances is smaller than any of the radiuses
+        return (posDist < dist1 + dist2);
+    }
+
     return false;
 }
 
@@ -190,9 +263,10 @@ void SceneHandler::AddCamera()
     float fov = 50.f;
 
     irr::core::matrix4 matrix;
-    matrix.buildProjectionMatrixOrthoLH(fov * aspectRatio, fov, 0.1f, 500.f);
+    matrix.buildProjectionMatrixOrthoLH(fov * aspectRatio, fov, 1.f, 500.f);
 
     Get().m_camera->setProjectionMatrix(matrix, true);
+
 }
 
 void SceneHandler::SetCameraPosition(const irr::core::vector3df& pos)

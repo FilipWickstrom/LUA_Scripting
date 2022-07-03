@@ -15,7 +15,6 @@ function BasicBoss:New()
 	g.direction = Vector:New()
 	g.direction.x = 1
 	g.direction.z = 1
-	g.direction.y = 0
 	g.cooldown = 0
 
 	g.gid = C_AddHealthbar(0.0, 0.0, 100.0, 50.0)
@@ -34,21 +33,24 @@ function BasicBoss:Chase()
 	-- loop through all objects, any collision?
 	for num, obj in pairs(objects) do
 
-		if C_CheckSpriteCollision(self.id, obj.id) and self.id ~= obj.id then
-			if self.position.x < obj.position.x then
-				self.direction.x = -1 
-			else
-				self.direction.x = 1
+		-- Not colliding with itself		
+		if self.id ~= obj.id then
+
+			-- Checking horizontal direction
+			if (self.direction.x ~= 0) then
+				if (C_CheckSpriteCollision(self.id, obj.id, "horizontal")) then
+					self.direction.x = self.direction.x * -1
+				end
 			end
 
-			if self.position.z > obj.position.z then
-				self.direction.z = -1
-			else
-				self.direction.z = 1
+			-- Checking vertical direction
+			if (self.direction.z ~= 0) then
+				if (C_CheckSpriteCollision(self.id, obj.id, "vertical")) then
+					self.direction.z = self.direction.z * -1
+				end
 			end
 
 		end
-
 	end
 
 	self:Move(self.direction)

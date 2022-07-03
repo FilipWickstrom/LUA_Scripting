@@ -5,6 +5,7 @@ Sprite::Sprite()
 {
 	m_node = nullptr;
 	m_size = irr::core::vector2df(16.f, 16.f);
+	m_collisionRadius = 0.f;
 	this->LoadTexture("default.png");
 }
 
@@ -12,6 +13,7 @@ Sprite::Sprite(const std::string& textureName)
 {
 	m_node = nullptr;
 	m_size = irr::core::vector2df(16.f, 16.f);
+	m_collisionRadius = 0.f;
 	this->LoadTexture(textureName);
 }
 
@@ -29,7 +31,23 @@ void Sprite::SetScale(const irr::core::vector3df& scl)
 {
 	m_size.X *= scl.X;
 	m_size.Y *= scl.Z;
+	m_collisionRadius = m_size.getLength() / 2.f;
 	m_node->setScale(scl);
+}
+
+const irr::core::vector3df& Sprite::GetPosition() const
+{
+	return m_node->getPosition();
+}
+
+const irr::core::vector2df Sprite::GetPosition2D() const
+{
+	return { m_node->getPosition().X, m_node->getPosition().Z };
+}
+
+const float& Sprite::GetCollisionRadius() const
+{
+	return m_collisionRadius;
 }
 
 const irr::core::rectf Sprite::GetBounds() const
@@ -52,7 +70,6 @@ void Sprite::LoadTexture(const std::string& filename)
 		m_size = static_cast<irr::core::dimension2df>(texture->getSize()) / SPRITE_SIZE_MODIFIER;
 	
 	irr::scene::IMesh* mesh = Graphics::GetGeometryCreator()->createPlaneMesh(m_size);
-	
 	m_node = Graphics::GetSceneManager()->addMeshSceneNode(mesh);
 
 	if (!m_node)
@@ -70,10 +87,20 @@ void Sprite::LoadTexture(const std::string& filename)
 	//Turn off filtering - no interpolation
 	m_node->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_BILINEAR_FILTER, false);
 
-	//Visualize the boundingboxes
-#if DEBUG_HITBOXES
+	// Calculate collision radius
+	m_collisionRadius = m_size.getLength() / 2.f;
+	
+	/*
+		DEBUGGING - COLLISION
+	*/
+#if DEBUG_AABB_HITBOXES
 	m_node->setDebugDataVisible(irr::scene::EDS_BBOX);
 #endif
+#if DEBUG_CIRCULAR_HITBOXES
+	irr::scene::ISceneNode* sphereNode = Graphics::GetSceneManager()->addSphereSceneNode(m_collisionRadius, 12, m_node);
+	sphereNode->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_WIREFRAME, true);
+#endif
+
 }
 
 void Sprite::Remove()

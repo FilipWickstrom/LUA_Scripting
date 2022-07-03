@@ -28,6 +28,7 @@ private:
 	//Help functions to make the code cleaner
 	void ResetScene();
 	bool LoadScene(const std::string& file);
+	irr::core::vector2di Convert3DTo2DPositions(const irr::core::vector3df& pos3D);
 
 public:
 	/*
@@ -47,7 +48,15 @@ public:
 	static void SetSpritePosition(const unsigned int& id, const irr::core::vector3df& pos);
 	static void SetSpriteScale(const unsigned int& id, const irr::core::vector3df& scl);
 	static void SetSpriteRotation(const unsigned int& id, const irr::core::vector3df& rot);
-	static bool CheckSpriteCollision(const unsigned int& firstObjID, const unsigned int& secondObjID);
+	
+	enum class CollisionDir
+	{
+		horizontal,
+		vertical,
+		both
+	};
+	static bool CheckSpriteCollision(const unsigned int& id1, const unsigned int& id2, const CollisionDir& dir = CollisionDir::both);
+	static bool CheckSpriteCircleCollsion(const unsigned int& id1, const unsigned int& id2);
 
 	/*
 		Camera

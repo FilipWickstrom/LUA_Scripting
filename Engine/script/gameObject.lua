@@ -4,7 +4,7 @@ require('script/Utility')
 
 function gameObject:RandomizePos()
 	self.position.x = math.random(10)
-	self.position.y = 0
+	--self.position.y = 0
 	self.position.z = math.random(10)
 end
 
@@ -36,8 +36,9 @@ function gameObject:OnEnd()
 	C_RemoveSprite(self.id)
 end
 
+--UpdatePos
 function gameObject:GUpdate()
-	C_SetSpritePosition(self.id, self.position.x, self.position.z)
+	C_SetSpritePosition(self.id, self.position.x, self.position.y, self.position.z)
 end
 
 function gameObject:Move(vec)
@@ -47,14 +48,14 @@ end
 function gameObject:RotateLeft()
 	if self.rotation.z ~= 180 then
 		self.rotation.z = 180
-		C_SetSpriteRotation(self.rotation.x, self.rotation.y, self.rotation.z)
+		C_SetSpriteRotation(self.id, self.rotation.x, self.rotation.y, self.rotation.z)
 	end
 end
 
 function gameObject:RotateRight()
 	if self.rotation.z ~= 0 then
 		self.rotation.z = 0
-		C_SetSpriteRotation(self.rotation.x, self.rotation.y, self.rotation.z)
+		C_SetSpriteRotation(self.id, self.rotation.x, self.rotation.y, self.rotation.z)
 	end
 end
 
