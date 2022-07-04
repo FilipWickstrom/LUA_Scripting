@@ -32,7 +32,6 @@ end
 
 function gameObject:OnEnd()
 	C_RemoveUI(self.gid)
-	print("[LUA]: Removing model: " .. self.id)
 	C_RemoveSprite(self.id)
 end
 

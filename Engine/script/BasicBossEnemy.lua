@@ -56,7 +56,7 @@ function BasicBoss:Chase()
 	self:Move(self.direction)
 end
 
-function BasicBoss:Attack(player)
+function BasicBoss:Attack()
 
 	self.cooldown = self.cooldown - deltatime
 
@@ -67,9 +67,9 @@ function BasicBoss:Attack(player)
 
 end
 
-function BasicBoss:Update(player)
+function BasicBoss:Update()
 	self:Chase()
-	self:Attack(player)
+	self:Attack()
 	self:GUpdate()
 	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 100.0, 50.0)
 	C_UpdateUI(self.gid, self.hp)
