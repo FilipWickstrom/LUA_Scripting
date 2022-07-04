@@ -90,6 +90,10 @@ function gameObject:GetPosition()
 	return self.position.x, self.position.y, self.position.z
 end
 
+function gameObject:__tostring()
+	return "Position: " .. self.position.x .. " " .. self.position.y .. " " .. self.position.z
+end
+
 function gameObject:ChangeSprite(sprite)
 	C_ChangeSprite(self.id, sprite)
 end

@@ -2,6 +2,7 @@
 require('script/vector')
 gameObject = require('script/gameObject')
 Player = gameObject:New()
+require('script/Weapon')
 
 function Player:New()
 	local g = gameObject:New()
@@ -9,16 +10,12 @@ function Player:New()
 	g.hp = 100.0
 	g.gold = 0
 	g.xp = 0
-	g.weapon = "Hands"
+	g.weapon = Weapon.new("default")
 	g.name = "Player"
-	g.damage = 5
 	g.speed = 12
-	-- Add effects here.
 	g.position = vector:New()
+	-- Add effects here.
 	g.lastpickup = "None"
-	g.fireRate = 0.2
-	g.fireTimer = 0.0
-	g.canShoot = true
 
 	g.id = C_LoadSprite('knight.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0)
@@ -58,13 +55,15 @@ end
 
 function Player:Shoot()
 	if C_IsKeyDown(keys.LBUTTON) then
-		--print("Left mouse was clicked")
+		self.weapon:Fire(self.position)
 	end
 end
 
-function Player:Update(camera)
+function Player:Update(camera, enemies)
+	self:GUpdate()
 	self:HandleMovement(camera)
 	self:Shoot()
+	self.weapon:Update(enemies)
 
 	if self.hp > 100.0 then
 		self.hp = 100.0
@@ -73,14 +72,14 @@ function Player:Update(camera)
 	-- GOD MODE!!
 	--self.hp = 100
 	C_UpdateUI(self.gid, self.hp)
-	self:GUpdate()
-
 end
 
 function Player:IsAlive()
 	if(self.hp > 0) then
 		return true
 	end
+
+	self:OnEnd()
 
 	return false
 end
@@ -122,7 +121,7 @@ function Player:ReceiveExperience(xp)
 end
 
 function Player:GetWeapon()
-	print("Weapon is" .. " " .. self.weapon .. ".")
+	print("Weapon is" .. " " .. self.weapon.type .. ".")
 	return self.weapon
 end
 

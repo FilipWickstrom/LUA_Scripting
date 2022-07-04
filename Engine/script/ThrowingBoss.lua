@@ -12,15 +12,15 @@ function ThrowBoss:New()
 	g.xp = 25
 	g.damage = 5
 	g.speed = math.random(5) + 1
-	g.type = "shooty"
+	g.type = "shooter"
 	g.name = "enemy"
 	g.inhand = true
 	g.cooldown = 1
-	g.RandomizePos(g)
-	g.direction = {x = 1, y = 1}
+
+	g.direction = Vector:New()
 	g.gid = C_AddHealthbar(0.0, 0.0, 145.0, 50.0)
 
-	g.id = C_LoadSprite('ogre.png')
+	--g.id = C_LoadSprite('ogre.png')
 
 	g.projectile = gameObject:New()
 
@@ -38,6 +38,8 @@ end
 
 function ThrowBoss:OnDeath(playerGold)
 	playerGold = playerGold + self.worth
+	self.projectile:OnEnd()
+	self:OnEnd()
 end
 
 function ThrowBoss:Throw(point)
@@ -53,7 +55,7 @@ function ThrowBoss:Throw(point)
 		self.projectile.position.x = self.position.x
 		self.projectile.position.z = self.position.z
 
-		C_SetSpriteVisible(g.projectile.id, true)
+		C_SetSpriteVisible(self.projectile.id, true)
 	end
 end
 
@@ -89,23 +91,32 @@ function ThrowBoss:UpdateThrow()
 end
 
 function ThrowBoss:Chase()
-	local vec = vector:New()
-	if self.position.x > 18 or self.position.x < -22 then
-		self.direction.x = self.direction.x * -1
-	end
-	
-	if self.position.z > 11 or self.position.z < -11 then
-		self.direction.y = self.direction.y * -1
+
+	-- loop through all objects, any collision?
+	for num, obj in pairs(objects) do
+
+		if C_CheckSpriteCollision(self.id, obj.id) and self.id ~= obj.id then
+			if self.position.x < obj.position.x then
+				self.direction.x = -1 
+			else
+				self.direction.x = 1
+			end
+
+			if self.position.z > obj.position.z then
+				self.direction.z = -1
+			else
+				self.direction.z = 1
+			end
+
+		end
+
 	end
 
-	vec.x = self.direction.x;
-	vec.z = self.direction.y
-	
-	self:Move(vec)
+	self:Move(self.direction)
 	
 end
 
-function ThrowBoss:Update(player)
+function ThrowBoss:Update()
 	
 	self:Throw(player.position)
 	self:UpdateThrow()

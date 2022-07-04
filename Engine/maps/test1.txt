@@ -1,4 +1,29 @@
 {
+type=door
+sprite=doors_leaf_closed.png
+pos=20 -10
+visible=1
+collision=1
+}
+
+{
+type=shooter
+sprite=zombie_big.png
+pos=20 -10
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=50 30
+visible=1
+collision=1
+}
+
+
+{
 type=bouncy
 sprite=necromancer.png
 pos=20 0 0

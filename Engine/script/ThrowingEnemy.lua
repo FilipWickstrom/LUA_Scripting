@@ -36,6 +36,7 @@ end
 
 function ThrowMonkey:OnDeath(playerGold)
 	playerGold = playerGold + self.worth
+	self:OnEnd()
 end
 
 function ThrowMonkey:Throw(point)

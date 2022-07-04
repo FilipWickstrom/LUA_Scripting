@@ -358,32 +358,39 @@ int GUI::L_SetTextAlignment(lua_State* L)
 	return 0;
 }
 
-int L_ScreenCoordsToWorld(lua_State* L)
+int L_GetScreenCoords(lua_State* L)
 {
 	/*
-		Arguments: Pos[vector2di]
+		Arguments: None
 		Return: Pos[vector2di]
 	*/
 
 	irr::core::vector2di screenPos;
 
-	if (lua_type(L, -2) == LUA_TNUMBER)
-	{
-		screenPos.X = static_cast<int>(lua_tonumber(L, -2));
-	}
-	if (lua_type(L, -1) == LUA_TNUMBER)
-	{
-		screenPos.Y = static_cast<int>(lua_tonumber(L, -1));
-	}
+	screenPos = Input::GetInputHandler().MouseState.pos;
 
-	irr::core::line3df ray = SceneHandler::GetRayFromScreenCoords(screenPos);
-
-	//printf("Ray: %f, %f, %f\n", ray.start.X, ray.start.Y, ray.start.Z);
-
-	lua_pushnumber(L, 1);
-	lua_pushnumber(L, 2);
+	lua_pushnumber(L, screenPos.X);
+	lua_pushnumber(L, screenPos.Y);
 
 	return 2;
+}
+
+int L_GetWorldFromScreen(lua_State* L)
+{
+	/*
+		Arguments: None
+		Return: Pos[vector3di]
+	*/
+
+	irr::core::vector2di screenPos = Input::GetInputHandler().MouseState.pos;
+
+	irr::core::line3df ray = Graphics::GetSceneManager()->getSceneCollisionManager()->getRayFromScreenCoordinates(screenPos);
+
+	lua_pushnumber(L, ray.start.X);
+	lua_pushnumber(L, ray.start.Y);
+	lua_pushnumber(L, ray.start.Z);
+
+	return 3;
 }
 
 int L_IsKeyDown(lua_State* L)

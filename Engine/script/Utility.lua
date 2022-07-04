@@ -10,3 +10,17 @@ keys = {
 	LBUTTON = 0x01, 
 	RBUTTON = 0x02 
 }
+
+weapons = { 
+	["default"] = { 
+		sprite = "sword.png", fireRate = 0.2, damage = 15, speed = 35, lifetime = 4.0 
+	}
+}
+
+function tableLength(T)
+	local count = 0
+	for _ in pairs(T) do 
+		count = count + 1
+	end
+	return count
+end

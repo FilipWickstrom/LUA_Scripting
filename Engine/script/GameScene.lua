@@ -16,11 +16,6 @@ objects = {}
 
 function Start()
 	math.randomseed(os.time())
-	--AddMonster('skeleton.png')
-	--AddMonster('skeleton.png')
-
-	--local newMonkey = refMonkey:New()
-	--local throwBoss = refThrowBoss:New()
 
 	powerup = require('script/Powerups'):New()
 	goldText:Initialize()
@@ -36,14 +31,10 @@ function Start()
 
 	-- write down file
 	Write_To_File(objects, 'maps/test1.txt')
-
-	--print("Num of objects: " .. #objects)
 end
 
 -- Destroying everything
 function Clean()
-
-
 
 	print("### Removing player ###")
 	player:OnEnd()
@@ -53,21 +44,16 @@ function Clean()
 		v:OnEnd()
 	end
 
-	--print("### Removing powerups ###")
-	--for k, v in pairs(powerups) do
-	--	v:OnEnd()
-	--end
 end
 
 -- Game loop
 function Update(dt)
 	deltatime = dt
-
 	-- Loop through all objects
 	for num, obj in pairs(objects) do
 		if obj ~= nil then 
 			if obj.hp > 0 then
-				obj:Update(player)
+				obj:Update()
 			else
 				RemoveObject(num, obj)
 			end
@@ -85,7 +71,7 @@ function Update(dt)
 	end
 
 	-- Update player
-	player:Update(camera)
+	player:Update(camera, objects)
 end
 
 
