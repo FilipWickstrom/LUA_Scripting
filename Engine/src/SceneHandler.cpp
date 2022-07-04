@@ -116,33 +116,6 @@ bool SceneHandler::LoadScene(const std::string& file)
     return false;
 }
 
-irr::core::vector2di SceneHandler::Convert3DTo2DPositions(const irr::core::vector3df& pos3D)
-{
-    // Code from: https://irrlicht.sourceforge.io/forum/viewtopic.php?p=304427&hilit=2d+circle+node#p304427
-
-    irr::s32 sw = Graphics::GetWindowWidth() / 2;
-    irr::s32 sh = Graphics::GetWindowHeight() / 2;
-
-    irr::f32 transformedPos[4];
-    irr::core::matrix4 trans;
-    if (Graphics::GetSceneManager()->getActiveCamera())
-    {
-        trans *= Graphics::GetSceneManager()->getActiveCamera()->getProjectionMatrix();
-        trans *= Graphics::GetSceneManager()->getActiveCamera()->getViewMatrix();
-    }
-    transformedPos[0] = pos3D.X;
-    transformedPos[1] = pos3D.Y;
-    transformedPos[2] = pos3D.Z;
-    transformedPos[3] = 1.0f;
-    trans.multiplyWith1x4Matrix(transformedPos);
-    irr::f32 zDiv = transformedPos[3] == 0.0f ? 1.0f : (1.0f / transformedPos[3]);
-
-    irr::s32 screenx = (irr::s32)(sw * transformedPos[0] * zDiv) + sw;
-    irr::s32 screeny = ((irr::s32)(sh - (sh * (transformedPos[1] * zDiv))));
-
-    return irr::core::vector2di(screenx, screeny);
-}
-
 unsigned int SceneHandler::AddSprite(const std::string& file)
 {
     unsigned int id = Get().m_spriteUID++;

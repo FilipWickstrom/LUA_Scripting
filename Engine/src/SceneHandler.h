@@ -28,7 +28,6 @@ private:
 	//Help functions to make the code cleaner
 	void ResetScene();
 	bool LoadScene(const std::string& file);
-	irr::core::vector2di Convert3DTo2DPositions(const irr::core::vector3df& pos3D);
 
 public:
 	/*
