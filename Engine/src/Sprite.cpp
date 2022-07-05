@@ -120,3 +120,13 @@ void Sprite::SetVisible(const bool& isVisible)
 	}
 }
 
+void Sprite::SetCollision(const bool& hasCollision)
+{
+	m_collision = hasCollision;
+}
+
+const bool& Sprite::HasCollision() const
+{
+	return m_collision;
+}
+

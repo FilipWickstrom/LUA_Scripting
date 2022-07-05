@@ -169,6 +169,12 @@ bool SceneHandler::CheckSpriteCollision(const unsigned int& id1, const unsigned 
     if (Get().m_sprites.find(id1) != Get().m_sprites.end() &&
         Get().m_sprites.find(id2) != Get().m_sprites.end())
     {
+        
+        // Return false if one of them don't use collision
+        if (!Get().m_sprites.at(id1)->HasCollision() || 
+            !Get().m_sprites.at(id2)->HasCollision())
+            return false;
+
 		const auto& rect1 = Get().m_sprites.at(id1)->GetBounds();
 		const auto& rect2 = Get().m_sprites.at(id2)->GetBounds();
         
@@ -223,6 +229,16 @@ bool SceneHandler::CheckSpriteCircleCollsion(const unsigned int& id1, const unsi
     }
 
     return false;
+}
+
+Sprite* SceneHandler::GetSprite(const unsigned int& id)
+{
+    if (Get().m_sprites.find(id) != Get().m_sprites.end())
+    {
+        return Get().m_sprites.at(id).get();
+    }
+
+    return nullptr;
 }
 
 void SceneHandler::AddCamera()

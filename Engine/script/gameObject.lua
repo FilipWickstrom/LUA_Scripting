@@ -80,8 +80,19 @@ function gameObject:SetVisibility(set)
 
 		self.isVisible = 1
 	end
+end
 
+function gameObject:SetCollision(set)
 
+	if set == 0 then
+		C_SetSpriteCollision(self.id, false)
+
+		self.hasCollision = 0
+	else
+		C_SetSpriteCollision(self.id, true)
+
+		self.hasCollision = 1
+	end
 
 end
 

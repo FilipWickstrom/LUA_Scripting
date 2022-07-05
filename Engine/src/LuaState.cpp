@@ -32,6 +32,8 @@ LuaHandler::LuaHandler()
 	// Param: id1{uint}, id2{uint}
 	// Return: isColliding{bool}
 	lua_register(m_state, "C_CheckSpriteCircleCollision", L_CheckSpriteCircleCollision);
+	// Param: 
+	lua_register(m_state, "C_SetSpriteCollision",	L_SetSpriteCollision);
 
 	/*
 		Window

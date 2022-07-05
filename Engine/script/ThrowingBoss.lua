@@ -80,7 +80,7 @@ function ThrowBoss:UpdateThrow()
 
 		self.cooldown = self.cooldown - deltatime
 
-		if x < 1.5 and y < 1.5 and self.cooldown < 0 then
+		if C_CheckSpriteCollision(self.projectile.id, player.id) or self.cooldown < 0 then
 			-- hide the projectile from the screen
 			C_SetSpriteVisible(self.projectile.id, false)
 			self.inhand = true
