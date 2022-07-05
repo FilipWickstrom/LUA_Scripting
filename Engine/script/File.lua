@@ -67,7 +67,7 @@ function Adjust_Object_Collision(objects, num, line)
 	local coll = string.gsub(line, "collision=", "")
 
 	if objects[num] ~= nil then
-		objects[num].hasCollision = tonumber(coll)
+		objects[num]:SetCollision(tonumber(coll))
 	end
 
 end

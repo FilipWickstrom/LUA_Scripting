@@ -48,6 +48,7 @@ public:
 	static void SetSpriteScale(const unsigned int& id, const irr::core::vector3df& scl);
 	static void SetSpriteRotation(const unsigned int& id, const irr::core::vector3df& rot);
 	static bool CheckSpriteCollision(const unsigned int& firstObjID, const unsigned int& secondObjID);
+	static Sprite* GetSprite(const unsigned int& id);
 
 	/*
 		Camera

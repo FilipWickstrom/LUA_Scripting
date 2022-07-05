@@ -169,14 +169,32 @@ bool SceneHandler::CheckSpriteCollision(const unsigned int& firstObjID, const un
     if (Get().m_sprites.find(firstObjID) != Get().m_sprites.end() &&
         Get().m_sprites.find(secondObjID) != Get().m_sprites.end())
     {
+
+        Sprite* first = Get().m_sprites.at(firstObjID).get();
+        Sprite* second = Get().m_sprites.at(secondObjID).get();
+
+        // Return false if one of them has collision enabled.
+        if (!first->HasCollision() || !second->HasCollision())
+            return false;
+
         //Collision check between rectangles - AABB
         //[OPTIMIZE] do sphere collision first before AABB
-        const auto& rect1 = Get().m_sprites.at(firstObjID)->GetBounds();
-        const auto& rect2 = Get().m_sprites.at(secondObjID)->GetBounds();
+        const auto& rect1 = first->GetBounds();
+        const auto& rect2 = second->GetBounds();
 
         return rect1.isRectCollided(rect2);
     }
     return false;
+}
+
+Sprite* SceneHandler::GetSprite(const unsigned int& id)
+{
+    if (Get().m_sprites.find(id) != Get().m_sprites.end())
+    {
+        return Get().m_sprites.at(id).get();
+    }
+
+    return nullptr;
 }
 
 void SceneHandler::AddCamera()

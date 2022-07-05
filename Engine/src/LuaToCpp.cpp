@@ -85,6 +85,21 @@ int L_CheckSpriteCollision(lua_State* L)
 	return 1;
 }
 
+int L_SetSpriteCollision(lua_State* L)
+{
+	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+	const bool trueorfalse = static_cast<bool>(lua_toboolean(L, -1));
+
+	Sprite* sprite = SceneHandler::GetSprite(id);
+
+	if (sprite)
+	{
+		sprite->SetCollision(trueorfalse);
+	}
+
+	return 0;
+}
+
 int L_GetWindowWidth(lua_State* L)
 {
 	lua_pushnumber(L, Graphics::GetWindowWidth());

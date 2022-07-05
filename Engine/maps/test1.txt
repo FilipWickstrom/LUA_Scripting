@@ -19,6 +19,6 @@ type=wall
 sprite=wall_mid.png
 pos=50 30
 visible=1
-collision=1
+collision=0
 }
 

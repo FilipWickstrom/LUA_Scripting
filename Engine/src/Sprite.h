@@ -5,6 +5,7 @@ class Sprite
 private:
 	irr::scene::ISceneNode* m_node;
 	irr::core::vector2df	m_size;
+	bool					m_collision = true;
 
 public:
 	Sprite();
@@ -14,6 +15,8 @@ public:
 	void LoadTexture(const std::string& filename);
 	void Remove();
 	void SetVisible(const bool& isVisible = true);
+	void SetCollision(const bool& hasCollision = true);
+	const bool& HasCollision() const;
 	
 	/*
 		Transform
