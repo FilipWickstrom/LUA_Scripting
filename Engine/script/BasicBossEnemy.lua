@@ -13,7 +13,7 @@ function BasicBoss:New()
 	g.type = "bouncy"
 	g.name = "enemy"
 	g.direction = Vector:New()
-	g.direction.x = 1
+	g.direction.x = 0.5
 	g.direction.z = 1
 	g.cooldown = 0
 
@@ -30,27 +30,28 @@ end
 
 function BasicBoss:Chase()
 
-	-- loop through all objects, any collision?
-	for num, obj in pairs(objects) do
+	-- Go through all the wall tiles
+	for num, obj in pairs(walls) do
 
-		-- Not colliding with itself		
-		if self.id ~= obj.id then
-
-			-- Checking horizontal direction
-			if (self.direction.x ~= 0) then
-				if (C_CheckSpriteCollision(self.id, obj.id, "horizontal")) then
-					self.direction.x = self.direction.x * -1
-				end
-			end
-
-			-- Checking vertical direction
-			if (self.direction.z ~= 0) then
-				if (C_CheckSpriteCollision(self.id, obj.id, "vertical")) then
-					self.direction.z = self.direction.z * -1
-				end
-			end
-
+		-- Not the best collision :(
+		if C_CheckSpriteCollision(self.id, obj.id) then
+			self.direction.x = self.direction.x * -1
+			self.direction.z = self.direction.z * -1
 		end
+			
+		--[[
+		-- Not working correctly either...
+		-- Checking horizontal direction
+		if (C_CheckSpriteCollision(self.id, obj.id, "horizontal")) then
+			self.direction.x = self.direction.x * -1
+		end
+
+		-- Checking vertical direction
+		if (C_CheckSpriteCollision(self.id, obj.id, "vertical")) then
+			self.direction.z = self.direction.z * -1
+		end
+		]]--
+
 	end
 
 	self:Move(self.direction)

@@ -164,6 +164,12 @@ void SceneHandler::SetSpriteRotation(const unsigned int& id, const irr::core::ve
         Get().m_sprites.at(id)->SetRotation(rot);
 }
 
+void SceneHandler::SetHasCollision(const unsigned int& id, const bool& enabled)
+{
+    if (Get().m_sprites.find(id) != Get().m_sprites.end())
+        Get().m_sprites.at(id)->SetCollision(enabled);
+}
+
 bool SceneHandler::CheckSpriteCollision(const unsigned int& id1, const unsigned int& id2, const CollisionDir& dir)
 {
     if (Get().m_sprites.find(id1) != Get().m_sprites.end() &&
@@ -171,9 +177,11 @@ bool SceneHandler::CheckSpriteCollision(const unsigned int& id1, const unsigned 
     {
         
         // Return false if one of them don't use collision
-        if (!Get().m_sprites.at(id1)->HasCollision() || 
+        if (!Get().m_sprites.at(id1)->HasCollision() ||
             !Get().m_sprites.at(id2)->HasCollision())
+        {
             return false;
+        }
 
 		const auto& rect1 = Get().m_sprites.at(id1)->GetBounds();
 		const auto& rect2 = Get().m_sprites.at(id2)->GetBounds();
@@ -229,16 +237,6 @@ bool SceneHandler::CheckSpriteCircleCollsion(const unsigned int& id1, const unsi
     }
 
     return false;
-}
-
-Sprite* SceneHandler::GetSprite(const unsigned int& id)
-{
-    if (Get().m_sprites.find(id) != Get().m_sprites.end())
-    {
-        return Get().m_sprites.at(id).get();
-    }
-
-    return nullptr;
 }
 
 void SceneHandler::AddCamera()

@@ -47,7 +47,7 @@ public:
 	static void SetSpritePosition(const unsigned int& id, const irr::core::vector3df& pos);
 	static void SetSpriteScale(const unsigned int& id, const irr::core::vector3df& scl);
 	static void SetSpriteRotation(const unsigned int& id, const irr::core::vector3df& rot);
-	static Sprite* GetSprite(const unsigned int& id);
+	static void SetHasCollision(const unsigned int& id, const bool& enabled);
 	
 	enum class CollisionDir
 	{

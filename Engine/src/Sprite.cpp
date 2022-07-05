@@ -6,6 +6,7 @@ Sprite::Sprite()
 	m_node = nullptr;
 	m_size = irr::core::vector2df(16.f, 16.f);
 	m_collisionRadius = 0.f;
+	m_hasCollision = true;
 	this->LoadTexture("default.png");
 }
 
@@ -14,6 +15,7 @@ Sprite::Sprite(const std::string& textureName)
 	m_node = nullptr;
 	m_size = irr::core::vector2df(16.f, 16.f);
 	m_collisionRadius = 0.f;
+	m_hasCollision = true;
 	this->LoadTexture(textureName);
 }
 
@@ -122,11 +124,11 @@ void Sprite::SetVisible(const bool& isVisible)
 
 void Sprite::SetCollision(const bool& hasCollision)
 {
-	m_collision = hasCollision;
+	m_hasCollision = hasCollision;
 }
 
 const bool& Sprite::HasCollision() const
 {
-	return m_collision;
+	return m_hasCollision;
 }
 

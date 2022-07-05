@@ -120,28 +120,34 @@ function Adjust_Object_Type(objects, num, line)
 	-- Spawn a normal following enemy
 	if line:find('monster') then 
 		objects[num] = Monster:New()
+		objects[num].type = 'monster'
 	end
 
 	-- Spawn a throwing stationary enemy
 	if line:find('monkey') then
 		objects[num] = Monkey:New()
+		objects[num].type = 'monkey'
 	end
 
 	-- Spawns a basic boss that bounces across the room
 	if line:find('bouncy') then
 		objects[num] = Bouncy:New()
+		objects[num].type = 'bouncy'
 	end
 
 	if line:find('wall') then
 		objects[num] = WallTile:New()
+		objects[num].type = 'wall'
 	end
 
 	if line:find('shooter') then
 		objects[num] = Shooter:New()
+		objects[num].type = 'shooter'
 	end
 
 	if line:find('door') then
 		objects[num] = DoorTile:New()
+		objects[num].type = 'door'
 	end
 
 end

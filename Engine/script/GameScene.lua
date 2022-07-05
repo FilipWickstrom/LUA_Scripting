@@ -13,6 +13,8 @@ require('script/File')
 
 -- Collect separate types in different tables
 objects = {}
+walls = {}
+enemies = {}
 
 function Start()
 	math.randomseed(os.time())
@@ -30,7 +32,25 @@ function Start()
 	objects = Load_File('maps/test1.txt')
 
 	-- write down file
-	Write_To_File(objects, 'maps/test1.txt')
+	--Write_To_File(objects, 'maps/test1.txt')
+
+	-- Go through all the objects
+	for k, v in pairs(objects) do
+		
+		-- Collidable tiles
+		if (v.type == 'wall' or 
+			v.type == 'door') then
+			table.insert(walls, v)
+		end
+
+		-- Adds all enemies to the enemies table
+		if (v.type == 'bouncy'	or 
+			v.type == 'monster' or
+			v.type == 'shooter' or
+			v.type == 'monkey')	then
+			table.insert(enemies, v)
+		end
+	end
 end
 
 -- Destroying everything

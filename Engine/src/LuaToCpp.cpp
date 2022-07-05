@@ -133,16 +133,12 @@ int L_CheckSpriteCircleCollision(lua_State* L)
 
 int L_SetSpriteCollision(lua_State* L)
 {
-	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
-	const bool trueorfalse = static_cast<bool>(lua_toboolean(L, -1));
-
-	Sprite* sprite = SceneHandler::GetSprite(id);
-
-	if (sprite)
+	if (lua_isnumber(L, -2) && lua_isboolean(L, -1))
 	{
-		sprite->SetCollision(trueorfalse);
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+		const bool trueorfalse = static_cast<bool>(lua_toboolean(L, -1));
+		SceneHandler::SetHasCollision(id, trueorfalse);
 	}
-
 	return 0;
 }
 
