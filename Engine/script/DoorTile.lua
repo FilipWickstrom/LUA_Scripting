@@ -4,7 +4,7 @@ local DoorTile = gameObject:New()
 
 function DoorTile:New()
 	local g = gameObject:New()
-	g.hp = 100
+	g.hp = 10000000000
 	g.type = "door"
 	g.key = gameObject:New()
 	g.key.id = C_LoadSprite('key.png')

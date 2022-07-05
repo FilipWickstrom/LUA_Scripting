@@ -4,7 +4,7 @@ local WallTile = gameObject:New()
 
 function WallTile:New()
 	local g = gameObject:New()
-	g.hp = 100
+	g.hp = 100000000
 	g.type = "wall"
 
 	self.__index = WallTile

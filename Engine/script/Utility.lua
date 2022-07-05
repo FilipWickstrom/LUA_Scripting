@@ -13,7 +13,7 @@ keys = {
 
 weapons = { 
 	["default"] = { 
-		sprite = "sword.png", fireRate = 0.2, damage = 15, speed = 35, lifetime = 4.0 
+		sprite = "sword.png", fireRate = 1.2, damage = 5.0, speed = 35, lifetime = 4.0 
 	}
 }
 

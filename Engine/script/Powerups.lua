@@ -55,7 +55,7 @@ function Powerup:Gain(player, goldText)
 		-- Update gold text
 		goldText:Update(player)
 	elseif self.type == "Attack" then
-		player.damage = player.damage + 5.0
+		player.weapon.damage = player.weapon.damage + 5.0
 	elseif self.type == "Speed" then
 		player.speed = player.speed + 2.5
 	elseif self.type == "Health" then
