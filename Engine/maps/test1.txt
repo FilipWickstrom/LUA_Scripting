@@ -17,8 +17,519 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
+pos=-4 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-1 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=2 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=5 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=8 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=11 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=14 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=17 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=20 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=23 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=26 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=29 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=32 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=35 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=38 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=41 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=44 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=47 30
+visible=1
+collision=0
+}
+
+{
+type=wall
+sprite=wall_mid.png
 pos=50 30
 visible=1
 collision=0
 }
 
+{
+type=wall
+sprite=wall_mid.png
+pos=53 30
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 27
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 24
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 21
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 18
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 15
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 9
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 6
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 3
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 0
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 -3
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 -6
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 -9
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=53 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=50 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=47 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=44 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=41 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=38 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=35 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=32 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=29 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=26 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=14 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=11 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=8 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=5 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=2 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-1 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-4 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 -12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 30
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 27
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 24
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 21
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 18
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 15
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 12
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 9
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 6
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 3
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 0
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 -3
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 -6
+visible=1
+collision=1
+}
+
+{
+type=wall
+sprite=wall_mid.png
+pos=-5 -9
+visible=1
+collision=1
+}

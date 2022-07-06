@@ -30,7 +30,7 @@ function Start()
 	objects = Load_File('maps/test1.txt')
 
 	-- write down file
-	Write_To_File(objects, 'maps/test1.txt')
+	--Write_To_File(objects, 'maps/test1.txt')
 end
 
 -- Destroying everything
