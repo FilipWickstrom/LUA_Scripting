@@ -36,11 +36,6 @@ function gameObject:RandomizePos()
 	self.position.z = math.random(10)
 end
 
---UpdatePos
-function gameObject:GUpdate()
-	C_SetSpritePosition(self.id, self.position.x, self.position.y, self.position.z)
-end
-
 function gameObject:Move(vec)
 	self.position = self.position + (vec * self.speed * deltatime)
 	C_SetSpritePosition(self.id, self.position.x, self.position.y, self.position.z)
@@ -60,9 +55,16 @@ function gameObject:RotateRight()
 	end
 end
 
+-- Set position: use table or x,y,z
 function gameObject:SetPosition(pos)
 	self.position = pos
 	C_SetSpritePosition(self.id, pos.x, pos.y, pos.z)
+end
+function gameObject:SetPosition(x, y, z)
+	self.position.x = x
+	self.position.y = y
+	self.position.z = z
+	C_SetSpritePosition(self.id, x, y, z)
 end
 
 function gameObject:SetVisibility(set)

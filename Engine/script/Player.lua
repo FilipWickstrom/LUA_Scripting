@@ -21,7 +21,6 @@ function Player:New()
 
 	g.id = C_LoadSprite('knight.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0)
-	g:GUpdate()
 
 	self.__index = Player
 	setmetatable(g, self)
@@ -48,7 +47,6 @@ function Player:HandleMovement(camera)
 
 	-- Move everything
 	self:Move(dir)
-	self:GUpdate()
 	camera:Move(dir * self.speed * deltatime)
 
 	-- Check if player collided with walls
@@ -61,7 +59,6 @@ function Player:HandleMovement(camera)
 			dir.x = dir.x * -1
 			dir.z = dir.z * -1
 			self:Move(dir)
-			self:GUpdate()
 			camera:Move(dir * self.speed * deltatime)
 
 			-- Found collision - dont need to keep going
@@ -78,7 +75,6 @@ function Player:Shoot()
 end
 
 function Player:Update(camera, enemies)
-	self:GUpdate()
 	self:HandleMovement(camera)
 	self:Shoot()
 	self.weapon:Update(enemies)

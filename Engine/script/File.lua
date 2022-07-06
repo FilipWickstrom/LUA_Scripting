@@ -96,12 +96,9 @@ function Adjust_Object_Pos(objects, num, line)
 
 	local x, y, z = string.match(filepath, '(%-?%d+)%s(%-?%d+)%s(%-?%d+)')
 
-	-- check if x and y is properly present in the text file
+	-- check if x,y,z is properly present in the text file
 	if x ~= nil and y ~= nil and z ~= nil and objects[num] ~= nil then
-		objects[num].position.x = tonumber(x)
-		objects[num].position.y = tonumber(y)
-		objects[num].position.z = tonumber(z)
-		C_SetSpritePosition(objects[num].id, objects[num].position.x, objects[num].position.y, objects[num].position.z)
+		objects[num]:SetPosition(tonumber(x), tonumber(y), tonumber(z))
 	end
 
 end

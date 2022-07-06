@@ -71,7 +71,6 @@ end
 function BasicBoss:Update()
 	self:Chase()
 	self:Attack()
-	self:GUpdate()
 	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 100.0, 50.0)
 	C_UpdateUI(self.gid, self.hp)
 end

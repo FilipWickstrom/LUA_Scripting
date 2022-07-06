@@ -90,10 +90,8 @@ end
 function ThrowMonkey:Update(player)
 	self:Throw(player.position)
 	self:UpdateThrow()
-	self:GUpdate()
 	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 75.0, 25.0)
 	C_UpdateUI(self.gid, self.hp)
-	self.projectile:GUpdate()
 end
 
 

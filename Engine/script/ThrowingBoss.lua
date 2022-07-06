@@ -25,7 +25,7 @@ function ThrowBoss:New()
 	g.projectile = gameObject:New()
 
 	g.projectile.id = C_LoadSprite('sword_huge.png')
-	g.projectile.position = Vector:New()
+	g.projectile:SetPosition(g.position)
 	g.projectile.target = Vector:New()
 	g.projectile.speed = 2
 	C_SetSpriteVisible(g.projectile.id, false)
@@ -66,18 +66,21 @@ function ThrowBoss:UpdateThrow()
 		local x = math.abs(self.projectile.position.x - self.projectile.target.x)
 		local y = math.abs(self.projectile.position.z - self.projectile.target.z)
 
+		local dir = vector:New()
+
 		if self.projectile.position.x > self.projectile.target.x then
-			self.projectile.position.x = self.projectile.position.x - x * deltatime * self.projectile.speed
+			dir.x = -x
 		else
-			self.projectile.position.x = self.projectile.position.x + x * deltatime * self.projectile.speed
+			dir.x = x
 		end
 
 		if self.projectile.position.z > self.projectile.target.z then
-			self.projectile.position.z = self.projectile.position.z - y * deltatime * self.projectile.speed
+			dir.z = -y	
 		else
-			self.projectile.position.z = self.projectile.position.z + y * deltatime * self.projectile.speed
+			dir.z = y
 		end
 
+		self.projectile:Move(dir)
 		self.cooldown = self.cooldown - deltatime
 
 		if C_CheckSpriteCollision(self.projectile.id, player.id) or self.cooldown < 0 then
@@ -122,8 +125,6 @@ function ThrowBoss:Update()
 	self:UpdateThrow()
 
 	self:Chase()
-	self:GUpdate()
-	self.projectile:GUpdate()
 	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 145.0, 50.0)
 	C_UpdateUI(self.gid, self.hp)
 end
