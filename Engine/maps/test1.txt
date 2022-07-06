@@ -15,6 +15,14 @@ collision=1
 }
 
 {
+type=monkey
+sprite=necromancer.png
+pos=30 -10
+visible=1
+collision=1
+}
+
+{
 type=wall
 sprite=wall_mid.png
 pos=-4 30

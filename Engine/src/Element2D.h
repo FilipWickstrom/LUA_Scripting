@@ -57,6 +57,7 @@ public:
 
 	Healthbar(const irr::core::rect<irr::s32>& pos);
 	~Healthbar() = default;
+	void SetMaxHealth(const float& maxHp);
 
 	// Inherited via Element2D
 	virtual void Draw() override;

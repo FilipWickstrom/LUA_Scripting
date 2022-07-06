@@ -170,8 +170,8 @@ int L_UpdatePosUI(lua_State* L)
 	irr::core::rect<irr::s32> rect;
 	irr::scene::ISceneCollisionManager* m = Graphics::GetSceneManager()->getSceneCollisionManager();
 	irr::core::vector2d<irr::s32> pos = m->getScreenCoordinatesFrom3DPosition({ x, 0, y });
-	rect.LowerRightCorner = irr::core::vector2di(static_cast<int>(pos.X + x2), static_cast<int>(pos.Y + y2));
-	rect.UpperLeftCorner = irr::core::vector2di(static_cast<int>(pos.X), static_cast<int>(pos.Y));
+	rect.LowerRightCorner = irr::core::vector2di(static_cast<int>(pos.X + x2 * 0.5f), static_cast<int>(pos.Y + y2 * 1.5f));
+	rect.UpperLeftCorner = irr::core::vector2di(static_cast<int>(pos.X - x2 * 0.5f), static_cast<int>(pos.Y + y2 * 1.f));
 
 	Graphics2D::SetPosition(id, rect);
 	return 0;

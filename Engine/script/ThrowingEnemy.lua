@@ -7,7 +7,7 @@ local COOLDOWN = 1.5
 
 function ThrowMonkey:New()
 	local g = gameObject:New()
-	g.hp = 100
+	g.hp = 35
 	g.worth = 15
 	g.xp = 25
 	g.damage = 5
@@ -20,7 +20,7 @@ function ThrowMonkey:New()
 	self.__index = ThrowMonkey
 	setmetatable(g, self)
 
-	g.id = C_LoadSprite('necromancer.png')
+	--g.id = C_LoadSprite('necromancer.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0)
 
 	g.projectile = gameObject:New()
@@ -52,7 +52,7 @@ function ThrowMonkey:Throw(point)
 		self.projectile.position.x = self.position.x
 		self.projectile.position.z = self.position.z
 
-		C_SetSpriteVisible(g.projectile.id, true)
+		C_SetSpriteVisible(self.projectile.id, true)
 	end
 end
 
@@ -87,7 +87,7 @@ function ThrowMonkey:UpdateThrow()
 	end
 end
 
-function ThrowMonkey:Update(player)
+function ThrowMonkey:Update()
 	self:Throw(player.position)
 	self:UpdateThrow()
 	self:GUpdate()
