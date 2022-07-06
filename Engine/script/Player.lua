@@ -1,8 +1,10 @@
--- require/include
-require('script/vector')
-gameObject = require('script/gameObject')
-Player = gameObject:New()
+-- Includes
+--require('script/vector')
 require('script/Weapon')
+local gameObject = require('script/gameObject')
+
+
+Player = gameObject:New()
 
 function Player:New()
 	local g = gameObject:New()
@@ -27,30 +29,46 @@ function Player:New()
 end
 
 function Player:HandleMovement(camera)
-	local x = 0
-	local y = 0
+	local dir = vector:New()
 
 	if C_IsKeyDown(keys.W) then
-		y = 1
+		dir.z = dir.z + 1
 	end
 	if C_IsKeyDown(keys.S) then
-		y = -1
+		dir.z = dir.z - 1
 	end
 	if C_IsKeyDown(keys.A) then
-		x = -1
+		dir.x = dir.x - 1
 		self:RotateLeft()
 	end
 	if C_IsKeyDown(keys.D) then
-		x = 1
+		dir.x = dir.x + 1
 		self:RotateRight()
 	end
-	
-	local dir = vector:New()
-	dir.x = x
-	dir.z = y
 
+	-- Move everything
 	self:Move(dir)
+	self:GUpdate()
 	camera:Move(dir * self.speed * deltatime)
+
+	-- Check if player collided with walls
+
+	for i = 1, #walls do
+
+		-- Move back the player when colliding
+		if (C_CheckSpriteCollision(self.id, walls[i].id)) then
+			
+			dir.x = dir.x * -1
+			dir.z = dir.z * -1
+			self:Move(dir)
+			self:GUpdate()
+			camera:Move(dir * self.speed * deltatime)
+
+			-- Found collision - dont need to keep going
+			break
+		end
+	end
+
 end
 
 function Player:Shoot()

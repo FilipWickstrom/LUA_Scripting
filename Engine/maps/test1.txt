@@ -46,6 +46,15 @@ visible=1
 collision=1
 }
 
+
+{
+type=wall
+sprite=wall_mid.png
+pos=30 0 4
+visible=1
+collision=1
+}
+
 {
 type=wall
 sprite=wall_mid.png

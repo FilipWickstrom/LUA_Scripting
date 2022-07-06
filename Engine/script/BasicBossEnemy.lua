@@ -31,10 +31,10 @@ end
 function BasicBoss:Chase()
 
 	-- Go through all the wall tiles
-	for num, obj in pairs(walls) do
+	for i = 1, #walls do
 
 		-- Not the best collision :(
-		if C_CheckSpriteCollision(self.id, obj.id) then
+		if C_CheckSpriteCollision(self.id, walls[i].id) then
 			self.direction.x = self.direction.x * -1
 			self.direction.z = self.direction.z * -1
 		end

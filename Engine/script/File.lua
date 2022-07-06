@@ -1,10 +1,14 @@
-Monster = require('script/Monster')
-Monkey = require('script/ThrowingEnemy')
-gameObject = require('script/gameObject')
-Bouncy = require('script/BasicBossEnemy')
-WallTile = require('script/WallTile')
-DoorTile = require('script/DoorTile')
-Shooter = require('script/ThrowingBoss')
+gameObject	= require('script/gameObject')
+
+-- Enemies
+Monster		= require('script/Monster')
+Monkey		= require('script/ThrowingEnemy')
+Bouncy		= require('script/BasicBossEnemy')
+Shooter		= require('script/ThrowingBoss')
+
+-- Tiles
+WallTile	= require('script/WallTile')
+DoorTile	= require('script/DoorTile')
 
 --[[LOAD TO FILE SECTION]]--
 
