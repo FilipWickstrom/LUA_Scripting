@@ -7,7 +7,7 @@ local COOLDOWN = 1.5
 
 function ThrowMonkey:New()
 	local g = gameObject:New()
-	g.hp = 35
+	g.hp = 25
 	g.worth = 15
 	g.xp = 25
 	g.damage = 5
@@ -77,7 +77,7 @@ function ThrowMonkey:UpdateThrow()
 
 		self.cooldown = self.cooldown - deltatime
 
-		if x < 1.5 and y < 1.5 and self.cooldown < 0 then
+		if self.cooldown < 0 then
 			-- hide the projectile from the screen
 			C_SetSpriteVisible(self.projectile.id, false)
 			self.inhand = true

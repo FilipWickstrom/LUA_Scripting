@@ -7,7 +7,7 @@ local COOLDOWN_TIME = 5.0
 
 function Monster:New()
 	local g = gameObject:New()
-	g.hp = 100
+	g.hp = 15
 	g.worth = 25
 	g.xp = 25
 	g.damage = 5
