@@ -32,14 +32,15 @@ function Powerup:New()
 	g.shouldrespawn = false
 	g.id = C_LoadSprite("chest.png")
 	g:RandomizePos()
-	C_SetSpritePosition(g.id, g.position.x, g.position.z)
+	g.position.y = 1
+	g:GUpdate()
 
 	g.bomb = gameObject:New()
 	g.bomb.id = C_LoadSprite('bomb.png')
-	g.bomb.position = vector:New()
+	g.bomb.position = g.position
 	g.bomb.countdown = 3.0
 	g.bomb.active = false
-	C_SetSpritePosition(g.bomb.id, g.bomb.position.x, g.bomb.position.z)
+	g.bomb:GUpdate()
 	C_SetSpriteVisible(g.bomb.id, false)
 
 	self.__index = Powerup
@@ -65,7 +66,7 @@ function Powerup:Gain(player, goldText)
 
 		self.bomb.position.x = self.position.x
 		self.bomb.position.z = self.position.z
-		C_SetSpritePosition(self.bomb.id, self.bomb.position.x, self.bomb.position.z)
+		self.bomb:GUpdate()
 		C_SetSpriteVisible(self.bomb.id, true)
 
 	end

@@ -90,13 +90,14 @@ function Adjust_Object_Pos(objects, num, line)
 	-- removes the pos= from the current line
 	local filepath = string.gsub(line, "pos=", "")
 
-	local x, y = string.match(filepath, '(%-?%d+)%s(%-?%d+)')
+	local x, y, z = string.match(filepath, '(%-?%d+)%s(%-?%d+)%s(%-?%d+)')
 
 	-- check if x and y is properly present in the text file
-	if x ~= nil and y ~= nil and objects[num] ~= nil then
+	if x ~= nil and y ~= nil and z ~= nil and objects[num] ~= nil then
 		objects[num].position.x = tonumber(x)
 		objects[num].position.y = tonumber(y)
-		C_SetSpritePosition(objects[num].id, objects[num].position.x, objects[num].position.y)
+		objects[num].position.z = tonumber(z)
+		C_SetSpritePosition(objects[num].id, objects[num].position.x, objects[num].position.y, objects[num].position.z)
 	end
 
 end
@@ -119,28 +120,34 @@ function Adjust_Object_Type(objects, num, line)
 	-- Spawn a normal following enemy
 	if line:find('monster') then 
 		objects[num] = Monster:New()
+		objects[num].type = 'monster'
 	end
 
 	-- Spawn a throwing stationary enemy
 	if line:find('monkey') then
 		objects[num] = Monkey:New()
+		objects[num].type = 'monkey'
 	end
 
 	-- Spawns a basic boss that bounces across the room
 	if line:find('bouncy') then
 		objects[num] = Bouncy:New()
+		objects[num].type = 'bouncy'
 	end
 
 	if line:find('wall') then
 		objects[num] = WallTile:New()
+		objects[num].type = 'wall'
 	end
 
 	if line:find('shooter') then
 		objects[num] = Shooter:New()
+		objects[num].type = 'shooter'
 	end
 
 	if line:find('door') then
 		objects[num] = DoorTile:New()
+		objects[num].type = 'door'
 	end
 
 end
@@ -166,7 +173,7 @@ function Write_To_File(objects, path)
 			file:write('{', "\n")
 			file:write('type=' .. obj.type, "\n")
 			file:write('sprite=' .. obj.spritename, "\n")
-			file:write('pos=' .. tostring(obj.position.x) .. ' ' .. tostring(obj.position.y), "\n")
+			file:write('pos=' .. tostring(obj.position.x) .. ' ' .. tostring(obj.position.y) .. ' ' .. tostring(obj.position.z), "\n")
 			file:write('visible=' .. obj.isVisible, "\n")
 			file:write('collision=' .. obj.hasCollision, "\n")
 			file:write('}', "\n")

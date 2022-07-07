@@ -13,9 +13,8 @@ function BasicBoss:New()
 	g.type = "bouncy"
 	g.name = "enemy"
 	g.direction = Vector:New()
-	g.direction.x = 1
+	g.direction.x = 0.5
 	g.direction.z = 1
-	g.direction.y = 0
 	g.cooldown = 0
 
 	g.gid = C_AddHealthbar(0.0, 0.0, 100.0, 50.0)
@@ -31,30 +30,34 @@ end
 
 function BasicBoss:Chase()
 
-	-- loop through all objects, any collision?
-	for num, obj in pairs(objects) do
+	-- Go through all the wall tiles
+	for num, obj in pairs(walls) do
 
-		if C_CheckSpriteCollision(self.id, obj.id) and self.id ~= obj.id then
-			if self.position.x < obj.position.x then
-				self.direction.x = -1 
-			else
-				self.direction.x = 1
-			end
-
-			if self.position.z > obj.position.z then
-				self.direction.z = -1
-			else
-				self.direction.z = 1
-			end
-
+		-- Not the best collision :(
+		if C_CheckSpriteCollision(self.id, obj.id) then
+			self.direction.x = self.direction.x * -1
+			self.direction.z = self.direction.z * -1
 		end
+			
+		--[[
+		-- Not working correctly either...
+		-- Checking horizontal direction
+		if (C_CheckSpriteCollision(self.id, obj.id, "horizontal")) then
+			self.direction.x = self.direction.x * -1
+		end
+
+		-- Checking vertical direction
+		if (C_CheckSpriteCollision(self.id, obj.id, "vertical")) then
+			self.direction.z = self.direction.z * -1
+		end
+		]]--
 
 	end
 
 	self:Move(self.direction)
 end
 
-function BasicBoss:Attack(player)
+function BasicBoss:Attack()
 
 	self.cooldown = self.cooldown - deltatime
 
@@ -65,9 +68,9 @@ function BasicBoss:Attack(player)
 
 end
 
-function BasicBoss:Update(player)
+function BasicBoss:Update()
 	self:Chase()
-	self:Attack(player)
+	self:Attack()
 	self:GUpdate()
 	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 100.0, 50.0)
 	C_UpdateUI(self.gid, self.hp)

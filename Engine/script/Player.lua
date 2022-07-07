@@ -19,7 +19,7 @@ function Player:New()
 
 	g.id = C_LoadSprite('knight.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0)
-	C_SetSpritePosition(g.id, g.position.x, g.position.z)
+	g:GUpdate()
 
 	self.__index = Player
 	setmetatable(g, self)

@@ -51,7 +51,8 @@ const std::string SCRIPTSPATH	= "script/";
 const float SPRITE_SIZE_MODIFIER = 4.f;
 // Option to show UI area
 #define DEBUG_UI 0
-#define DEBUG_HITBOXES 0
+#define DEBUG_AABB_HITBOXES 0
+#define DEBUG_CIRCULAR_HITBOXES 0
 
 
 /*

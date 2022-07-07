@@ -44,59 +44,101 @@ int L_SetSpriteVisible(lua_State* L)
 
 int L_SetSpritePosition(lua_State* L)
 {
-	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -3));
-	irr::core::vector3df vec;
-	vec.X = static_cast<float>(lua_tonumber(L, -2));
-	//vec.Y = static_cast<float>(lua_tonumber(L, -2));
-	vec.Z = static_cast<float>(lua_tonumber(L, -1));
-	SceneHandler::SetSpritePosition(id, vec);
+	if (lua_isnumber(L, -4) && lua_isnumber(L, -3) &&
+		lua_isnumber(L, -2) && lua_isnumber(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -4));
+		irr::core::vector3df vec;
+		vec.X = static_cast<float>(lua_tonumber(L, -3));
+		vec.Y = static_cast<float>(lua_tonumber(L, -2));
+		vec.Z = static_cast<float>(lua_tonumber(L, -1));
+		SceneHandler::SetSpritePosition(id, vec);
+	}
 	return 0;
 }
 
 int L_SetSpriteScale(lua_State* L)
 {
-	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
-	float scl = static_cast<float>(lua_tonumber(L, -1));
-	SceneHandler::SetSpriteScale(id, { scl, scl, scl });
+	if (lua_isnumber(L, -2) && lua_isnumber(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+		float scl = static_cast<float>(lua_tonumber(L, -1));
+		SceneHandler::SetSpriteScale(id, { scl, scl, scl });
+	}
 	return 0;
 }
 
 int L_SetSpriteRotation(lua_State* L)
 {
-	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -4));
-	irr::core::vector3df vec;
-	vec.X = static_cast<float>(lua_tonumber(L, -3));
-	vec.Y = static_cast<float>(lua_tonumber(L, -2));
-	vec.Z = static_cast<float>(lua_tonumber(L, -1));
-	SceneHandler::SetSpriteRotation(id, vec);
+	if (lua_isnumber(L, -4) && lua_isnumber(L, -3) &&
+		lua_isnumber(L, -2) && lua_isnumber(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -4));
+		irr::core::vector3df vec;
+		vec.X = static_cast<float>(lua_tonumber(L, -3));
+		vec.Y = static_cast<float>(lua_tonumber(L, -2));
+		vec.Z = static_cast<float>(lua_tonumber(L, -1));
+		SceneHandler::SetSpriteRotation(id, vec);
+	}
 	return 0;
 }
 
 int L_CheckSpriteCollision(lua_State* L)
 {
-	if (lua_isnumber(L, -2) && lua_isnumber(L, -1))
+	// Default collision
+	if (lua_isnumber(L, -1) && lua_isnumber(L, -2))
 	{
-		unsigned int obj1ID = static_cast<unsigned int>(lua_tonumber(L, -2));
-		unsigned int obj2ID = static_cast<unsigned int>(lua_tonumber(L, -1));
-		bool collided = SceneHandler::CheckSpriteCollision(obj1ID, obj2ID);
+		unsigned int id1 = static_cast<unsigned int>(lua_tonumber(L, -2));
+		unsigned int id2 = static_cast<unsigned int>(lua_tonumber(L, -1));
+		bool collided = SceneHandler::CheckSpriteCollision(id1, id2);
 		lua_pushboolean(L, collided);
 	}
 
+	// Also took in the optional direction of collision
+	else if (lua_isstring(L, -1) && lua_isnumber(L, -2) && lua_isnumber(L, -3))
+	{
+		unsigned int id1 = static_cast<unsigned int>(lua_tonumber(L, -3));
+		unsigned int id2 = static_cast<unsigned int>(lua_tonumber(L, -2));
+		std::string collDirection = lua_tostring(L, -1);
+		SceneHandler::CollisionDir direction = SceneHandler::CollisionDir::both;
+
+		if (collDirection == "horizontal")
+			direction = SceneHandler::CollisionDir::horizontal;
+		else if (collDirection == "vertical")
+			direction = SceneHandler::CollisionDir::vertical;
+		
+		bool collided = SceneHandler::CheckSpriteCollision(id1, id2, direction);
+		lua_pushboolean(L, collided);
+	}
+
+	// Wrong arguments
+	else
+	{
+		lua_pushboolean(L, false);
+	}
+	return 1;
+}
+
+int L_CheckSpriteCircleCollision(lua_State* L)
+{
+	if (lua_isnumber(L, -1) && lua_isnumber(L, -2))
+	{
+		unsigned int id1 = static_cast<unsigned int>(lua_tonumber(L, -2));
+		unsigned int id2 = static_cast<unsigned int>(lua_tonumber(L, -1));
+		bool collided = SceneHandler::CheckSpriteCircleCollsion(id1, id2);
+		lua_pushboolean(L, collided);
+	}
 	return 1;
 }
 
 int L_SetSpriteCollision(lua_State* L)
 {
-	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
-	const bool trueorfalse = static_cast<bool>(lua_toboolean(L, -1));
-
-	Sprite* sprite = SceneHandler::GetSprite(id);
-
-	if (sprite)
+	if (lua_isnumber(L, -2) && lua_isboolean(L, -1))
 	{
-		sprite->SetCollision(trueorfalse);
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+		const bool trueorfalse = static_cast<bool>(lua_toboolean(L, -1));
+		SceneHandler::SetHasCollision(id, trueorfalse);
 	}
-
 	return 0;
 }
 
@@ -147,7 +189,7 @@ int L_AddHealthbarUI(lua_State* L)
 int L_SetHealthbarVisibility(lua_State* L)
 {
 
-	const unsigned int id = lua_tonumber(L, -2);
+	const unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
 	const bool visible = lua_toboolean(L, -1);
 
 	if (Graphics2D::GetElement(id))
