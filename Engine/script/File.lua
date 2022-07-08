@@ -98,6 +98,19 @@ function Adjust_Object_Pos(objects, num, line)
 		objects[num].position.y = tonumber(y)
 		objects[num].position.z = tonumber(z)
 		C_SetSpritePosition(objects[num].id, objects[num].position.x, objects[num].position.y, objects[num].position.z)
+	else
+
+		-- support for only x and z axis
+		local x, z = string.match(filepath, '(%-?%d+)%s(%-?%d+)')
+
+		if x~= nil and z ~=nil and objects[num] ~= nil then
+
+			objects[num].position.x = tonumber(x)
+			objects[num].position.y = 0
+			objects[num].position.z = tonumber(z)
+			C_SetSpritePosition(objects[num].id, objects[num].position.x, objects[num].position.y, objects[num].position.z)
+		end
+
 	end
 
 end
