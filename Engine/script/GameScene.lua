@@ -38,16 +38,12 @@ function Start()
 	for k, v in pairs(objects) do
 		
 		-- Collidable tiles
-		if (v.type == 'wall' or 
-			v.type == 'door') then
+		if (v.name == "default") then
 			table.insert(walls, v)
 		end
 
 		-- Adds all enemies to the enemies table
-		if (v.type == 'bouncy'	or 
-			v.type == 'monster' or
-			v.type == 'shooter' or
-			v.type == 'monkey')	then
+		if (v.name == "enemy")	then
 			table.insert(enemies, v)
 		end
 	end
