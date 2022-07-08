@@ -6,10 +6,13 @@ boss			= require('script/BasicBossEnemy')
 refThrowBoss	= require('script/ThrowingBoss')
 powerup			= require('script/Powerups')
 goldText		= require('script/GoldText')
+weaponText		= require('script/WeaponText')
 refCamera		= require('script/Camera')
 lastpickupText	= require('script/lastpickuptext')
 require('script/AllScenes')
 require('script/File')
+
+
 
 -- Collect separate types in different tables
 objects = {}
@@ -21,6 +24,7 @@ function Start()
 
 	powerup = require('script/Powerups'):New()
 	goldText:Initialize()
+	weaponText:Initialize()
 	lastpickupText:Initialize(player)
 
 	--Camera setup
@@ -88,6 +92,8 @@ function Update(dt)
 
 	-- Update player
 	player:Update(camera, objects)
+
+	weaponText:Update()
 end
 
 
