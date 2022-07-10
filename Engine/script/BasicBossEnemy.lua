@@ -30,6 +30,7 @@ end
 
 function BasicBoss:Chase()
 
+	--[[
 	-- Go through all the wall tiles
 	for i = 1, #walls do
 
@@ -38,6 +39,30 @@ function BasicBoss:Chase()
 			self.direction.x = self.direction.x * -1
 			self.direction.z = self.direction.z * -1
 			break
+		end
+	end
+
+	self:Move(self.direction)
+	]]
+
+	-- temporary bounce that works better than the one above.
+
+	-- loop through all objects, any collision?
+	for num, obj in pairs(objects) do
+
+		if C_CheckSpriteCollision(self.id, obj.id) and self.id ~= obj.id then
+			if self.position.x < obj.position.x then
+				self.direction.x = -1 
+			else
+				self.direction.x = 1
+			end
+
+			if self.position.z < obj.position.z then
+				self.direction.z = -1
+			else
+				self.direction.z = 1
+			end
+
 		end
 
 	end
