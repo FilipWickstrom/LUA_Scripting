@@ -170,16 +170,24 @@ int L_UpdateGraphicalInterface(lua_State* L)
 
 int L_AddHealthbarUI(lua_State* L)
 {
-	float y2 = static_cast<float>(lua_tonumber(L, -1));
-	float x2 = static_cast<float>(lua_tonumber(L, -2));
-	float y = static_cast<float>(lua_tonumber(L, -3));
-	float x = static_cast<float>(lua_tonumber(L, -4));
+	float y2 = static_cast<float>(lua_tonumber(L, -2));
+	float x2 = static_cast<float>(lua_tonumber(L, -3));
+	float y = static_cast<float>(lua_tonumber(L, -4));
+	float x = static_cast<float>(lua_tonumber(L, -5));
+	float maxHp = 100.0f;
+
+	// Checks if maxHp is entered into the function, and sets it accordingly.
+	if (lua_isnumber(L, -5))
+	{
+		maxHp = static_cast<int>(lua_tonumber(L, -1));
+	}
 
 	irr::core::rect<irr::s32> rect;
 	rect.LowerRightCorner = irr::core::vector2di(static_cast<int>(x2), static_cast<int>(y2));
 	rect.UpperLeftCorner = irr::core::vector2di(static_cast<int>(x), static_cast<int>(y));
 
 	const unsigned int ret = Graphics2D::AddHealthbar(rect);
+	dynamic_cast<Healthbar*>(Graphics2D::GetElement(ret))->SetMaxHealth(maxHp);
 
 	lua_pushnumber(L, ret);
 

@@ -6,10 +6,13 @@ boss			= require('script/BasicBossEnemy')
 refThrowBoss	= require('script/ThrowingBoss')
 powerup			= require('script/Powerups')
 goldText		= require('script/GoldText')
+weaponText		= require('script/WeaponText')
 refCamera		= require('script/Camera')
 lastpickupText	= require('script/lastpickuptext')
 require('script/AllScenes')
 require('script/File')
+
+
 
 -- Collect separate types in different tables
 objects = {}
@@ -21,6 +24,7 @@ function Start()
 
 	powerup = require('script/Powerups'):New()
 	goldText:Initialize()
+	weaponText:Initialize()
 	lastpickupText:Initialize(player)
 
 	--Camera setup
@@ -38,16 +42,12 @@ function Start()
 	for k, v in pairs(objects) do
 		
 		-- Collidable tiles
-		if (v.type == 'wall' or 
-			v.type == 'door') then
+		if (v.name == "default") then
 			table.insert(walls, v)
 		end
 
 		-- Adds all enemies to the enemies table
-		if (v.type == 'bouncy'	or 
-			v.type == 'monster' or
-			v.type == 'shooter' or
-			v.type == 'monkey')	then
+		if (v.name == "enemy")	then
 			table.insert(enemies, v)
 		end
 	end
@@ -92,6 +92,8 @@ function Update(dt)
 
 	-- Update player
 	player:Update(camera, objects)
+
+	weaponText:Update()
 end
 
 

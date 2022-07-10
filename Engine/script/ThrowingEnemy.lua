@@ -21,7 +21,7 @@ function ThrowMonkey:New()
 	setmetatable(g, self)
 
 	--g.id = C_LoadSprite('necromancer.png')
-	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0)
+	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0, g.hp)
 
 	g.projectile = gameObject:New()
 
@@ -37,6 +37,7 @@ end
 function ThrowMonkey:OnDeath(playerGold)
 	playerGold = playerGold + self.worth
 	self:OnEnd()
+	self.projectile:OnEnd()
 end
 
 function ThrowMonkey:Throw(point)

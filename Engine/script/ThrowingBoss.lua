@@ -18,7 +18,7 @@ function ThrowBoss:New()
 	g.cooldown = 1
 
 	g.direction = Vector:New()
-	g.gid = C_AddHealthbar(0.0, 0.0, 145.0, 50.0)
+	g.gid = C_AddHealthbar(0.0, 0.0, 145.0, 50.0, g.hp)
 
 	--g.id = C_LoadSprite('ogre.png')
 
