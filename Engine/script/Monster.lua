@@ -7,7 +7,7 @@ local COOLDOWN_TIME = 5.0
 
 function Monster:New()
 	local g = gameObject:New()
-	g.hp = 100
+	g.hp = 15
 	g.worth = 25
 	g.xp = 25
 	g.damage = 5
@@ -15,7 +15,7 @@ function Monster:New()
 	g.type = "monster"
 	g.name = "enemy"
 	g.cooldown = 0.0
-	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0)
+	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0, g.hp)
 	self.__index = Monster
 	setmetatable(g, self)
 

@@ -9,6 +9,7 @@ function Weapon.new(_type)
 	assert(weapons[_type] ~= nil, "Weapon type of: " .. _type .. " does not exist!")
 	local instance = setmetatable({}, MetaWeapon)
 	instance.type = _type
+	instance.name = weapons[_type].name
 	instance.bullets = {}
 	instance.damage = weapons[_type].damage
 	instance.fireRate = weapons[_type].fireRate

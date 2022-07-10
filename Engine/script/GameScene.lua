@@ -3,9 +3,12 @@ Player			= require('script/Player')
 Camera			= require('script/Camera')
 Powerup			= require('script/Powerups')
 goldText		= require('script/GoldText')
+weaponText		= require('script/WeaponText')
 lastpickupText	= require('script/lastpickuptext')
 require('script/AllScenes')	
 require('script/File')
+
+
 
 -- Collect separate types in different tables
 objects	= {}
@@ -20,6 +23,7 @@ function Start()
 
 	powerup = Powerup:New()
 	goldText:Initialize()
+	weaponText:Initialize()
 	lastpickupText:Initialize(player)
 
 	--Camera setup
@@ -92,6 +96,8 @@ function Update(dt)
 
 	-- Update player
 	player:Update(camera, objects)
+
+	weaponText:Update()
 end
 
 

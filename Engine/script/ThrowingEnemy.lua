@@ -7,7 +7,7 @@ local COOLDOWN = 1.5
 
 function ThrowMonkey:New()
 	local g = gameObject:New()
-	g.hp = 100
+	g.hp = 25
 	g.worth = 15
 	g.xp = 25
 	g.damage = 5
@@ -19,7 +19,7 @@ function ThrowMonkey:New()
 	self.__index = ThrowMonkey
 	setmetatable(g, self)
 
-	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0)
+	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0, g.hp)
 
 	g.projectile = gameObject:New()
 
@@ -36,6 +36,7 @@ function ThrowMonkey:OnDeath(playerGold)
 	playerGold = playerGold + self.worth
 	self.projectile:OnEnd()
 	self:OnEnd()
+	self.projectile:OnEnd()
 end
 
 function ThrowMonkey:Throw(point)
@@ -80,6 +81,7 @@ function ThrowMonkey:UpdateThrow()
 		self.cooldown = self.cooldown - deltatime
 
 		if C_CheckSpriteCollision(self.projectile.id, player.id) or self.cooldown < 0 then
+		--if self.cooldown < 0 then
 			-- hide the projectile from the screen
 			C_SetSpriteVisible(self.projectile.id, false)
 			self.inhand = true

@@ -18,7 +18,7 @@ function ThrowBoss:New()
 	g.cooldown = 1
 
 	g.direction = Vector:New()
-	g.gid = C_AddHealthbar(0.0, 0.0, 145.0, 50.0)
+	g.gid = C_AddHealthbar(0.0, 0.0, 145.0, 50.0, g.hp)
 
 	g.projectile = gameObject:New()
 
@@ -81,7 +81,7 @@ function ThrowBoss:UpdateThrow()
 		self.projectile:Move(dir)
 		self.cooldown = self.cooldown - deltatime
 
-		if C_CheckSpriteCollision(self.projectile.id, player.id) or self.cooldown < 0 then
+		if self.cooldown < 0 then
 			-- hide the projectile from the screen
 			C_SetSpriteVisible(self.projectile.id, false)
 			self.inhand = true

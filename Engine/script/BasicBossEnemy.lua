@@ -5,7 +5,7 @@ local COOLDOWN_TIME = 3.0
 
 function BasicBoss:New()
 	local g = gameObject:New()
-	g.hp = 100
+	g.hp = 150
 	g.worth = 30
 	g.xp = 25
 	g.damage = 25
@@ -17,7 +17,7 @@ function BasicBoss:New()
 	g.direction.z = 1
 	g.cooldown = 0
 
-	g.gid = C_AddHealthbar(0.0, 0.0, 100.0, 50.0)
+	g.gid = C_AddHealthbar(0.0, 0.0, 100.0, 50.0, g.hp)
 
 	self.__index = BasicBoss
 	setmetatable(g, self)

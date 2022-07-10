@@ -47,6 +47,11 @@ Healthbar::Healthbar(const irr::core::rect<irr::s32>& pos)
 	m_background = pos;
 }
 
+void Healthbar::SetMaxHealth(const float& maxHp)
+{
+	m_max = maxHp;
+}
+
 void Healthbar::Draw()
 {
 	if (m_visible)

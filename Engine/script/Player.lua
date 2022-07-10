@@ -19,7 +19,7 @@ function Player:New()
 	g.lastpickup = "None"
 
 	g.id = C_LoadSprite('knight.png')
-	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0)
+	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0, g.hp)
 
 	self.__index = Player
 	setmetatable(g, self)
