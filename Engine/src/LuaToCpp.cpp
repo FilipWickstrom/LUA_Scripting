@@ -410,7 +410,7 @@ int L_IsKeyDown(lua_State* L)
 
 	if (lua_type(L, -1) == LUA_TNUMBER)
 	{
-		irr::EKEY_CODE key = static_cast<irr::EKEY_CODE>(lua_tonumber(L, -1));
+		irr::EKEY_CODE key = static_cast<irr::EKEY_CODE>((int)lua_tonumber(L, -1));
 
 		isKeyDown = Input::IsKeyDown(key);
 	}

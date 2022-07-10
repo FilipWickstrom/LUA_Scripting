@@ -92,7 +92,7 @@ void Graphics::LoadOptionsLUA(const std::string& luafile)
     lua_pushstring(LUA, "driverType");
     lua_gettable(LUA, -2);
     if (lua_isnumber(LUA, -1))
-        m_window.driverType = static_cast<irr::video::E_DRIVER_TYPE>(lua_tonumber(LUA, -1));
+        m_window.driverType = static_cast<irr::video::E_DRIVER_TYPE>((int)lua_tonumber(LUA, -1));
     lua_pop(LUA, 1);
 }
 
