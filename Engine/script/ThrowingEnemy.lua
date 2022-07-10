@@ -32,11 +32,9 @@ function ThrowMonkey:New()
 	return g
 end
 
-function ThrowMonkey:OnDeath(playerGold)
-	playerGold = playerGold + self.worth
+function ThrowMonkey:OnDeath()
 	self.projectile:OnEnd()
 	self:OnEnd()
-	self.projectile:OnEnd()
 end
 
 function ThrowMonkey:Throw(point)

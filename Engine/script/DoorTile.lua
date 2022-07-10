@@ -25,11 +25,11 @@ end
 ]]
 function DoorTile:Update()
 
-
-
 	if C_CheckSpriteCollision(player.id, self.key.id) then
 		C_SetSpriteVisible(self.key.id, false)
 		C_SetSpriteVisible(self.id, false)
+		C_RemoveSprite(self.id)
+		C_RemoveSprite(self.key.id)
 	end
 
 end

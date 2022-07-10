@@ -34,8 +34,7 @@ function ThrowBoss:New()
 	return g
 end
 
-function ThrowBoss:OnDeath(playerGold)
-	playerGold = playerGold + self.worth
+function ThrowBoss:OnDeath()
 	self.projectile:OnEnd()
 	self:OnEnd()
 end

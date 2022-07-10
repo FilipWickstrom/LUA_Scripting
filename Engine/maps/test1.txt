@@ -1,19 +1,10 @@
 {
-type=door
-sprite=doors_leaf_closed.png
-pos=-20 0 -10
-visible=1
-collision=1
-}
-
-{
 type=shooter
 sprite=zombie_big.png
 pos=-20 0.2 -10
 visible=1
 collision=1
 }
-
 
 {
 type=monster
@@ -23,19 +14,10 @@ visible=1
 collision=1
 }
 
-
 {
 type=bouncy
-sprite=necromancer.png
+sprite=ogre.png
 pos=20 0.2 0
-visible=1
-collision=1
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=20 0 10
 visible=1
 collision=1
 }
@@ -43,158 +25,14 @@ collision=1
 {
 type=monkey
 sprite=necromancer.png
-pos=30 -10
+pos=50 0.2 -20
 visible=1
 collision=1
 }
 
 {
-type=wall
-sprite=wall_mid.png
-pos=-4 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=-1 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=2 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=5 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=8 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=11 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=14 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=17 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=20 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=23 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=26 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=29 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=32 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=35 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=38 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=41 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=44 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=47 30
-visible=1
-collision=0
-}
-
-{
-type=wall
-sprite=wall_mid.png
+type=door
+sprite=doors_leaf_closed.png
 pos=20 0 -10
 visible=1
 collision=1
@@ -203,16 +41,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=30 0 0
-visible=1
-collision=1
-}
-
-
-{
-type=wall
-sprite=wall_mid.png
-pos=30 0 4
+pos=26 0 -12
 visible=1
 collision=1
 }
@@ -220,7 +49,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=10 0 0
+pos=30 0 -12
 visible=1
 collision=1
 }
@@ -228,7 +57,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 30
+pos=34 0 -12
 visible=1
 collision=1
 }
@@ -236,7 +65,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 27
+pos=38 0 -12
 visible=1
 collision=1
 }
@@ -244,7 +73,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 24
+pos=42 0 -12
 visible=1
 collision=1
 }
@@ -252,7 +81,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 21
+pos=46 0 -12
 visible=1
 collision=1
 }
@@ -260,7 +89,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 18
+pos=46 0 -8
 visible=1
 collision=1
 }
@@ -268,7 +97,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 15
+pos=46 0 -4
 visible=1
 collision=1
 }
@@ -276,7 +105,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 12
+pos=46 0 0
 visible=1
 collision=1
 }
@@ -284,7 +113,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 9
+pos=46 0 4
 visible=1
 collision=1
 }
@@ -292,7 +121,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 6
+pos=46 0 8
 visible=1
 collision=1
 }
@@ -300,7 +129,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 3
+pos=46 0 12
 visible=1
 collision=1
 }
@@ -308,7 +137,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 0
+pos=46 0 16
 visible=1
 collision=1
 }
@@ -316,7 +145,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 -3
+pos=46 0 20
 visible=1
 collision=1
 }
@@ -324,7 +153,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 -6
+pos=42 0 20
 visible=1
 collision=1
 }
@@ -332,7 +161,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 -9
+pos=38 0 20
 visible=1
 collision=1
 }
@@ -340,7 +169,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=53 -12
+pos=34 0 20
 visible=1
 collision=1
 }
@@ -348,7 +177,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=50 -12
+pos=30 0 20
 visible=1
 collision=1
 }
@@ -356,7 +185,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=47 -12
+pos=26 0 20
 visible=1
 collision=1
 }
@@ -364,7 +193,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=44 -12
+pos=22 0 20
 visible=1
 collision=1
 }
@@ -372,7 +201,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=41 -12
+pos=18 0 20
 visible=1
 collision=1
 }
@@ -380,7 +209,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=38 -12
+pos=14 0 20
 visible=1
 collision=1
 }
@@ -388,7 +217,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=35 -12
+pos=10 0 20
 visible=1
 collision=1
 }
@@ -396,7 +225,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=32 -12
+pos=6 0 20
 visible=1
 collision=1
 }
@@ -404,7 +233,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=29 -12
+pos=2 0 20
 visible=1
 collision=1
 }
@@ -412,7 +241,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=26 -12
+pos=-2 0 20
 visible=1
 collision=1
 }
@@ -420,7 +249,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=14 -12
+pos=-6 0 20
 visible=1
 collision=1
 }
@@ -428,7 +257,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=11 -12
+pos=-6 0 16
 visible=1
 collision=1
 }
@@ -436,7 +265,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=8 -12
+pos=-6 0 12
 visible=1
 collision=1
 }
@@ -444,7 +273,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=5 -12
+pos=-6 0 8
 visible=1
 collision=1
 }
@@ -452,7 +281,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=2 -12
+pos=-6 0 4
 visible=1
 collision=1
 }
@@ -460,7 +289,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=-1 -12
+pos=-6 0 0
 visible=1
 collision=1
 }
@@ -468,7 +297,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=-4 -12
+pos=-6 0 -4
 visible=1
 collision=1
 }
@@ -476,7 +305,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=-5 -12
+pos=-6 0 -8
 visible=1
 collision=1
 }
@@ -484,7 +313,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=-5 30
+pos=-6 0 -12
 visible=1
 collision=1
 }
@@ -492,7 +321,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=-5 27
+pos=-2 0 -12
 visible=1
 collision=1
 }
@@ -500,7 +329,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=-5 24
+pos=2 0 -12
 visible=1
 collision=1
 }
@@ -508,7 +337,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=-5 21
+pos=6 0 -12
 visible=1
 collision=1
 }
@@ -516,7 +345,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=-5 18
+pos=10 0 -12
 visible=1
 collision=1
 }
@@ -524,71 +353,7 @@ collision=1
 {
 type=wall
 sprite=wall_mid.png
-pos=-5 15
-visible=1
-collision=1
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=-5 12
-visible=1
-collision=1
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=-5 9
-visible=1
-collision=1
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=-5 6
-visible=1
-collision=1
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=-5 3
-visible=1
-collision=1
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=-5 0
-visible=1
-collision=1
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=-5 -3
-visible=1
-collision=1
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=-5 -6
-visible=1
-collision=1
-}
-
-{
-type=wall
-sprite=wall_mid.png
-pos=-5 -9
+pos=14 0 -12
 visible=1
 collision=1
 }

@@ -22,30 +22,50 @@ function Monster:New()
 	return g
 end
 
-function Monster:OnDeath(playerGold)
-	playerGold = playerGold + self.worth
+function Monster:OnDeath()
 	self:OnEnd()
 end
 
 function Monster:Chase(point)
 
 	-- Create a new vector.
-	local vec = Vector:New()
+	local dir = Vector:New()
 
-	-- Manipulate vector so that it follows the player.
-	if(self.position.x < point.x) then
-		vec.x = 1
-	else
-		vec.x = -1
+	-- Not worth to change direction when too close
+	if (math.abs(self.position.x - point.x) > 0.01) then
+		
+		-- Manipulate vector so that it follows the player.
+		if(self.position.x < point.x) then
+			dir.x = 1
+			self:RotateRight()
+		else
+			dir.x = -1
+			self:RotateLeft()
+		end
+
 	end
+
 
 	if(self.position.z < point.z) then
-		vec.z = 1
+		dir.z = 1
 	else
-		vec.z = -1
+		dir.z = -1
 	end
 
-	self:Move(vec)
+	self:Move(dir)
+
+	for i = 1, #walls do
+
+		-- Check collision with all walls
+		if (C_CheckSpriteCollision(self.id, walls[i].id)) then
+			-- Move back the enemy when colliding
+			dir.x = dir.x * -1
+			dir.z = dir.z * -1
+			self:Move(dir)
+			-- Found collision - dont need to keep going
+			break
+		end
+	end
 end
 
 function Monster:OnHit(playerHp)

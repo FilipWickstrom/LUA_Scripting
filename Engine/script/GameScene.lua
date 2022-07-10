@@ -98,13 +98,15 @@ function Update(dt)
 	player:Update(camera, objects)
 
 	weaponText:Update()
+	goldText:Update()
 end
 
 
 function RemoveObject(num, obj)
 
 	if obj.name == "enemy" then
-		obj:OnDeath(player.gold)
+		player.gold = player.gold + obj.worth
+		obj:OnDeath()
 	end
 
 	table.remove(objects, num)

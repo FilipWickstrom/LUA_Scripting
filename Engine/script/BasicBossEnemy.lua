@@ -24,8 +24,8 @@ function BasicBoss:New()
 	return g
 end
 
-function BasicBoss:OnDeath(playerGold)
-	playerGold = playerGold + self.worth
+function BasicBoss:OnDeath()
+	self:OnEnd()
 end
 
 function BasicBoss:Chase()
@@ -37,6 +37,7 @@ function BasicBoss:Chase()
 		if C_CheckSpriteCollision(self.id, walls[i].id) then
 			self.direction.x = self.direction.x * -1
 			self.direction.z = self.direction.z * -1
+			break
 		end
 
 	end

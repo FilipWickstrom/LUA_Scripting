@@ -170,7 +170,7 @@ int L_AddHealthbarUI(lua_State* L)
 	// Checks if maxHp is entered into the function, and sets it accordingly.
 	if (lua_isnumber(L, -5))
 	{
-		maxHp = static_cast<int>(lua_tonumber(L, -1));
+		maxHp = static_cast<float>(lua_tonumber(L, -1));
 	}
 
 	irr::core::rect<irr::s32> rect;
