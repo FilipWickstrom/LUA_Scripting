@@ -1626,7 +1626,9 @@ namespace core
 
 		M[12] = 0;
 		M[13] = 0;
-		M[14] = (T)(zNear/(zNear-zFar));
+		//Source: https://gamedev.net/forums/topic/643384-shadow-mapping-understanding-orthographic-projection/5066234/
+		//M[14] = (T)(zNear/(zNear-zFar));		//Original
+		M[14] = (T)(-zNear / (zFar - zNear));	//Modified
 		M[15] = 1;
 
 #if defined ( USE_MATRIX_TEST )

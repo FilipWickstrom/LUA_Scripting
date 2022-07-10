@@ -1,5 +1,5 @@
 -- require/include
-gameObject = require('script/gameObject')
+local gameObject = require('script/gameObject')
 
 Powerup = gameObject:New()
 
@@ -31,16 +31,13 @@ function Powerup:New()
 	g.respawntimer = 0.0
 	g.shouldrespawn = false
 	g.id = C_LoadSprite("chest.png")
-	g:RandomizePos()
-	g.position.y = 1
-	g:GUpdate()
+	g:SetPosition(10, 0.1, 12)
 
 	g.bomb = gameObject:New()
 	g.bomb.id = C_LoadSprite('bomb.png')
-	g.bomb.position = g.position
+	g.bomb:SetPosition(g.position.x, g.position.y, g.position.z)
 	g.bomb.countdown = 3.0
 	g.bomb.active = false
-	g.bomb:GUpdate()
 	C_SetSpriteVisible(g.bomb.id, false)
 
 	self.__index = Powerup
@@ -63,10 +60,7 @@ function Powerup:Gain(player, goldText)
 		player.hp = player.hp + 15.0
 	elseif self.type == "Bomb" then
 		self.bomb.active = true
-
-		self.bomb.position.x = self.position.x
-		self.bomb.position.z = self.position.z
-		self.bomb:GUpdate()
+		--self.bomb:SetPosition(self.position)
 		C_SetSpriteVisible(self.bomb.id, true)
 
 	end
@@ -95,16 +89,13 @@ function Powerup:Update(player, enemies, goldText, lastpickupText)
 		end
 	end
 	
-	self:GUpdate()
-
 	-- Powerup respawns
 	if self.shouldrespawn == true then
 		self.respawntimer = self.respawntimer - deltatime
 
 		if self.respawntimer < 0 then
 			self.shouldrespawn = false
-			self:RandomizePos()
-			self:GUpdate()
+			--self:RandomizePos()
 			self.type = self:Initiate()
 			C_SetSpriteVisible(self.id, true)
 		end

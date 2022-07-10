@@ -1,10 +1,14 @@
-Monster = require('script/Monster')
-Monkey = require('script/ThrowingEnemy')
-gameObject = require('script/gameObject')
-Bouncy = require('script/BasicBossEnemy')
-WallTile = require('script/WallTile')
-DoorTile = require('script/DoorTile')
-Shooter = require('script/ThrowingBoss')
+gameObject	= require('script/gameObject')
+
+-- Enemies
+Monster		= require('script/Monster')
+Monkey		= require('script/ThrowingEnemy')
+Bouncy		= require('script/BasicBossEnemy')
+Shooter		= require('script/ThrowingBoss')
+
+-- Tiles
+WallTile	= require('script/WallTile')
+DoorTile	= require('script/DoorTile')
 
 --[[LOAD TO FILE SECTION]]--
 
@@ -88,29 +92,24 @@ end
 function Adjust_Object_Pos(objects, num, line)
 
 	-- removes the pos= from the current line
-	local filepath = string.gsub(line, "pos=", "")
+	local coordinates = string.gsub(line, "pos=", "")
 
-	local x, y, z = string.match(filepath, '(%-?%d+)%s(%-?%d+)%s(%-?%d+)')
-
-	-- check if x and y is properly present in the text file
-	if x ~= nil and y ~= nil and z ~= nil and objects[num] ~= nil then
-		objects[num].position.x = tonumber(x)
-		objects[num].position.y = tonumber(y)
-		objects[num].position.z = tonumber(z)
-		C_SetSpritePosition(objects[num].id, objects[num].position.x, objects[num].position.y, objects[num].position.z)
-	else
-
-		-- support for only x and z axis
-		local x, z = string.match(filepath, '(%-?%d+)%s(%-?%d+)')
-
-		if x~= nil and z ~=nil and objects[num] ~= nil then
-
-			objects[num].position.x = tonumber(x)
-			objects[num].position.y = 0
-			objects[num].position.z = tonumber(z)
-			C_SetSpritePosition(objects[num].id, objects[num].position.x, objects[num].position.y, objects[num].position.z)
+	--Split the coordinates by spaces
+	local vec = {}
+	local substring
+	for substring in coordinates:gmatch("%S+") do
+	   table.insert(vec, tonumber(substring))
+	end
+	
+	--Check that none is nil
+	if (#vec == 3) then
+		if (vec[1] and vec[2] and vec[3]) then		
+			objects[num]:SetPosition(vec[1], vec[2], vec[3])
+		else
+			print("ERROR: '" .. line .. "' not correct... One of the numbers was nil")
 		end
-
+	else
+		print("ERROR: '" .. line .. "' not correct... Expected: 3 numbers")
 	end
 
 end

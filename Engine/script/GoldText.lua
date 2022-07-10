@@ -8,7 +8,7 @@ function goldText:Initialize()
 
 end
 
-function goldText:Update(player)
+function goldText:Update()
 
 	-- Update the text here
 	C_UpdateText(goldText.id, 'Gold: ' .. player.gold)

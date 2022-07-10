@@ -51,7 +51,6 @@ function Weapon:Update(enemies)
 		end
 		if not removed then
 			bullet:Move(bullet.dir)
-			bullet:GUpdate()
 			bullet.lifetime = bullet.lifetime - deltatime
 			for j, enemy in ipairs(enemies) do
 				if C_CheckSpriteCollision(bullet.id, enemy.id) and enemy.hp > 0 then

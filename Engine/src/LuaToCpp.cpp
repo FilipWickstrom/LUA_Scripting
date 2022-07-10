@@ -85,49 +85,40 @@ int L_SetSpriteRotation(lua_State* L)
 
 int L_CheckSpriteCollision(lua_State* L)
 {
-	// Default collision
+	// C_CheckSpriteCollision(id1, id2) 
+	// Defaults to AABB collision
 	if (lua_isnumber(L, -1) && lua_isnumber(L, -2))
 	{
 		unsigned int id1 = static_cast<unsigned int>(lua_tonumber(L, -2));
 		unsigned int id2 = static_cast<unsigned int>(lua_tonumber(L, -1));
-		bool collided = SceneHandler::CheckSpriteCollision(id1, id2);
+		bool collided = SceneHandler::SpriteCollisionAABB(id1, id2);
 		lua_pushboolean(L, collided);
 	}
-
-	// Also took in the optional direction of collision
+	// C_CheckSpriteCollision(id1, id2, "AABB")
+	// C_CheckSpriteCollision(id1, id2, "circle")
 	else if (lua_isstring(L, -1) && lua_isnumber(L, -2) && lua_isnumber(L, -3))
 	{
 		unsigned int id1 = static_cast<unsigned int>(lua_tonumber(L, -3));
 		unsigned int id2 = static_cast<unsigned int>(lua_tonumber(L, -2));
-		std::string collDirection = lua_tostring(L, -1);
-		SceneHandler::CollisionDir direction = SceneHandler::CollisionDir::both;
+		std::string type = lua_tostring(L, -1);
 
-		if (collDirection == "horizontal")
-			direction = SceneHandler::CollisionDir::horizontal;
-		else if (collDirection == "vertical")
-			direction = SceneHandler::CollisionDir::vertical;
-		
-		bool collided = SceneHandler::CheckSpriteCollision(id1, id2, direction);
+		bool collided = false;
+		if (type == "AABB")
+		{
+			collided = SceneHandler::SpriteCollisionAABB(id1, id2);
+		}
+		else if (type == "circle")
+		{
+			collided = SceneHandler::SpriteCollisionCircle(id1, id2);
+		}
 		lua_pushboolean(L, collided);
 	}
-
 	// Wrong arguments
 	else
 	{
 		lua_pushboolean(L, false);
 	}
-	return 1;
-}
 
-int L_CheckSpriteCircleCollision(lua_State* L)
-{
-	if (lua_isnumber(L, -1) && lua_isnumber(L, -2))
-	{
-		unsigned int id1 = static_cast<unsigned int>(lua_tonumber(L, -2));
-		unsigned int id2 = static_cast<unsigned int>(lua_tonumber(L, -1));
-		bool collided = SceneHandler::CheckSpriteCircleCollsion(id1, id2);
-		lua_pushboolean(L, collided);
-	}
 	return 1;
 }
 
@@ -179,7 +170,7 @@ int L_AddHealthbarUI(lua_State* L)
 	// Checks if maxHp is entered into the function, and sets it accordingly.
 	if (lua_isnumber(L, -5))
 	{
-		maxHp = static_cast<int>(lua_tonumber(L, -1));
+		maxHp = static_cast<float>(lua_tonumber(L, -1));
 	}
 
 	irr::core::rect<irr::s32> rect;

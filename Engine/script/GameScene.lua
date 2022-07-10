@@ -1,34 +1,33 @@
+--Global classes
 Player			= require('script/Player')
-player			= Player:New()
-refMonster		= require('script/Monster')
-refMonkey		= require('script/ThrowingEnemy')
-boss			= require('script/BasicBossEnemy')
-refThrowBoss	= require('script/ThrowingBoss')
-powerup			= require('script/Powerups')
+Camera			= require('script/Camera')
+Powerup			= require('script/Powerups')
 goldText		= require('script/GoldText')
 weaponText		= require('script/WeaponText')
-refCamera		= require('script/Camera')
 lastpickupText	= require('script/lastpickuptext')
-require('script/AllScenes')
+require('script/AllScenes')	
 require('script/File')
 
 
 
 -- Collect separate types in different tables
-objects = {}
-walls = {}
-enemies = {}
+objects	= {}
+walls	= {}
+enemies	= {}
 
 function Start()
 	math.randomseed(os.time())
 
-	powerup = require('script/Powerups'):New()
+	--Player setup
+	player = Player:New()
+
+	powerup = Powerup:New()
 	goldText:Initialize()
 	weaponText:Initialize()
 	lastpickupText:Initialize(player)
 
 	--Camera setup
-	camera = refCamera:New()
+	camera = Camera:New()
 	camera:SetPosition(0,40,0)
 	camera:SetTarget(0,0,0.1)
 	camera:SetFOV(90)
@@ -39,16 +38,21 @@ function Start()
 	--Write_To_File(objects, 'maps/test1.txt')
 
 	-- Go through all the objects
-	for k, v in pairs(objects) do
-		
+	for i = 1, #objects do
+		local type = objects[i].type	
+
 		-- Collidable tiles
-		if (v.name == "default") then
-			table.insert(walls, v)
+		if (type == 'wall' or 
+			type == 'door') then
+			table.insert(walls, objects[i])
 		end
 
 		-- Adds all enemies to the enemies table
-		if (v.name == "enemy")	then
-			table.insert(enemies, v)
+		if (type == 'bouncy'	or 
+			type == 'monster' or
+			type == 'shooter' or
+			type == 'monkey')	then
+			table.insert(enemies, objects[i])
 		end
 	end
 end
@@ -94,13 +98,15 @@ function Update(dt)
 	player:Update(camera, objects)
 
 	weaponText:Update()
+	goldText:Update()
 end
 
 
 function RemoveObject(num, obj)
 
 	if obj.name == "enemy" then
-		obj:OnDeath(player.gold)
+		player.gold = player.gold + obj.worth
+		obj:OnDeath()
 	end
 
 	table.remove(objects, num)
