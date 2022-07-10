@@ -38,19 +38,6 @@ function BasicBoss:Chase()
 			self.direction.x = self.direction.x * -1
 			self.direction.z = self.direction.z * -1
 		end
-			
-		--[[
-		-- Not working correctly either...
-		-- Checking horizontal direction
-		if (C_CheckSpriteCollision(self.id, obj.id, "horizontal")) then
-			self.direction.x = self.direction.x * -1
-		end
-
-		-- Checking vertical direction
-		if (C_CheckSpriteCollision(self.id, obj.id, "vertical")) then
-			self.direction.z = self.direction.z * -1
-		end
-		]]--
 
 	end
 

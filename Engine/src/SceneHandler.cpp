@@ -170,12 +170,11 @@ void SceneHandler::SetHasCollision(const unsigned int& id, const bool& enabled)
         Get().m_sprites.at(id)->SetCollision(enabled);
 }
 
-bool SceneHandler::CheckSpriteCollision(const unsigned int& id1, const unsigned int& id2, const CollisionDir& dir)
+bool SceneHandler::SpriteCollisionAABB(const unsigned int& id1, const unsigned int& id2)
 {
     if (Get().m_sprites.find(id1) != Get().m_sprites.end() &&
         Get().m_sprites.find(id2) != Get().m_sprites.end())
     {
-        
         // Return false if one of them don't use collision
         if (!Get().m_sprites.at(id1)->HasCollision() ||
             !Get().m_sprites.at(id2)->HasCollision())
@@ -183,44 +182,34 @@ bool SceneHandler::CheckSpriteCollision(const unsigned int& id1, const unsigned 
             return false;
         }
 
-		const auto& rect1 = Get().m_sprites.at(id1)->GetBounds();
-		const auto& rect2 = Get().m_sprites.at(id2)->GetBounds();
-        
-		// AABB collisions
-		switch (dir)
-		{
-			// Only checking in Y-direction of the rectangles
-		case CollisionDir::vertical:
-			return (rect1.LowerRightCorner.Y > rect2.UpperLeftCorner.Y &&
-				    rect1.UpperLeftCorner.Y  < rect2.LowerRightCorner.Y);
-			break;
+        // Optimizing by checking if in range
+        if (SpriteCollisionCircle(id1, id2))
+        {
+		    const auto& rect1 = Get().m_sprites.at(id1)->GetBounds();
+		    const auto& rect2 = Get().m_sprites.at(id2)->GetBounds();
 
-			// Only checking in X-direction of the rectangles
-		case CollisionDir::horizontal:
-			return (rect1.LowerRightCorner.X > rect2.UpperLeftCorner.X &&
-				    rect1.UpperLeftCorner.X  < rect2.LowerRightCorner.X);
-			break;
-
-			// Default - checking if one rectangle is inside on the other
-		case CollisionDir::both:
-			return rect1.isRectCollided(rect2);
-			break;
-
-		default:
-			break;
-		}
+	        // Checking if one rectangle is inside on the other
+            return rect1.isRectCollided(rect2);
+        }
     }
 
     return false;
 }
 
-bool SceneHandler::CheckSpriteCircleCollsion(const unsigned int& id1, const unsigned int& id2)
+bool SceneHandler::SpriteCollisionCircle(const unsigned int& id1, const unsigned int& id2)
 {
     if (Get().m_sprites.find(id1) != Get().m_sprites.end() &&
         Get().m_sprites.find(id2) != Get().m_sprites.end())
     {
         const Sprite* sprite1 = Get().m_sprites.at(id1).get();
         const Sprite* sprite2 = Get().m_sprites.at(id2).get();
+
+        // Return false if one of them don't use collision
+        if (!sprite1->HasCollision() ||
+            !sprite2->HasCollision())
+        {
+            return false;
+        }
 
         irr::core::vector2df pos1 = sprite1->GetPosition2D();
         float dist1 = sprite1->GetCollisionRadius();
@@ -241,19 +230,18 @@ bool SceneHandler::CheckSpriteCircleCollsion(const unsigned int& id1, const unsi
 
 void SceneHandler::AddCamera()
 {
+    float width = static_cast<float>(Graphics::GetWindowWidth());
+    float height = static_cast<float>(Graphics::GetWindowHeight());
+
     //Add a default camera
     Get().m_camera = Graphics::GetSceneManager()->addCameraSceneNode();
-    Graphics::GetSceneManager()->setActiveCamera(Get().m_camera);
-
-    float aspectRatio = static_cast<float>(Graphics::GetWindowWidth()) /
-                        static_cast<float>(Graphics::GetWindowHeight());
-    float fov = 50.f;
 
     irr::core::matrix4 matrix;
-    matrix.buildProjectionMatrixOrthoLH(fov * aspectRatio, fov, 1.f, 500.f);
+    matrix.buildProjectionMatrixOrthoLH(width, height, 1.f, 100.f);
 
     Get().m_camera->setProjectionMatrix(matrix, true);
 
+    Graphics::GetSceneManager()->setActiveCamera(Get().m_camera);
 }
 
 void SceneHandler::SetCameraPosition(const irr::core::vector3df& pos)

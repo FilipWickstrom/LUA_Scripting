@@ -92,13 +92,24 @@ end
 function Adjust_Object_Pos(objects, num, line)
 
 	-- removes the pos= from the current line
-	local filepath = string.gsub(line, "pos=", "")
+	local coordinates = string.gsub(line, "pos=", "")
 
-	local x, y, z = string.match(filepath, '(%-?%d+)%s(%-?%d+)%s(%-?%d+)')
-
-	-- check if x,y,z is properly present in the text file
-	if x ~= nil and y ~= nil and z ~= nil and objects[num] ~= nil then
-		objects[num]:SetPosition(tonumber(x), tonumber(y), tonumber(z))
+	--Split the coordinates by spaces
+	local vec = {}
+	local substring
+	for substring in coordinates:gmatch("%S+") do
+	   table.insert(vec, tonumber(substring))
+	end
+	
+	--Check that none is nil
+	if (#vec == 3) then
+		if (vec[1] and vec[2] and vec[3]) then		
+			objects[num]:SetPosition(vec[1], vec[2], vec[3])
+		else
+			print("ERROR: '" .. line .. "' not correct... One of the numbers was nil")
+		end
+	else
+		print("ERROR: '" .. line .. "' not correct... Expected: 3 numbers")
 	end
 
 end

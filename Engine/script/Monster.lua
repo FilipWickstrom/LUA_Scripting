@@ -15,7 +15,6 @@ function Monster:New()
 	g.type = "monster"
 	g.name = "enemy"
 	g.cooldown = 0.0
-	g.RandomizePos(g)
 	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0)
 	self.__index = Monster
 	setmetatable(g, self)
@@ -25,6 +24,7 @@ end
 
 function Monster:OnDeath(playerGold)
 	playerGold = playerGold + self.worth
+	self:OnEnd()
 end
 
 function Monster:Chase(point)
@@ -63,7 +63,7 @@ function Monster:Hit(player)
 	end
 end
 
-function Monster:Update(player)
+function Monster:Update()
 	self:Chase(player.position)
 	self:Hit(player)
 	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 75.0, 25.0)

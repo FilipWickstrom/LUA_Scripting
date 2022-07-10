@@ -1,5 +1,4 @@
 -- Includes
---require('script/vector')
 require('script/Weapon')
 local gameObject = require('script/gameObject')
 
@@ -15,7 +14,7 @@ function Player:New()
 	g.weapon = Weapon.new("default")
 	g.name = "Player"
 	g.speed = 12
-	g.position = vector:New()
+	g:SetPosition(0,0.2,0)
 	-- Add effects here.
 	g.lastpickup = "None"
 
@@ -49,13 +48,11 @@ function Player:HandleMovement(camera)
 	self:Move(dir)
 	camera:Move(dir * self.speed * deltatime)
 
-	-- Check if player collided with walls
-
 	for i = 1, #walls do
 
-		-- Move back the player when colliding
+		--Check if player and wall is colliding
 		if (C_CheckSpriteCollision(self.id, walls[i].id)) then
-			
+			-- Move back the player when colliding
 			dir.x = dir.x * -1
 			dir.z = dir.z * -1
 			self:Move(dir)

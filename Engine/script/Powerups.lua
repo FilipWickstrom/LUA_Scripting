@@ -32,7 +32,7 @@ function Powerup:New()
 	g.shouldrespawn = false
 	g.id = C_LoadSprite("chest.png")
 	g:RandomizePos()
-	g.position.y = 1
+	g.position.y = 0.1
 
 	g.bomb = gameObject:New()
 	g.bomb.id = C_LoadSprite('bomb.png')

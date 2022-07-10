@@ -16,11 +16,9 @@ function ThrowMonkey:New()
 	g.name = "enemy"
 	g.inhand = true
 	g.cooldown = 1
-	g.RandomizePos(g)
 	self.__index = ThrowMonkey
 	setmetatable(g, self)
 
-	g.id = C_LoadSprite('necromancer.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0)
 
 	g.projectile = gameObject:New()
@@ -36,6 +34,7 @@ end
 
 function ThrowMonkey:OnDeath(playerGold)
 	playerGold = playerGold + self.worth
+	self.projectile:OnEnd()
 	self:OnEnd()
 end
 
@@ -52,7 +51,7 @@ function ThrowMonkey:Throw(point)
 		self.projectile.position.x = self.position.x
 		self.projectile.position.z = self.position.z
 
-		C_SetSpriteVisible(g.projectile.id, true)
+		C_SetSpriteVisible(self.projectile.id, true)
 	end
 end
 
@@ -63,21 +62,24 @@ function ThrowMonkey:UpdateThrow()
 		local x = math.abs(self.projectile.position.x - self.projectile.target.x)
 		local y = math.abs(self.projectile.position.z - self.projectile.target.z)
 
+		local dir = vector:New()
+
 		if self.projectile.position.x > self.projectile.target.x then
-			self.projectile.position.x = self.projectile.position.x - x * deltatime * self.projectile.speed
+			dir.x = -x
 		else
-			self.projectile.position.x = self.projectile.position.x + x * deltatime * self.projectile.speed
+			dir.x = x
 		end
 
 		if self.projectile.position.z > self.projectile.target.z then
-			self.projectile.position.z = self.projectile.position.z - y * deltatime * self.projectile.speed
+			dir.z = -y	
 		else
-			self.projectile.position.z = self.projectile.position.z + y * deltatime * self.projectile.speed
+			dir.z = y
 		end
 
+		self.projectile:Move(dir)
 		self.cooldown = self.cooldown - deltatime
 
-		if x < 1.5 and y < 1.5 and self.cooldown < 0 then
+		if C_CheckSpriteCollision(self.projectile.id, player.id) or self.cooldown < 0 then
 			-- hide the projectile from the screen
 			C_SetSpriteVisible(self.projectile.id, false)
 			self.inhand = true
@@ -87,7 +89,7 @@ function ThrowMonkey:UpdateThrow()
 	end
 end
 
-function ThrowMonkey:Update(player)
+function ThrowMonkey:Update()
 	self:Throw(player.position)
 	self:UpdateThrow()
 	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 75.0, 25.0)

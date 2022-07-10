@@ -11,7 +11,7 @@ function DoorTile:New()
 	--C_SetSpriteVisible(g.key.id, false)
 
 	-- test position
-	g.key:SetPosition(35,0,0)
+	g.key:SetPosition(35,0.1,0)
 
 	self.__index = DoorTile
 	setmetatable(g, self)

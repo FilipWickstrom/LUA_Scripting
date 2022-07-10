@@ -20,8 +20,6 @@ function ThrowBoss:New()
 	g.direction = Vector:New()
 	g.gid = C_AddHealthbar(0.0, 0.0, 145.0, 50.0)
 
-	--g.id = C_LoadSprite('ogre.png')
-
 	g.projectile = gameObject:New()
 
 	g.projectile.id = C_LoadSprite('sword_huge.png')
