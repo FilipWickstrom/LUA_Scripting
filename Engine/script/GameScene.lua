@@ -7,6 +7,7 @@ weaponText		= require('script/WeaponText')
 lastpickupText	= require('script/lastpickuptext')
 require('script/AllScenes')	
 require('script/File')
+weaponDrops		= require('script/WeaponDrop')
 
 
 
