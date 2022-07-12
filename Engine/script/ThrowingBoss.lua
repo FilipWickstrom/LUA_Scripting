@@ -35,6 +35,11 @@ function ThrowBoss:New()
 end
 
 function ThrowBoss:OnDeath()
+	
+	if random(100) > bossWeaponDropChance then
+		weaponDrops:CreateWeapon(self.position)
+	end
+
 	self.projectile:OnEnd()
 	self:OnEnd()
 end

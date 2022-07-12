@@ -25,6 +25,11 @@ function BasicBoss:New()
 end
 
 function BasicBoss:OnDeath()
+
+	if random(100) > bossWeaponDropChance then
+		weaponDrops:CreateWeapon(self.position)
+	end
+
 	self:OnEnd()
 end
 

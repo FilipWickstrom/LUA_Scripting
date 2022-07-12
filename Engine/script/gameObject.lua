@@ -36,6 +36,11 @@ function gameObject:RandomizePos()
 	self.position.z = math.random(10)
 end
 
+-- Update position to the screen.
+function gameObject:GUpdate()
+	C_SetSpritePosition(self.id, self.position.x, self.position.y, self.position.z)
+end
+
 function gameObject:Move(vec)
 	self.position = self.position + (vec * self.speed * deltatime)
 	C_SetSpritePosition(self.id, self.position.x, self.position.y, self.position.z)

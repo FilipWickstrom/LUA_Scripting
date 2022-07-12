@@ -25,6 +25,7 @@ function Start()
 	powerup = Powerup:New()
 	goldText:Initialize()
 	weaponText:Initialize()
+	weaponDrops:new()
 	lastpickupText:Initialize(player)
 
 	--Camera setup
@@ -60,6 +61,8 @@ end
 
 -- Destroying everything
 function Clean()
+
+	weaponDrops:OnEnd()
 
 	print("### Removing player ###")
 	player:OnEnd()
@@ -97,6 +100,8 @@ function Update(dt)
 
 	-- Update player
 	player:Update(camera, objects)
+
+	weaponDrops:Update()
 
 	weaponText:Update()
 	goldText:Update()
