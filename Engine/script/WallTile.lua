@@ -14,6 +14,10 @@ function WallTile:New()
 
 end
 
+function WallTile:OnEnd()
+	C_RemoveSprite(self.id)
+end
+
 function WallTile:Update(player)
 
 end

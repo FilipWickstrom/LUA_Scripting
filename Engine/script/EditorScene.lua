@@ -2,6 +2,7 @@ require('script/AllScenes')
 local gameObject = require('script/gameObject') --temp
 local levelObjects = {}
 local loaded = false
+local created = false
 local camera = require('script/Camera'):New()
 require('script/File')
 
@@ -44,13 +45,26 @@ function Update(dt)
 	if (C_IsButtonPressed(GUI["Create"])) then
 		--Call c++ create map
 
+		
+		if (created == false) then
+			loaded = false
+			created = true
+			for num, obj in pairs(levelObjects) do
+				obj:OnEnd()
+			end
+
+			-- reset levelObjects
+			levelObjects = {}
+		end
+
 	elseif(C_IsButtonPressed(GUI["Load"])) then
 		--Call c++ load map
 		if (loaded == false) then
 			levelObjects = Load_File('maps/test1.txt')
-			print(#levelObjects)
 			loaded = true
+			created = false
 		end
+
 
 	elseif(C_IsButtonPressed(GUI["Save"])) then
 		--Call c++ save map
