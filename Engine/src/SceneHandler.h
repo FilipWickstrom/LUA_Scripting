@@ -48,15 +48,8 @@ public:
 	static void SetSpriteScale(const unsigned int& id, const irr::core::vector3df& scl);
 	static void SetSpriteRotation(const unsigned int& id, const irr::core::vector3df& rot);
 	static void SetHasCollision(const unsigned int& id, const bool& enabled);
-	
-	enum class CollisionDir
-	{
-		horizontal,
-		vertical,
-		both
-	};
-	static bool CheckSpriteCollision(const unsigned int& id1, const unsigned int& id2, const CollisionDir& dir = CollisionDir::both);
-	static bool CheckSpriteCircleCollsion(const unsigned int& id1, const unsigned int& id2);
+	static bool SpriteCollisionAABB(const unsigned int& id1, const unsigned int& id2);
+	static bool SpriteCollisionCircle(const unsigned int& id1, const unsigned int& id2);
 
 	/*
 		Camera

@@ -2,12 +2,6 @@ local gameObject = {}
 vector = require("script/vector")
 require('script/Utility')
 
-function gameObject:RandomizePos()
-	self.position.x = math.random(10)
-	--self.position.y = 0
-	self.position.z = math.random(10)
-end
-
 function gameObject:New(g)
 	g = g or {}
 	g.name = "default"
@@ -36,13 +30,20 @@ function gameObject:OnEnd()
 	C_RemoveSprite(self.id)
 end
 
---UpdatePos
+function gameObject:RandomizePos()
+	self.position.x = math.random(10)
+	--self.position.y = 0
+	self.position.z = math.random(10)
+end
+
+-- Update position to the screen.
 function gameObject:GUpdate()
 	C_SetSpritePosition(self.id, self.position.x, self.position.y, self.position.z)
 end
 
 function gameObject:Move(vec)
 	self.position = self.position + (vec * self.speed * deltatime)
+	C_SetSpritePosition(self.id, self.position.x, self.position.y, self.position.z)
 end
 
 function gameObject:RotateLeft()
@@ -64,13 +65,16 @@ function gameObject:RotateRight()
 	end
 end
 
-function gameObject:SetPosition(x, y)
-	if type(x) == "number" and type(y) == "number" then
-		self.position.x = x
-		self.position.y = y
-	else
-		error("Either both or one of the intakes were not a number!")
-	end
+-- Set position: use table or x,y,z
+function gameObject:SetPosition(pos)
+	self.position = pos
+	C_SetSpritePosition(self.id, pos.x, pos.y, pos.z)
+end
+function gameObject:SetPosition(x, y, z)
+	self.position.x = x
+	self.position.y = y
+	self.position.z = z
+	C_SetSpritePosition(self.id, x, y, z)
 end
 
 function gameObject:SetVisibility(set)

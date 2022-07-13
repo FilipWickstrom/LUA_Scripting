@@ -1,8 +1,9 @@
--- require/include
-require('script/vector')
-gameObject = require('script/gameObject')
-Player = gameObject:New()
+-- Includes
 require('script/Weapon')
+local gameObject = require('script/gameObject')
+
+
+Player = gameObject:New()
 
 function Player:New()
 	local g = gameObject:New()
@@ -13,13 +14,12 @@ function Player:New()
 	g.weapon = Weapon.new("default")
 	g.name = "Player"
 	g.speed = 12
-	g.position = vector:New()
+	g:SetPosition(0,0.2,0)
 	-- Add effects here.
 	g.lastpickup = "None"
 
 	g.id = C_LoadSprite('knight.png')
 	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0, g.hp)
-	g:GUpdate()
 
 	self.__index = Player
 	setmetatable(g, self)
@@ -27,30 +27,42 @@ function Player:New()
 end
 
 function Player:HandleMovement(camera)
-	local x = 0
-	local y = 0
+	local dir = vector:New()
 
 	if C_IsKeyDown(keys.W) then
-		y = 1
+		dir.z = dir.z + 1
 	end
 	if C_IsKeyDown(keys.S) then
-		y = -1
+		dir.z = dir.z - 1
 	end
 	if C_IsKeyDown(keys.A) then
-		x = -1
+		dir.x = dir.x - 1
 		self:RotateLeft()
 	end
 	if C_IsKeyDown(keys.D) then
-		x = 1
+		dir.x = dir.x + 1
 		self:RotateRight()
 	end
-	
-	local dir = vector:New()
-	dir.x = x
-	dir.z = y
 
+	-- Move everything
 	self:Move(dir)
 	camera:Move(dir * self.speed * deltatime)
+
+	for i = 1, #walls do
+
+		--Check if player and wall is colliding
+		if (C_CheckSpriteCollision(self.id, walls[i].id)) then
+			-- Move back the player when colliding
+			dir.x = dir.x * -1
+			dir.z = dir.z * -1
+			self:Move(dir)
+			camera:Move(dir * self.speed * deltatime)
+
+			-- Found collision - dont need to keep going
+			break
+		end
+	end
+
 end
 
 function Player:Shoot()
@@ -64,7 +76,6 @@ function Player:Shoot()
 end
 
 function Player:Update(camera, enemies)
-	self:GUpdate()
 	self:HandleMovement(camera)
 	self:Shoot()
 	self.weapon:Update(enemies)

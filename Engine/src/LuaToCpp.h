@@ -20,7 +20,6 @@ int L_SetSpritePosition(lua_State* L);
 int L_SetSpriteScale(lua_State* L);
 int L_SetSpriteRotation(lua_State* L);
 int L_CheckSpriteCollision(lua_State* L);
-int L_CheckSpriteCircleCollision(lua_State* L);
 int L_SetSpriteCollision(lua_State* L);
 
 /*

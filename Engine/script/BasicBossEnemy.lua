@@ -24,33 +24,51 @@ function BasicBoss:New()
 	return g
 end
 
-function BasicBoss:OnDeath(playerGold)
-	playerGold = playerGold + self.worth
+function BasicBoss:OnDeath()
+
+	if random(100) > bossWeaponDropChance then
+		weaponDrops:CreateWeapon(self.position)
+	end
+
+	self:OnEnd()
 end
 
 function BasicBoss:Chase()
 
+	--[[
 	-- Go through all the wall tiles
-	for num, obj in pairs(walls) do
+	for i = 1, #walls do
 
 		-- Not the best collision :(
-		if C_CheckSpriteCollision(self.id, obj.id) then
+		if C_CheckSpriteCollision(self.id, walls[i].id) then
 			self.direction.x = self.direction.x * -1
 			self.direction.z = self.direction.z * -1
+			break
 		end
-			
-		--[[
-		-- Not working correctly either...
-		-- Checking horizontal direction
-		if (C_CheckSpriteCollision(self.id, obj.id, "horizontal")) then
-			self.direction.x = self.direction.x * -1
-		end
+	end
 
-		-- Checking vertical direction
-		if (C_CheckSpriteCollision(self.id, obj.id, "vertical")) then
-			self.direction.z = self.direction.z * -1
+	self:Move(self.direction)
+	]]
+
+	-- temporary bounce that works better than the one above.
+
+	-- loop through all objects, any collision?
+	for num, obj in pairs(objects) do
+
+		if C_CheckSpriteCollision(self.id, obj.id) and self.id ~= obj.id then
+			if self.position.x < obj.position.x then
+				self.direction.x = -1 
+			else
+				self.direction.x = 1
+			end
+
+			if self.position.z < obj.position.z then
+				self.direction.z = -1
+			else
+				self.direction.z = 1
+			end
+
 		end
-		]]--
 
 	end
 
@@ -71,7 +89,6 @@ end
 function BasicBoss:Update()
 	self:Chase()
 	self:Attack()
-	self:GUpdate()
 	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 100.0, 50.0)
 	C_UpdateUI(self.gid, self.hp)
 end
