@@ -1,5 +1,6 @@
 local gameObject = require('script/gameObject')
 local Vector = require('script/vector')
+require('script/Weapon')
 
 local ThrowBoss = gameObject:New()
 

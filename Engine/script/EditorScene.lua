@@ -1,5 +1,9 @@
 require('script/AllScenes')
 local gameObject = require('script/gameObject') --temp
+local levelObjects = {}
+local loaded = false
+local camera = require('script/Camera'):New()
+require('script/File')
 
 local GUI = {}
 
@@ -21,6 +25,10 @@ function Start()
 	local menuBtn = { X = 150, Y = 50 }
 	GUI["Menu"] = C_AddButton("Back to menu", "roboto_12.xml", window.X-(menuBtn.X/2), menuBtn.Y/2, menuBtn.X, menuBtn.Y)
 
+	-- Create a camera
+	camera:SetPosition(0,40,0)
+	camera:SetTarget(0,0,0.1)
+	camera:SetFOV(90)
 end
 
 
@@ -38,6 +46,11 @@ function Update(dt)
 
 	elseif(C_IsButtonPressed(GUI["Load"])) then
 		--Call c++ load map
+		if (loaded == false) then
+			levelObjects = Load_File('maps/test1.txt')
+			print(#levelObjects)
+			loaded = true
+		end
 
 	elseif(C_IsButtonPressed(GUI["Save"])) then
 		--Call c++ save map
