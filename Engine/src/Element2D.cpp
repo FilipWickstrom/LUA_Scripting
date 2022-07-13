@@ -45,6 +45,8 @@ Healthbar::Healthbar(const irr::core::rect<irr::s32>& pos)
 {
 	//m_foreground = pos;
 	m_background = pos;
+	m_backgroundColor = irr::video::SColor(255, 255, 0, 0);
+	m_foregroundColor = irr::video::SColor(255, 0, 255, 0);
 }
 
 void Healthbar::SetMaxHealth(const float& maxHp)
@@ -52,12 +54,22 @@ void Healthbar::SetMaxHealth(const float& maxHp)
 	m_max = maxHp;
 }
 
+void Healthbar::SetBackgroundColor(const irr::video::SColor color)
+{
+	m_backgroundColor = color;
+}
+
+void Healthbar::SetForegroundColor(const irr::video::SColor color)
+{
+	m_foregroundColor = color;
+}
+
 void Healthbar::Draw()
 {
 	if (m_visible)
 	{
-		Graphics::GetDriver()->draw2DRectangle(irr::video::SColor(255, 255, 0, 0), m_background);
-		Graphics::GetDriver()->draw2DRectangle(irr::video::SColor(255, 0, 255, 0), m_foreground);
+		Graphics::GetDriver()->draw2DRectangle(m_backgroundColor, m_background);
+		Graphics::GetDriver()->draw2DRectangle(m_foregroundColor, m_foreground);
 	}
 }
 

@@ -60,9 +60,12 @@ function weaponDrops:Update()
 		if C_CheckSpriteCollision(obj.id, player.id) then
 			player.weapon = self.weapons[num]
 
+			-- Update max fireRate
+			C_SetHealthbarMax(player.sid, player.weapon.fireRate)
 			obj:OnEnd()
 			table.remove(self.objects, num)
 			table.remove(self.weapons, num)
+			break
 		end
 
 	end
