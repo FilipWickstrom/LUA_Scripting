@@ -49,7 +49,9 @@ class Healthbar : public Element2D
 private:
 
 	irr::core::rect<irr::s32> m_foreground;
+	irr::video::SColor m_foregroundColor;
 	irr::core::rect<irr::s32> m_background;
+	irr::video::SColor m_backgroundColor;
 	float m_max = 100;
 	float m_current = 100;
 
@@ -58,6 +60,8 @@ public:
 	Healthbar(const irr::core::rect<irr::s32>& pos);
 	~Healthbar() = default;
 	void SetMaxHealth(const float& maxHp);
+	void SetBackgroundColor(const irr::video::SColor color);
+	void SetForegroundColor(const irr::video::SColor color);
 
 	// Inherited via Element2D
 	virtual void Draw() override;

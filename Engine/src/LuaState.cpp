@@ -72,6 +72,12 @@ LuaHandler::LuaHandler()
 	lua_register(m_state, "C_UpdateUI", 			L_UpdateGraphicalInterface);
 	// Param: id{uint}, x1{float}, y1{float}, x2{float}, y2{float} 
 	lua_register(m_state, "C_UpdatePosUI", 			L_UpdatePosUI);
+	// Param: id{uint}, maxHealth{float}
+	lua_register(m_state, "C_SetHealthbarMax",		L_SetHealthbarMax);
+	// Param: id{uint}, r{float}, g{float}, b{float}
+	lua_register(m_state, "C_SetHealthbarBackgroundColor", L_SetHealthbarBackgroundColor);
+	// Param: id{uint}, r{float}, g{float}, b{float}
+	lua_register(m_state, "C_SetHealthbarForegroundColor", L_SetHealthbarForegroundColor);
 	// Param: id{uint}
 	lua_register(m_state, "C_RemoveUI", 			L_RemoveUI);
 	// Param: id{uint}, isVisible{bool}

@@ -19,7 +19,14 @@ function Player:New()
 	g.lastpickup = "None"
 
 	g.id = C_LoadSprite('knight.png')
+
+	-- Healthbar for health
 	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0, g.hp)
+
+	-- Healthbar for fireTimer.
+	g.sid = C_AddHealthbar(265.0, 0.0, 515.0, 50.0, g.weapon.fireRate)
+	C_SetHealthbarBackgroundColor(g.sid, 0.0, 0.0, 255.0)
+	C_SetHealthbarForegroundColor(g.sid, 0.0, 0.0, 0.0);
 
 	self.__index = Player
 	setmetatable(g, self)
@@ -75,6 +82,7 @@ function Player:Update(camera, enemies)
 	self:HandleMovement(camera)
 	self:Shoot()
 	self.weapon:Update(enemies)
+	
 
 	if self.hp > 100.0 then
 		self.hp = 100.0
@@ -83,6 +91,7 @@ function Player:Update(camera, enemies)
 	-- GOD MODE!!
 	--self.hp = 100
 	C_UpdateUI(self.gid, self.hp)
+	C_UpdateUI(self.sid, self.weapon.fireTimer)
 end
 
 function Player:IsAlive()
