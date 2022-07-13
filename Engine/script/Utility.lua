@@ -13,7 +13,7 @@ keys = {
 
 weapons = { 
 	["default"] = { 
-		name = "Sword", sprite = "sword.png", fireRate = 1.1, damage = 600.0, speed = 35, lifetime = 3.0 
+		name = "Sword", sprite = "sword.png", fireRate = 1.1, damage = 6.0, speed = 35, lifetime = 3.0 
 	},
 	["Heart"] = {
 		name = "Heart Magic", sprite = "ui_heart_full.png", fireRate = 0.9, damage = 10.0, speed = 55, lifetime = 3.5 
