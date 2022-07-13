@@ -4,6 +4,8 @@ Weapon = {}
 local MetaWeapon = {}
 MetaWeapon.__index = Weapon
 
+--Provide a weapon type from the templated list in Utility.lua to be
+--able to create new weapons
 function Weapon.new(_type)
 	assert(type(_type) == "string", "Weapon 'type' provided is not a string!")
 	assert(weapons[_type] ~= nil, "Weapon type of: " .. _type .. " does not exist!")
@@ -19,16 +21,11 @@ function Weapon.new(_type)
 end
 
 --Adds a new bullet into the bullets table and sets its props
-function Weapon:Fire(playerPos)
+function Weapon:Fire(spawnPos, dir)
 	if self.fireTimer <= 0 then
-		mousepoint = vector:New()
-		mousepoint.x, mousepoint.y, mousepoint.z = C_GetWorldFromScreen()
-		dir = mousepoint - playerPos
-		dir:Normalize()
-
 		g = gameObject:New()
 		g.id = C_LoadSprite(weapons[self.type].sprite)
-		g.position = playerPos
+		g.position = spawnPos
 		g.dir = dir
 		g.speed = weapons[self.type].speed
 		g.lifetime = weapons[self.type].lifetime
@@ -53,13 +50,13 @@ function Weapon:Update(enemies)
 			bullet:Move(bullet.dir)
 			bullet:GUpdate()
 			bullet.lifetime = bullet.lifetime - deltatime
-			for j, enemy in ipairs(enemies) do
-				if C_CheckSpriteCollision(bullet.id, enemy.id) and enemy.hp > 0 then
-					enemy.hp = enemy.hp - self.damage
-					bullet:OnEnd()
-					table.remove(self.bullets, i)
-				end
-			end
+			--for j, enemy in ipairs(enemies) do
+			--	if C_CheckSpriteCollision(bullet.id, enemy.id) and enemy.hp > 0 then
+			--		enemy.hp = enemy.hp - self.damage
+			--		bullet:OnEnd()
+			--		table.remove(self.bullets, i)
+			--	end
+			--end
 		end
 	end
 

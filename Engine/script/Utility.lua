@@ -1,5 +1,6 @@
 deltatime = 0.0
 mousePos = { x = 0.0, y = 0.0 }
+
 keys = { 
 	W = 0x57, 
 	A = 0x41, 
@@ -13,7 +14,7 @@ keys = {
 
 weapons = { 
 	["default"] = { 
-		name = "Sword", sprite = "sword.png", fireRate = 1.2, damage = 5.0, speed = 35, lifetime = 4.0 
+		name = "Sword", sprite = "sword.png", fireRate = 0.2, damage = 5.0, speed = 35, lifetime = 4.0 
 	}
 }
 

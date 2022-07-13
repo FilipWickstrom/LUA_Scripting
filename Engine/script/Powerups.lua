@@ -82,7 +82,7 @@ function Powerup:Gain(player, goldText)
 
 end
 
-function Powerup:Update(player, enemies, goldText, lastpickupText)
+function Powerup:Update(enemies, goldText, lastpickupText)
 	
 	--Check if player and the powerup is colliding
 	if C_CheckSpriteCollision(player.id, self.id) and self.shouldrespawn == false then

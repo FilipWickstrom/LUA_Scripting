@@ -52,6 +52,11 @@ function gameObject:RotateLeft()
 	end
 end
 
+function gameObject:Rotate(vec)
+	self.rotation = vec
+	C_SetSpriteRotation(self.rotation.x, self.rotation.y,self.rotation.z)
+end
+
 function gameObject:RotateRight()
 	if self.rotation.z ~= 0 then
 		self.rotation.z = 0

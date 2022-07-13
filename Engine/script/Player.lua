@@ -55,7 +55,11 @@ end
 
 function Player:Shoot()
 	if C_IsKeyDown(keys.LBUTTON) then
-		self.weapon:Fire(self.position)
+		local mousepoint = vector:New()
+		mousepoint.x, mousepoint.y, mousepoint.z = C_GetWorldFromScreen()
+		local dir = mousepoint - self.position
+		dir:Normalize()
+		self.weapon:Fire(self.position, dir)
 	end
 end
 

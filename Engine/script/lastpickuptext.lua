@@ -1,7 +1,7 @@
 
 local lpText = {}
 
-function lpText:Initialize(player)
+function lpText:Initialize()
 
 	lpText.playerRef = player
 	lpText.id = C_AddText("Last Pickup: None", "roboto_28.xml", 245, 200, 450, 100)

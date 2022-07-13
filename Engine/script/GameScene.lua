@@ -25,7 +25,7 @@ function Start()
 	powerup = require('script/Powerups'):New()
 	goldText:Initialize()
 	weaponText:Initialize()
-	lastpickupText:Initialize(player)
+	lastpickupText:Initialize()
 
 	--Camera setup
 	camera = refCamera:New()
@@ -55,7 +55,6 @@ end
 
 -- Destroying everything
 function Clean()
-
 	print("### Removing player ###")
 	player:OnEnd()
 
@@ -63,7 +62,6 @@ function Clean()
 	for k, v in pairs(objects) do
 		v:OnEnd()
 	end
-
 end
 
 -- Game loop
@@ -82,7 +80,7 @@ function Update(dt)
 
 	-- Update powerup
 	if powerup ~= nil then
-		powerup:Update(player, objects, goldText, lastpickupText)
+		powerup:Update(objects, goldText, lastpickupText)
 	end
 
 	-- Go back to menu when player dies
