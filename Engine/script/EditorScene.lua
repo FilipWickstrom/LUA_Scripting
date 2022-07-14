@@ -80,6 +80,13 @@ function Update(dt)
 	elseif(C_IsButtonPressed(GUI["Load"])) then
 		--Call c++ load map
 		if (loaded == false) then
+
+			-- Reset scene before loading.
+			for num, obj in pairs(levelObjects) do
+				obj:OnEnd()
+			end
+			levelObjects = {}
+
 			levelObjects = Load_File('maps/test1.txt')
 			loaded = true
 			created = false
