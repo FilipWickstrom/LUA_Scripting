@@ -195,10 +195,10 @@ int L_SetHealthbarMax(lua_State* L)
 	unsigned int id = 0;
 
 	if (lua_isnumber(L, -1))
-		maxHp = lua_tonumber(L, -1);
+		maxHp = static_cast<float>(lua_tonumber(L, -1));
 
 	if (lua_isnumber(L, -2))
-		id = lua_tonumber(L, -2);
+		id = static_cast<unsigned int>(lua_tonumber(L, -2));
 
 	Element2D* elem = Graphics2D::GetElement(id);
 
@@ -212,17 +212,15 @@ int L_SetHealthbarMax(lua_State* L)
 
 int L_SetHealthbarBackgroundColor(lua_State* L)
 {
-	float r = 0;
-	float g = 0;
-	float b = 0;
-
+	unsigned int r = 0;
+	unsigned int g = 0;
+	unsigned int b = 0;
 	unsigned int id = 0;
 
-	b = lua_tonumber(L, -1);
-	g = lua_tonumber(L, -2);
-	r = lua_tonumber(L, -3);
-
-	id = lua_tonumber(L, -4);
+	b = static_cast<unsigned int>(lua_tonumber(L, -1));
+	g = static_cast<unsigned int>(lua_tonumber(L, -2));
+	r = static_cast<unsigned int>(lua_tonumber(L, -3));
+	id = static_cast<unsigned int>(lua_tonumber(L, -4));
 
 	Element2D* elem = Graphics2D::GetElement(id);
 
@@ -237,17 +235,15 @@ int L_SetHealthbarBackgroundColor(lua_State* L)
 
 int L_SetHealthbarForegroundColor(lua_State* L)
 {
-	float r = 0;
-	float g = 0;
-	float b = 0;
-
+	unsigned int r = 0;
+	unsigned int g = 0;
+	unsigned int b = 0;
 	unsigned int id = 0;
 
-	b = lua_tonumber(L, -1);
-	g = lua_tonumber(L, -2);
-	r = lua_tonumber(L, -3);
-
-	id = lua_tonumber(L, -4);
+	b = static_cast<unsigned int>(lua_tonumber(L, -1));
+	g = static_cast<unsigned int>(lua_tonumber(L, -2));
+	r = static_cast<unsigned int>(lua_tonumber(L, -3));
+	id = static_cast<unsigned int>(lua_tonumber(L, -4));
 
 	Element2D* elem = Graphics2D::GetElement(id);
 
