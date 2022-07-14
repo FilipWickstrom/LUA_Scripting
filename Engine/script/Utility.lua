@@ -9,7 +9,9 @@ keys = {
 	SPACE = 0x20, 
 	ESCAPE = 0x1B,		
 	LBUTTON = 0x01, 
-	RBUTTON = 0x02 
+	RBUTTON = 0x02,
+	PLUS = 0xBB,
+	MINUS = 0xBD
 }
 
 weapons = { 
@@ -29,6 +31,7 @@ weapons = {
 
 bossWeaponDropChance = 101
 
+-- Why not use "#table"?
 function tableLength(T)
 	local count = 0
 	for _ in pairs(T) do 

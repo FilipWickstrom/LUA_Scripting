@@ -19,6 +19,7 @@ private:
 	irr::scene::ISceneManager* m_sceneManager;
 	irr::gui::IGUIEnvironment* m_guiEnvironment;
 	const irr::scene::IGeometryCreator* m_geoCreator;
+	irr::scene::ISceneCollisionManager* m_collManager;
 
 	// Delta time
 	double m_dt;
@@ -37,6 +38,7 @@ public:
 	static irr::scene::ISceneManager* GetSceneManager();
 	static irr::gui::IGUIEnvironment* GetGUIEnvironment();
 	static const irr::scene::IGeometryCreator* GetGeometryCreator();
+	static irr::scene::ISceneCollisionManager* GetCollisionManager();
 
 	static double& GetDeltaTime();
 	static unsigned int& GetWindowWidth();

@@ -31,9 +31,12 @@ function Start()
 	-- Create a camera
 	camera:SetPosition(0,40,0)
 	camera:SetTarget(0,0,0.1)
-	camera:SetFOV(90)
+	camera:SetZoom(10)
 
 	C_ToggleRenderUI(false)
+
+	-- [DEBUG] Place a blank tile in origo 
+	C_LoadSprite("")
 end
 
 
@@ -45,15 +48,13 @@ function Clean()
 end
 
 function Update(dt)
+	deltatime = dt
 
 	if (C_IsKeyDown(keys.LBUTTON)) then
 		if selectedBlock ~= nil then
 			local newObject = selectedBlock:New()
 			local newVector = vector:New()
 			newVector.x, newVector.y, newVector.z = C_GetWorldFromScreen()
-			newVector.y = 0
-			newVector.z = newVector.z / 75
-			newVector.x = newVector.x / 75
 			newObject:LoadSprite('wall_mid.png')
 			newObject:SetPosition(newVector.x, newVector.y, newVector.z)
 			table.insert(levelObjects, newObject)
@@ -91,5 +92,8 @@ function Update(dt)
 	elseif(C_IsButtonPressed(GUI["Menu"])) then
 		C_ChangeScene(Scenes.MENU)
 	end
+
+	camera:UpdateMovement()
+	camera:UpdateZoom()
 
 end

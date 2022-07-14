@@ -256,16 +256,26 @@ void SceneHandler::SetCameraTarget(const irr::core::vector3df& tar)
         Get().m_camera->setTarget(tar);
 }
 
-void SceneHandler::SetCameraFOV(const float& fov)
+void SceneHandler::SetCameraZoom(const float& zoom)
 {
     if (!Get().m_camera) return;
 
-    float thefov = fov;
-    //Fov should not go below 0
-    if (fov <= 0.f)
-        thefov = 1.f;
+    float width = static_cast<float>(Graphics::GetWindowWidth());
+    float height = static_cast<float>(Graphics::GetWindowHeight());
 
-    Get().m_camera->setFOV(irr::core::degToRad(thefov));
+    float thezoom = zoom;
+    //Zoom should not go below 1 and not higher than the resolution
+    if (zoom < 1.f)
+        thezoom = 1.f;
+    else if (zoom > height)
+        thezoom = height;
+    else if (zoom > width)
+        thezoom = width;
+
+    irr::core::matrix4 matrix;
+    matrix.buildProjectionMatrixOrthoLH(width / thezoom, height / thezoom, 1.f, 100.f);
+
+    Get().m_camera->setProjectionMatrix(matrix, true);
 }
 
 unsigned int SceneHandler::AddText(const std::string& text, const std::string& font, irr::core::vector2di pos, irr::core::vector2di size)
@@ -361,15 +371,3 @@ bool SceneHandler::IsButtonPressed(unsigned int id)
 
     return false;
 }
-
-irr::core::line3df SceneHandler::GetRayFromScreenCoords(irr::core::vector2di screenCoords)
-{
-    irr::core::line3df ray;
-
-    //Camera does not exist
-    if (!Get().m_camera) return ray;
-
-    return Graphics::GetSceneManager()->getSceneCollisionManager()->getRayFromScreenCoordinates(screenCoords, Get().m_camera);
-}
-
-

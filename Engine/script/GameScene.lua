@@ -32,7 +32,7 @@ function Start()
 	camera = Camera:New()
 	camera:SetPosition(0,40,0)
 	camera:SetTarget(0,0,0.1)
-	camera:SetFOV(90)
+	camera:SetZoom(10)
 
 	objects = Load_File('maps/test1.txt')
 
@@ -104,6 +104,8 @@ function Update(dt)
 
 	weaponText:Update()
 	goldText:Update()
+
+	camera:UpdateZoom()
 end
 
 

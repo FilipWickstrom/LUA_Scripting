@@ -4,7 +4,7 @@
 Sprite::Sprite()
 {
 	m_node = nullptr;
-	m_size = irr::core::vector2df(16.f, 16.f);
+	m_size = irr::core::vector2df(SPRITE_SIZE_MODIFIER, SPRITE_SIZE_MODIFIER);
 	m_collisionRadius = 0.f;
 	m_hasCollision = true;
 	this->LoadTexture("default.png");
@@ -13,7 +13,7 @@ Sprite::Sprite()
 Sprite::Sprite(const std::string& textureName)
 {
 	m_node = nullptr;
-	m_size = irr::core::vector2df(16.f, 16.f);
+	m_size = irr::core::vector2df(SPRITE_SIZE_MODIFIER, SPRITE_SIZE_MODIFIER);
 	m_collisionRadius = 0.f;
 	m_hasCollision = true;
 	this->LoadTexture(textureName);
@@ -67,7 +67,11 @@ void Sprite::LoadTexture(const std::string& filename)
 	// Cleaning up before loading new
 	this->Remove();
 
-	irr::video::ITexture* texture = Graphics::GetDriver()->getTexture((SPRITEPATH + filename).c_str());
+	irr::video::ITexture* texture = nullptr;
+
+	if (!filename.empty())
+		texture = Graphics::GetDriver()->getTexture((SPRITEPATH + filename).c_str());
+	
 	if (texture)
 		m_size = static_cast<irr::core::dimension2df>(texture->getSize()) / SPRITE_SIZE_MODIFIER;
 	

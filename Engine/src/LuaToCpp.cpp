@@ -4,8 +4,11 @@
 
 int L_LoadSprite(lua_State* L)
 {
-	std::string filepath = lua_tostring(L, -1);
-	lua_pushnumber(L, SceneHandler::AddSprite(filepath));
+	if (lua_isstring(L, -1))
+	{
+		std::string filepath = lua_tostring(L, -1);
+		lua_pushnumber(L, SceneHandler::AddSprite(filepath));
+	}
 	return 1;
 }
 
@@ -345,13 +348,13 @@ int CAM::L_SetCameraTarget(lua_State* L)
 	return 0;
 }
 
-int CAM::L_SetCameraFOV(lua_State* L)
+int CAM::L_SetCameraZoom(lua_State* L)
 {
-	float fov = 0.f;
+	float zoom = 1.f;
 	if (lua_isnumber(L, -1))
 	{
-		fov = static_cast<float>(lua_tonumber(L, -1));
-		SceneHandler::SetCameraFOV(fov);
+		zoom = static_cast<float>(lua_tonumber(L, -1));
+		SceneHandler::SetCameraZoom(zoom);
 	}
 	return 0;
 }
@@ -473,16 +476,26 @@ int L_GetWorldFromScreen(lua_State* L)
 {
 	/*
 		Arguments: None
-		Return: Pos[vector3di]
+		Return: Pos[vector3df]
 	*/
 
 	irr::core::vector2di screenPos = Input::GetInputHandler().MouseState.pos;
+	irr::scene::ICameraSceneNode* cam = Graphics::GetSceneManager()->getActiveCamera();
 
-	irr::core::line3df ray = Graphics::GetSceneManager()->getSceneCollisionManager()->getRayFromScreenCoordinates(screenPos);
+	// Ray between the camera position and the far plane of the frustum
+	irr::core::line3df ray = Graphics::GetCollisionManager()->getRayFromScreenCoordinates(screenPos, cam);
 
-	lua_pushnumber(L, ray.start.X);
-	lua_pushnumber(L, ray.start.Y);
-	lua_pushnumber(L, ray.start.Z);
+	// Plane in origo facing the camera
+	irr::core::plane3d<irr::f32> plane({ 0,0,0 }, {0,-1,0});
+
+	irr::core::vector3df intersectPoint;
+
+	// Check where the ray intersect with the plane
+	plane.getIntersectionWithLine(ray.start, ray.getVector(), intersectPoint);
+
+	lua_pushnumber(L, intersectPoint.X);
+	lua_pushnumber(L, intersectPoint.Y);
+	lua_pushnumber(L, intersectPoint.Z);
 
 	return 3;
 }

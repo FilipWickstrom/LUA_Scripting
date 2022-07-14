@@ -4,14 +4,17 @@ local Camera = {}
 
 
 function Camera:New()
-	local cam = {}
-	self.__index = self
-	setmetatable(cam,self)
+	cam = {}
 
 	cam.position = vector:New()
 	cam.target   = vector:New()
+	cam.speed	 = 10
+	cam.zoomSpeed = 15
+	cam.zoomValue = 1
 	C_CreateCamera()
 
+	self.__index = self
+	setmetatable(cam, self)
 	return cam
 end
 
@@ -29,8 +32,15 @@ function Camera:SetTarget(x, y, z)
 	C_SetCameraTarget(self.target.x, self.target.y, self.target.z)
 end
 
-function Camera:SetFOV(fov)
-	C_SetCameraFOV(fov)
+function Camera:SetZoom(zoom)
+	if (tonumber(zoom)) then
+
+		-- Zoom only between 1 and 100
+		if (zoom >= 1 and zoom <= 100) then
+			self.zoomValue = tonumber(zoom)
+			C_SetCameraZoom(self.zoomValue)
+		end
+	end
 end
 
 function Camera:Move(vec)
@@ -40,5 +50,34 @@ function Camera:Move(vec)
 	self:SetTarget(tar.x, tar.y, tar.z)
 end
 
+function Camera:UpdateMovement()	
+
+	-- Movement
+	local dir = vector:New()
+	if C_IsKeyDown(keys.W) then
+		dir.z = dir.z + 1
+	end
+	if C_IsKeyDown(keys.S) then
+		dir.z = dir.z - 1
+	end
+	if C_IsKeyDown(keys.A) then
+		dir.x = dir.x - 1
+	end
+	if C_IsKeyDown(keys.D) then
+		dir.x = dir.x + 1
+	end
+
+	self:Move(dir * self.speed * deltatime)	
+end
+
+function Camera:UpdateZoom()
+	-- Zooming the camera
+	if C_IsKeyDown(keys.PLUS) then
+		self:SetZoom(self.zoomValue + (self.zoomSpeed * deltatime))
+	
+	elseif C_IsKeyDown(keys.MINUS) then
+		self:SetZoom(self.zoomValue - (self.zoomSpeed * deltatime))
+	end
+end
 
 return Camera

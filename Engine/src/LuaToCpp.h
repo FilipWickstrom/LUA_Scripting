@@ -36,7 +36,7 @@ namespace CAM
 	int L_CreateCamera(lua_State* L);
 	int L_SetCameraPosition(lua_State* L);
 	int L_SetCameraTarget(lua_State* L);
-	int L_SetCameraFOV(lua_State* L);
+	int L_SetCameraZoom(lua_State* L);
 };
 
 

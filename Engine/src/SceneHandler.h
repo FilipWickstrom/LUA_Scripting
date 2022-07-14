@@ -57,7 +57,7 @@ public:
 	static void AddCamera();
 	static void SetCameraPosition(const irr::core::vector3df& pos);
 	static void SetCameraTarget(const irr::core::vector3df& tar);
-	static void SetCameraFOV(const float& fov);
+	static void SetCameraZoom(const float& zoom);
 
 	/*
 		GUI
@@ -71,7 +71,4 @@ public:
 
 	static void RemoveGUI(unsigned int id);
 	static bool IsButtonPressed(unsigned int id);
-
-	static irr::core::line3df GetRayFromScreenCoords(irr::core::vector2di screenCoords);
-
 };

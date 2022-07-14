@@ -35,6 +35,7 @@ Graphics::Graphics()
     m_sceneManager      = m_device->getSceneManager();
     m_guiEnvironment    = m_device->getGUIEnvironment();
     m_geoCreator        = m_sceneManager->getGeometryCreator();
+    m_collManager       = m_sceneManager->getSceneCollisionManager();
     m_dt = 0.0;
 }
 
@@ -119,6 +120,11 @@ irr::gui::IGUIEnvironment* Graphics::GetGUIEnvironment()
 const irr::scene::IGeometryCreator* Graphics::GetGeometryCreator()
 {
     return Get().m_geoCreator;
+}
+
+irr::scene::ISceneCollisionManager* Graphics::GetCollisionManager()
+{
+    return Get().m_collManager;
 }
 
 double& Graphics::GetDeltaTime()
