@@ -104,6 +104,8 @@ LuaHandler::LuaHandler()
 	lua_register(m_state, "C_IsKeyDown",			L_IsKeyDown);
 	// Return: posX{float}, posY{float}, posZ{float}
 	lua_register(m_state, "C_GetWorldFromScreen",	L_GetWorldFromScreen);
+	// Param: shouldRender{boolean}
+	lua_register(m_state, "C_ToggleRenderUI",		L_ToggleRenderUI);
 }
 
 LuaHandler::~LuaHandler()

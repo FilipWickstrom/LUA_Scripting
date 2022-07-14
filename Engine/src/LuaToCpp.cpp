@@ -297,6 +297,18 @@ int L_RemoveUI(lua_State* L)
 	return 0;
 }
 
+int L_ToggleRenderUI(lua_State* L)
+{
+	bool shouldRender = true;
+
+	if (lua_isboolean(L, -1))
+		shouldRender = lua_toboolean(L, -1);
+
+	Graphics2D::ToggleRender(shouldRender);
+
+	return 0;
+}
+
 int CAM::L_CreateCamera(lua_State* L)
 {
 	SceneHandler::AddCamera();

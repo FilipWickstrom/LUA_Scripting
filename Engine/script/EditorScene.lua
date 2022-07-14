@@ -1,9 +1,11 @@
 require('script/AllScenes')
+local vector = require('script/Vector')
 local gameObject = require('script/gameObject') --temp
 local levelObjects = {}
 local loaded = false
 local created = false
 local camera = require('script/Camera'):New()
+local selectedBlock = require('script/WallTile')
 require('script/File')
 
 local GUI = {}
@@ -30,6 +32,8 @@ function Start()
 	camera:SetPosition(0,40,0)
 	camera:SetTarget(0,0,0.1)
 	camera:SetFOV(90)
+
+	C_ToggleRenderUI(false)
 end
 
 
@@ -41,6 +45,21 @@ function Clean()
 end
 
 function Update(dt)
+
+	if (C_IsKeyDown(keys.LBUTTON)) then
+		if selectedBlock ~= nil then
+			local newObject = selectedBlock:New()
+			local newVector = vector:New()
+			newVector.x, newVector.y, newVector.z = C_GetWorldFromScreen()
+			newVector.z = newVector.z / newVector.y
+			newVector.x = newVector.x / newVector.y
+			newVector.y = 0
+			newObject:LoadSprite('wall_mid.png')
+			newObject:SetPosition(newVector.x, newVector.y, newVector.z)
+			table.insert(levelObjects, newObject)
+		end
+	end
+
 	-- Check if any of the buttons is clicked
 	if (C_IsButtonPressed(GUI["Create"])) then
 		--Call c++ create map

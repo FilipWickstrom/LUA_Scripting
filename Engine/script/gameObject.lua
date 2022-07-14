@@ -25,6 +25,12 @@ function gameObject:New(g)
 	return g
 end
 
+function gameObject:LoadSprite(spriteFile)
+
+	self.id = C_LoadSprite(spriteFile)
+
+end
+
 function gameObject:OnEnd()
 	C_RemoveUI(self.gid)
 	C_RemoveSprite(self.id)

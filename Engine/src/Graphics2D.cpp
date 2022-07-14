@@ -63,9 +63,14 @@ void Graphics2D::RemoveElement(const unsigned int& index)
     INSTANCE.m_elements.erase(index);
 }
 
+void Graphics2D::ToggleRender(const bool& toggle)
+{
+	INSTANCE.m_shouldRender = toggle;
+}
+
 void Graphics2D::Draw()
 {
-    if (INSTANCE.m_driver)
+    if (INSTANCE.m_driver && INSTANCE.m_shouldRender)
     {
         for (auto elem : INSTANCE.m_elements)
         {

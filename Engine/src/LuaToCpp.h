@@ -61,6 +61,7 @@ int L_SetHealthbarForegroundColor(lua_State* L);
 int L_SetHealthbarVisibility(lua_State* L);
 int L_UpdatePosUI(lua_State* L);
 int L_RemoveUI(lua_State* L);
+int L_ToggleRenderUI(lua_State* L);
 
 // Utilities
 int L_GetScreenCoords(lua_State* L);

@@ -12,6 +12,7 @@ private:
 	irr::gui::IGUIFont* m_defaultFont = nullptr;
 
 	unsigned int m_nextID = 0;
+	bool m_shouldRender = true;
 
 	std::unordered_map<unsigned int, Element2D*> m_elements;
 
@@ -24,6 +25,9 @@ public:
 	static const unsigned int AddHealthbar(irr::core::rect<irr::s32> pos);
 	static void SetPosition(const unsigned int& index, irr::core::rect<irr::s32> pos);
 	static void RemoveElement(const unsigned int& index);
+
+	// true - will render UI, false - won't render UI
+	static void ToggleRender(const bool& toggle);
 
 	static void Draw();
 
