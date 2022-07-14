@@ -51,9 +51,9 @@ function Update(dt)
 			local newObject = selectedBlock:New()
 			local newVector = vector:New()
 			newVector.x, newVector.y, newVector.z = C_GetWorldFromScreen()
-			newVector.z = newVector.z / newVector.y
-			newVector.x = newVector.x / newVector.y
 			newVector.y = 0
+			newVector.z = newVector.z / 75
+			newVector.x = newVector.x / 75
 			newObject:LoadSprite('wall_mid.png')
 			newObject:SetPosition(newVector.x, newVector.y, newVector.z)
 			table.insert(levelObjects, newObject)
