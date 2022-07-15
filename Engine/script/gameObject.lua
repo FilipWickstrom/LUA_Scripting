@@ -55,7 +55,7 @@ end
 
 function gameObject:Rotate(vec)
 	self.rotation = vec
-	C_SetSpriteRotation(self.rotation.x, self.rotation.y,self.rotation.z)
+	C_SetSpriteRotation(self.id, self.rotation.x, self.rotation.y, self.rotation.z)
 end
 
 function gameObject:RotateRight()

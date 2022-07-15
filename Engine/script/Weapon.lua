@@ -29,6 +29,11 @@ function Weapon:Fire(spawnPos, dir)
 		g.dir = dir
 		g.speed = weapons[self.type].speed
 		g.lifetime = weapons[self.type].lifetime
+		local rad = math.atan(g.dir.x, g.dir.z)
+		local degrees = rad * 180 / math.pi
+		local vec = vector:New()
+		vec.y = degrees
+		g:Rotate(vec)
 		C_SetSpriteVisible(g.id, true)
 		table.insert(self.bullets, g)
 
