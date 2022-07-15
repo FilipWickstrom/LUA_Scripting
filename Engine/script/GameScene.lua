@@ -8,6 +8,7 @@ lastpickupText	= require('script/lastpickuptext')
 require('script/AllScenes')	
 require('script/File')
 weaponDrops		= require('script/WeaponDrop')
+require('script/ProjectileHandler')
 
 
 
@@ -99,6 +100,7 @@ function Update(dt)
 
 	-- Update player
 	player:Update(camera, objects)
+	UpdateProjectiles()
 
 	weaponDrops:Update()
 
