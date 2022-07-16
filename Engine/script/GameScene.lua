@@ -65,10 +65,8 @@ function Clean()
 
 	weaponDrops:OnEnd()
 
-	print("### Removing player ###")
 	player:OnEnd()
 
-	print("### Removing objects ###")
 	for k, v in pairs(objects) do
 		v:OnEnd()
 	end
@@ -93,19 +91,18 @@ function Update(dt)
 		powerup:Update(objects, goldText, lastpickupText)
 	end
 
-	-- Go back to menu when player dies
-	if(player:IsAlive() == false) then
-		C_ChangeScene(Scenes.GAMEOVER)
-	end
-
 	-- Update player
 	player:Update(camera, objects)
 	UpdateProjectiles()
 
 	weaponDrops:Update()
-
 	weaponText:Update()
 	goldText:Update()
+	
+	-- Go back to menu when player dies
+	if (not player:IsAlive()) then
+		C_ChangeScene(Scenes.GAMEOVER)
+	end
 end
 
 

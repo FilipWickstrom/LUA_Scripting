@@ -89,6 +89,7 @@ void SceneHandler::ResetScene()
     Graphics::GetSceneManager()->clear();
     Graphics::GetSceneManager()->getMeshCache()->clear();
     Graphics::GetGUIEnvironment()->clear();
+    Graphics2D::RemoveAll();
 
     m_spriteUID = 0;
     m_guiUID = 0;
