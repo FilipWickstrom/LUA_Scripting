@@ -1,18 +1,17 @@
---Global classes
-Player			= require('script/Player')
-Camera			= require('script/Camera')
-Powerup			= require('script/Powerups')
-goldText		= require('script/GoldText')
-weaponText		= require('script/WeaponText')
-lastpickupText	= require('script/lastpickuptext')
+--Includes
+local Player			= require('script/Player')
+local Camera			= require('script/Camera')
+local Powerup			= require('script/Powerups')
+local goldText			= require('script/GoldText')
+local weaponText		= require('script/WeaponText')
+local lastpickupText	= require('script/lastpickuptext')
+local weaponDrops		= require('script/WeaponDrop')
 require('script/AllScenes')	
 require('script/File')
-weaponDrops		= require('script/WeaponDrop')
 require('script/ProjectileHandler')
 
 
-
--- Collect separate types in different tables
+-- Globals to collect separate types in different tables
 objects	= {}
 walls	= {}
 enemies	= {}
@@ -58,18 +57,7 @@ function Start()
 			table.insert(enemies, objects[i])
 		end
 	end
-end
 
--- Destroying everything
-function Clean()
-
-	weaponDrops:OnEnd()
-
-	player:OnEnd()
-
-	for k, v in pairs(objects) do
-		v:OnEnd()
-	end
 end
 
 -- Game loop

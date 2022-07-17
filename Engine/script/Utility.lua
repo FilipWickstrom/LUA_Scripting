@@ -47,11 +47,3 @@ function random(limit)
 	return math.random(limit)
 
 end
-
-function PrintNumberOfGlobals()
-	local counter = 0
-	for k,v in pairs(_G) do
-		counter = counter + 1
-	end
-	print("### Total globals: " .. tostring(counter) .. " ###")
-end
