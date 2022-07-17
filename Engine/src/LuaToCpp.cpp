@@ -458,40 +458,24 @@ int L_GetScreenCoords(lua_State* L)
 		Return: Pos[vector2di]
 	*/
 
-	irr::core::vector2di screenPos;
-
-	screenPos = Input::GetInputHandler().MouseState.pos;
-
+	irr::core::vector2di screenPos = Input::GetInputHandler().MouseState.pos;
 	lua_pushnumber(L, screenPos.X);
 	lua_pushnumber(L, screenPos.Y);
 
 	return 2;
 }
 
-int L_GetWorldFromScreen(lua_State* L)
+int L_GetWorldCoords(lua_State* L)
 {
 	/*
 		Arguments: None
 		Return: Pos[vector3df]
 	*/
 
-	irr::core::vector2di screenPos = Input::GetInputHandler().MouseState.pos;
-	irr::scene::ICameraSceneNode* cam = Graphics::GetSceneManager()->getActiveCamera();
-
-	// Ray between the camera position and the far plane of the frustum
-	irr::core::line3df ray = Graphics::GetCollisionManager()->getRayFromScreenCoordinates(screenPos, cam);
-
-	// Plane in origo facing the camera
-	irr::core::plane3d<irr::f32> plane({ 0,0,0 }, {0,-1,0});
-
-	irr::core::vector3df intersectPoint;
-
-	// Check where the ray intersect with the plane
-	plane.getIntersectionWithLine(ray.start, ray.getVector(), intersectPoint);
-
-	lua_pushnumber(L, intersectPoint.X);
-	lua_pushnumber(L, intersectPoint.Y);
-	lua_pushnumber(L, intersectPoint.Z);
+	irr::core::vector3df worldPos = SceneHandler::GetWorldCoordFromScreen();
+	lua_pushnumber(L, worldPos.X);
+	lua_pushnumber(L, worldPos.Y);
+	lua_pushnumber(L, worldPos.Z);
 
 	return 3;
 }
@@ -573,4 +557,27 @@ int GUI::L_IsButtonPressed(lua_State* L)
 
 	lua_pushboolean(L, isPressed);
 	return 1;
+}
+
+int L_AddGridSystem(lua_State* L)
+{
+	irr::core::dimension2du dimension;
+	if (lua_isnumber(L, -1) && lua_isnumber(L, -2))
+	{
+		dimension.Width = static_cast<unsigned int>(std::abs(lua_tonumber(L, -2)));
+		dimension.Height = static_cast<unsigned int>(std::abs(lua_tonumber(L, -1)));
+		SceneHandler::AddGridSystem(dimension);
+	}
+
+	return 0;
+}
+
+int L_PlaceTile(lua_State* L)
+{
+	irr::core::vector3df tilePos = SceneHandler::SnapToGrid();
+	lua_pushnumber(L, tilePos.X);
+	lua_pushnumber(L, tilePos.Y);
+	lua_pushnumber(L, tilePos.Z);
+
+	return 3;
 }

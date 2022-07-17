@@ -71,4 +71,16 @@ public:
 
 	static void RemoveGUI(unsigned int id);
 	static bool IsButtonPressed(unsigned int id);
+
+	/*
+		Utility
+	*/
+	static irr::core::vector3df GetWorldCoordFromScreen();
+
+	/*
+		Editor
+	*/
+	static void AddGridSystem(const irr::core::dimension2du& dimension);
+	static irr::core::vector3df SnapToGrid();
+
 };

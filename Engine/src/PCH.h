@@ -47,8 +47,8 @@ const std::string SPRITEPATH	= "../Assets/Sprites/";
 const std::string FONTPATH		= "../Assets/Fonts/";
 const std::string SCRIPTSPATH	= "script/";
 
-//Sprite modifier - larger value means smaller sprites
-const float SPRITE_SIZE_MODIFIER = 4.f;
+//Size of the tiles
+const irr::core::vector2df DEFAULT_TILE_SIZE = { 16.f, 16.f };
 
 /*
 	DEBUG 

@@ -4,16 +4,16 @@
 Sprite::Sprite()
 {
 	m_node = nullptr;
-	m_size = irr::core::vector2df(SPRITE_SIZE_MODIFIER, SPRITE_SIZE_MODIFIER);
+	m_size = DEFAULT_TILE_SIZE;
 	m_collisionRadius = 0.f;
 	m_hasCollision = true;
-	this->LoadTexture("default.png");
+	this->LoadTexture();
 }
 
 Sprite::Sprite(const std::string& textureName)
 {
 	m_node = nullptr;
-	m_size = irr::core::vector2df(SPRITE_SIZE_MODIFIER, SPRITE_SIZE_MODIFIER);
+	m_size = DEFAULT_TILE_SIZE;
 	m_collisionRadius = 0.f;
 	m_hasCollision = true;
 	this->LoadTexture(textureName);
@@ -73,16 +73,20 @@ void Sprite::LoadTexture(const std::string& filename)
 		texture = Graphics::GetDriver()->getTexture((SPRITEPATH + filename).c_str());
 	
 	if (texture)
-		m_size = static_cast<irr::core::dimension2df>(texture->getSize()) / SPRITE_SIZE_MODIFIER;
-	
+		m_size = static_cast<irr::core::dimension2df>(texture->getSize());
+
 	irr::scene::IMesh* mesh = Graphics::GetGeometryCreator()->createPlaneMesh(m_size);
 	m_node = Graphics::GetSceneManager()->addMeshSceneNode(mesh);
-
+	
 	if (!m_node)
 		std::cout << "ERROR: Node not correct..." << std::endl;
 
+	// Set material to the texture
 	if (texture)
 		m_node->setMaterialTexture(0, texture);
+	// Load a default material
+	else
+		Graphics::GetSceneManager()->getMeshManipulator()->setVertexColors(mesh, irr::video::SColor(255, 255, 20, 147));
 
 	//Make it possible to see using directX or openGL
 	m_node->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_LIGHTING, false);

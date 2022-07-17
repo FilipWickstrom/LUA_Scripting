@@ -13,7 +13,7 @@ public:
 	Sprite(const std::string& textureName);
 	~Sprite() = default;
 
-	void LoadTexture(const std::string& filename);
+	void LoadTexture(const std::string& filename = "");
 	void Remove();
 	void SetVisible(const bool& isVisible = true);
 	void SetCollision(const bool& hasCollision = true);

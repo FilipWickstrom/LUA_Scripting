@@ -130,13 +130,36 @@ void LuaHandler::LoadState()
 	lua_register(m_state, "C_UpdateText",					GUI::L_UpdateText);
 	// Param: id{uint}, alignment{string}
 	lua_register(m_state, "C_SetTextAlignment",				GUI::L_SetTextAlignment);
-	// Return: posX{int}, posY{int}
-	lua_register(m_state, "C_GetScreenCoords",				L_GetScreenCoords);
+	// Param: shouldRender{boolean}
+	lua_register(m_state, "C_ToggleRenderUI",				L_ToggleRenderUI);
+
+	/*
+		Input
+	*/
+
 	// Param: keyCode{irr::EKEY_CODE}
 	// Return: isKeyDown{bool}
 	lua_register(m_state, "C_IsKeyDown",					L_IsKeyDown);
+
+
+	/*
+		Mouse position
+	*/
+
+	// Return: posX{int}, posY{int}
+	lua_register(m_state, "C_GetScreenCoords",				L_GetScreenCoords);
 	// Return: posX{float}, posY{float}, posZ{float}
-	lua_register(m_state, "C_GetWorldFromScreen",			L_GetWorldFromScreen);
+	lua_register(m_state, "C_GetWorldCoords",				L_GetWorldCoords);
+
+	/*
+		Editor
+	*/
+
+	// Param: tilename{string}
+	// Return: posX{float}, posY{float}, posZ{float}
+	lua_register(m_state, "C_AddTile",						L_PlaceTile);
+	// Param: dimensionX{uint}, dimensionZ{uint}
+	lua_register(m_state, "C_AddGrid",						L_AddGridSystem);
 }
 
 lua_State*& LuaHandler::GetLua()

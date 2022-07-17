@@ -63,7 +63,14 @@ int L_UpdatePosUI(lua_State* L);
 int L_RemoveUI(lua_State* L);
 int L_ToggleRenderUI(lua_State* L);
 
-// Utilities
-int L_GetScreenCoords(lua_State* L);
-int L_GetWorldFromScreen(lua_State* L);
+// Input
 int L_IsKeyDown(lua_State* L);
+
+// Mouse position
+int L_GetScreenCoords(lua_State* L);
+int L_GetWorldCoords(lua_State* L);
+
+// Editor
+int L_AddGridSystem(lua_State* L);
+int L_PlaceTile(lua_State* L);
+//RemoveTile

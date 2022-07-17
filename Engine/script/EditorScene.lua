@@ -35,8 +35,11 @@ function Start()
 
 	C_ToggleRenderUI(false)
 
+	C_AddGrid(100,100)
+
 	-- [DEBUG] Place a blank tile in origo 
 	C_LoadSprite("")
+
 end
 
 
@@ -47,7 +50,7 @@ function Update(dt)
 		if selectedBlock ~= nil then
 			local newObject = selectedBlock:New()
 			local newVector = vector:New()
-			newVector.x, newVector.y, newVector.z = C_GetWorldFromScreen()
+			newVector.x, newVector.y, newVector.z = C_AddTile()
 			newObject:LoadSprite('wall_mid.png')
 			newObject:SetPosition(newVector.x, newVector.y, newVector.z)
 			table.insert(levelObjects, newObject)

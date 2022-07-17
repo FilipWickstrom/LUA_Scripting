@@ -374,3 +374,56 @@ bool SceneHandler::IsButtonPressed(unsigned int id)
 
     return false;
 }
+
+irr::core::vector3df SceneHandler::GetWorldCoordFromScreen()
+{
+    irr::core::vector2di screenPos = Input::GetInputHandler().MouseState.pos;
+    irr::scene::ICameraSceneNode* cam = Graphics::GetSceneManager()->getActiveCamera();
+
+    // Ray between the camera position and the far plane of the frustum
+    irr::core::line3df ray = Graphics::GetCollisionManager()->getRayFromScreenCoordinates(screenPos, cam);
+
+    // Plane in origo facing the camera
+    irr::core::plane3d<irr::f32> plane({ 0,0,0 }, { 0,-1,0 });
+
+    irr::core::vector3df intersectPoint;
+
+    // Check where the ray intersect with the plane
+    plane.getIntersectionWithLine(ray.start, ray.getVector(), intersectPoint);
+
+    return intersectPoint;
+}
+
+void SceneHandler::AddGridSystem(const irr::core::dimension2du& dimension)
+{
+    irr::scene::IMesh* mesh = Graphics::GetGeometryCreator()->createPlaneMesh(DEFAULT_TILE_SIZE, dimension);
+    irr::scene::ISceneNode* node = Graphics::GetSceneManager()->addMeshSceneNode(mesh);
+    irr::core::vector2df gridPos;
+   
+    // Even width
+    if (dimension.Width % 2 == 0)
+        gridPos.X = DEFAULT_TILE_SIZE.X / 2.f;
+    // Even height
+    if (dimension.Height % 2 == 0)
+        gridPos.Y = DEFAULT_TILE_SIZE.Y / 2.f;
+
+    // Align it to be in the background
+    node->setPosition({ gridPos.X, -10, gridPos.Y });
+    
+    // Change color of the mesh
+    Graphics::GetSceneManager()->getMeshManipulator()->setVertexColors(mesh, irr::video::SColor(255, 0, 255, 0));
+
+    node->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_LIGHTING, false);
+    node->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_WIREFRAME, true);
+    
+}
+
+irr::core::vector3df SceneHandler::SnapToGrid()
+{
+    irr::core::vector3df position = Get().GetWorldCoordFromScreen();
+   
+    position.X = std::round(position.X / DEFAULT_TILE_SIZE.X) * DEFAULT_TILE_SIZE.X;
+    position.Z = std::round(position.Z / DEFAULT_TILE_SIZE.Y) * DEFAULT_TILE_SIZE.Y;
+
+    return position;
+}
