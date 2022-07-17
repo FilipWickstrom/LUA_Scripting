@@ -2,7 +2,7 @@
 #include "Renderer.h"
 
 // Run the console
-void ConsoleThread(lua_State* L)
+void ConsoleThread()
 {
 	std::string command = "";
 	bool keepLooping = true;
@@ -18,12 +18,13 @@ void ConsoleThread(lua_State* L)
 			break;
 		}
 
-		if (luaL_dostring(L, command.c_str()) != LUA_OK)
+
+		if (luaL_dostring(LUA, command.c_str()) != LUA_OK)
 		{
-			if (lua_gettop(L) && lua_isstring(L, -1))
+			if (lua_gettop(LUA) && lua_isstring(LUA, -1))
 			{
-				std::cout << "Lua error: " << lua_tostring(L, -1) << '\n';
-				lua_pop(L, 1);
+				std::cout << "Lua error: " << lua_tostring(LUA, -1) << '\n';
+				lua_pop(LUA, 1);
 			}
 		}
 	}
@@ -32,7 +33,7 @@ void ConsoleThread(lua_State* L)
 Renderer::Renderer()
 {
 #ifdef _DEBUG
-	m_conThread = std::thread(ConsoleThread, LUA);
+	m_conThread = std::thread(ConsoleThread);
 #endif // _DEBUG
 
 	SceneHandler::LoadStartScene();

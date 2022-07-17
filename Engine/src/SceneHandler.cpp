@@ -63,6 +63,8 @@ void SceneHandler::ChangeScene(const std::string& file)
     //Clean up previous scene
     Get().ResetScene();
 
+    LuaHandler::ResetState();
+
     //Load in the new scene
     Get().LoadScene(file);
 }
@@ -78,17 +80,12 @@ void SceneHandler::UpdateScene()
 void SceneHandler::ResetScene()
 {
     /*
-        Cleaning up in LUA
-    */
-    lua_getglobal(LUA, "Clean");
-    LuaHandler::CheckErrors(0, 0);
-
-    /*
         Cleaning up in C++
     */
     Graphics::GetSceneManager()->clear();
     Graphics::GetSceneManager()->getMeshCache()->clear();
     Graphics::GetGUIEnvironment()->clear();
+    Graphics2D::RemoveAll();
 
     m_spriteUID = 0;
     m_guiUID = 0;
@@ -111,6 +108,12 @@ bool SceneHandler::LoadScene(const std::string& file)
     {
         lua_getglobal(LUA, "Start");
         LuaHandler::CheckErrors(0, 0);
+
+#if DEBUG_LUA_GLOBALS
+        lua_getglobal(LUA, "PrintAllGlobals");
+        LuaHandler::CheckErrors(0, 0);
+#endif
+
         return true;
     }
     return false;

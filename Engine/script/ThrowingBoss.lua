@@ -24,12 +24,6 @@ function ThrowBoss:New()
 	g.weapon.fireRate = 1.2
 	g.projectile = gameObject:New()
 
-	--g.projectile.id = C_LoadSprite('sword_huge.png')
-	--g.projectile.position = Vector:New()
-	--g.projectile.target = Vector:New()
-	--g.projectile.speed = 20
-	--C_SetSpriteVisible(g.projectile.id, false)
-
 	self.__index = ThrowBoss
 	setmetatable(g, self)
 
@@ -48,8 +42,8 @@ end
 function ThrowBoss:Throw()
 	local dir = player.position - self.position
 	dir:Normalize()
-	self.weapon:Fire(self.position, dir)
-	self.weapon:Update(enemies)
+	self.weapon:Fire(self.position, dir, self.id)
+	self.weapon:Update()
 end
 
 function ThrowBoss:Chase()

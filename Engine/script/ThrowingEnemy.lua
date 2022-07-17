@@ -24,16 +24,15 @@ function ThrowMonkey:New()
 	return g
 end
 
-function ThrowMonkey:OnDeath(playerGold)
-	playerGold = playerGold + self.worth
+function ThrowMonkey:OnDeath()
 	self:OnEnd()
 end
 
 function ThrowMonkey:Throw()
 	local dir = player.position - self.position
 	dir:Normalize()
-	self.weapon:Fire(self.position, dir)
-	self.weapon:Update(enemies)
+	self.weapon:Fire(self.position, dir, self.id)
+	self.weapon:Update()
 end
 
 function ThrowMonkey:Update()

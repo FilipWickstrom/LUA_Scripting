@@ -9,6 +9,9 @@ private:
 	LuaHandler();
 	~LuaHandler();
 	static auto& Get();
+
+	void LoadState();
+
 public:
 	// Get the Lua state
 	static lua_State*& GetLua();
@@ -18,4 +21,6 @@ public:
 
 	// Writing out errors from pcall. Return when receiving errors 
 	static bool CheckErrors(const int& nrOfArgs, const int& nrOfReturns);
+
+	static void ResetState();
 };

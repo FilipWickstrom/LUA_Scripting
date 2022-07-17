@@ -78,3 +78,9 @@ void Graphics2D::Draw()
         }
     }
 }
+
+void Graphics2D::RemoveAll()
+{
+    Get().m_nextID = 0;
+    Get().m_elements.clear();
+}

@@ -78,7 +78,7 @@ function Player:Shoot()
 		mousepoint.x, mousepoint.y, mousepoint.z = C_GetWorldFromScreen()
 		local dir = mousepoint - self.position
 		dir:Normalize()
-		self.weapon:Fire(self.position, dir)
+		self.weapon:Fire(self.position, dir, self.id)
 	end
 end
 

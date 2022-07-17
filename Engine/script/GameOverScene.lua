@@ -1,5 +1,6 @@
 require('script/AllScenes')
-local GUI	= {}
+
+local GUI = {}
 
 function Start()
 	local window = { X = C_WinWidth(), Y = C_WinHeight() }
@@ -19,13 +20,6 @@ function Start()
 
 end
 
-
-function Clean()
-	-- Cleaning up everything in LUA
-	for key, value in next, GUI do
-		GUI[key] = nil	
-	end
-end
 
 function Update(dt)
 

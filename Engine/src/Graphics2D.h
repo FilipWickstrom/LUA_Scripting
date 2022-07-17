@@ -30,5 +30,6 @@ public:
 	static void ToggleRender(const bool& toggle);
 
 	static void Draw();
+	static void RemoveAll();
 
 };

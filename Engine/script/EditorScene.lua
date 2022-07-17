@@ -40,13 +40,6 @@ function Start()
 end
 
 
-function Clean()
-	-- Cleaning up everything in LUA
-	for key, value in next, GUI do
-		GUI[key] = nil	
-	end
-end
-
 function Update(dt)
 	deltatime = dt
 
