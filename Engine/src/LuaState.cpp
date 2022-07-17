@@ -85,7 +85,7 @@ void LuaHandler::LoadState()
 	// Param: x{float}, y{float}, z{float}
 	lua_register(m_state, "C_SetCameraTarget",				CAM::L_SetCameraTarget);
 	// Param: fov{float}
-	lua_register(m_state, "C_SetCameraFOV",					CAM::L_SetCameraFOV);
+	lua_register(m_state, "C_SetCameraZoom",				CAM::L_SetCameraZoom);
 
 	/*
 		Scene
