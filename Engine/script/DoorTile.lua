@@ -6,6 +6,7 @@ function DoorTile:New()
 	local g = gameObject:New()
 	g.hp = 10000000000
 	g.type = "door"
+	g.defaultsprite = 'doors_leaf_closed.png'
 	g.key = gameObject:New()
 	g.key.id = C_LoadSprite('key.png')
 	--C_SetSpriteVisible(g.key.id, false)

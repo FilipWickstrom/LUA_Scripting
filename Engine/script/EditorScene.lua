@@ -78,7 +78,6 @@ function Update(dt)
 		
 		if (created == false) then
 			loaded = false
-			created = true
 			for num, obj in pairs(levelObjects) do
 				obj:OnEnd()
 			end
