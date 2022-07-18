@@ -80,13 +80,13 @@ function Player:Shoot()
 		dir:Normalize()
 		self.weapon:Fire(self.position, dir, self.id)
 	end
+
+	self.weapon:Update(enemies)
 end
 
 function Player:Update(camera, enemies)
 	self:HandleMovement(camera)
 	self:Shoot()
-	self.weapon:Update(enemies)
-	
 
 	if self.hp > 100.0 then
 		self.hp = 100.0

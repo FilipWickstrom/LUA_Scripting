@@ -76,6 +76,12 @@ end
 
 -- Game loop
 function Update(dt)
+	-- Go back to menu when player dies
+	if(player:IsAlive() == false) then
+		C_ChangeScene(Scenes.GAMEOVER)
+		return
+	end
+
 	deltatime = dt
 	-- Loop through all objects
 	for num, obj in pairs(objects) do
@@ -91,11 +97,6 @@ function Update(dt)
 	-- Update powerup
 	if powerup ~= nil then
 		powerup:Update(objects, goldText, lastpickupText)
-	end
-
-	-- Go back to menu when player dies
-	if(player:IsAlive() == false) then
-		C_ChangeScene(Scenes.GAMEOVER)
 	end
 
 	-- Update player
