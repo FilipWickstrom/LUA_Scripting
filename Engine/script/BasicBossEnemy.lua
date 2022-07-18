@@ -12,6 +12,7 @@ function BasicBoss:New()
 	g.speed = 5
 	g.type = "bouncy"
 	g.name = "enemy"
+	g.defaultsprite = 'ogre.png'
 	g.direction = Vector:New()
 	g.direction.x = 0.5
 	g.direction.z = 1

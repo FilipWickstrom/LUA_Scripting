@@ -6,6 +6,7 @@ function WallTile:New()
 	local g = gameObject:New()
 	g.hp = 100000000
 	g.type = "wall"
+	g.defaultsprite = 'wall_mid.png'
 
 	self.__index = WallTile
 	setmetatable(g, self)

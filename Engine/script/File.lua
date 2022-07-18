@@ -16,6 +16,11 @@ DoorTile	= require('script/DoorTile')
 function Load_File(path)
 
 	local lines = Load_File_Lines(path)
+
+	if lines == false then
+		return {}
+	end
+
 	local fileObjects = {}
 
 	local objNum = 1
@@ -185,7 +190,7 @@ function Write_To_File(objects, path)
 			file:write('{', "\n")
 			file:write('type=' .. obj.type, "\n")
 			file:write('sprite=' .. obj.spritename, "\n")
-			file:write('pos=' .. tostring(obj.position.x) .. ' ' .. tostring(obj.position.y) .. ' ' .. tostring(obj.position.z), "\n")
+			file:write('pos=' .. obj.position.x .. ' ' .. obj.position.y .. ' ' .. obj.position.z, "\n")
 			file:write('visible=' .. obj.isVisible, "\n")
 			file:write('collision=' .. obj.hasCollision, "\n")
 			file:write('}', "\n")

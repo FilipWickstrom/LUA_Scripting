@@ -14,6 +14,7 @@ function Monster:New()
 	g.speed = math.random(3) + 1
 	g.type = "monster"
 	g.name = "enemy"
+	g.defaultsprite = 'skeleton.png'
 	g.cooldown = 0.0
 	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0, g.hp)
 	self.__index = Monster

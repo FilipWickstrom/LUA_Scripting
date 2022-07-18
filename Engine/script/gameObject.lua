@@ -7,6 +7,7 @@ function gameObject:New(g)
 	g.name = "default"
 	g.spritename = ""
 	g.type = "default"
+	g.defaultsprite = ""
 	g.id = -1 --model id? [rename]
 	g.gid = -1 --id for ui? [rename]
 	g.hasCollision = 1

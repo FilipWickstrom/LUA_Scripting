@@ -34,7 +34,7 @@ function Start()
 	camera:SetTarget(0,0,0.1)
 	camera:SetZoom(10)
 
-	objects = Load_File('maps/test1.txt')
+	objects = Load_File('maps/test2.txt')
 
 	-- write down file
 	--Write_To_File(objects, 'maps/test1.txt')

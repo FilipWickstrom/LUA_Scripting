@@ -15,6 +15,7 @@ function ThrowBoss:New()
 	g.speed = math.random(5) + 1
 	g.type = "shooter"
 	g.name = "enemy"
+	g.defaultsprite = 'zombie_big.png'
 
 	g.direction = Vector:New()
 	g.gid = C_AddHealthbar(0.0, 0.0, 145.0, 50.0, g.hp)

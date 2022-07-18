@@ -4,9 +4,20 @@ local gameObject = require('script/gameObject') --temp
 local levelObjects = {}
 local loaded = false
 local created = false
+local saved = false
 local camera = require('script/Camera'):New()
 local selectedBlock = require('script/WallTile')
 require('script/File')
+
+-- Placing tiles 'requires'
+local selector = require('script/EditorTilePlacer')
+local wallTile = require('script/WallTile')
+local doorTile = require('script/DoorTile')
+local monster = require('script/Monster')
+local monkey = require('script/ThrowingEnemy')
+local bouncy = require('script/BasicBossEnemy')
+local shooter = require('script/ThrowingBoss')
+local powerup = require('script/Powerups')
 
 local GUI = {}
 
@@ -40,6 +51,8 @@ function Start()
 	-- [DEBUG] Place a blank tile in origo 
 	C_LoadSprite("")
 
+	selector:Initialize()
+
 end
 
 
@@ -47,11 +60,12 @@ function Update(dt)
 	deltatime = dt
 
 	if (C_IsKeyDown(keys.LBUTTON)) then
-		if selectedBlock ~= nil then
-			local newObject = selectedBlock:New()
+		if selector.selected ~= nil then
+			local newObject = selector.selected:New()
+			selector:UpdateBlock(newObject)
 			local newVector = vector:New()
 			newVector.x, newVector.y, newVector.z = C_AddTile()
-			newObject:LoadSprite('wall_mid.png')
+			newObject:LoadSprite(selector.sprite)
 			newObject:SetPosition(newVector.x, newVector.y, newVector.z)
 			table.insert(levelObjects, newObject)
 		end
@@ -91,6 +105,10 @@ function Update(dt)
 
 	elseif(C_IsButtonPressed(GUI["Save"])) then
 		--Call c++ save map
+		if saved == false then
+			Write_To_File(levelObjects, 'maps/test2.txt')
+			saved = false
+		end
 
 	elseif(C_IsButtonPressed(GUI["Menu"])) then
 		C_ChangeScene(Scenes.MENU)
@@ -98,5 +116,6 @@ function Update(dt)
 
 	camera:UpdateMovement()
 	camera:UpdateZoom()
+	selector:Update()
 
 end

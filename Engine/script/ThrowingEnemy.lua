@@ -12,6 +12,7 @@ function ThrowMonkey:New()
 	g.speed = math.random(3) + 1
 	g.type = "monkey"
 	g.name = "enemy"
+	g.defaultsprite = 'necromancer.png'
 	g.RandomizePos(g)
 	self.__index = ThrowMonkey
 	setmetatable(g, self)
