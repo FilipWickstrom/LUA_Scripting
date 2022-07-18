@@ -26,5 +26,6 @@ public:
 	static void RemoveElement(const unsigned int& index);
 
 	static void Draw();
+	static void RemoveAll();
 
 };
