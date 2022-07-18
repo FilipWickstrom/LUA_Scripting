@@ -13,7 +13,7 @@ function Player:New()
 	g.xp = 0
 	g.weapon = Weapon.new("default")
 	g.name = "Player"
-	g.speed = 12
+	g.speed = 25
 	g:SetPosition(0,0.2,0)
 	-- Add effects here.
 	g.lastpickup = "None"
@@ -52,6 +52,7 @@ function Player:HandleMovement(camera)
 	end
 
 	-- Move everything
+	dir:Normalize()
 	self:Move(dir)
 	camera:Move(dir * self.speed * deltatime)
 

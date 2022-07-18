@@ -32,7 +32,9 @@ function Start()
 	camera = Camera:New()
 	camera:SetPosition(0,40,0)
 	camera:SetTarget(0,0,0.1)
-	camera:SetZoom(10)
+	camera:SetZoom(5)
+
+	C_ToggleRenderUI(true)
 
 	objects = Load_File('maps/test2.txt')
 

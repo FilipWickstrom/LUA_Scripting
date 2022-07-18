@@ -42,7 +42,7 @@ function Start()
 	-- Create a camera
 	camera:SetPosition(0,40,0)
 	camera:SetTarget(0,0,0.1)
-	camera:SetZoom(10)
+	camera:SetZoom(5)
 
 	C_ToggleRenderUI(false)
 

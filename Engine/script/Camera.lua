@@ -8,7 +8,7 @@ function Camera:New()
 
 	cam.position = vector:New()
 	cam.target   = vector:New()
-	cam.speed	 = 10
+	cam.speed	 = 20
 	cam.zoomSpeed = 15
 	cam.zoomValue = 1
 	C_CreateCamera()
