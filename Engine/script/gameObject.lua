@@ -60,6 +60,14 @@ function gameObject:RotateLeft()
 	end
 end
 
+function gameObject:RotateToDirection(dir)
+	local rad = math.atan(dir.x, dir.z)
+	local degrees = rad * 180 / math.pi
+	local vec = vector:New()
+	vec.y = degrees
+	self:Rotate(vec)
+end
+
 function gameObject:Rotate(vec)
 	self.rotation = vec
 	C_SetSpriteRotation(self.id, self.rotation.x, self.rotation.y, self.rotation.z)

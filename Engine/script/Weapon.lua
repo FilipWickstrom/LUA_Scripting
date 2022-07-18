@@ -31,11 +31,7 @@ function Weapon:Fire(spawnPos, dir, id)
 		projectile.lifetime = weapons[self.type].lifetime
 		projectile.damage = weapons[self.type].damage
 		projectile.owner = id
-		local rad = math.atan(projectile.dir.x, projectile.dir.z)
-		local degrees = rad * 180 / math.pi
-		local vec = vector:New()
-		vec.y = degrees
-		projectile:Rotate(vec)
+		projectile:RotateToDirection(dir)
 		C_SetSpriteVisible(projectile.id, true)
 
 		self.fireTimer = self.fireRate
