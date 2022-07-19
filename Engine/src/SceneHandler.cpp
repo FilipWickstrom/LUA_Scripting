@@ -122,7 +122,7 @@ bool SceneHandler::LoadScene(const std::string& file)
 unsigned int SceneHandler::AddSprite(const std::string& file)
 {
     unsigned int id = Get().m_spriteUID++;
-    Get().m_sprites.emplace(id, std::make_unique<Sprite>(file));
+    Get().m_sprites.emplace(id, std::make_unique<Sprite>(file, id));
     return id;
 }
 
@@ -426,4 +426,33 @@ irr::core::vector3df SceneHandler::SnapToGrid()
     position.Z = std::round(position.Z / DEFAULT_TILE_SIZE.Y) * DEFAULT_TILE_SIZE.Y;
 
     return position;
+}
+
+int SceneHandler::RayHitObject()
+{
+	irr::core::vector2di screenPos = Input::GetInputHandler().MouseState.pos;
+	irr::scene::ICameraSceneNode* cam = Graphics::GetSceneManager()->getActiveCamera();
+
+	// Ray between the camera position and the far plane of the frustum
+	irr::core::line3df ray = Graphics::GetCollisionManager()->getRayFromScreenCoordinates(screenPos, cam);
+
+	for (int i = 0; i < Get().m_sprites.size(); i++)
+	{
+		Sprite* sprite = Get().m_sprites[i].get();
+		if (sprite)
+		{
+			irr::f64 dist = 0;
+			ray.getIntersectionWithSphere(sprite->GetPosition(), sprite->GetCollisionRadius(), dist);
+
+			if (dist > 0)
+			{
+				//std::cout << "Dist: " << dist << "\n";
+				return Get().m_sprites[i]->GetID();
+			}
+		}
+
+		
+	}
+
+	return -1;
 }

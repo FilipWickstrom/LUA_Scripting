@@ -73,4 +73,5 @@ int L_GetWorldCoords(lua_State* L);
 // Editor
 int L_AddGridSystem(lua_State* L);
 int L_PlaceTile(lua_State* L);
+int L_RayHitObject(lua_State* L);
 //RemoveTile

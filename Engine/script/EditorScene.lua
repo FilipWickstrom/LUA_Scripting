@@ -59,6 +59,7 @@ end
 function Update(dt)
 	deltatime = dt
 
+	-- place tile
 	if (C_IsKeyDown(keys.LBUTTON)) then
 		if selector.selected ~= nil then
 			local newObject = selector.selected:New()
@@ -69,6 +70,25 @@ function Update(dt)
 			newObject:SetPosition(newVector.x, newVector.y, newVector.z)
 			table.insert(levelObjects, newObject)
 		end
+	end
+
+	-- remove tile
+	if (C_IsKeyDown(keys.SPACE)) then
+
+		hit = C_RayHitObject()
+
+		if hit >= 0 then
+
+			for num, obj in pairs(levelObjects) do
+				if obj.id == hit then
+					obj:OnEnd()
+					table.remove(levelObjects, num)
+					break
+				end
+			end
+
+		end
+
 	end
 
 	-- Check if any of the buttons is clicked

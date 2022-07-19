@@ -581,3 +581,9 @@ int L_PlaceTile(lua_State* L)
 
 	return 3;
 }
+
+int L_RayHitObject(lua_State* L)
+{
+	lua_pushnumber(L, SceneHandler::RayHitObject());
+	return 1;
+}

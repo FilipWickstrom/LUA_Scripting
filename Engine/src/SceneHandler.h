@@ -82,5 +82,6 @@ public:
 	*/
 	static void AddGridSystem(const irr::core::dimension2du& dimension);
 	static irr::core::vector3df SnapToGrid();
+	static int RayHitObject();
 
 };

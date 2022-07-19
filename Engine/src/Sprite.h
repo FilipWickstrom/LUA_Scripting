@@ -7,10 +7,12 @@ private:
 	irr::core::vector2df	m_size;
 	float					m_collisionRadius;
 	bool					m_hasCollision;
+	unsigned int			m_id;
 
 public:
 	Sprite();
 	Sprite(const std::string& textureName);
+	Sprite(const std::string& textureName, const unsigned int& id);
 	~Sprite() = default;
 
 	void LoadTexture(const std::string& filename = "");
@@ -18,6 +20,8 @@ public:
 	void SetVisible(const bool& isVisible = true);
 	void SetCollision(const bool& hasCollision = true);
 	const bool& HasCollision() const;
+	void SetID(const unsigned int& id);
+	const unsigned int& GetID() const;
 	
 	/*
 		Transform

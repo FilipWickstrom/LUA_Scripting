@@ -160,6 +160,7 @@ void LuaHandler::LoadState()
 	lua_register(m_state, "C_AddTile",						L_PlaceTile);
 	// Param: dimensionX{uint}, dimensionZ{uint}
 	lua_register(m_state, "C_AddGrid",						L_AddGridSystem);
+	lua_register(m_state, "C_RayHitObject",					L_RayHitObject);
 }
 
 lua_State*& LuaHandler::GetLua()
