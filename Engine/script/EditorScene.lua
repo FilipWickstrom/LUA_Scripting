@@ -61,7 +61,7 @@ function Update(dt)
 
 	-- place tile
 	if (C_IsKeyDown(keys.LBUTTON)) then
-		if selector.selected ~= nil then
+		if selector.selected ~= nil and C_RayHitObject() == -1 then
 			local newObject = selector.selected:New()
 			selector:UpdateBlock(newObject)
 			local newVector = vector:New()
