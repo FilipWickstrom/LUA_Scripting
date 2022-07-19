@@ -19,8 +19,13 @@ int L_SetSpriteVisible(lua_State* L);
 int L_SetSpritePosition(lua_State* L);
 int L_SetSpriteScale(lua_State* L);
 int L_SetSpriteRotation(lua_State* L);
+
+/*
+	Collision
+*/
 int L_CheckSpriteCollision(lua_State* L);
 int L_SetSpriteCollision(lua_State* L);
+int L_SetColliderSize(lua_State* L);
 
 /*
 	Application window

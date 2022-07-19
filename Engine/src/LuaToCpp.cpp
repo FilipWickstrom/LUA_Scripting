@@ -136,6 +136,20 @@ int L_SetSpriteCollision(lua_State* L)
 	return 0;
 }
 
+int L_SetColliderSize(lua_State* L)
+{
+	if (lua_isnumber(L, -3) && 
+		lua_isnumber(L, -2) &&
+		lua_isnumber(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -3));
+		float width = static_cast<float>(lua_tonumber(L, -2));
+		float height = static_cast<float>(lua_tonumber(L, -1));
+		SceneHandler::SetColliderSize(id, width, height);
+	}
+	return 0;
+}
+
 int L_GetWindowWidth(lua_State* L)
 {
 	lua_pushnumber(L, Graphics::GetWindowWidth());

@@ -19,6 +19,7 @@ function Player:New()
 	g.lastpickup = "None"
 
 	g.id = C_LoadSprite('knight.png')
+	C_SetColliderSize(g.id, 10,10)
 
 	-- Healthbar for health
 	g.gid = C_AddHealthbar(0.0, 0.0, 250.0, 50.0, g.hp)

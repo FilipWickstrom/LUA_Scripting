@@ -4,6 +4,7 @@ class Sprite
 {
 private:
 	irr::scene::ISceneNode* m_node;
+	irr::scene::IMesh*		m_mesh;
 	irr::core::vector2df	m_size;
 	float					m_collisionRadius;
 	bool					m_hasCollision;
@@ -22,6 +23,7 @@ public:
 	const bool& HasCollision() const;
 	void SetID(const unsigned int& id);
 	const unsigned int& GetID() const;
+	void SetColliderSize(const float& width, const float& height);
 	
 	/*
 		Transform

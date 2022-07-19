@@ -167,6 +167,12 @@ void SceneHandler::SetSpriteRotation(const unsigned int& id, const irr::core::ve
         Get().m_sprites.at(id)->SetRotation(rot);
 }
 
+void SceneHandler::SetColliderSize(const unsigned int& id, const float& width, const float& height)
+{
+    if (Get().m_sprites.find(id) != Get().m_sprites.end())
+        Get().m_sprites.at(id)->SetColliderSize(width, height);
+}
+
 void SceneHandler::SetHasCollision(const unsigned int& id, const bool& enabled)
 {
     if (Get().m_sprites.find(id) != Get().m_sprites.end())

@@ -47,6 +47,11 @@ public:
 	static void SetSpritePosition(const unsigned int& id, const irr::core::vector3df& pos);
 	static void SetSpriteScale(const unsigned int& id, const irr::core::vector3df& scl);
 	static void SetSpriteRotation(const unsigned int& id, const irr::core::vector3df& rot);
+
+	/*
+		Collision - between sprites
+	*/
+	static void SetColliderSize(const unsigned int& id, const float& width, const float& height);
 	static void SetHasCollision(const unsigned int& id, const bool& enabled);
 	static bool SpriteCollisionAABB(const unsigned int& id1, const unsigned int& id2);
 	static bool SpriteCollisionCircle(const unsigned int& id1, const unsigned int& id2);

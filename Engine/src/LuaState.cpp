@@ -59,11 +59,19 @@ void LuaHandler::LoadState()
 	lua_register(m_state, "C_SetSpriteScale",				L_SetSpriteScale);
 	// Param: id{uint}, x{float}, y{float}, z{float}
 	lua_register(m_state, "C_SetSpriteRotation",			L_SetSpriteRotation);
+
+
+	/*
+		Collision
+	*/
 	// Param: id1{uint}, id2{uint}, collisionType{string}[optional]
 	// Return: isColliding{bool}
 	lua_register(m_state, "C_CheckSpriteCollision",			L_CheckSpriteCollision);
 	// Param: id{uint}, useCollision{bool}
 	lua_register(m_state, "C_SetSpriteCollision",			L_SetSpriteCollision);
+	// Param: id{uint}, width{float}, height{float}
+	lua_register(m_state, "C_SetColliderSize",				L_SetColliderSize);
+
 
 	/*
 		Window
