@@ -87,8 +87,8 @@ void Sprite::LoadTexture(const std::string& filename)
 	if (texture)
 		m_size = static_cast<irr::core::dimension2df>(texture->getSize());
 
-	irr::scene::IMesh* mesh = Graphics::GetGeometryCreator()->createPlaneMesh(m_size);
-	m_node = Graphics::GetSceneManager()->addMeshSceneNode(mesh);
+	m_mesh = Graphics::GetGeometryCreator()->createPlaneMesh(m_size);
+	m_node = Graphics::GetSceneManager()->addMeshSceneNode(m_mesh);
 	
 	if (!m_node)
 		std::cout << "ERROR: Node not correct..." << std::endl;
@@ -98,7 +98,7 @@ void Sprite::LoadTexture(const std::string& filename)
 		m_node->setMaterialTexture(0, texture);
 	// Load a default material
 	else
-		Graphics::GetSceneManager()->getMeshManipulator()->setVertexColors(mesh, irr::video::SColor(255, 255, 20, 147));
+		Graphics::GetSceneManager()->getMeshManipulator()->setVertexColors(m_mesh, irr::video::SColor(255, 255, 20, 147));
 
 	//Make it possible to see using directX or openGL
 	m_node->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_LIGHTING, false);
@@ -160,5 +160,22 @@ void Sprite::SetID(const unsigned int& id)
 const unsigned int& Sprite::GetID() const
 {
 	return m_id;
+}
+
+void Sprite::SetColliderSize(const float& width, const float& height)
+{
+#if DEBUG_AABB_HITBOXES
+	irr::core::aabbox3df box;
+	irr::core::vector3df pos = this->GetPosition();
+	
+	float halfWidth = width / 2.f;
+	float halfHeight = height / 2.f;
+	box.MinEdge = { pos.X - halfWidth, 0, pos.Z - halfHeight };
+	box.MaxEdge = { pos.X + halfWidth, 0, pos.Z + halfHeight };
+	m_mesh->setBoundingBox(box);
+#endif
+
+	m_size.X = width;
+	m_size.Y = height;
 }
 
