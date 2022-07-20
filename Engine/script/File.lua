@@ -10,6 +10,9 @@ Shooter		= require('script/ThrowingBoss')
 WallTile	= require('script/WallTile')
 DoorTile	= require('script/DoorTile')
 
+-- Powerup
+Powerup		= require('script/Powerups')
+
 --[[LOAD TO FILE SECTION]]--
 
 -- Load objects from a file into a table
@@ -165,6 +168,11 @@ function Adjust_Object_Type(objects, num, line)
 	if line:find('door') then
 		objects[num] = DoorTile:New()
 		objects[num].type = 'door'
+	end
+
+	if line:find('powerup') then
+		objects[num] = Powerup:New()
+		objects[num].type = 'powerup'
 	end
 
 end

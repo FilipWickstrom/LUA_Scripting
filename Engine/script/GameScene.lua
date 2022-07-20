@@ -22,7 +22,7 @@ function Start()
 	--Player setup
 	player = Player:New()
 
-	powerup = Powerup:New()
+	--powerup = Powerup:New()
 	goldText:Initialize()
 	weaponText:Initialize()
 	weaponDrops:new()
@@ -74,17 +74,14 @@ function Update(dt)
 	-- Loop through all objects
 	for num, obj in pairs(objects) do
 		if obj ~= nil then 
-			if obj.hp > 0 then
+			if obj.hp > 0 and obj.type ~= 'powerup' then
 				obj:Update()
+			elseif obj.hp > 0 and obj.type == 'powerup' then
+				obj:Update(objects, goldText, lastpickupText)
 			else
 				RemoveObject(num, obj)
 			end
 		end
-	end
-
-	-- Update powerup
-	if powerup ~= nil then
-		powerup:Update(objects, goldText, lastpickupText)
 	end
 
 	-- Update player

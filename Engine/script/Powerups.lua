@@ -1,12 +1,13 @@
 -- require/include
 local gameObject = require('script/gameObject')
+local Vector = require('script/vector')
 
 Powerup = gameObject:New()
 
 local BOMB_RADIUS = 5.0
 local BOMB_DAMAGE = 50.0
 
-local types = 
+local modes = 
 {
 	[1] = "Money",
 	[2] = "Attack",
@@ -19,19 +20,23 @@ local RESPAWN_TIME = 5.0
 
 function Powerup:Initiate()
 	
-	return types[math.random(#types)]
-	--return "Bomb"
+	--return modes[math.random(#modes)]
+	return "Bomb"
 
 end
 
 function Powerup:New()
 	local g = gameObject:New()
-	g.type = self:Initiate()
+	g.mode = self:Initiate()
+	g.hp = 100000000000
+	g.type = 'powerup'
+	g.defaultsprite = 'chest.png'
 
 	g.respawntimer = 0.0
 	g.shouldrespawn = false
-	g.id = C_LoadSprite("chest.png")
-	g:SetPosition(10, 0.1, 12)
+	--g.position = Vector:New()
+	--g.id = C_LoadSprite("chest.png")
+	--g:SetPosition(10, 0.1, 12)
 
 	g.bomb = gameObject:New()
 	g.bomb.id = C_LoadSprite('bomb.png')
@@ -47,25 +52,25 @@ end
 
 function Powerup:Gain(player, goldText)
 
-	if self.type == "Money" then
+	if self.mode == "Money" then
 		player.gold = player.gold + 5
 
 		-- Update gold text
 		goldText:Update(player)
-	elseif self.type == "Attack" then
+	elseif self.mode == "Attack" then
 		player.weapon.damage = player.weapon.damage + 5.0
-	elseif self.type == "Speed" then
+	elseif self.mode == "Speed" then
 		player.speed = player.speed + 2.5
-	elseif self.type == "Health" then
+	elseif self.mode == "Health" then
 		player.hp = player.hp + 15.0
-	elseif self.type == "Bomb" then
+	elseif self.mode == "Bomb" then
 		self.bomb.active = true
-		--self.bomb:SetPosition(self.position)
+		self.bomb:SetPosition(self.position.x, self.position.y, self.position.z)
 		C_SetSpriteVisible(self.bomb.id, true)
 
 	end
 
-	player.lastpickup = self.type
+	player.lastpickup = self.mode
 
 	-- Hide from player.
 	C_SetSpriteVisible(self.id, false)
@@ -96,7 +101,7 @@ function Powerup:Update(enemies, goldText, lastpickupText)
 		if self.respawntimer < 0 then
 			self.shouldrespawn = false
 			--self:RandomizePos()
-			self.type = self:Initiate()
+			self.mode = self:Initiate()
 			C_SetSpriteVisible(self.id, true)
 		end
 	end

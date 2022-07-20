@@ -59,37 +59,7 @@ end
 function Update(dt)
 	deltatime = dt
 
-	-- place tile
-	if (C_IsKeyDown(keys.LBUTTON)) then
-		if selector.selected ~= nil and C_RayHitObject() == -1 then
-			local newObject = selector.selected:New()
-			selector:UpdateBlock(newObject)
-			local newVector = vector:New()
-			newVector.x, newVector.y, newVector.z = C_AddTile()
-			newObject:LoadSprite(selector.sprite)
-			newObject:SetPosition(newVector.x, newVector.y, newVector.z)
-			table.insert(levelObjects, newObject)
-		end
-	end
-
-	-- remove tile
-	if (C_IsKeyDown(keys.SPACE)) then
-
-		hit = C_RayHitObject()
-
-		if hit >= 0 then
-
-			for num, obj in pairs(levelObjects) do
-				if obj.id == hit then
-					obj:OnEnd()
-					table.remove(levelObjects, num)
-					break
-				end
-			end
-
-		end
-
-	end
+	
 
 	-- Check if any of the buttons is clicked
 	if (C_IsButtonPressed(GUI["Create"])) then
@@ -131,6 +101,40 @@ function Update(dt)
 
 	elseif(C_IsButtonPressed(GUI["Menu"])) then
 		C_ChangeScene(Scenes.MENU)
+	else
+
+	-- place tile
+	if (C_IsKeyDown(keys.LBUTTON)) then
+		if selector.selected ~= nil and C_RayHitObject() == -1 then
+			local newObject = selector.selected:New()
+			selector:UpdateBlock(newObject)
+			local newVector = vector:New()
+			newVector.x, newVector.y, newVector.z = C_AddTile()
+			newObject:LoadSprite(selector.sprite)
+			newObject:SetPosition(newVector.x, newVector.y, newVector.z)
+			table.insert(levelObjects, newObject)
+		end
+	end
+
+	-- remove tile
+	if (C_IsKeyDown(keys.SPACE)) then
+
+		hit = C_RayHitObject()
+
+		if hit >= 0 then
+
+			for num, obj in pairs(levelObjects) do
+				if obj.id == hit then
+					obj:OnEnd()
+					table.remove(levelObjects, num)
+					break
+				end
+			end
+
+		end
+
+	end
+
 	end
 
 	camera:UpdateMovement()

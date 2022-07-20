@@ -54,6 +54,10 @@ function tilePlacer:Update()
 
 		self:SetBlock(shooter)
 
+	elseif (C_IsKeyDown(keys.SEVEN)) then
+
+		self:SetBlock(powerup)
+
 	end
 
 
