@@ -7,6 +7,7 @@ SceneHandler::SceneHandler()
     m_spriteUID = 0;
     m_guiUID = 0;
     m_camera = nullptr;
+    m_gridsystem = nullptr;
 }
 
 SceneHandler::~SceneHandler()
@@ -122,7 +123,7 @@ bool SceneHandler::LoadScene(const std::string& file)
 unsigned int SceneHandler::AddSprite(const std::string& file)
 {
     unsigned int id = Get().m_spriteUID++;
-    Get().m_sprites.emplace(id, std::make_unique<Sprite>(file, id));
+    Get().m_sprites.emplace(id, std::make_unique<Sprite>(file));
     return id;
 }
 
@@ -400,65 +401,17 @@ irr::core::vector3df SceneHandler::GetWorldCoordFromScreen()
     return intersectPoint;
 }
 
-void SceneHandler::AddGridSystem(const irr::core::dimension2du& dimension)
+void SceneHandler::AddGridSystem(const irr::core::vector2di& size)
 {
-    irr::scene::IMesh* mesh = Graphics::GetGeometryCreator()->createPlaneMesh(DEFAULT_TILE_SIZE, dimension);
-    irr::scene::ISceneNode* node = Graphics::GetSceneManager()->addMeshSceneNode(mesh);
-    irr::core::vector2df gridPos;
-   
-    // Even width
-    if (dimension.Width % 2 == 0)
-        gridPos.X = DEFAULT_TILE_SIZE.X / 2.f;
-    // Even height
-    if (dimension.Height % 2 == 0)
-        gridPos.Y = DEFAULT_TILE_SIZE.Y / 2.f;
-
-    // Align it to be in the background
-    node->setPosition({ gridPos.X, -10, gridPos.Y });
-    
-    // Change color of the mesh
-    Graphics::GetSceneManager()->getMeshManipulator()->setVertexColors(mesh, irr::video::SColor(255, 0, 255, 0));
-
-    node->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_LIGHTING, false);
-    node->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_WIREFRAME, true);
-    
+    // Grid does not exist - create a new!
+    if (!Get().m_gridsystem.get())
+        Get().m_gridsystem = std::make_unique<Gridsystem>(size);
+    // Otherwise just change the size
+    else
+        Get().m_gridsystem->SetSize(size);
 }
 
-irr::core::vector3df SceneHandler::SnapToGrid()
+Gridsystem* SceneHandler::GetGridsystem()
 {
-    irr::core::vector3df position = Get().GetWorldCoordFromScreen();
-   
-    position.X = std::round(position.X / DEFAULT_TILE_SIZE.X) * DEFAULT_TILE_SIZE.X;
-    position.Z = std::round(position.Z / DEFAULT_TILE_SIZE.Y) * DEFAULT_TILE_SIZE.Y;
-
-    return position;
-}
-
-int SceneHandler::RayHitObject()
-{
-	irr::core::vector2di screenPos = Input::GetInputHandler().MouseState.pos;
-	irr::scene::ICameraSceneNode* cam = Graphics::GetSceneManager()->getActiveCamera();
-
-	// Ray between the camera position and the far plane of the frustum
-	irr::core::line3df ray = Graphics::GetCollisionManager()->getRayFromScreenCoordinates(screenPos, cam);
-
-	for (int i = 0; i < Get().m_sprites.size(); i++)
-	{
-		Sprite* sprite = Get().m_sprites[i].get();
-		if (sprite)
-		{
-			irr::f64 dist = 0;
-			ray.getIntersectionWithSphere(sprite->GetPosition(), sprite->GetCollisionRadius(), dist);
-
-			if (dist > 0)
-			{
-				//std::cout << "Dist: " << dist << "\n";
-				return Get().m_sprites[i]->GetID();
-			}
-		}
-
-		
-	}
-
-	return -1;
+    return Get().m_gridsystem.get();
 }

@@ -4,30 +4,18 @@
 Sprite::Sprite()
 {
 	m_node = nullptr;
-	m_size = DEFAULT_TILE_SIZE;
+	m_size = irr::core::vector2df(TILE_SIZE, TILE_SIZE);
 	m_collisionRadius = 0.f;
 	m_hasCollision = true;
-	m_id = 0;
 	this->LoadTexture();
 }
 
 Sprite::Sprite(const std::string& textureName)
 {
 	m_node = nullptr;
-	m_size = DEFAULT_TILE_SIZE;
+	m_size = irr::core::vector2df(TILE_SIZE, TILE_SIZE);
 	m_collisionRadius = 0.f;
 	m_hasCollision = true;
-	m_id = 0;
-	this->LoadTexture(textureName);
-}
-
-Sprite::Sprite(const std::string& textureName, const unsigned int& id)
-{
-	m_node = nullptr;
-	m_size = DEFAULT_TILE_SIZE;
-	m_collisionRadius = 0.f;
-	m_hasCollision = true;
-	m_id = id;
 	this->LoadTexture(textureName);
 }
 
@@ -150,16 +138,6 @@ void Sprite::SetCollision(const bool& hasCollision)
 const bool& Sprite::HasCollision() const
 {
 	return m_hasCollision;
-}
-
-void Sprite::SetID(const unsigned int& id)
-{
-	m_id = id;
-}
-
-const unsigned int& Sprite::GetID() const
-{
-	return m_id;
 }
 
 void Sprite::SetColliderSize(const float& width, const float& height)

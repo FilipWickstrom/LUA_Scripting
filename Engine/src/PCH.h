@@ -48,7 +48,7 @@ const std::string FONTPATH		= "../Assets/Fonts/";
 const std::string SCRIPTSPATH	= "script/";
 
 //Size of the tiles
-const irr::core::vector2df DEFAULT_TILE_SIZE = { 16.f, 16.f };
+const float TILE_SIZE = 16.f;
 
 /*
 	DEBUG 
@@ -58,7 +58,7 @@ const irr::core::vector2df DEFAULT_TILE_SIZE = { 16.f, 16.f };
 #define DEBUG_AABB_HITBOXES 0
 #define DEBUG_CIRCULAR_HITBOXES 0
 
-#define DEBUG_LUA_GLOBALS 1
+#define DEBUG_LUA_GLOBALS 0
 
 /*
 	Code comments

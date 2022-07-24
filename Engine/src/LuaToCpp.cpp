@@ -573,31 +573,114 @@ int GUI::L_IsButtonPressed(lua_State* L)
 	return 1;
 }
 
-int L_AddGridSystem(lua_State* L)
+int L_AddGridsystem(lua_State* L)
 {
-	irr::core::dimension2du dimension;
+	irr::core::vector2di size;
 	if (lua_isnumber(L, -1) && lua_isnumber(L, -2))
 	{
-		dimension.Width = static_cast<unsigned int>(std::abs(lua_tonumber(L, -2)));
-		dimension.Height = static_cast<unsigned int>(std::abs(lua_tonumber(L, -1)));
-		SceneHandler::AddGridSystem(dimension);
+		size.X = static_cast<unsigned int>(std::abs(lua_tonumber(L, -2)));
+		size.Y = static_cast<unsigned int>(std::abs(lua_tonumber(L, -1)));
+		SceneHandler::AddGridSystem(size);
 	}
 
 	return 0;
 }
 
-int L_PlaceTile(lua_State* L)
+int L_IsTileOccupied(lua_State* L)
 {
-	irr::core::vector3df tilePos = SceneHandler::SnapToGrid();
-	lua_pushnumber(L, tilePos.X);
-	lua_pushnumber(L, tilePos.Y);
-	lua_pushnumber(L, tilePos.Z);
+	bool success = false;
 
+	if (lua_isnumber(L, -1))
+	{
+		int layer = static_cast<int>(lua_tonumber(L, -1));
+		if (SceneHandler::GetGridsystem())
+		{
+			irr::core::vector3di vec;
+			success = SceneHandler::GetGridsystem()->IsTileOccupied(layer, vec);
+		}
+	}
+
+	lua_pushboolean(L, success);
+	return 1;
+}
+
+int L_AddTile(lua_State* L)
+{
+	bool success = false;
+
+	if (lua_isnumber(L, 1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, 1));
+		if (SceneHandler::GetGridsystem())
+		{
+			// Position vector
+			if (lua_isnumber(L, 2) && 
+				lua_isnumber(L, 3) &&
+				lua_isnumber(L, 4))
+			{
+				irr::core::vector3df vec;
+				vec.X = static_cast<float>(lua_tonumber(L, 2));
+				vec.Y = static_cast<float>(lua_tonumber(L, 3));
+				vec.Z = static_cast<float>(lua_tonumber(L, 4));
+
+				if (SceneHandler::GetGridsystem()->AddTile(id, vec))
+					success = true;
+			}
+			// Defaults to mouse position
+			else
+			{
+				// Return true if we could place tile
+				if (SceneHandler::GetGridsystem()->AddTileAtMouse(id))
+					success = true;
+			}
+		}
+	}
+
+	lua_pushboolean(L, success);
+	return 1;
+}
+
+int L_RemoveTile(lua_State* L)
+{
+	int id = -1;
+
+	if (lua_isnumber(L, -1))
+	{
+		int layer = static_cast<int>(lua_tonumber(L, -1));
+		if (SceneHandler::GetGridsystem())
+		{
+			id = SceneHandler::GetGridsystem()->RemoveTile(layer);
+		}
+	}
+
+	lua_pushnumber(L, id);
+	return 1;
+}
+
+int L_GetTilePos(lua_State* L)
+{
+	irr::core::vector3df vec(0, -1000, 0);
+
+	if (lua_isnumber(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
+		if (SceneHandler::GetGridsystem())
+		{
+			vec = SceneHandler::GetGridsystem()->GetTilePosition(id);
+		}
+	}
+
+	lua_pushnumber(L, vec.X);
+	lua_pushnumber(L, vec.Y);
+	lua_pushnumber(L, vec.Z);
 	return 3;
 }
 
-int L_RayHitObject(lua_State* L)
+int L_ResetGridsystem(lua_State* L)
 {
-	lua_pushnumber(L, SceneHandler::RayHitObject());
-	return 1;
+	if (SceneHandler::GetGridsystem())
+	{
+		SceneHandler::GetGridsystem()->ResetGrid();
+	}
+	return 0;
 }

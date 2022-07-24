@@ -1,11 +1,6 @@
 require('script/AllScenes')
 local vector = require('script/Vector')
-local gameObject = require('script/gameObject') --temp
-local levelObjects = {}
-local loaded = false
-local created = false
-local saved = false
-local camera = require('script/Camera'):New()
+local Camera = require('script/Camera')
 local selectedBlock = require('script/WallTile')
 require('script/File')
 
@@ -19,6 +14,11 @@ local bouncy = require('script/BasicBossEnemy')
 local shooter = require('script/ThrowingBoss')
 local powerup = require('script/Powerups')
 
+-- "Globals" in this scope
+local objects = {}
+local loaded = false
+local created = false
+local saved = false
 local GUI = {}
 
 function Start()
@@ -40,16 +40,14 @@ function Start()
 	GUI["Menu"] = C_AddButton("Back to menu", "roboto_12.xml", window.X-(menuBtn.X/2), menuBtn.Y/2, menuBtn.X, menuBtn.Y)
 
 	-- Create a camera
+	camera = Camera:New()
 	camera:SetPosition(0,40,0)
 	camera:SetTarget(0,0,0.1)
 	camera:SetZoom(5)
 
 	C_ToggleRenderUI(false)
 
-	C_AddGrid(100,100)
-
-	-- [DEBUG] Place a blank tile in origo 
-	C_LoadSprite("")
+	C_AddGrid(25,25)
 
 	selector:Initialize()
 
@@ -59,21 +57,19 @@ end
 function Update(dt)
 	deltatime = dt
 
-	
-
 	-- Check if any of the buttons is clicked
 	if (C_IsButtonPressed(GUI["Create"])) then
 		--Call c++ create map
 
-		
 		if (created == false) then
 			loaded = false
-			for num, obj in pairs(levelObjects) do
+			for num, obj in pairs(objects) do
 				obj:OnEnd()
 			end
 
-			-- reset levelObjects
-			levelObjects = {}
+			-- reset objects
+			objects = {}
+			C_ResetGrid()
 		end
 
 	elseif(C_IsButtonPressed(GUI["Load"])) then
@@ -81,59 +77,65 @@ function Update(dt)
 		if (loaded == false) then
 
 			-- Reset scene before loading.
-			for num, obj in pairs(levelObjects) do
+			for num, obj in pairs(objects) do
 				obj:OnEnd()
 			end
-			levelObjects = {}
+			objects = {}
+			C_ResetGrid()
 
-			levelObjects = Load_File('maps/test1.txt')
+			-- Load in the new scene
+			objects = Load_File('maps/test1.txt')
 			loaded = true
 			created = false
+
+			-- Add all the objects to the grid
+			for num, obj in pairs(objects) do
+				C_AddTile(num, obj.position.x, obj.position.y, obj.position.z)
+			end
 		end
 
 
 	elseif(C_IsButtonPressed(GUI["Save"])) then
 		--Call c++ save map
 		if saved == false then
-			Write_To_File(levelObjects, 'maps/test2.txt')
+			Write_To_File(objects, 'maps/test1.txt')
 			saved = false
 		end
 
 	elseif(C_IsButtonPressed(GUI["Menu"])) then
 		C_ChangeScene(Scenes.MENU)
+	
 	else
+		-- place tile
+		if (C_IsKeyDown(keys.LBUTTON)) then
+			
+			if (selector.selected ~= nil) then
 
-	-- place tile
-	if (C_IsKeyDown(keys.LBUTTON)) then
-		if selector.selected ~= nil and C_RayHitObject() == -1 then
-			local newObject = selector.selected:New()
-			selector:UpdateBlock(newObject)
-			local newVector = vector:New()
-			newVector.x, newVector.y, newVector.z = C_AddTile()
-			newObject:LoadSprite(selector.sprite)
-			newObject:SetPosition(newVector.x, newVector.y, newVector.z)
-			table.insert(levelObjects, newObject)
-		end
-	end
+				if (not C_IsTileOccupied(0)) then
+					local obj = selector.selected:New()
+					selector:UpdateBlock(obj)
+					obj:LoadSprite(selector.sprite)
+					C_AddTile(#objects + 1)
 
-	-- remove tile
-	if (C_IsKeyDown(keys.SPACE)) then
+					local vec = vector:New()			
+					vec.x, vec.y, vec.z = C_GetTilePos(#objects + 1)
+					obj:SetPosition(vec.x, vec.y, vec.z)
 
-		hit = C_RayHitObject()
-
-		if hit >= 0 then
-
-			for num, obj in pairs(levelObjects) do
-				if obj.id == hit then
-					obj:OnEnd()
-					table.remove(levelObjects, num)
-					break
+					objects[#objects + 1] = obj
+				end
+			end		
+		
+		-- remove tile
+		elseif (C_IsKeyDown(keys.RBUTTON)) then
+			
+			if (C_IsTileOccupied(0)) then
+				local id = C_RemoveTile(0)
+				if (id ~= -1 and objects[id] ~= nil) then
+					objects[id]:OnEnd()
+					objects[id] = nil
 				end
 			end
-
 		end
-
-	end
 
 	end
 

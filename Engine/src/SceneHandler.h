@@ -1,5 +1,6 @@
 #pragma once
 #include "Sprite.h"
+#include "Gridsystem.h"
 
 class SceneHandler
 {
@@ -14,6 +15,8 @@ private:
 	std::unordered_map<unsigned int, irr::gui::IGUIStaticText*> m_texts;
 
 	irr::scene::ICameraSceneNode* m_camera;
+
+	std::unique_ptr<Gridsystem> m_gridsystem;
 
 private:
 	//Singleton standard
@@ -85,8 +88,7 @@ public:
 	/*
 		Editor
 	*/
-	static void AddGridSystem(const irr::core::dimension2du& dimension);
-	static irr::core::vector3df SnapToGrid();
-	static int RayHitObject();
+	static void AddGridSystem(const irr::core::vector2di& size);
+	static Gridsystem* GetGridsystem();
 
 };

@@ -36,10 +36,7 @@ function Start()
 
 	C_ToggleRenderUI(true)
 
-	objects = Load_File('maps/test2.txt')
-
-	-- write down file
-	--Write_To_File(objects, 'maps/test1.txt')
+	objects = Load_File('maps/test1.txt')
 
 	-- Go through all the objects
 	for i = 1, #objects do

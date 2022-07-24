@@ -41,6 +41,8 @@ project "Game"
 		
 		["Scripts"] 		= { "script/**.*" },
 		["Scripts/Scenes"]  = { "script/**Scene.*", "script/**AllScenes.*"},
+		
+		["Systems"] 		= { "src/**Gridsystem.*", "src/**Unordered_vec3_map.*"},
 
     }
 

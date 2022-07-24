@@ -10,9 +10,11 @@ public:
 	{
 		irr::core::position2di pos;
 		bool leftButtonDown;
+		bool rightButtonDown;
 		SMouseState()
 		{
 			leftButtonDown = false;
+			rightButtonDown = false;
 		}
 	}MouseState;
 
@@ -41,13 +43,24 @@ public:
 			{
 				MouseState.leftButtonDown = true;
 				keyIsDown[irr::EKEY_CODE::KEY_LBUTTON] = true;
-
 				break;
 			}
 			case irr::EMIE_LMOUSE_LEFT_UP:
 			{
 				MouseState.leftButtonDown = false;
 				keyIsDown[irr::EKEY_CODE::KEY_LBUTTON] = false;
+				break;
+			}
+			case irr::EMIE_RMOUSE_PRESSED_DOWN:
+			{
+				MouseState.rightButtonDown = true;
+				keyIsDown[irr::EKEY_CODE::KEY_RBUTTON] = true;
+				break;
+			}
+			case irr::EMIE_RMOUSE_LEFT_UP:
+			{
+				MouseState.rightButtonDown = false;
+				keyIsDown[irr::EKEY_CODE::KEY_RBUTTON] = false;
 				break;
 			}
 			case irr::EMIE_MOUSE_MOVED:

@@ -149,7 +149,6 @@ void LuaHandler::LoadState()
 	// Return: isKeyDown{bool}
 	lua_register(m_state, "C_IsKeyDown",					L_IsKeyDown);
 
-
 	/*
 		Mouse position
 	*/
@@ -163,12 +162,22 @@ void LuaHandler::LoadState()
 		Editor
 	*/
 
-	// Param: tilename{string}
+	// Param: sizeX{uint}, sizeZ{uint}
+	lua_register(m_state, "C_AddGrid",						L_AddGridsystem);
+	// Param: layer{int}
+	// Return: status{bool}
+	lua_register(m_state, "C_IsTileOccupied",				L_IsTileOccupied);
+	// Param: id{unsigned int}, layer{int}
+	// Return: status{bool}
+	lua_register(m_state, "C_AddTile",						L_AddTile);
+	// Param: id{unsigned int}
 	// Return: posX{float}, posY{float}, posZ{float}
-	lua_register(m_state, "C_AddTile",						L_PlaceTile);
-	// Param: dimensionX{uint}, dimensionZ{uint}
-	lua_register(m_state, "C_AddGrid",						L_AddGridSystem);
-	lua_register(m_state, "C_RayHitObject",					L_RayHitObject);
+	lua_register(m_state, "C_GetTilePos",					L_GetTilePos);
+	// Param: none
+	lua_register(m_state, "C_ResetGrid",					L_ResetGridsystem);
+	// Param: layer{int}
+	// Return: id{int}
+	lua_register(m_state, "C_RemoveTile",					L_RemoveTile);
 }
 
 lua_State*& LuaHandler::GetLua()
