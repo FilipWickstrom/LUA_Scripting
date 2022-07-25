@@ -20,9 +20,6 @@ Graphics2D::~Graphics2D()
 {
     for (auto elem : m_elements)
         delete elem.second;
-
-    for (auto elem : m_copyElements)
-        delete elem;
 }
 
 auto& Graphics2D::Get()
@@ -110,7 +107,8 @@ void Graphics2D::AlwaysDraw()
 {
     for (auto elem : INSTANCE.m_copyElements)
     {
-        elem->Draw();
+        if(elem)
+            elem->Draw();
     }
 }
 

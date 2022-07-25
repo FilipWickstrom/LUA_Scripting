@@ -153,6 +153,7 @@ function Update(dt)
 	camera:UpdateZoom()
 	selector:Update()
 
+	
 	-- Update Indicator to be above player dummy image
 	local x, y = C_ObjectToScreen(playerDummy.id)
 
@@ -170,5 +171,6 @@ function Update(dt)
 	if pointerDummy ~= nil then
 		C_UpdateImage2D(pointerDummy.id, x, y)
 	end
+	
 
 end
