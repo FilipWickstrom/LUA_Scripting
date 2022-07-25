@@ -140,6 +140,10 @@ void LuaHandler::LoadState()
 	lua_register(m_state, "C_SetTextAlignment",				GUI::L_SetTextAlignment);
 	// Param: shouldRender{boolean}
 	lua_register(m_state, "C_ToggleRenderUI",				L_ToggleRenderUI);
+	// Return: id{unsigned int}
+	lua_register(m_state, "C_AddImage2D",					GUI::L_Add2dImage);
+	// Param: id{unsigned int}, x{int}, y{int}
+	lua_register(m_state, "C_UpdateImage2D",				GUI::L_Update2dImage);
 
 	/*
 		Input
@@ -178,6 +182,9 @@ void LuaHandler::LoadState()
 	// Param: layer{int}
 	// Return: id{int}
 	lua_register(m_state, "C_RemoveTile",					L_RemoveTile);
+	// Param: id{unsigned int}
+	// Return: x{float}, y{float}
+	lua_register(m_state, "C_ObjectToScreen",				L_GetScreenFromWorld);
 }
 
 lua_State*& LuaHandler::GetLua()
@@ -218,8 +225,11 @@ bool LuaHandler::CheckErrors(const int& nrOfArgs, const int& nrOfReturns)
 {
 	if (lua_pcall(LUA, nrOfArgs, nrOfReturns, 0) != LUA_OK)
 	{
-		std::cout << "LUA Error: " << lua_tostring(LUA, -1) << '\n';
-		lua_pop(LUA, 1);
+		if (lua_isstring(LUA, -1))
+		{
+			std::cout << "LUA Error: " << lua_tostring(LUA, -1) << '\n';
+			lua_pop(LUA, 1);
+		}
 		return true;
 	}
 	return false;

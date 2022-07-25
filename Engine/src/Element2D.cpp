@@ -87,3 +87,34 @@ void Healthbar::SetPosition(irr::core::recti pos)
 {
 	m_background = pos;
 }
+
+Image::Image(const std::string& filepath)
+{
+	m_texture = Graphics::GetDriver()->getTexture((SPRITEPATH + filepath).c_str());
+}
+
+Image::~Image()
+{
+	m_texture->drop();
+}
+
+void Image::SetImagePosition(const irr::core::vector2di& newPos)
+{
+	m_position = newPos;
+}
+
+void Image::Draw()
+{
+	if (m_texture)
+	{
+		Graphics::GetDriver()->draw2DImage(m_texture, m_position);
+	}
+}
+
+void Image::Update(void* buff)
+{
+}
+
+void Image::SetPosition(irr::core::recti pos)
+{
+}

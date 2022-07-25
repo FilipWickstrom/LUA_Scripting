@@ -73,3 +73,26 @@ public:
 	virtual void SetPosition(irr::core::recti pos) override;
 
 };
+
+class Image : public Element2D
+{
+private:
+
+	irr::core::vector2di m_position;
+	irr::video::ITexture* m_texture;
+
+public:
+
+	Image(const std::string& filepath);
+	virtual ~Image() override;
+
+	void SetImagePosition(const irr::core::vector2di& newPos);
+
+	// Inherited via Element2D
+	virtual void Draw() override;
+
+	virtual void Update(void* buff) override;
+
+	virtual void SetPosition(irr::core::recti pos) override;
+
+};

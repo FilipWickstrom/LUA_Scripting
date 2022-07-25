@@ -26,6 +26,15 @@ function DoorTile:OnEnd()
 	C_RemoveSprite(self.key.id)
 end
 
+function DoorTile:SetPosition(x, y, z)
+
+	self.key:SetPosition(x, y, z + 32.0)
+	self.position.x = x
+	self.position.y = y + 1
+	self.position.z = z
+	C_SetSpritePosition(self.id, self.position.x, self.position.y, self.position.z)
+end
+
 --[[ Check if player collides with the key, if so, 
 	 set itself and the key to invisible, or remove itself.
 ]]

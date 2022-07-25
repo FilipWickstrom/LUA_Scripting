@@ -168,6 +168,18 @@ void SceneHandler::SetSpriteRotation(const unsigned int& id, const irr::core::ve
         Get().m_sprites.at(id)->SetRotation(rot);
 }
 
+Sprite* SceneHandler::GetSprite(const unsigned int& id)
+{
+    Sprite* toReturn = nullptr;
+
+    if (Get().m_sprites.find(id) != Get().m_sprites.end())
+    {
+        toReturn = Get().m_sprites.at(id).get();
+    }
+
+    return toReturn;
+}
+
 void SceneHandler::SetColliderSize(const unsigned int& id, const float& width, const float& height)
 {
     if (Get().m_sprites.find(id) != Get().m_sprites.end())
@@ -286,6 +298,11 @@ void SceneHandler::SetCameraZoom(const float& zoom)
     matrix.buildProjectionMatrixOrthoLH(width / thezoom, height / thezoom, 1.f, 100.f);
 
     Get().m_camera->setProjectionMatrix(matrix, true);
+}
+
+irr::scene::ICameraSceneNode* SceneHandler::GetCamera()
+{
+    return Get().m_camera;
 }
 
 unsigned int SceneHandler::AddText(const std::string& text, const std::string& font, irr::core::vector2di pos, irr::core::vector2di size)

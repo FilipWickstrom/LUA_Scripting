@@ -55,6 +55,8 @@ namespace GUI
 	int L_IsButtonPressed(lua_State* L);
 	int L_UpdateText(lua_State* L);
 	int L_SetTextAlignment(lua_State* L);
+	int L_Add2dImage(lua_State* L);
+	int L_Update2dImage(lua_State* L);
 };
 
 // Graphical Interface wrapper
@@ -82,3 +84,4 @@ int L_AddTile(lua_State* L);
 int L_RemoveTile(lua_State* L);
 int L_GetTilePos(lua_State* L);
 int L_ResetGridsystem(lua_State* L);
+int L_GetScreenFromWorld(lua_State* L);

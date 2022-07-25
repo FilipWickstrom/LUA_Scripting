@@ -15,6 +15,7 @@ private:
 	bool m_shouldRender = true;
 
 	std::unordered_map<unsigned int, Element2D*> m_elements;
+	std::vector<Element2D*> m_copyElements;
 
 public:
 
@@ -23,13 +24,21 @@ public:
 	static Element2D* GetElement(const unsigned int& index);
 
 	static const unsigned int AddHealthbar(irr::core::rect<irr::s32> pos);
+	static const unsigned int Add2dImage(const std::string& filepath, irr::core::vector2di pos);
+
+	// Update healthbar pos
 	static void SetPosition(const unsigned int& index, irr::core::rect<irr::s32> pos);
+
+	// update 2d image pos
+	static void SetPosition(const unsigned int& index, irr::core::vector2di pos);
+
 	static void RemoveElement(const unsigned int& index);
 
 	// true - will render UI, false - won't render UI
 	static void ToggleRender(const bool& toggle);
 
 	static void Draw();
+	static void AlwaysDraw();
 	static void RemoveAll();
 
 };

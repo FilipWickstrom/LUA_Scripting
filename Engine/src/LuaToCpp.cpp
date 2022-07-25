@@ -465,6 +465,32 @@ int GUI::L_SetTextAlignment(lua_State* L)
 	return 0;
 }
 
+int GUI::L_Add2dImage(lua_State* L)
+{
+	std::string filepath = lua_tostring(L, -3);
+	int x = lua_tonumber(L, -2);
+	int y = lua_tonumber(L, -1);
+
+	irr::core::vector2di pos = { x, y };
+
+	unsigned int id = Graphics2D::Add2dImage(filepath, pos);
+
+	lua_pushnumber(L, id);
+
+	return 1;
+}
+
+int GUI::L_Update2dImage(lua_State* L)
+{
+	unsigned int id = lua_tonumber(L, -3);
+	int x = lua_tonumber(L, -2);
+	int y = lua_tonumber(L, -1);
+
+	Graphics2D::SetPosition(id, { x, y });
+
+	return 0;
+}
+
 int L_GetScreenCoords(lua_State* L)
 {
 	/*
@@ -683,4 +709,35 @@ int L_ResetGridsystem(lua_State* L)
 		SceneHandler::GetGridsystem()->ResetGrid();
 	}
 	return 0;
+}
+
+int L_GetScreenFromWorld(lua_State* L)
+{
+	unsigned int id = lua_tonumber(L, -1);
+
+	Sprite* sprite = SceneHandler::GetSprite(id);
+	if (sprite)
+	{
+		irr::core::vector3df pos = sprite->GetPosition();
+		irr::core::matrix4 posMatrix = SceneHandler::GetCamera()->getViewMatrix();
+		posMatrix.transformVect(pos);
+		posMatrix = SceneHandler::GetCamera()->getProjectionMatrix();
+		posMatrix.transformVect(pos);
+		
+		float x = (((pos.X + 1) * (Graphics::GetWindowWidth())) / (2.0f));
+		float y = Graphics::GetWindowHeight() - (((pos.Y + 1) * Graphics::GetWindowHeight()) / (2.0f));
+
+		lua_pushnumber(L, x);
+		lua_pushnumber(L, y);
+
+		return 2;
+	}
+
+	float x = 1.0f;
+	float y = 1.0f;
+
+	lua_pushnumber(L, x);
+	lua_pushnumber(L, y);
+
+	return 2;
 }

@@ -50,6 +50,7 @@ public:
 	static void SetSpritePosition(const unsigned int& id, const irr::core::vector3df& pos);
 	static void SetSpriteScale(const unsigned int& id, const irr::core::vector3df& scl);
 	static void SetSpriteRotation(const unsigned int& id, const irr::core::vector3df& rot);
+	static Sprite* GetSprite(const unsigned int& id);
 
 	/*
 		Collision - between sprites
@@ -66,6 +67,7 @@ public:
 	static void SetCameraPosition(const irr::core::vector3df& pos);
 	static void SetCameraTarget(const irr::core::vector3df& tar);
 	static void SetCameraZoom(const float& zoom);
+	static irr::scene::ICameraSceneNode* GetCamera();
 
 	/*
 		GUI

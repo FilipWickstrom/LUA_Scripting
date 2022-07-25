@@ -73,6 +73,7 @@ void Renderer::Run()
 		Graphics::GetSceneManager()->drawAll();
 		Graphics::GetGUIEnvironment()->drawAll();
 		Graphics2D::Draw();
+		Graphics2D::AlwaysDraw();
 
 		Graphics::GetDriver()->endScene();
 	}

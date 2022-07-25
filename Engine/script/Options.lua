@@ -7,8 +7,8 @@ local DriverType =
 local Window = 
 {
 	name		= "Budget Binding of Isaac",
-	width		= 1920,
-	height		= 1080,
+	width		= 1024,
+	height		= 720,
 	fullscreen	= false,
 	vsync		= true,
 	driverType	= DriverType.DIRECT3D9

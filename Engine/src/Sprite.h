@@ -27,6 +27,7 @@ public:
 	void SetPosition(const irr::core::vector3df& pos);
 	void SetRotation(const irr::core::vector3df& rot);
 	void SetScale(const irr::core::vector3df& scl);
+	irr::core::matrix4 GetAbsoluteTransform();
 
 	/*
 		Getters

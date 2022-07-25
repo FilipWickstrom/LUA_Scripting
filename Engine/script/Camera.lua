@@ -54,17 +54,23 @@ function Camera:UpdateMovement()
 
 	-- Movement
 	local dir = vector:New()
+	local power = 1.0
+
+	if (C_IsKeyDown(keys.SPACE)) then
+		power = 5.0
+	end
+
 	if C_IsKeyDown(keys.W) then
-		dir.z = dir.z + 1
+		dir.z = dir.z + power
 	end
 	if C_IsKeyDown(keys.S) then
-		dir.z = dir.z - 1
+		dir.z = dir.z - power
 	end
 	if C_IsKeyDown(keys.A) then
-		dir.x = dir.x - 1
+		dir.x = dir.x - power
 	end
 	if C_IsKeyDown(keys.D) then
-		dir.x = dir.x + 1
+		dir.x = dir.x + power
 	end
 
 	self:Move(dir * self.speed * deltatime)	

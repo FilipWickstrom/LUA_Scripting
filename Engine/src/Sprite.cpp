@@ -62,6 +62,11 @@ const irr::core::rectf Sprite::GetBounds() const
 							irr::core::vector2df(pos.X + halfXSize, pos.Y + halfYSize));
 }
 
+irr::core::matrix4 Sprite::GetAbsoluteTransform()
+{
+	return m_node->getAbsoluteTransformation();
+}
+
 void Sprite::LoadTexture(const std::string& filename)
 {
 	// Cleaning up before loading new
