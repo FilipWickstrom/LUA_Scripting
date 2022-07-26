@@ -38,7 +38,6 @@ end
 
 function ThrowMonkey:Update()
 	self:Throw()
-	self:GUpdate()
 	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 75.0, 25.0)
 	C_UpdateUI(self.gid, self.hp)
 end

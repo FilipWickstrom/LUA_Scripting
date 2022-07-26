@@ -3,17 +3,18 @@ local vector = require('script/Vector')
 local Camera = require('script/Camera')
 local selectedBlock = require('script/WallTile')
 require('script/File')
-Window = require('script/Options')
+local Window = require('script/Options')
 
 -- Placing tiles 'requires'
-local selector = require('script/EditorTilePlacer')
-local wallTile = require('script/WallTile')
-local doorTile = require('script/DoorTile')
-local monster = require('script/Monster')
-local monkey = require('script/ThrowingEnemy')
-local bouncy = require('script/BasicBossEnemy')
-local shooter = require('script/ThrowingBoss')
-local powerup = require('script/Powerups')
+local selector	= require('script/EditorTilePlacer')
+local wallTile	= require('script/WallTile')
+local doorTile	= require('script/DoorTile')
+local monster	= require('script/Monster')
+local monkey	= require('script/ThrowingEnemy')
+local bouncy	= require('script/BasicBossEnemy')
+local shooter	= require('script/ThrowingBoss')
+local powerup	= require('script/Powerups')
+local player	= require('script/Player'):New()
 
 -- "Globals" in this scope
 local objects = {}
@@ -21,9 +22,6 @@ local loaded = false
 local created = false
 local saved = false
 local GUI = {}
-
--- player dummy
-local playerDummy = gameObject:New()
 local pointerDummy = {id = 0}
 
 function Start()
@@ -46,8 +44,7 @@ function Start()
 
 	-- Create a camera
 	camera = Camera:New()
-	camera:SetPosition(0,40,0)
-	camera:SetTarget(0,0,0.1)
+	camera:SetPosition(0,0)
 	camera:SetZoom(5)
 
 	C_ToggleRenderUI(false)
@@ -56,9 +53,6 @@ function Start()
 
 	selector:Initialize()
 
-
-	playerDummy.id = C_LoadSprite('knight.png')
-	playerDummy:SetPosition(1, 1, 1)
 	pointerDummy.id = C_AddImage2D('knight_sword.png', 900, 500)
 
 end
@@ -155,7 +149,7 @@ function Update(dt)
 
 	
 	-- Update Indicator to be above player dummy image
-	local x, y = C_ObjectToScreen(playerDummy.id)
+	local x, y = C_ObjectToScreen(player.id)
 
 	if x < 0 then
 		x = 0

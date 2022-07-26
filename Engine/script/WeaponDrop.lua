@@ -33,10 +33,7 @@ function weaponDrops:CreateWeapon(pos)
 	-- Create an object in the scene to represent the weapon pickup.
 	local newObject = gameObject:New()
 	newObject.id = C_LoadSprite(weapons[newWeapon.type].sprite)
-	newObject.position.x = pos.x
-	newObject.position.y = pos.y
-	newObject.position.z = pos.z
-	newObject:GUpdate()
+	newObject:SetPosition(pos.x, pos.y, pos.z)
 
 	-- insert into tables
 	table.insert(self.objects, newObject)

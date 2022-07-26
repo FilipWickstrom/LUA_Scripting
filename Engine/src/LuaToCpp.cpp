@@ -468,8 +468,8 @@ int GUI::L_SetTextAlignment(lua_State* L)
 int GUI::L_Add2dImage(lua_State* L)
 {
 	std::string filepath = lua_tostring(L, -3);
-	int x = lua_tonumber(L, -2);
-	int y = lua_tonumber(L, -1);
+	int x = static_cast<int>(lua_tonumber(L, -2));
+	int y = static_cast<int>(lua_tonumber(L, -1));
 
 	irr::core::vector2di pos = { x, y };
 
@@ -482,9 +482,9 @@ int GUI::L_Add2dImage(lua_State* L)
 
 int GUI::L_Update2dImage(lua_State* L)
 {
-	unsigned int id = lua_tonumber(L, -3);
-	int x = lua_tonumber(L, -2);
-	int y = lua_tonumber(L, -1);
+	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -3));
+	int x = static_cast<int>(lua_tonumber(L, -2));
+	int y = static_cast<int>(lua_tonumber(L, -1));
 
 	Graphics2D::SetPosition(id, { x, y });
 
@@ -713,7 +713,7 @@ int L_ResetGridsystem(lua_State* L)
 
 int L_GetScreenFromWorld(lua_State* L)
 {
-	unsigned int id = lua_tonumber(L, -1);
+	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
 
 	Sprite* sprite = SceneHandler::GetSprite(id);
 	if (sprite)

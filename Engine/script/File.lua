@@ -1,17 +1,17 @@
-gameObject	= require('script/gameObject')
+local gameObject	= require('script/gameObject')
 
 -- Enemies
-Monster		= require('script/Monster')
-Monkey		= require('script/ThrowingEnemy')
-Bouncy		= require('script/BasicBossEnemy')
-Shooter		= require('script/ThrowingBoss')
+local Monster		= require('script/Monster')
+local Monkey		= require('script/ThrowingEnemy')
+local Bouncy		= require('script/BasicBossEnemy')
+local Shooter		= require('script/ThrowingBoss')
 
 -- Tiles
-WallTile	= require('script/WallTile')
-DoorTile	= require('script/DoorTile')
+local WallTile	= require('script/WallTile')
+local DoorTile	= require('script/DoorTile')
 
 -- Powerup
-Powerup		= require('script/Powerups')
+local Powerup		= require('script/Powerups')
 
 --[[LOAD TO FILE SECTION]]--
 
@@ -141,38 +141,33 @@ function Adjust_Object_Type(objects, num, line)
 	if line:find('monster') then 
 		objects[num] = Monster:New()
 		objects[num].type = 'monster'
-	end
 
 	-- Spawn a throwing stationary enemy
-	if line:find('monkey') then
+	elseif line:find('monkey') then
 		objects[num] = Monkey:New()
 		objects[num].type = 'monkey'
-	end
-
+	
 	-- Spawns a basic boss that bounces across the room
-	if line:find('bouncy') then
+	elseif line:find('bouncy') then
 		objects[num] = Bouncy:New()
 		objects[num].type = 'bouncy'
-	end
 
-	if line:find('wall') then
+	elseif line:find('wall') then
 		objects[num] = WallTile:New()
 		objects[num].type = 'wall'
-	end
 
-	if line:find('shooter') then
+	elseif line:find('shooter') then
 		objects[num] = Shooter:New()
 		objects[num].type = 'shooter'
-	end
 
-	if line:find('door') then
+	elseif line:find('door') then
 		objects[num] = DoorTile:New()
 		objects[num].type = 'door'
-	end
 
-	if line:find('powerup') then
+	elseif line:find('powerup') then
 		objects[num] = Powerup:New()
 		objects[num].type = 'powerup'
+
 	end
 
 end

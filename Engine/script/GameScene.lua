@@ -11,28 +11,22 @@ require('script/File')
 require('script/ProjectileHandler')
 
 
--- Globals to collect separate types in different tables
-objects	= {}
-walls	= {}
-enemies	= {}
 
 function Start()
 	math.randomseed(os.time())
 
+	-- Globals to collect separate types in different tables
+	objects	= {}
+	walls	= {}
+	enemies	= {}
+
 	--Player setup
 	player = Player:New()
 
-	--powerup = Powerup:New()
 	goldText:Initialize()
 	weaponText:Initialize()
-	weaponDrops:new()
 	lastpickupText:Initialize()
-
-	--Camera setup
-	camera = Camera:New()
-	camera:SetPosition(0,40,0)
-	camera:SetTarget(0,0,0.1)
-	camera:SetZoom(5)
+	weaponDrops:new()
 
 	C_ToggleRenderUI(true)
 
@@ -46,16 +40,21 @@ function Start()
 		if (type == 'wall' or 
 			type == 'door') then
 			table.insert(walls, objects[i])
-		end
 
 		-- Adds all enemies to the enemies table
-		if (type == 'bouncy'	or 
-			type == 'monster' or
-			type == 'shooter' or
-			type == 'monkey')	then
-			table.insert(enemies, objects[i])
+		elseif (type == 'bouncy'  or 
+				type == 'monster' or
+				type == 'shooter' or
+				type == 'monkey') then
+				table.insert(enemies, objects[i])
+		
 		end
 	end
+
+	--Camera setup
+	camera = Camera:New()
+	camera:SetPosition(player.position.x, player.position.z)
+	camera:SetZoom(5)
 
 end
 
@@ -82,13 +81,14 @@ function Update(dt)
 	end
 
 	-- Update player
-	player:Update(camera, objects)
+	player:Update()
 	UpdateProjectiles()
 
 	weaponDrops:Update()
 	weaponText:Update()
 	goldText:Update()
 
+	camera:SetPosition(player.position.x, player.position.z)
 	camera:UpdateZoom()
 	
 	-- Go back to menu when player dies

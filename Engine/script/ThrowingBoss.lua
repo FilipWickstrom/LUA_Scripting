@@ -76,7 +76,6 @@ end
 function ThrowBoss:Update()
 	self:Throw()
 	self:Chase()
-	self:GUpdate()
 	C_UpdatePosUI(self.gid, self.position.x, self.position.z, 145.0, 50.0)
 	C_UpdateUI(self.gid, self.hp)
 end

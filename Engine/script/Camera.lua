@@ -4,10 +4,12 @@ local Camera = {}
 
 
 function Camera:New()
-	cam = {}
+	local cam = {}
 
 	cam.position = vector:New()
+	cam.position.y = 40
 	cam.target   = vector:New()
+	cam.target.y = 0
 	cam.speed	 = 20
 	cam.zoomSpeed = 15
 	cam.zoomValue = 1
@@ -18,17 +20,13 @@ function Camera:New()
 	return cam
 end
 
-function Camera:SetPosition(x, y, z)
+function Camera:SetPosition(x, z)
 	self.position.x = x
-	self.position.y = y
 	self.position.z = z
-	C_SetCameraPosition(self.position.x, self.position.y, self.position.z)
-end
 
-function Camera:SetTarget(x, y, z)
-	self.target.x = x
-	self.target.y = y
-	self.target.z = z
+	self.target.x = self.position.x
+	self.target.z = self.position.z + 0.1
+	C_SetCameraPosition(self.position.x, self.position.y, self.position.z)
 	C_SetCameraTarget(self.target.x, self.target.y, self.target.z)
 end
 
@@ -40,14 +38,15 @@ function Camera:SetZoom(zoom)
 			self.zoomValue = tonumber(zoom)
 			C_SetCameraZoom(self.zoomValue)
 		end
+
 	end
 end
 
 function Camera:Move(vec)
-    local pos = self.position + vec
-	local tar = self.target + vec
-	self:SetPosition(pos.x, pos.y, pos.z)
-	self:SetTarget(tar.x, tar.y, tar.z)
+    self.position = self.position + vec
+	self.target = self.target + vec
+	C_SetCameraPosition(self.position.x, self.position.y, self.position.z)
+	C_SetCameraTarget(self.target.x, self.target.y, self.target.z)
 end
 
 function Camera:UpdateMovement()	

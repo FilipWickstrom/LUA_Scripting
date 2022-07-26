@@ -14,7 +14,7 @@ function Player:New()
 	g.weapon = Weapon.new("default")
 	g.name = "Player"
 	g.speed = 25
-	g:SetPosition(0,0.2,0)
+	g:SetPosition(0,3,0)
 	-- Add effects here.
 	g.lastpickup = "None"
 
@@ -34,7 +34,8 @@ function Player:New()
 	return g
 end
 
-function Player:HandleMovement(camera)
+function Player:HandleMovement()
+
 	local dir = vector:New()
 
 	if C_IsKeyDown(keys.W) then
@@ -55,7 +56,6 @@ function Player:HandleMovement(camera)
 	-- Move everything
 	dir:Normalize()
 	self:Move(dir)
-	camera:Move(dir * self.speed * deltatime)
 
 	for i = 1, #walls do
 
@@ -65,8 +65,7 @@ function Player:HandleMovement(camera)
 			dir.x = dir.x * -1
 			dir.z = dir.z * -1
 			self:Move(dir)
-			camera:Move(dir * self.speed * deltatime)
-
+			
 			-- Found collision - dont need to keep going
 			break
 		end
@@ -86,8 +85,8 @@ function Player:Shoot()
 	self.weapon:Update(enemies)
 end
 
-function Player:Update(camera, enemies)
-	self:HandleMovement(camera)
+function Player:Update()
+	self:HandleMovement()
 	self:Shoot()
 
 	if self.hp > 100.0 then

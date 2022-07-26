@@ -149,12 +149,10 @@ void Sprite::SetColliderSize(const float& width, const float& height)
 {
 #if DEBUG_AABB_HITBOXES
 	irr::core::aabbox3df box;
-	irr::core::vector3df pos = this->GetPosition();
-	
 	float halfWidth = width / 2.f;
 	float halfHeight = height / 2.f;
-	box.MinEdge = { pos.X - halfWidth, 0, pos.Z - halfHeight };
-	box.MaxEdge = { pos.X + halfWidth, 0, pos.Z + halfHeight };
+	box.MinEdge = { -halfWidth, 0, -halfHeight };
+	box.MaxEdge = {  halfWidth, 0,  halfHeight };
 	m_mesh->setBoundingBox(box);
 #endif
 
