@@ -7,6 +7,7 @@ Gridsystem::Gridsystem(const irr::core::vector2di& size)
     // Green grid
     m_color = irr::video::SColor(255, 0, 255, 0);
     m_gridNode = nullptr;
+    m_layer = 0;
     this->LoadGrid();
 
     // Reserve some memory
@@ -101,12 +102,12 @@ void Gridsystem::UpdateHoverEffect()
         Graphics::GetSceneManager()->getMeshManipulator()->setVertexColors(m_hoverMesh, irr::video::SColor(10, 0, 255, 0));
 }
 
-bool Gridsystem::IsTileOccupied(const int& layer, irr::core::vector3di& tilePos)
+bool Gridsystem::IsTileOccupied(irr::core::vector3di& tilePos)
 {
     irr::core::vector3df position = SceneHandler::GetWorldCoordFromScreen();
 
     tilePos.X = static_cast<int>(std::round(position.X / TILE_SIZE));
-    tilePos.Y = layer;
+    tilePos.Y = m_layer;
     tilePos.Z = static_cast<int>(std::round(position.Z / TILE_SIZE));
 
     if (this->OutOfBounds({ tilePos.X, tilePos.Z }))
@@ -116,11 +117,11 @@ bool Gridsystem::IsTileOccupied(const int& layer, irr::core::vector3di& tilePos)
      return m_vec3ToID.find(tilePos) != m_vec3ToID.end();
 }
 
-bool Gridsystem::AddTileAtMouse(const unsigned int& id, const int& depth)
+bool Gridsystem::AddTileAtMouse(const unsigned int& id)
 {
     irr::core::vector3di tile;
 
-    if (IsTileOccupied(depth, tile))
+    if (IsTileOccupied(tile))
         return false;
 
     // Add the tile to the map
@@ -163,13 +164,13 @@ bool Gridsystem::AddTile(const unsigned int& id, const irr::core::vector3df& pos
     }
 }
 
-int Gridsystem::RemoveTile(const int& depth)
+int Gridsystem::RemoveTile()
 {
     int id = -1;
     irr::core::vector3di tile;
 
     // Do we have a tile where the mouse is?
-    if (IsTileOccupied(depth, tile))
+    if (IsTileOccupied(tile))
     {
         // Out of bounds check
         if (m_vec3ToID.find(tile) != m_vec3ToID.end())
@@ -188,4 +189,9 @@ void Gridsystem::ResetGrid()
 {
     m_vec3ToID.clear();
     m_idToVec3.clear();
+}
+
+void Gridsystem::ChangeLayer(const int& layer)
+{
+    m_layer = layer;
 }

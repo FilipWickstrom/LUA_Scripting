@@ -9,11 +9,13 @@ private:
 	irr::scene::ISceneNode* m_gridNode;
 	irr::scene::IMesh*		m_hoverMesh;
 	irr::scene::ISceneNode* m_hoverNode;
+	int						m_layer;
 
 	// Key: irr::core::vector3di | Value: unsigned int
 	unodered_vec3_map m_vec3ToID;	
 	std::unordered_map<unsigned int, irr::core::vector3di> m_idToVec3;
 	
+
 private:
 	void LoadGrid();
 	bool OutOfBounds(const irr::core::vector2di& vec);
@@ -29,17 +31,22 @@ public:
 	void UpdateHoverEffect();
 
 	// Check if there is anything on this tile
-	bool IsTileOccupied(const int& layer, irr::core::vector3di& tilePos);
+	bool IsTileOccupied(irr::core::vector3di& tilePos);
 
-	// Add a tile to in the grid on a specific layer
-	bool AddTileAtMouse(const unsigned int& id, const int& depth = 0);	//TODO: Return position
-	irr::core::vector3df GetTilePosition(const unsigned int& id) const;
-
+	// Add a tile to the grid at the mouse position
+	bool AddTileAtMouse(const unsigned int& id);
+	
+	// Add a tile with an id and a position manually
 	bool AddTile(const unsigned int& id, const irr::core::vector3df& pos);
 
+	// Get the position of a specific tile
+	irr::core::vector3df GetTilePosition(const unsigned int& id) const;
+
 	// Return id of the removed tile
-	int RemoveTile(const int& depth = 0);
+	int RemoveTile();
 
 	// Reset all the maps 
 	void ResetGrid();
+
+	void ChangeLayer(const int& layer);
 };

@@ -168,20 +168,22 @@ void LuaHandler::LoadState()
 
 	// Param: sizeX{uint}, sizeZ{uint}
 	lua_register(m_state, "C_AddGrid",						L_AddGridsystem);
-	// Param: layer{int}
 	// Return: status{bool}
 	lua_register(m_state, "C_IsTileOccupied",				L_IsTileOccupied);
-	// Param: id{unsigned int}, layer{int}
+	// Param: id{unsigned int}
 	// Return: status{bool}
 	lua_register(m_state, "C_AddTile",						L_AddTile);
-	// Param: id{unsigned int}
+	// Param: id{unsigned int}, posX{float}[optional], posY{float}[optional], posZ{float}[optional]
 	// Return: posX{float}, posY{float}, posZ{float}
 	lua_register(m_state, "C_GetTilePos",					L_GetTilePos);
 	// Param: none
 	lua_register(m_state, "C_ResetGrid",					L_ResetGridsystem);
-	// Param: layer{int}
 	// Return: id{int}
 	lua_register(m_state, "C_RemoveTile",					L_RemoveTile);
+	// Param: layer{int}
+	lua_register(m_state, "C_SetGridLayer",					L_SetGridLayer);
+	
+	
 	// Param: id{unsigned int}
 	// Return: x{float}, y{float}
 	lua_register(m_state, "C_ObjectToScreen",				L_GetScreenFromWorld);

@@ -27,12 +27,12 @@ local pointerDummy = {id = 0}
 function Start()
 	local window = { X = C_WinWidth(), Y = C_WinHeight() }
 
-	GUI["Title"] = C_AddText("Level editor", "roboto_28.xml", window.X/2, 25, 400, 100)
+	GUI["Title"] = C_AddText("Level editor", "roboto_28.xml", window.X/2, 25, 250, 75)
 
 	-- Buttons: Create, Load, Save
 	local editBtn = { X = 100, Y = 50 }
 	local xSpace = 0;
-	GUI["Create"] = C_AddButton("Create", "roboto_12.xml", editBtn.X/2, editBtn.Y/2, editBtn.X, editBtn.Y)
+	GUI["New"] = C_AddButton("New", "roboto_12.xml", editBtn.X/2, editBtn.Y/2, editBtn.X, editBtn.Y)
 	xSpace = xSpace + editBtn.X
 	GUI["Load"] = C_AddButton("Load", "roboto_12.xml", editBtn.X/2 + xSpace, editBtn.Y/2, editBtn.X, editBtn.Y)
 	xSpace = xSpace + editBtn.X
@@ -41,6 +41,17 @@ function Start()
 	-- Buttons: Back to menu
 	local menuBtn = { X = 150, Y = 50 }
 	GUI["Menu"] = C_AddButton("Back to menu", "roboto_12.xml", window.X-(menuBtn.X/2), menuBtn.Y/2, menuBtn.X, menuBtn.Y)
+
+	-- Layers
+	local ySpace = 75
+	GUI["LayerText"] = C_AddText("Layer: Ground", "roboto_12.xml", window.X-75, ySpace, 150, 50)
+	C_SetTextAlignment(GUI["LayerText"], "left")
+	ySpace = ySpace + editBtn.Y
+	GUI["Layer0"] = C_AddButton("Ground", "roboto_12.xml", window.X-(menuBtn.X/2), ySpace, menuBtn.X, menuBtn.Y)
+	ySpace = ySpace + editBtn.Y
+	GUI["Layer1"] = C_AddButton("Items", "roboto_12.xml", window.X-(menuBtn.X/2), ySpace, menuBtn.X, menuBtn.Y)
+	ySpace = ySpace + editBtn.Y
+	GUI["Layer2"] = C_AddButton("Entities", "roboto_12.xml", window.X-(menuBtn.X/2), ySpace, menuBtn.X, menuBtn.Y)
 
 	-- Create a camera
 	camera = Camera:New()
@@ -62,10 +73,9 @@ function Update(dt)
 	deltatime = dt
 
 	-- Check if any of the buttons is clicked
-	if (C_IsButtonPressed(GUI["Create"])) then
-		--Call c++ create map
+	if (C_IsButtonPressed(GUI["New"])) then
 
-		if (created == false) then
+		if (not created) then
 			loaded = false
 			for num, obj in pairs(objects) do
 				obj:OnEnd()
@@ -77,8 +87,8 @@ function Update(dt)
 		end
 
 	elseif(C_IsButtonPressed(GUI["Load"])) then
-		--Call c++ load map
-		if (loaded == false) then
+		
+		if (not loaded) then
 
 			-- Reset scene before loading.
 			for num, obj in pairs(objects) do
@@ -100,22 +110,33 @@ function Update(dt)
 
 
 	elseif(C_IsButtonPressed(GUI["Save"])) then
-		--Call c++ save map
-		if saved == false then
+		
+		if (not saved) then
 			Write_To_File(objects, 'maps/test1.txt')
 			saved = false
 		end
 
 	elseif(C_IsButtonPressed(GUI["Menu"])) then
 		C_ChangeScene(Scenes.MENU)
-	
+
+	-- Change what layer we want to place on
+	elseif (C_IsButtonPressed(GUI["Layer0"])) then
+		C_SetGridLayer(0)
+		C_UpdateText(GUI["LayerText"], "Layer: Ground")
+	elseif (C_IsButtonPressed(GUI["Layer1"])) then
+		C_SetGridLayer(1)
+		C_UpdateText(GUI["LayerText"], "Layer: Items")
+	elseif (C_IsButtonPressed(GUI["Layer2"])) then
+		C_SetGridLayer(2)
+		C_UpdateText(GUI["LayerText"], "Layer: Entities")
+
 	else
 		-- place tile
 		if (C_IsKeyDown(keys.LBUTTON)) then
 			
 			if (selector.selected ~= nil) then
 
-				if (not C_IsTileOccupied(0)) then
+				if (not C_IsTileOccupied()) then
 					local obj = selector.selected:New()
 					selector:UpdateBlock(obj)
 					obj:LoadSprite(selector.sprite)
@@ -136,8 +157,8 @@ function Update(dt)
 		-- remove tile
 		elseif (C_IsKeyDown(keys.RBUTTON)) then
 			
-			if (C_IsTileOccupied(0)) then
-				local id = C_RemoveTile(0)
+			if (C_IsTileOccupied()) then
+				local id = C_RemoveTile()
 				if (id ~= -1 and objects[id] ~= nil) then
 					objects[id]:OnEnd()
 					objects[id] = nil

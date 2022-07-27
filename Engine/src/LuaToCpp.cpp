@@ -615,17 +615,11 @@ int L_AddGridsystem(lua_State* L)
 int L_IsTileOccupied(lua_State* L)
 {
 	bool success = false;
-
-	if (lua_isnumber(L, -1))
+	if (SceneHandler::GetGridsystem())
 	{
-		int layer = static_cast<int>(lua_tonumber(L, -1));
-		if (SceneHandler::GetGridsystem())
-		{
-			irr::core::vector3di vec;
-			success = SceneHandler::GetGridsystem()->IsTileOccupied(layer, vec);
-		}
+		irr::core::vector3di vec;
+		success = SceneHandler::GetGridsystem()->IsTileOccupied(vec);
 	}
-
 	lua_pushboolean(L, success);
 	return 1;
 }
@@ -640,6 +634,7 @@ int L_AddTile(lua_State* L)
 		if (SceneHandler::GetGridsystem())
 		{
 			// Position vector
+			// Example: C_AddTile(id, pos.x, pos.y, pos.z)
 			if (lua_isnumber(L, 2) && 
 				lua_isnumber(L, 3) &&
 				lua_isnumber(L, 4))
@@ -653,6 +648,7 @@ int L_AddTile(lua_State* L)
 					success = true;
 			}
 			// Defaults to mouse position
+			// Example: C_AddTile(id)
 			else
 			{
 				// Return true if we could place tile
@@ -669,16 +665,10 @@ int L_AddTile(lua_State* L)
 int L_RemoveTile(lua_State* L)
 {
 	int id = -1;
-
-	if (lua_isnumber(L, -1))
+	if (SceneHandler::GetGridsystem())
 	{
-		int layer = static_cast<int>(lua_tonumber(L, -1));
-		if (SceneHandler::GetGridsystem())
-		{
-			id = SceneHandler::GetGridsystem()->RemoveTile(layer);
-		}
+		id = SceneHandler::GetGridsystem()->RemoveTile();
 	}
-
 	lua_pushnumber(L, id);
 	return 1;
 }
@@ -740,4 +730,17 @@ int L_GetScreenFromWorld(lua_State* L)
 	lua_pushnumber(L, y);
 
 	return 2;
+}
+
+int L_SetGridLayer(lua_State* L)
+{
+	if (lua_isnumber(L, -1))
+	{
+		if (SceneHandler::GetGridsystem())
+		{
+			int layer = static_cast<int>(lua_tonumber(L, -1));
+			SceneHandler::GetGridsystem()->ChangeLayer(layer);
+		}
+	}
+	return 0;
 }
