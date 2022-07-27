@@ -12,6 +12,7 @@ function gameObject:New(g)
 	g.gid = -1 --id for ui? [rename]
 	g.hasCollision = 1
 	g.isVisible = 1
+	g.hp = 100
 	
 	--Transform
 	g.position = vector:New()

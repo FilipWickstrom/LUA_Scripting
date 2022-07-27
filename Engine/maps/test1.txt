@@ -1198,3 +1198,11 @@ visible=1
 collision=1
 }
 
+{
+type=spawnpoint
+sprite=column_top.png
+pos=-96.0 0.0 32.0
+visible=1
+collision=1
+}
+

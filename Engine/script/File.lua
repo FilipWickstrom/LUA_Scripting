@@ -13,6 +13,9 @@ local DoorTile	= require('script/DoorTile')
 -- Powerup
 local Powerup		= require('script/Powerups')
 
+-- Others
+local spawnpoint	= require('script/spawnpoint')
+
 --[[LOAD TO FILE SECTION]]--
 
 -- Load objects from a file into a table
@@ -111,8 +114,17 @@ function Adjust_Object_Pos(objects, num, line)
 	
 	--Check that none is nil
 	if (#vec == 3) then
-		if (vec[1] and vec[2] and vec[3]) then		
-			objects[num]:SetPosition(vec[1], vec[2], vec[3])
+		if (vec[1] and vec[2] and vec[3]) then	
+			if objects[num].type ~= 'spawnpoint' then
+				objects[num]:SetPosition(vec[1], vec[2], vec[3])
+			else
+				-- this was a spawnpoint so set the player position at this point.
+				if player ~= nil then
+					player:SetPosition(vec[1], vec[2], vec[3])
+				end
+
+				objects[num]:SetPosition(vec[1], vec[2], vec[3])
+			end
 		else
 			print("ERROR: '" .. line .. "' not correct... One of the numbers was nil")
 		end
@@ -167,6 +179,13 @@ function Adjust_Object_Type(objects, num, line)
 	elseif line:find('powerup') then
 		objects[num] = Powerup:New()
 		objects[num].type = 'powerup'
+
+	elseif line:find('spawnpoint') then
+
+		objects[num] = spawnpoint:New()
+		objects[num].type = 'spawnpoint'
+
+	elseif line:find('goalpoint') then
 
 	end
 

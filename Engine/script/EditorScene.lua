@@ -126,6 +126,10 @@ function Update(dt)
 					obj:SetPosition(vec.x, vec.y, vec.z)
 
 					objects[#objects + 1] = obj
+
+					if obj.type == 'spawnpoint' then
+						player:SetPosition(vec.x, vec.y, vec.z)
+					end
 				end
 			end		
 		
