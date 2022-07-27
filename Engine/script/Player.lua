@@ -13,7 +13,7 @@ function Player:New()
 	g.xp = 0
 	g.weapon = Weapon.new("default")
 	g.name = "Player"
-	g.speed = 25
+	g.speed = 35
 	g:SetPosition(0,3,0)
 	-- Add effects here.
 	g.lastpickup = "None"

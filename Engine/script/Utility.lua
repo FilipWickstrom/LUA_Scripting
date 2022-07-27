@@ -26,16 +26,16 @@ keys = {
 
 weapons = { 
 	["default"] = { 
-		name = "Sword", sprite = "sword.png", fireRate = 1.1, damage = 6.0, speed = 35, lifetime = 3.0 
+		name = "Sword", sprite = "sword.png", fireRate = 1.1, damage = 6.0, speed = 45, lifetime = 3.0 
 	},
 	["Heart"] = {
-		name = "Heart Magic", sprite = "ui_heart_full.png", fireRate = 0.9, damage = 10.0, speed = 55, lifetime = 3.5 
+		name = "Heart Magic", sprite = "ui_heart_full.png", fireRate = 0.9, damage = 25.0, speed = 55, lifetime = 3.5 
 	},
 	["Bomb"] = {
-		name = "Bombs", sprite = "bomb.png", fireRate = 1.8, damage = 15.0, speed = 12.25, lifetime = 6.0 
+		name = "Bombs", sprite = "bomb.png", fireRate = 1.8, damage = 15.0, speed = 30, lifetime = 6.0 
 	},
 	["Arrow"] = {
-		name = "Arrows", sprite = "arrow.png", fireRate = 0.75, damage = 4.5, speed = 60, lifetime = 4.0 
+		name = "Arrows", sprite = "arrow.png", fireRate = 0.75, damage = 4.5, speed = 75, lifetime = 4.0 
 	}
 }
 

@@ -20,8 +20,8 @@ local RESPAWN_TIME = 5.0
 
 function Powerup:Initiate()
 	
-	--return modes[math.random(#modes)]
-	return "Bomb"
+	return modes[math.random(#modes)]
+	--return "Bomb"
 
 end
 
@@ -95,6 +95,7 @@ function Powerup:Update(enemies, goldText, lastpickupText)
 	end
 	
 	-- Powerup respawns
+	--[[
 	if self.shouldrespawn == true then
 		self.respawntimer = self.respawntimer - deltatime
 
@@ -105,6 +106,7 @@ function Powerup:Update(enemies, goldText, lastpickupText)
 			C_SetSpriteVisible(self.id, true)
 		end
 	end
+	]]
 
 
 	-- Update bomb timer

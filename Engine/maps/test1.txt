@@ -1206,3 +1206,19 @@ visible=1
 collision=1
 }
 
+{
+type=powerup
+sprite=chest.png
+pos=-80.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=powerup
+sprite=chest.png
+pos=-272.0 0.0 -320.0
+visible=1
+collision=1
+}
+

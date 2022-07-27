@@ -11,7 +11,7 @@ function Monster:New()
 	g.worth = 25
 	g.xp = 25
 	g.damage = 5
-	g.speed = math.random(3) + 1
+	g.speed = math.random(10) + math.random(10)
 	g.type = "monster"
 	g.name = "enemy"
 	g.defaultsprite = 'skeleton.png'
