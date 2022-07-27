@@ -20,6 +20,11 @@ function goalPoint:Update()
 	-- Check if player is colliding with this tile, win game.
 	if player ~= nil then
 
+		if C_CheckSpriteCollision(self.id, player.id) then
+
+			C_ChangeScene(Scenes.GAMEOVER)
+
+		end
 
 	end
 
