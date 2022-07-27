@@ -6,6 +6,7 @@ local bouncy = require('script/BasicBossEnemy')
 local shooter = require('script/ThrowingBoss')
 local powerup = require('script/Powerups')
 local spawnpoint = require('script/spawnpoint')
+local goalpoint = require('script/goalpoint')
 
 
 local tilePlacer = {} 
@@ -59,9 +60,13 @@ function tilePlacer:Update()
 
 		self:SetBlock(powerup)
 
-	elseif(C_IsKeyDown(keys.EIGHT)) then
+	elseif (C_IsKeyDown(keys.EIGHT)) then
 
 		self:SetBlock(spawnpoint)
+
+	elseif (C_IsKeyDown(keys.NINE)) then
+
+		self:SetBlock(goalpoint)
 
 	end
 

@@ -15,6 +15,7 @@ local Powerup		= require('script/Powerups')
 
 -- Others
 local spawnpoint	= require('script/spawnpoint')
+local goalpoint		= require('script/goalpoint')
 
 --[[LOAD TO FILE SECTION]]--
 
@@ -186,6 +187,9 @@ function Adjust_Object_Type(objects, num, line)
 		objects[num].type = 'spawnpoint'
 
 	elseif line:find('goalpoint') then
+
+		objects[num] = goalpoint:New()
+		objects[num].type = 'goalpoint'
 
 	end
 
