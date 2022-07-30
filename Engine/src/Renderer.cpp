@@ -63,7 +63,7 @@ void Renderer::Run()
 		Graphics::GetDeltaTime() = deltaTime;
 
 
-		Graphics::GetDriver()->beginScene(true, true, irr::video::SColor(255, 90, 101, 140));
+		Graphics::GetDriver()->beginScene(true, true, irr::video::SColor(255, 34, 34, 34));
 		
 		//Update the scene from LUA
 		SceneHandler::UpdateScene();

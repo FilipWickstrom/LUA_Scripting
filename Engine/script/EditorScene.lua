@@ -171,6 +171,7 @@ function Update(dt)
 	camera:UpdateMovement()
 	camera:UpdateZoom()
 	selector:Update()
+	C_GridUpdateHover()
 
 	
 	-- Update Indicator to be above player dummy image

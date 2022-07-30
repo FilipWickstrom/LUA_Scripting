@@ -744,3 +744,12 @@ int L_SetGridLayer(lua_State* L)
 	}
 	return 0;
 }
+
+int L_GridUpdateHover(lua_State* L)
+{
+	if (SceneHandler::GetGridsystem())
+	{
+		SceneHandler::GetGridsystem()->UpdateHoverEffect();
+	}
+	return 0;
+}

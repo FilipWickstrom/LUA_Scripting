@@ -101,6 +101,10 @@ void SceneHandler::ResetScene()
     
     Graphics::GetSceneManager()->setActiveCamera(0);
     m_camera = nullptr;
+
+    // Reset grid and delete it if we got one
+    if (m_gridsystem.get())
+        m_gridsystem.reset();
 }
 
 bool SceneHandler::LoadScene(const std::string& file)
@@ -322,6 +326,8 @@ unsigned int SceneHandler::AddText(const std::string& text, const std::string& f
     irrText->setDrawBackground(true);
 #endif
 
+    //Set color of the text to white
+    irrText->setOverrideColor(irr::video::SColor(255, 255, 255, 255));
     //Center text by default
     irrText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
 

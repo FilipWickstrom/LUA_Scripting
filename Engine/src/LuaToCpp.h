@@ -85,6 +85,7 @@ int L_RemoveTile(lua_State* L);
 int L_GetTilePos(lua_State* L);
 int L_ResetGridsystem(lua_State* L);
 int L_SetGridLayer(lua_State* L);
+int L_GridUpdateHover(lua_State* L);
 
 
 int L_GetScreenFromWorld(lua_State* L);

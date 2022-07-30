@@ -18,7 +18,7 @@ Gridsystem::Gridsystem(const irr::core::vector2di& size)
     m_hoverMesh = Graphics::GetGeometryCreator()->createPlaneMesh({ TILE_SIZE, TILE_SIZE });
     m_hoverNode = Graphics::GetSceneManager()->addMeshSceneNode(m_hoverMesh);
     m_hoverNode->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_LIGHTING, false);
-    m_hoverNode->setMaterialType(irr::video::E_MATERIAL_TYPE::EMT_TRANSPARENT_ADD_COLOR);
+    m_hoverNode->setMaterialType(irr::video::E_MATERIAL_TYPE::EMT_TRANSPARENT_VERTEX_ALPHA);
     m_hoverNode->setVisible(false);
 }
 
@@ -86,20 +86,32 @@ void Gridsystem::SetSize(const irr::core::vector2di& size)
 
 void Gridsystem::UpdateHoverEffect()
 {
-    bool occupied = false;
+    irr::core::vector3df position = SceneHandler::GetWorldCoordFromScreen();
+    irr::core::vector3di tilePos;
+    tilePos.X = static_cast<int>(std::round(position.X / TILE_SIZE));
+    tilePos.Y = m_layer;
+    tilePos.Z = static_cast<int>(std::round(position.Z / TILE_SIZE));
 
     // If we are out of bounds - set visibility to false
+    if (this->OutOfBounds({ tilePos.X, tilePos.Z }))
+    {
+        m_hoverNode->setVisible(false);
+    }
+    else
+    {
+        // Hover node should be visible
+        m_hoverNode->setVisible(true);
+        
+        // If tile is occupied set mesh to red
+        if (m_vec3ToID.find(tilePos) != m_vec3ToID.end())
+            Graphics::GetSceneManager()->getMeshManipulator()->setVertexColors(m_hoverMesh, irr::video::SColor(128, 255, 0, 0));
+     
+        // Else if tile is not occupied set mesh to green
+        else
+            Graphics::GetSceneManager()->getMeshManipulator()->setVertexColors(m_hoverMesh, irr::video::SColor(128, 0, 255, 0));
+    }
 
-    // If tile is occupied - set visibility to true and mesh to red
-
-    // If tile is not occupied - set visibility to true and mesh to green
-
-
-    //m_hoverNode->setPosition({ vec.X * TILE_SIZE, 4, vec.Z * TILE_SIZE });
-    if (occupied)
-        Graphics::GetSceneManager()->getMeshManipulator()->setVertexColors(m_hoverMesh, irr::video::SColor(10, 255, 0, 0));
-    else 
-        Graphics::GetSceneManager()->getMeshManipulator()->setVertexColors(m_hoverMesh, irr::video::SColor(10, 0, 255, 0));
+    m_hoverNode->setPosition({ tilePos.X * TILE_SIZE, 4, tilePos.Z * TILE_SIZE });
 }
 
 bool Gridsystem::IsTileOccupied(irr::core::vector3di& tilePos)
