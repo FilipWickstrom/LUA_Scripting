@@ -9,6 +9,7 @@ local Shooter		= require('script/ThrowingBoss')
 -- Tiles
 local WallTile	= require('script/WallTile')
 local DoorTile	= require('script/DoorTile')
+local FloorTile = require('script/FloorTile')
 
 -- Powerup
 local Powerup		= require('script/Powerups')
@@ -191,6 +192,9 @@ function Adjust_Object_Type(objects, num, line)
 		objects[num] = goalpoint:New()
 		objects[num].type = 'goalpoint'
 
+	elseif line:find('floor') then
+		objects[num] = FloorTile:New()
+		objects[num].type = 'floor'
 	end
 
 end

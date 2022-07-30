@@ -7,6 +7,7 @@ local shooter = require('script/ThrowingBoss')
 local powerup = require('script/Powerups')
 local spawnpoint = require('script/spawnpoint')
 local goalpoint = require('script/goalpoint')
+local floorTile = require('script/FloorTile')
 
 
 local tilePlacer = {} 
@@ -70,6 +71,8 @@ function tilePlacer:Update()
 	elseif (C_IsKeyDown(keys.NINE)) then
 
 		self:SetBlock(goalpoint)
+	elseif (C_IsKeyDown(keys.ZERO)) then
+		self:SetBlock(floorTile)
 	end
 
 

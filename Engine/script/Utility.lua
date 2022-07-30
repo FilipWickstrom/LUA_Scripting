@@ -21,7 +21,8 @@ keys = {
 	SIX = 0x36,
 	SEVEN = 0x37,
 	EIGHT = 0x38,
-	NINE = 0x39
+	NINE = 0x39,
+	ZERO = 0x30
 }
 
 weapons = { 

@@ -711,41 +711,9 @@ collision=1
 }
 
 {
-type=bouncy
-sprite=ogre.png
-pos=96.0 0.0 -208.0
-visible=1
-collision=1
-}
-
-{
-type=monster
-sprite=skeleton.png
-pos=-64.0 0.0 -64.0
-visible=1
-collision=1
-}
-
-{
-type=monster
-sprite=skeleton.png
-pos=112.0 0.0 -64.0
-visible=1
-collision=1
-}
-
-{
 type=wall
 sprite=wall_mid.png
 pos=160.0 0.0 -256.0
-visible=1
-collision=1
-}
-
-{
-type=monster
-sprite=skeleton.png
-pos=112.0 0.0 32.0
 visible=1
 collision=1
 }
@@ -1183,30 +1151,6 @@ collision=1
 }
 
 {
-type=monster
-sprite=skeleton.png
-pos=112.0 0.0 -320.0
-visible=1
-collision=1
-}
-
-{
-type=powerup
-sprite=chest.png
-pos=-80.0 0.0 -208.0
-visible=1
-collision=1
-}
-
-{
-type=powerup
-sprite=chest.png
-pos=-272.0 0.0 -320.0
-visible=1
-collision=1
-}
-
-{
 type=wall
 sprite=wall_mid.png
 pos=-304.0 0.0 -368.0
@@ -1623,48 +1567,5224 @@ collision=1
 }
 
 {
-type=monster
-sprite=skeleton.png
-pos=-272.0 0.0 -432.0
+type=goalpoint
+sprite=hole.png
+pos=144.0 0.0 -432.0
 visible=1
 collision=1
 }
 
 {
-type=spawnpoint
-sprite=column_top.png
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -16.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -48.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -80.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -112.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -144.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -160.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -240.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -256.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-128.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-128.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-144.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-160.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-160.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-160.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-144.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-128.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-128.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-144.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-160.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-176.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-176.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-192.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-208.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-224.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-240.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-224.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-208.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-192.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-240.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-256.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-272.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-288.0 0.0 -288.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-288.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-288.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-288.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-272.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-256.0 0.0 -304.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-256.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-256.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-240.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-272.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-240.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-224.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-208.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-192.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-176.0 0.0 -336.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-176.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-192.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-208.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-224.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-144.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-288.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-288.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-272.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-256.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-240.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-224.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-208.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-192.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-176.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-160.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-144.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-128.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-128.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-144.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-160.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-176.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-176.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-192.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-208.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-224.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-224.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-240.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-256.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-208.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-192.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-176.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-160.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-144.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-128.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-272.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-256.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-240.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-160.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-144.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-128.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-128.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-128.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-144.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-144.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-144.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-128.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-128.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-160.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-176.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-192.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-192.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-176.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-176.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-160.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-144.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-176.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-160.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-160.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-192.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-192.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-208.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-208.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-224.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-240.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-240.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-224.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-224.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-240.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-256.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-256.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-224.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-208.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-208.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-192.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-208.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-224.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-240.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-256.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-272.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-288.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-288.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-288.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-272.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-256.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-240.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-256.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-272.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-288.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-288.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-272.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-272.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-288.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-48.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-32.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-16.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=32.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=48.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -400.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=128.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=80.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=64.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=144.0 0.0 -368.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
 pos=-96.0 0.0 32.0
 visible=1
 collision=1
 }
 
 {
-type=monkey
-sprite=necromancer.png
-pos=-112.0 0.0 -464.0
+type=floor
+sprite=floor_1.png
+pos=16.0 0.0 -128.0
 visible=1
 collision=1
 }
 
 {
-type=monkey
-sprite=necromancer.png
+type=floor
+sprite=floor_1.png
+pos=96.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-80.0 0.0 -208.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=112.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-96.0 0.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
 pos=-112.0 0.0 -384.0
 visible=1
 collision=1
 }
 
 {
-type=shooter
-sprite=zombie_big.png
+type=floor
+sprite=floor_1.png
+pos=-112.0 0.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-64.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-272.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=-272.0 0.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
 pos=112.0 0.0 -416.0
 visible=1
 collision=1
 }
 
 {
-type=monkey
-sprite=necromancer.png
+type=floor
+sprite=floor_1.png
 pos=112.0 0.0 -464.0
 visible=1
 collision=1
@@ -1673,7 +6793,7 @@ collision=1
 {
 type=powerup
 sprite=chest.png
-pos=-64.0 0.0 -416.0
+pos=-272.0 1.0 -320.0
 visible=1
 collision=1
 }
@@ -1681,15 +6801,135 @@ collision=1
 {
 type=powerup
 sprite=chest.png
-pos=-64.0 0.0 -432.0
+pos=-64.0 1.0 -416.0
 visible=1
 collision=1
 }
 
 {
-type=goalpoint
-sprite=hole.png
-pos=144.0 0.0 -432.0
+type=powerup
+sprite=chest.png
+pos=-64.0 1.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=powerup
+sprite=chest.png
+pos=-256.0 1.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=powerup
+sprite=chest.png
+pos=16.0 1.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=powerup
+sprite=chest.png
+pos=16.0 1.0 -64.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_1.png
+pos=0.0 0.0 0.0
+visible=1
+collision=1
+}
+
+{
+type=monster
+sprite=skeleton.png
+pos=128.0 2.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=monster
+sprite=skeleton.png
+pos=128.0 2.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=monster
+sprite=skeleton.png
+pos=-96.0 2.0 -96.0
+visible=1
+collision=1
+}
+
+{
+type=bouncy
+sprite=ogre.png
+pos=48.0 2.0 -192.0
+visible=1
+collision=1
+}
+
+{
+type=shooter
+sprite=zombie_big.png
+pos=128.0 2.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=monster
+sprite=skeleton.png
+pos=96.0 2.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=monkey
+sprite=necromancer.png
+pos=-112.0 2.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=monkey
+sprite=necromancer.png
+pos=-208.0 2.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=monster
+sprite=skeleton.png
+pos=-144.0 2.0 -416.0
+visible=1
+collision=1
+}
+
+{
+type=monster
+sprite=skeleton.png
+pos=-176.0 2.0 -320.0
+visible=1
+collision=1
+}
+
+{
+type=monster
+sprite=skeleton.png
+pos=112.0 2.0 -320.0
 visible=1
 collision=1
 }
