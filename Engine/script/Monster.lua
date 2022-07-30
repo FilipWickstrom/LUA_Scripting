@@ -4,6 +4,13 @@ local Monster = gameObject:New()
 
 local COOLDOWN_TIME = 5.0
 
+local monsters = {
+	[1] = 'skeleton.png',
+	[2] = 'swampy.png',
+	[3] = 'masked_goblin.png',
+	[4] = 'imp.png'
+}
+
 
 function Monster:New()
 	local g = gameObject:New()
@@ -14,7 +21,7 @@ function Monster:New()
 	g.speed = math.random(10) + math.random(10)
 	g.type = "monster"
 	g.name = "enemy"
-	g.defaultsprite = 'skeleton.png'
+	g.defaultsprite = monsters[math.random(#monsters)]
 	g.cooldown = 0.0
 	g.gid = C_AddHealthbar(0.0, 0.0, 75.0, 25.0, g.hp)
 	self.__index = Monster
