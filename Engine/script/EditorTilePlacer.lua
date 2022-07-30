@@ -17,16 +17,22 @@ function tilePlacer:Initialize()
 	self.selected = wallTile:New()
 	self.sprite = self.selected.defaultsprite
 	self.selected.spritename = self.sprite
+	self.indicator = C_AddImage2D(self.selected.spritename, 1700, 25)
 
 end
 
 function tilePlacer:SetBlock(block)
 	self.selected = block
+
+	local temp = block:New()
+	C_ChangeImage2D(self.indicator, temp.defaultsprite)
+	temp:OnEnd()
 end
 
 function tilePlacer:UpdateBlock(block)
 	self.sprite = block.defaultsprite
 	block.spritename = self.sprite
+
 end
 
 function tilePlacer:Update()
@@ -35,40 +41,33 @@ function tilePlacer:Update()
 	if (C_IsKeyDown(keys.ONE)) then
 
 		self:SetBlock(wallTile)
-
 	elseif (C_IsKeyDown(keys.TWO)) then
 
 		self:SetBlock(doorTile)
-
 	elseif (C_IsKeyDown(keys.THREE)) then
 
 		self:SetBlock(monster)
-
 	elseif (C_IsKeyDown(keys.FOUR)) then
 
 		self:SetBlock(monkey)
-
 	elseif (C_IsKeyDown(keys.FIVE)) then
 
 		self:SetBlock(bouncy)
-
 	elseif (C_IsKeyDown(keys.SIX)) then
 
 		self:SetBlock(shooter)
-
 	elseif (C_IsKeyDown(keys.SEVEN)) then
 
 		self:SetBlock(powerup)
-
 	elseif (C_IsKeyDown(keys.EIGHT)) then
 
 		self:SetBlock(spawnpoint)
-
 	elseif (C_IsKeyDown(keys.NINE)) then
 
 		self:SetBlock(goalpoint)
-
 	end
+
+
 
 
 end

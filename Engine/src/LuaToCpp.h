@@ -57,6 +57,8 @@ namespace GUI
 	int L_SetTextAlignment(lua_State* L);
 	int L_Add2dImage(lua_State* L);
 	int L_Update2dImage(lua_State* L);
+	int L_Change2dImage(lua_State* L);
+	int L_SetSize2DImage(lua_State* L);
 };
 
 // Graphical Interface wrapper

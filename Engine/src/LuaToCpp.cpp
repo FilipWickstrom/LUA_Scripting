@@ -491,6 +491,26 @@ int GUI::L_Update2dImage(lua_State* L)
 	return 0;
 }
 
+int GUI::L_Change2dImage(lua_State* L)
+{
+	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+	const std::string filepath = static_cast<std::string>(lua_tostring(L, -1));
+
+	Graphics2D::ChangeImage2D(id, filepath);
+
+	return 0;
+}
+
+int GUI::L_SetSize2DImage(lua_State* L)
+{
+	const unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+	float size = static_cast<float>(lua_tonumber(L, -1));
+
+	Graphics2D::SetSizeImage2D(id, size);
+
+	return 0;
+}
+
 int L_GetScreenCoords(lua_State* L)
 {
 	/*

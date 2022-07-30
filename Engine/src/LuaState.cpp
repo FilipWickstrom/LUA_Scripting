@@ -144,6 +144,10 @@ void LuaHandler::LoadState()
 	lua_register(m_state, "C_AddImage2D",					GUI::L_Add2dImage);
 	// Param: id{unsigned int}, x{int}, y{int}
 	lua_register(m_state, "C_UpdateImage2D",				GUI::L_Update2dImage);
+	// Param: id{unsigned int}, filepath{string}
+	lua_register(m_state, "C_ChangeImage2D",				GUI::L_Change2dImage);
+	// Param: id{unsigned int}, size{float}
+	lua_register(m_state, "C_SetSizeImage2D",				GUI::L_SetSize2DImage);
 
 	/*
 		Input

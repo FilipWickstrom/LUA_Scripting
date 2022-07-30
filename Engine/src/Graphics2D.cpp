@@ -82,9 +82,33 @@ void Graphics2D::SetPosition(const unsigned int& index, irr::core::vector2di pos
     }
 }
 
+void Graphics2D::ChangeImage2D(const unsigned int& index, const std::string& filepath)
+{
+    if (Get().m_elements.find(index) != Get().m_elements.end())
+    {
+        Image* img = dynamic_cast<Image*>(Get().m_elements.at(index));
+        if (img)
+        {
+            img->SwitchImage(filepath);
+        }
+    }
+}
+
 void Graphics2D::RemoveElement(const unsigned int& index)
 {
     INSTANCE.m_elements.erase(index);
+}
+
+void Graphics2D::SetSizeImage2D(const unsigned int& index, const float& size)
+{
+    if (Get().m_elements.find(index) != Get().m_elements.end())
+    {
+        Image* img = dynamic_cast<Image*>(Get().m_elements.at(index));
+        if (img)
+        {
+            img->SetSize(size);
+        }
+    }
 }
 
 void Graphics2D::ToggleRender(const bool& toggle)

@@ -95,7 +95,6 @@ Image::Image(const std::string& filepath)
 
 Image::~Image()
 {
-	m_texture->drop();
 }
 
 void Image::SetImagePosition(const irr::core::vector2di& newPos)
@@ -103,11 +102,27 @@ void Image::SetImagePosition(const irr::core::vector2di& newPos)
 	m_position = newPos;
 }
 
+void Image::SwitchImage(const std::string& filepath)
+{
+	m_texture = Graphics::GetDriver()->getTexture((SPRITEPATH + filepath).c_str());
+}
+
+void Image::SetSize(const float& size)
+{
+	m_size = size;
+}
+
 void Image::Draw()
 {
 	if (m_texture)
 	{
-		Graphics::GetDriver()->draw2DImage(m_texture, m_position);
+		if (m_size > 0)
+		{
+			irr::core::recti rect = irr::core::recti(m_position.X, m_position.Y, m_position.X + m_size, m_position.Y + m_size);
+			Graphics::GetDriver()->draw2DImage(m_texture, rect, rect);
+		}
+		else
+			Graphics::GetDriver()->draw2DImage(m_texture, m_position);
 	}
 }
 

@@ -32,7 +32,11 @@ public:
 	// update 2d image pos
 	static void SetPosition(const unsigned int& index, irr::core::vector2di pos);
 
+	static void ChangeImage2D(const unsigned int& index, const std::string& filepath);
+
 	static void RemoveElement(const unsigned int& index);
+
+	static void SetSizeImage2D(const unsigned int& index, const float& size);
 
 	// true - will render UI, false - won't render UI
 	static void ToggleRender(const bool& toggle);
