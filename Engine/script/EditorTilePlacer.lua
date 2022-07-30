@@ -13,11 +13,16 @@ local tilePlacer = {}
 
 function tilePlacer:Initialize()
 
+	local window = { X = C_WinWidth(), Y = C_WinHeight() }
+	local menuBtn = { X = 150, Y = 50 }
+	local ySpace = 300
+
 	-- start with the wall tile
 	self.selected = wallTile:New()
 	self.sprite = self.selected.defaultsprite
 	self.selected.spritename = self.sprite
-	self.indicator = C_AddImage2D(self.selected.spritename, 1700, 25)
+	self.indicator = C_AddImage2D(self.selected.spritename, window.X-(menuBtn.X/2), ySpace - 10)
+	self.indicatorText = C_AddText('Block: ', "roboto_12.xml", window.X-(menuBtn.X), ySpace, 150, 50)
 
 end
 
