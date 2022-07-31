@@ -5,7 +5,8 @@
 SceneHandler::SceneHandler()
 {
     m_spriteUID = 0;
-    m_guiUID = 0;
+    m_textUID = 0;
+    m_image2dUID = 0;
     m_camera = nullptr;
     m_gridsystem = nullptr;
 }
@@ -88,11 +89,13 @@ void SceneHandler::ResetScene()
     Graphics::GetGUIEnvironment()->clear();
     Graphics2D::RemoveAll();
 
-    m_spriteUID = 0;
-    m_guiUID = 0;
+    m_spriteUID  = 0;
+    m_textUID    = 0;
+    m_image2dUID = 0;
 
     m_sprites.clear();
     m_texts.clear();
+    m_image2ds.clear();
 
     //Removing active camera
     irr::scene::ICameraSceneNode* oldCam = Graphics::GetSceneManager()->getActiveCamera();
@@ -332,7 +335,7 @@ unsigned int SceneHandler::AddText(const std::string& text, const std::string& f
     irrText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
 
     //Set an ID for the GUI
-    unsigned int id = Get().m_guiUID++;
+    unsigned int id = Get().m_textUID++;
     irrText->setID(id);
 
     std::string fontstr = FONTPATH + font;
@@ -374,7 +377,7 @@ unsigned int SceneHandler::AddButton(const std::string& text, const std::string&
     );
 
     //Set an ID for the GUI
-    unsigned int id = Get().m_guiUID++;
+    unsigned int id = Get().m_textUID++;
     irrButton->setID(id);
 
     std::string fontstr = FONTPATH + font;
@@ -403,6 +406,61 @@ bool SceneHandler::IsButtonPressed(unsigned int id)
     }
 
     return false;
+}
+
+const unsigned int SceneHandler::AddImage2d(const std::string& filepath)
+{
+    irr::video::ITexture* texture = Graphics::GetDriver()->getTexture((SPRITEPATH + filepath).c_str());
+    irr::gui::IGUIImage* image = Graphics::GetGUIEnvironment()->addImage(texture, { 0,0 });
+    image->setScaleImage(true);
+
+    unsigned int id = Get().m_image2dUID++;
+    image->setID(id);
+
+    Get().m_image2ds[id] = image;
+
+    return id;
+}
+
+void SceneHandler::RemoveImage2d(const unsigned int& index)
+{
+    if (Get().m_image2ds.find(index) != Get().m_image2ds.end())
+    {
+        Get().m_image2ds.at(index)->remove();
+        Get().m_image2ds.erase(index);
+    }
+}
+
+void SceneHandler::ChangeImage2d(const unsigned int& index, const std::string& filepath)
+{
+    if (Get().m_image2ds.find(index) != Get().m_image2ds.end())
+    {
+        irr::core::recti rect = Get().m_image2ds.at(index)->getRelativePosition();
+        irr::core::vector2di pos = { rect.UpperLeftCorner.X, rect.UpperLeftCorner.Y };
+
+        Get().m_image2ds.at(index)->remove();
+
+        irr::video::ITexture* texture = Graphics::GetDriver()->getTexture((SPRITEPATH + filepath).c_str());
+        irr::gui::IGUIImage* image = Graphics::GetGUIEnvironment()->addImage(texture, pos);
+        image->setScaleImage(true);
+        Get().m_image2ds[index] = image;
+    }
+}
+
+void SceneHandler::SetImage2dPosition(const unsigned int& index, irr::core::vector2di pos)
+{
+    if (Get().m_image2ds.find(index) != Get().m_image2ds.end())
+        Get().m_image2ds.at(index)->setRelativePosition(pos);
+}
+
+void SceneHandler::SetImage2dScale(const unsigned int& index, const float& scale)
+{
+    if (Get().m_image2ds.find(index) != Get().m_image2ds.end())
+    {
+        irr::core::dimension2du dimension = Get().m_image2ds.at(index)->getImage()->getOriginalSize();
+        Get().m_image2ds.at(index)->setMinSize({ (irr::u32)(dimension.Width  * scale), 
+                                                 (irr::u32)(dimension.Height * scale)});
+    }
 }
 
 irr::core::vector3df SceneHandler::GetWorldCoordFromScreen()

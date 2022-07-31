@@ -49,16 +49,23 @@ int L_ChangeScene(lua_State* L);
 
 namespace GUI
 {
-	int L_AddText(lua_State* L);
+	// Buttons
 	int L_AddButton(lua_State* L);
-	int L_RemoveGUI(lua_State* L);
 	int L_IsButtonPressed(lua_State* L);
+	
+	// Text
+	int L_AddText(lua_State* L);
 	int L_UpdateText(lua_State* L);
 	int L_SetTextAlignment(lua_State* L);
+
+	// 2D image
 	int L_Add2dImage(lua_State* L);
-	int L_Update2dImage(lua_State* L);
+	int L_RemoveImage2d(lua_State* L);
 	int L_Change2dImage(lua_State* L);
-	int L_SetSize2DImage(lua_State* L);
+	int L_SetImage2dPosition(lua_State* L);
+	int L_SetImage2dScale(lua_State* L);
+
+	int L_RemoveGUI(lua_State* L);
 };
 
 // Graphical Interface wrapper

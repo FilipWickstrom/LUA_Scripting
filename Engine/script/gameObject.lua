@@ -5,11 +5,10 @@ require('script/Utility')
 function gameObject:New(g)
 	g = g or {}
 	g.name = "default"
-	g.spritename = ""
 	g.type = "default"
 	g.defaultsprite = ""
-	g.id = -1 --model id? [rename]
-	g.gid = -1 --id for ui? [rename]
+	g.id = -1	--Sprite id
+	g.gid = -1	--UI id
 	g.hasCollision = 1
 	g.isVisible = 1
 	g.hp = 100
@@ -34,8 +33,12 @@ function gameObject:LoadSprite(spriteFile)
 end
 
 function gameObject:OnEnd()
-	C_RemoveUI(self.gid)
-	C_RemoveSprite(self.id)
+	if (self.id ~= -1) then
+		C_RemoveSprite(self.id)
+	end
+	if (self.gid ~= -1) then
+		C_RemoveUI(self.gid)
+	end
 end
 
 function gameObject:RandomizePos()

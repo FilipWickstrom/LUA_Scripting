@@ -9,10 +9,12 @@ private:
 
 	//Unique ID
 	unsigned int m_spriteUID;
-	unsigned int m_guiUID;
+	unsigned int m_textUID;
+	unsigned int m_image2dUID;
 
-	std::unordered_map<unsigned int, std::unique_ptr<Sprite>> m_sprites;
+	std::unordered_map<unsigned int, std::unique_ptr<Sprite>>	m_sprites;
 	std::unordered_map<unsigned int, irr::gui::IGUIStaticText*> m_texts;
+	std::unordered_map<unsigned int, irr::gui::IGUIImage*>		m_image2ds;
 
 	irr::scene::ICameraSceneNode* m_camera;
 
@@ -81,6 +83,15 @@ public:
 
 	static void RemoveGUI(unsigned int id);
 	static bool IsButtonPressed(unsigned int id);
+
+	/*
+		Image 2d
+	*/
+	static const unsigned int AddImage2d(const std::string& filepath);
+	static void RemoveImage2d(const unsigned int& index);
+	static void ChangeImage2d(const unsigned int& index, const std::string& filepath);
+	static void SetImage2dPosition(const unsigned int& index, irr::core::vector2di pos);
+	static void SetImage2dScale(const unsigned int& index, const float& scale);
 
 	/*
 		Utility

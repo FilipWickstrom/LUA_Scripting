@@ -305,8 +305,11 @@ int L_UpdatePosUI(lua_State* L)
 
 int L_RemoveUI(lua_State* L)
 {
-	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
-	Graphics2D::RemoveElement(id);
+	if (lua_isnumber(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
+		Graphics2D::RemoveElement(id);
+	}
 	return 0;
 }
 
@@ -467,47 +470,64 @@ int GUI::L_SetTextAlignment(lua_State* L)
 
 int GUI::L_Add2dImage(lua_State* L)
 {
-	std::string filepath = lua_tostring(L, -3);
-	int x = static_cast<int>(lua_tonumber(L, -2));
-	int y = static_cast<int>(lua_tonumber(L, -1));
+	std::string filepath;
+	unsigned int id = 0;
 
-	irr::core::vector2di pos = { x, y };
-
-	unsigned int id = Graphics2D::Add2dImage(filepath, pos);
-
+	if (lua_isstring(L, -1))
+	{
+		filepath = lua_tostring(L, -1);
+		id = SceneHandler::AddImage2d(filepath);
+	}
 	lua_pushnumber(L, id);
 
 	return 1;
 }
 
-int GUI::L_Update2dImage(lua_State* L)
+int GUI::L_RemoveImage2d(lua_State* L)
 {
-	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -3));
-	int x = static_cast<int>(lua_tonumber(L, -2));
-	int y = static_cast<int>(lua_tonumber(L, -1));
+	if (lua_isnumber(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
+		SceneHandler::RemoveImage2d(id);
+	}
+	return 0;
+}
 
-	Graphics2D::SetPosition(id, { x, y });
-
+int GUI::L_SetImage2dPosition(lua_State* L)
+{
+	if (lua_isnumber(L, -1) && 
+		lua_isnumber(L, -2) && 
+		lua_isnumber(L, -3))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -3));
+		irr::core::vector2di pos;
+		pos.X = static_cast<int>(lua_tonumber(L, -2));
+		pos.Y = static_cast<int>(lua_tonumber(L, -1));
+		SceneHandler::SetImage2dPosition(id, pos);
+	}
 	return 0;
 }
 
 int GUI::L_Change2dImage(lua_State* L)
 {
-	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
-	const std::string filepath = static_cast<std::string>(lua_tostring(L, -1));
-
-	Graphics2D::ChangeImage2D(id, filepath);
-
+	if (lua_isnumber(L, -2) && lua_isstring(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+		std::string filepath = static_cast<std::string>(lua_tostring(L, -1));
+		SceneHandler::ChangeImage2d(id, filepath);
+	}
 	return 0;
 }
 
-int GUI::L_SetSize2DImage(lua_State* L)
+int GUI::L_SetImage2dScale(lua_State* L)
 {
-	const unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
-	float size = static_cast<float>(lua_tonumber(L, -1));
-
-	Graphics2D::SetSizeImage2D(id, size);
-
+	if (lua_isnumber(L, -1) &&
+		lua_isnumber(L, -2))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+		float size = static_cast<float>(lua_tonumber(L, -1));
+		SceneHandler::SetImage2dScale(id, size);
+	}
 	return 0;
 }
 

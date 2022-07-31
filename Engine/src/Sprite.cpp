@@ -98,7 +98,7 @@ void Sprite::LoadTexture(const std::string& filename)
 	//Possible to rotate the sprite
 	m_node->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_BACK_FACE_CULLING, false);
 	//Alpha value makes it transparent
-	m_node->setMaterialType(irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL);
+	m_node->setMaterialType(irr::video::EMT_TRANSPARENT_ALPHA_CHANNEL_REF);
 	//Turn off filtering - no interpolation
 	m_node->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_BILINEAR_FILTER, false);
 

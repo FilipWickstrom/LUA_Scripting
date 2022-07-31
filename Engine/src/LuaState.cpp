@@ -140,14 +140,18 @@ void LuaHandler::LoadState()
 	lua_register(m_state, "C_SetTextAlignment",				GUI::L_SetTextAlignment);
 	// Param: shouldRender{boolean}
 	lua_register(m_state, "C_ToggleRenderUI",				L_ToggleRenderUI);
+	
+	// Param: filepath{string}
 	// Return: id{unsigned int}
-	lua_register(m_state, "C_AddImage2D",					GUI::L_Add2dImage);
-	// Param: id{unsigned int}, x{int}, y{int}
-	lua_register(m_state, "C_UpdateImage2D",				GUI::L_Update2dImage);
+	lua_register(m_state, "C_AddImage2d",					GUI::L_Add2dImage);
+	// Param: id{unsigned int}
+	lua_register(m_state, "C_RemoveImage2d",				GUI::L_RemoveImage2d);
 	// Param: id{unsigned int}, filepath{string}
-	lua_register(m_state, "C_ChangeImage2D",				GUI::L_Change2dImage);
-	// Param: id{unsigned int}, size{float}
-	lua_register(m_state, "C_SetSizeImage2D",				GUI::L_SetSize2DImage);
+	lua_register(m_state, "C_ChangeImage2d",				GUI::L_Change2dImage);
+	// Param: id{unsigned int}, x{int}, y{int}
+	lua_register(m_state, "C_SetImage2dPosition",			GUI::L_SetImage2dPosition);
+	// Param: id{unsigned int}, scale{float}
+	lua_register(m_state, "C_SetImage2dScale",				GUI::L_SetImage2dScale);
 
 	/*
 		Input

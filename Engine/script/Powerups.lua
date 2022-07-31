@@ -34,9 +34,6 @@ function Powerup:New()
 
 	g.respawntimer = 0.0
 	g.shouldrespawn = false
-	--g.position = Vector:New()
-	--g.id = C_LoadSprite("chest.png")
-	--g:SetPosition(10, 0.1, 12)
 
 	g.bomb = gameObject:New()
 	g.bomb.id = C_LoadSprite('bomb.png')
@@ -82,7 +79,6 @@ function Powerup:Gain(player, goldText)
 end
 
 function Powerup:Update(enemies, goldText, lastpickupText)
-	
 	--Check if player and the powerup is colliding
 	if C_CheckSpriteCollision(player.id, self.id) and self.shouldrespawn == false then
 		
@@ -93,21 +89,6 @@ function Powerup:Update(enemies, goldText, lastpickupText)
 			lastpickupText:Update()
 		end
 	end
-	
-	-- Powerup respawns
-	--[[
-	if self.shouldrespawn == true then
-		self.respawntimer = self.respawntimer - deltatime
-
-		if self.respawntimer < 0 then
-			self.shouldrespawn = false
-			--self:RandomizePos()
-			self.mode = self:Initiate()
-			C_SetSpriteVisible(self.id, true)
-		end
-	end
-	]]
-
 
 	-- Update bomb timer
 	if(self.bomb.active == true) then

@@ -7,13 +7,6 @@ Graphics2D::Graphics2D()
 {
     m_driver = Graphics::GetDriver();
     m_defaultFont = Graphics::GetGUIEnvironment()->getBuiltInFont();
-
-    //Healthbar* test = new Healthbar(irr::core::rect<irr::s32>(0, 0, 1000, 100));
-    //m_elements[0] = test;
-    //float t = 50.0f;
-    //test->Update(&t);
-    //t = 100;
-    //test->Update(&t);
 }
 
 Graphics2D::~Graphics2D()
@@ -50,20 +43,6 @@ const unsigned int Graphics2D::AddHealthbar(irr::core::rect<irr::s32> pos)
     return ret;
 }
 
-const unsigned int Graphics2D::Add2dImage(const std::string& filepath, irr::core::vector2di pos)
-{
-    Image* newI = new Image(filepath);
-    newI->SetImagePosition(pos);
-
-    INSTANCE.m_elements[INSTANCE.m_nextID] = newI;
-    const unsigned int ret = INSTANCE.m_nextID;
-    INSTANCE.m_nextID++;
-
-    INSTANCE.m_copyElements.push_back(newI);
-
-    return ret;
-}
-
 void Graphics2D::SetPosition(const unsigned int& index, irr::core::rect<irr::s32> pos)
 {
     if (INSTANCE.m_elements.find(index) != INSTANCE.m_elements.end())
@@ -72,42 +51,11 @@ void Graphics2D::SetPosition(const unsigned int& index, irr::core::rect<irr::s32
     }
 }
 
-void Graphics2D::SetPosition(const unsigned int& index, irr::core::vector2di pos)
+void Graphics2D::RemoveElement(const unsigned int& index)
 {
     if (INSTANCE.m_elements.find(index) != INSTANCE.m_elements.end())
     {
-        Image* img = dynamic_cast<Image*>(INSTANCE.m_elements.at(index));
-        if(img)
-            img->SetImagePosition(pos);
-    }
-}
-
-void Graphics2D::ChangeImage2D(const unsigned int& index, const std::string& filepath)
-{
-    if (Get().m_elements.find(index) != Get().m_elements.end())
-    {
-        Image* img = dynamic_cast<Image*>(Get().m_elements.at(index));
-        if (img)
-        {
-            img->SwitchImage(filepath);
-        }
-    }
-}
-
-void Graphics2D::RemoveElement(const unsigned int& index)
-{
-    INSTANCE.m_elements.erase(index);
-}
-
-void Graphics2D::SetSizeImage2D(const unsigned int& index, const float& size)
-{
-    if (Get().m_elements.find(index) != Get().m_elements.end())
-    {
-        Image* img = dynamic_cast<Image*>(Get().m_elements.at(index));
-        if (img)
-        {
-            img->SetSize(size);
-        }
+        INSTANCE.m_elements.erase(index);
     }
 }
 
@@ -127,18 +75,8 @@ void Graphics2D::Draw()
     }
 }
 
-void Graphics2D::AlwaysDraw()
-{
-    for (auto elem : INSTANCE.m_copyElements)
-    {
-        if(elem)
-            elem->Draw();
-    }
-}
-
 void Graphics2D::RemoveAll()
 {
     Get().m_nextID = 0;
     Get().m_elements.clear();
-    Get().m_copyElements.clear();
 }

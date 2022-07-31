@@ -3,7 +3,6 @@ local vector = require('script/Vector')
 local Camera = require('script/Camera')
 local selectedBlock = require('script/WallTile')
 require('script/File')
-local Window = require('script/Options')
 
 -- Placing tiles 'requires'
 local selector	= require('script/EditorTilePlacer')
@@ -14,7 +13,6 @@ local monkey	= require('script/ThrowingEnemy')
 local bouncy	= require('script/BasicBossEnemy')
 local shooter	= require('script/ThrowingBoss')
 local powerup	= require('script/Powerups')
-local player	= require('script/Player'):New()
 
 -- "Globals" in this scope
 local objects = {}
@@ -22,7 +20,6 @@ local loaded = false
 local created = false
 local saved = false
 local GUI = {}
-local pointerDummy = {id = 0}
 
 function Start()
 	local window = { X = C_WinWidth(), Y = C_WinHeight() }
@@ -47,11 +44,15 @@ function Start()
 	GUI["LayerText"] = C_AddText("Layer: Ground", "roboto_12.xml", window.X-75, ySpace, 150, 50)
 	C_SetTextAlignment(GUI["LayerText"], "left")
 	ySpace = ySpace + editBtn.Y
+	
 	GUI["Layer0"] = C_AddButton("Ground", "roboto_12.xml", window.X-(menuBtn.X/2), ySpace, menuBtn.X, menuBtn.Y)
 	ySpace = ySpace + editBtn.Y
+	
 	GUI["Layer1"] = C_AddButton("Items", "roboto_12.xml", window.X-(menuBtn.X/2), ySpace, menuBtn.X, menuBtn.Y)
 	ySpace = ySpace + editBtn.Y
+	
 	GUI["Layer2"] = C_AddButton("Entities", "roboto_12.xml", window.X-(menuBtn.X/2), ySpace, menuBtn.X, menuBtn.Y)
+	ySpace = ySpace + editBtn.Y
 
 	-- Create a camera
 	camera = Camera:New()
@@ -63,8 +64,6 @@ function Start()
 	C_AddGrid(100,100)
 
 	selector:Initialize()
-
-	pointerDummy.id = C_AddImage2D('knight_sword.png', 900, 500)
 
 end
 
@@ -105,6 +104,10 @@ function Update(dt)
 			-- Add all the objects to the grid
 			for num, obj in pairs(objects) do
 				C_AddTile(num, obj.position.x, obj.position.y, obj.position.z)
+
+				if (obj.type == "spawnpoint") then
+					obj:AddIcon()
+				end
 			end
 		end
 
@@ -138,7 +141,6 @@ function Update(dt)
 
 				if (not C_IsTileOccupied()) then
 					local obj = selector.selected:New()
-					selector:UpdateBlock(obj)
 					obj:LoadSprite(selector.sprite)
 					C_AddTile(#objects + 1)
 
@@ -148,8 +150,8 @@ function Update(dt)
 
 					objects[#objects + 1] = obj
 
-					if obj.type == 'spawnpoint' then
-						player:SetPosition(vec.x, vec.y, vec.z)
+					if (obj.type == "spawnpoint") then
+						obj:AddIcon()
 					end
 				end
 			end		
@@ -173,24 +175,11 @@ function Update(dt)
 	selector:Update()
 	C_GridUpdateHover()
 
-	
-	-- Update Indicator to be above player dummy image
-	local x, y = C_ObjectToScreen(player.id)
-
-	if x < 0 then
-		x = 0
-	elseif x > Window.width then
-		x = Window.width - 8.0
+	for num, obj in pairs(objects) do
+		-- Update spawnpoint objects
+		if (obj.type == "spawnpoint") then
+			obj:Update()
+		end
 	end
-	if y < 0 then
-		y = 0
-	elseif y > Window.height then
-		y = Window.height - 32.0
-	end
-
-	if pointerDummy ~= nil then
-		C_UpdateImage2D(pointerDummy.id, x, y)
-	end
-	
 
 end

@@ -117,16 +117,7 @@ function Adjust_Object_Pos(objects, num, line)
 	--Check that none is nil
 	if (#vec == 3) then
 		if (vec[1] and vec[2] and vec[3]) then	
-			if objects[num].type ~= 'spawnpoint' then
-				objects[num]:SetPosition(vec[1], vec[2], vec[3])
-			else
-				-- this was a spawnpoint so set the player position at this point.
-				if player ~= nil then
-					player:SetPosition(vec[1], vec[2], vec[3])
-				end
-
-				objects[num]:SetPosition(vec[1], vec[2], vec[3])
-			end
+			objects[num]:SetPosition(vec[1], vec[2], vec[3])
 		else
 			print("ERROR: '" .. line .. "' not correct... One of the numbers was nil")
 		end
@@ -143,7 +134,7 @@ function Adjust_Object_Name(objects, num, line)
 
 	if objects[num] ~= nil then
 		objects[num].id = C_LoadSprite(filepath)
-		objects[num].spritename = filepath
+		objects[num].defaultsprite = filepath
 	end
 
 end
@@ -219,7 +210,7 @@ function Write_To_File(objects, path)
 		if obj ~= nil then
 			file:write('{', "\n")
 			file:write('type=' .. obj.type, "\n")
-			file:write('sprite=' .. obj.spritename, "\n")
+			file:write('sprite=' .. obj.defaultsprite, "\n")
 			file:write('pos=' .. obj.position.x .. ' ' .. obj.position.y .. ' ' .. obj.position.z, "\n")
 			file:write('visible=' .. obj.isVisible, "\n")
 			file:write('collision=' .. obj.hasCollision, "\n")

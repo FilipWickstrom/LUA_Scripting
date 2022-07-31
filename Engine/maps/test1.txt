@@ -6096,14 +6096,6 @@ collision=1
 
 {
 type=floor
-sprite=floor_4.png
-pos=-80.0 0.0 32.0
-visible=1
-collision=1
-}
-
-{
-type=floor
 sprite=floor_3.png
 pos=-96.0 0.0 32.0
 visible=1
@@ -6930,6 +6922,14 @@ collision=1
 type=monster
 sprite=imp.png
 pos=96.0 2.0 -464.0
+visible=1
+collision=1
+}
+
+{
+type=spawnpoint
+sprite=column_top.png
+pos=-80.0 0.0 32.0
 visible=1
 collision=1
 }

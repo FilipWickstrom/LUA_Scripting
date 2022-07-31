@@ -30,6 +30,10 @@ function FloorTile:OnEnd()
 	C_RemoveSprite(self.id)
 end
 
+function FloorTile:RandomSprite()
+	self.defaultsprite = floors[math.random(#floors)]
+end
+
 function FloorTile:Update(player)
 
 end
