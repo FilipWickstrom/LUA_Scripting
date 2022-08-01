@@ -455,14 +455,6 @@ collision=1
 }
 
 {
-type=door
-sprite=doors_leaf_closed.png
-pos=16.0 1.0 -128.0
-visible=1
-collision=1
-}
-
-{
 type=wall
 sprite=wall_mid.png
 pos=-128.0 0.0 -144.0
@@ -730,14 +722,6 @@ collision=1
 type=wall
 sprite=wall_mid.png
 pos=0.0 0.0 -272.0
-visible=1
-collision=1
-}
-
-{
-type=door
-sprite=doors_leaf_closed.png
-pos=16.0 1.0 -272.0
 visible=1
 collision=1
 }
@@ -1122,14 +1106,6 @@ collision=1
 type=wall
 sprite=wall_mid.png
 pos=-144.0 0.0 -272.0
-visible=1
-collision=1
-}
-
-{
-type=door
-sprite=doors_leaf_closed.png
-pos=-224.0 1.0 -352.0
 visible=1
 collision=1
 }
@@ -6930,6 +6906,46 @@ collision=1
 type=spawnpoint
 sprite=column_top.png
 pos=-80.0 0.0 32.0
+visible=1
+collision=1
+}
+
+{
+type=door
+sprite=doors_leaf_closed.png
+pos=16.0 1.0 -128.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_8.png
+pos=16.0 0.0 -272.0
+visible=1
+collision=1
+}
+
+{
+type=door
+sprite=doors_leaf_closed.png
+pos=16.0 1.0 -272.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_3.png
+pos=-224.0 0.0 -352.0
+visible=1
+collision=1
+}
+
+{
+type=door
+sprite=doors_leaf_closed.png
+pos=-224.0 1.0 -352.0
 visible=1
 collision=1
 }

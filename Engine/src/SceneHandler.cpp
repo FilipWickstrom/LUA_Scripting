@@ -4,11 +4,12 @@
 
 SceneHandler::SceneHandler()
 {
-    m_spriteUID = 0;
-    m_textUID = 0;
-    m_image2dUID = 0;
-    m_camera = nullptr;
-    m_gridsystem = nullptr;
+    m_spriteUID     = 0;
+    m_textUID       = 0;
+    m_image2dUID    = 0;
+    m_buttonUID     = 0;
+    m_camera        = nullptr;
+    m_gridsystem    = nullptr;
 }
 
 SceneHandler::~SceneHandler()
@@ -266,7 +267,7 @@ void SceneHandler::AddCamera()
     Get().m_camera = Graphics::GetSceneManager()->addCameraSceneNode();
 
     irr::core::matrix4 matrix;
-    matrix.buildProjectionMatrixOrthoLH(width, height, 1.f, 100.f);
+    matrix.buildProjectionMatrixOrthoLH(width, height, 1.f, 1000.f);
 
     Get().m_camera->setProjectionMatrix(matrix, true);
 
@@ -302,7 +303,7 @@ void SceneHandler::SetCameraZoom(const float& zoom)
         thezoom = width;
 
     irr::core::matrix4 matrix;
-    matrix.buildProjectionMatrixOrthoLH(width / thezoom, height / thezoom, 1.f, 100.f);
+    matrix.buildProjectionMatrixOrthoLH(width / thezoom, height / thezoom, 1.f, 1000.f);
 
     Get().m_camera->setProjectionMatrix(matrix, true);
 }
@@ -377,7 +378,7 @@ unsigned int SceneHandler::AddButton(const std::string& text, const std::string&
     );
 
     //Set an ID for the GUI
-    unsigned int id = Get().m_textUID++;
+    unsigned int id = Get().m_buttonUID++;
     irrButton->setID(id);
 
     std::string fontstr = FONTPATH + font;
@@ -385,26 +386,27 @@ unsigned int SceneHandler::AddButton(const std::string& text, const std::string&
     if (irrfont)
         irrButton->setOverrideFont(irrfont);
 
+    Get().m_buttons[id] = irrButton;
+
     return id;
 }
 
-void SceneHandler::RemoveGUI(unsigned int id)
+void SceneHandler::RemoveButton(const unsigned int& id)
 {
-    irr::gui::IGUIElement* elem = Graphics::GetGUIEnvironment()->getRootGUIElement()->getElementFromId(id, true);
-    if (elem)
-        elem->remove();
+    if (Get().m_buttons.find(id) != Get().m_buttons.end())
+    {
+        Get().m_buttons.at(id)->remove();
+        Get().m_buttons.erase(id);
+    }
 }
+
 
 bool SceneHandler::IsButtonPressed(unsigned int id)
 {
-    irr::gui::IGUIElement* elem = Graphics::GetGUIEnvironment()->getRootGUIElement()->getElementFromId(id, true);
-    if (elem->getType() == irr::gui::EGUIET_BUTTON)
+    if (Get().m_buttons.find(id) != Get().m_buttons.end())
     {
-        irr::gui::IGUIButton* button = dynamic_cast<irr::gui::IGUIButton*>(elem);
-        if (button->isPressed())
-            return true;
+        return Get().m_buttons.at(id)->isPressed();
     }
-
     return false;
 }
 

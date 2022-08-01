@@ -52,6 +52,7 @@ namespace GUI
 	// Buttons
 	int L_AddButton(lua_State* L);
 	int L_IsButtonPressed(lua_State* L);
+	int L_RemoveButton(lua_State* L);
 	
 	// Text
 	int L_AddText(lua_State* L);
@@ -64,8 +65,6 @@ namespace GUI
 	int L_Change2dImage(lua_State* L);
 	int L_SetImage2dPosition(lua_State* L);
 	int L_SetImage2dScale(lua_State* L);
-
-	int L_RemoveGUI(lua_State* L);
 };
 
 // Graphical Interface wrapper

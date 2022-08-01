@@ -11,10 +11,12 @@ private:
 	unsigned int m_spriteUID;
 	unsigned int m_textUID;
 	unsigned int m_image2dUID;
+	unsigned int m_buttonUID;
 
 	std::unordered_map<unsigned int, std::unique_ptr<Sprite>>	m_sprites;
 	std::unordered_map<unsigned int, irr::gui::IGUIStaticText*> m_texts;
 	std::unordered_map<unsigned int, irr::gui::IGUIImage*>		m_image2ds;
+	std::unordered_map<unsigned int, irr::gui::IGUIButton*>		m_buttons;
 
 	irr::scene::ICameraSceneNode* m_camera;
 
@@ -78,10 +80,10 @@ public:
 								irr::core::vector2di pos, irr::core::vector2di size);
 	static void SetTextAlignment(const unsigned int& id, const irr::gui::EGUI_ALIGNMENT& alignment);
 	static void UpdateText(unsigned int& id, const std::string& text);
+	
 	static unsigned int AddButton(const std::string& text, const std::string& font,
 								 irr::core::vector2di pos, irr::core::vector2di size);
-
-	static void RemoveGUI(unsigned int id);
+	static void RemoveButton(const unsigned int& id);
 	static bool IsButtonPressed(unsigned int id);
 
 	/*

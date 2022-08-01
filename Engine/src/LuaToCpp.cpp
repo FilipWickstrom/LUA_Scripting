@@ -610,19 +610,6 @@ int GUI::L_AddButton(lua_State* L)
 	return 1;
 }
 
-int GUI::L_RemoveGUI(lua_State* L)
-{
-	/*
-		Arguments: ID[unsigned int]
-	*/
-	if (lua_type(L, -1) == LUA_TNUMBER)
-	{
-		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
-		SceneHandler::RemoveGUI(id);
-	}
-	return 0;
-}
-
 int GUI::L_IsButtonPressed(lua_State* L)
 {
 	/*
@@ -637,6 +624,16 @@ int GUI::L_IsButtonPressed(lua_State* L)
 
 	lua_pushboolean(L, isPressed);
 	return 1;
+}
+
+int GUI::L_RemoveButton(lua_State* L)
+{
+	if (lua_isnumber(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
+		SceneHandler::RemoveButton(id);
+	}
+	return 0;
 }
 
 int L_AddGridsystem(lua_State* L)

@@ -130,7 +130,7 @@ void LuaHandler::LoadState()
 	// Return: id{uint}
 	lua_register(m_state, "C_AddButton",					GUI::L_AddButton);
 	// Param: id{uint}
-	lua_register(m_state, "C_RemoveGUI",					GUI::L_RemoveGUI);
+	lua_register(m_state, "C_RemoveButton",					GUI::L_RemoveButton);
 	// Param: id{uint}
 	// Return: isPressed{bool}
 	lua_register(m_state, "C_IsButtonPressed",				GUI::L_IsButtonPressed);
