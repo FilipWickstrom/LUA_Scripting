@@ -745,17 +745,18 @@ int L_GetScreenFromWorld(lua_State* L)
 	Sprite* sprite = SceneHandler::GetSprite(id);
 	if (sprite)
 	{
-		irr::core::vector3df pos = sprite->GetPosition();
-		irr::core::matrix4 posMatrix = SceneHandler::GetCamera()->getViewMatrix();
-		posMatrix.transformVect(pos);
-		posMatrix = SceneHandler::GetCamera()->getProjectionMatrix();
-		posMatrix.transformVect(pos);
-		
-		float x = (((pos.X + 1) * (Graphics::GetWindowWidth())) / (2.0f));
-		float y = Graphics::GetWindowHeight() - (((pos.Y + 1) * Graphics::GetWindowHeight()) / (2.0f));
+		irr::core::vector2di pos = Graphics::GetSceneManager()->getSceneCollisionManager()->getScreenCoordinatesFrom3DPosition(sprite->GetPosition());
+		//irr::core::vector3df pos = sprite->GetPosition();
+		//irr::core::matrix4 posMatrix = SceneHandler::GetCamera()->getViewMatrix();
+		//posMatrix.transformVect(pos);
+		//posMatrix = SceneHandler::GetCamera()->getProjectionMatrix();
+		//posMatrix.transformVect(pos);
+		//
+		//float x = (((pos.X + 1) * (Graphics::GetWindowWidth())) / (2.0f));
+		//float y = Graphics::GetWindowHeight() - (((pos.Y + 1) * Graphics::GetWindowHeight()) / (2.0f));
 
-		lua_pushnumber(L, x);
-		lua_pushnumber(L, y);
+		lua_pushnumber(L, pos.X);
+		lua_pushnumber(L, pos.Y);
 
 		return 2;
 	}
