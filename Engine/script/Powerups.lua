@@ -2,7 +2,7 @@
 local gameObject = require('script/gameObject')
 local Vector = require('script/vector')
 
-Powerup = gameObject:New()
+local Powerup = gameObject:New()
 
 local BOMB_RADIUS = 5.0
 local BOMB_DAMAGE = 50.0

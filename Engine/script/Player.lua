@@ -1,9 +1,9 @@
 -- Includes
 require('script/Weapon')
 local gameObject = require('script/gameObject')
+local vector = require('script/vector')
 
-
-Player = gameObject:New()
+local Player = gameObject:New()
 
 function Player:New()
 	local g = gameObject:New()

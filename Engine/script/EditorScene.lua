@@ -19,6 +19,7 @@ local objects = {}
 local GUI = {}
 local loadedMap = {}
 local savedMap = {}
+local camera = nil
 
 -- Global so that it can be changed in the console if needed
 currentMap = "Level1.map"
@@ -115,7 +116,7 @@ function Update(dt)
 
 	elseif(C_IsButtonPressed(GUI["Save"])) then
 		if (not HasSameKeys(savedMap, objects)) then
-			Write_To_File(objects, currentMap)
+			Save_Map(objects, currentMap)
 			savedMap = MapShallowCopy(objects)
 		end
 

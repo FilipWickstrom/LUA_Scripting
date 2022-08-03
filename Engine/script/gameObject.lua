@@ -1,5 +1,5 @@
 local gameObject = {}
-vector = require("script/vector")
+local vector = require("script/vector")
 require('script/Utility')
 
 function gameObject:New(g)

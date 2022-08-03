@@ -21,57 +21,12 @@ local goalpoint		= require('script/goalpoint')
 -- Format the maps should follow
 local fileExtension = ".map"
 
---[[LOAD TO FILE SECTION]]--
-
--- Load objects from a file into a table
-function Load_Map(file)
-
-	local path = "map/" .. file
-	local fileObjects = {}
-
-	-- Check file extension. Has to be ".map"
-	if (path:match("^.+(%..+)$") ~= fileExtension) then
-		print("The map file has to end with '" .. fileExtension .. "'...")
-		return fileObjects
-	end
-
-	-- Load all the lines from the file
-	local lines = Load_File_Lines(path)
-	if lines == false then
-		print("LUA could not read file: '" .. path .. "'...")
-		return fileObjects
-	end
-
-	local objNum = 1
-
-	-- Divide objects into tables
-	for num, line in pairs(lines) do
-		
-		-- current object start
-		if line:find('{') then
-			local object = gameObject:New()
-			fileObjects[objNum] = object
-		end
-
-		if line:find('type') then Adjust_Object_Type(fileObjects, objNum, line) end
-		if line:find('sprite') then Adjust_Object_Name(fileObjects, objNum, line) end
-		if line:find('pos') then Adjust_Object_Pos(fileObjects, objNum, line) end
-		if line:find('collision') then Adjust_Object_Collision(fileObjects, objNum, line) end
-		if line:find('visible') then Adjust_Object_Visibility(fileObjects, objNum, line) end
-		
-		-- current object end
-		if line:find('}') then
-			objNum = objNum + 1
-		end
-	end
-
-	return fileObjects
-
-end
+--[[
+		Local helpfunctions
+]]--
 
 -- Load in each line from file
-function Load_File_Lines(path)
-
+local function _Load_File_Lines(path)
 
 	local f = io.open(path, "r+")
 	if not f then return false end
@@ -88,70 +43,8 @@ function Load_File_Lines(path)
 
 end
 
-
--- set the collision on the object
-function Adjust_Object_Collision(objects, num, line)
-
-	local coll = string.gsub(line, "collision=", "")
-
-	if objects[num] ~= nil then
-		objects[num]:SetCollision(tonumber(coll))
-	end
-
-end
-
-
--- set the visibility of the object
-function Adjust_Object_Visibility(objects, num, line)
-
-	local visible = string.gsub(line, "visible=", "")
-
-	if objects[num] ~= nil then
-		objects[num]:SetVisibility(tonumber(visible))
-	end
-
-end
-
--- set the position of the current object in file
-function Adjust_Object_Pos(objects, num, line)
-
-	-- removes the pos= from the current line
-	local coordinates = string.gsub(line, "pos=", "")
-
-	--Split the coordinates by spaces
-	local vec = {}
-	local substring
-	for substring in coordinates:gmatch("%S+") do
-	   table.insert(vec, tonumber(substring))
-	end
-	
-	--Check that none is nil
-	if (#vec == 3) then
-		if (vec[1] and vec[2] and vec[3]) then	
-			objects[num]:SetPosition(vec[1], vec[2], vec[3])
-		else
-			print("ERROR: '" .. line .. "' not correct... One of the numbers was nil")
-		end
-	else
-		print("ERROR: '" .. line .. "' not correct... Expected: 3 numbers")
-	end
-
-end
-
--- create the sprite from the instructions in the loaded file
-function Adjust_Object_Name(objects, num, line)
-
-	local filepath = string.gsub(line, "sprite=", "")
-
-	if objects[num] ~= nil then
-		objects[num].id = C_LoadSprite(filepath)
-		objects[num].defaultsprite = filepath
-	end
-
-end
-
 -- create the specific type of object in the table of objects
-function Adjust_Object_Type(objects, num, line)
+local function _Adjust_Object_Type(objects, num, line)
 
 	-- Spawn a normal following enemy
 	if line:find('monster') then 
@@ -201,13 +94,119 @@ function Adjust_Object_Type(objects, num, line)
 
 end
 
---[[LOAD TO FILE SECTION]]--
+-- create the sprite from the instructions in the loaded file
+local function _Adjust_Object_Name(objects, num, line)
 
+	local filepath = string.gsub(line, "sprite=", "")
 
---[[WRITE TO FILE SECTION]]--
+	if objects[num] ~= nil then
+		objects[num].id = C_LoadSprite(filepath)
+		objects[num].defaultsprite = filepath
+	end
+
+end
+
+-- set the position of the current object in file
+local function _Adjust_Object_Pos(objects, num, line)
+
+	-- removes the pos= from the current line
+	local coordinates = string.gsub(line, "pos=", "")
+
+	--Split the coordinates by spaces
+	local vec = {}
+	local substring
+	for substring in coordinates:gmatch("%S+") do
+	   table.insert(vec, tonumber(substring))
+	end
+	
+	--Check that none is nil
+	if (#vec == 3) then
+		if (vec[1] and vec[2] and vec[3]) then	
+			objects[num]:SetPosition(vec[1], vec[2], vec[3])
+		else
+			print("ERROR: '" .. line .. "' not correct... One of the numbers was nil")
+		end
+	else
+		print("ERROR: '" .. line .. "' not correct... Expected: 3 numbers")
+	end
+
+end
+
+-- set the collision on the object
+local function _Adjust_Object_Collision(objects, num, line)
+
+	local coll = string.gsub(line, "collision=", "")
+
+	if objects[num] ~= nil then
+		objects[num]:SetCollision(tonumber(coll))
+	end
+
+end
+
+-- set the visibility of the object
+local function _Adjust_Object_Visibility(objects, num, line)
+
+	local visible = string.gsub(line, "visible=", "")
+
+	if objects[num] ~= nil then
+		objects[num]:SetVisibility(tonumber(visible))
+	end
+
+end
+
+--[[
+		Global functions that can be called
+]]--
+
+-- Load objects from a file into a table
+function Load_Map(file)
+
+	local path = "map/" .. file
+	local fileObjects = {}
+
+	-- Check file extension. Has to be ".map"
+	if (path:match("^.+(%..+)$") ~= fileExtension) then
+		print("The map file has to end with '" .. fileExtension .. "'...")
+		return fileObjects
+	end
+
+	-- Load all the lines from the file
+	local lines = _Load_File_Lines(path)
+	if lines == false then
+		print("LUA could not read file: '" .. path .. "'...")
+		return fileObjects
+	end
+
+	local objNum = 1
+
+	-- Divide objects into tables
+	for num, line in pairs(lines) do
+		
+		-- current object start
+		if line:find('{') then
+			fileObjects[objNum] = gameObject:New()
+		end
+
+		if	   line:find('type')		then _Adjust_Object_Type(fileObjects, objNum, line)				
+		elseif line:find('sprite')		then _Adjust_Object_Name(fileObjects, objNum, line)			
+		elseif line:find('pos')			then _Adjust_Object_Pos(fileObjects, objNum, line)			
+		elseif line:find('collision')	then _Adjust_Object_Collision(fileObjects, objNum, line)	
+		elseif line:find('visible')		then _Adjust_Object_Visibility(fileObjects, objNum, line)	
+		end
+		
+		-- current object end
+		if line:find('}') then
+			objNum = objNum + 1
+		end
+	end
+
+	return fileObjects
+
+end
+
 
 -- Writes each relevant properties of the objects in table to file located in path
-function Write_To_File(objects, path)
+function Save_Map(objects, path)
 
 	-- clear the file if it already exists.
 	io.open(path, "w"):close()
@@ -236,5 +235,3 @@ function Write_To_File(objects, path)
 	file:close()
 
 end
-
---[[WRITE TO FILE SECTION]]--
