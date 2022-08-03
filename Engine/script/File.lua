@@ -18,18 +18,29 @@ local Powerup		= require('script/Powerups')
 local spawnpoint	= require('script/spawnpoint')
 local goalpoint		= require('script/goalpoint')
 
+-- Format the maps should follow
+local fileExtension = ".map"
+
 --[[LOAD TO FILE SECTION]]--
 
 -- Load objects from a file into a table
-function Load_File(path)
+function Load_Map(file)
 
-	local lines = Load_File_Lines(path)
+	local path = "map/" .. file
+	local fileObjects = {}
 
-	if lines == false then
-		return {}
+	-- Check file extension. Has to be ".map"
+	if (path:match("^.+(%..+)$") ~= fileExtension) then
+		print("The map file has to end with '" .. fileExtension .. "'...")
+		return fileObjects
 	end
 
-	local fileObjects = {}
+	-- Load all the lines from the file
+	local lines = Load_File_Lines(path)
+	if lines == false then
+		print("LUA could not read file: '" .. path .. "'...")
+		return fileObjects
+	end
 
 	local objNum = 1
 

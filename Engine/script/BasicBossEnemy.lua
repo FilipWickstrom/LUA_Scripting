@@ -27,7 +27,7 @@ end
 
 function BasicBoss:OnDeath()
 
-	if random(100) < bossWeaponDropChance then
+	if (math.random(100) <= bossWeaponDropChance) then
 		weaponDrops:CreateWeapon(self.position)
 	end
 

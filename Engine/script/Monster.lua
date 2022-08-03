@@ -40,7 +40,7 @@ function Monster:Chase(point)
 	local dir = Vector:New()
 
 	-- Not worth to change direction when too close
-	if (math.abs(self.position.x - point.x) > 0.01) then
+	if (math.abs(self.position.x - point.x) > 0.1) then
 		
 		-- Manipulate vector so that it follows the player.
 		if(self.position.x < point.x) then

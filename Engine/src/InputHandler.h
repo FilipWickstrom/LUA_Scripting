@@ -34,6 +34,12 @@ public:
 		if (e.EventType == irr::EET_KEY_INPUT_EVENT)
 		{
 			keyIsDown[e.KeyInput.Key] = e.KeyInput.PressedDown;
+
+			// Return true as we do not want to click 
+			// gui buttons with space or return.
+			if (e.KeyInput.Key == irr::EKEY_CODE::KEY_SPACE ||
+				e.KeyInput.Key == irr::EKEY_CODE::KEY_RETURN)
+				return true;
 		}
 		if (e.EventType == irr::EET_MOUSE_INPUT_EVENT)
 		{

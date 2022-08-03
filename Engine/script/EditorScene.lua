@@ -16,17 +16,19 @@ local powerup	= require('script/Powerups')
 
 -- "Globals" in this scope
 local objects = {}
-local loaded = false
-local created = false
-local saved = false
 local GUI = {}
+local loadedMap = {}
+local savedMap = {}
+
+-- Global so that it can be changed in the console if needed
+currentMap = "Level1.map"
 
 function Start()
 	local window = { X = C_WinWidth(), Y = C_WinHeight() }
 
 	GUI["Title"] = C_AddText("Level editor", "roboto_28.xml", window.X/2, 25, 250, 75)
 
-	-- Buttons: Create, Load, Save
+	-- Buttons: New, Load, Save
 	local editBtn = { X = 100, Y = 50 }
 	local xSpace = 0;
 	GUI["New"] = C_AddButton("New", "roboto_12.xml", editBtn.X/2, editBtn.Y/2, editBtn.X, editBtn.Y)
@@ -73,21 +75,21 @@ function Update(dt)
 
 	-- Check if any of the buttons is clicked
 	if (C_IsButtonPressed(GUI["New"])) then
-
-		if (not created) then
-			loaded = false
-			for num, obj in pairs(objects) do
-				obj:OnEnd()
-			end
-
-			-- reset objects
-			objects = {}
-			C_ResetGrid()
+		for num, obj in pairs(objects) do
+			obj:OnEnd()
 		end
+
+		-- reset objects
+		objects = {}
+		loadedMap = {}
+		savedMap = {}
+		C_ResetGrid()
+
 
 	elseif(C_IsButtonPressed(GUI["Load"])) then
 		
-		if (not loaded) then
+		-- Check if current map is the same as the loaded one
+		if (not HasSameKeys(loadedMap, objects)) then
 
 			-- Reset scene before loading.
 			for num, obj in pairs(objects) do
@@ -97,9 +99,8 @@ function Update(dt)
 			C_ResetGrid()
 
 			-- Load in the new scene
-			objects = Load_File('maps/test1.txt')
-			loaded = true
-			created = false
+			objects = Load_Map(currentMap)
+			loadedMap = MapShallowCopy(objects)
 
 			-- Add all the objects to the grid
 			for num, obj in pairs(objects) do
@@ -113,10 +114,9 @@ function Update(dt)
 
 
 	elseif(C_IsButtonPressed(GUI["Save"])) then
-		
-		if (not saved) then
-			Write_To_File(objects, 'maps/test1.txt')
-			saved = false
+		if (not HasSameKeys(savedMap, objects)) then
+			Write_To_File(objects, currentMap)
+			savedMap = MapShallowCopy(objects)
 		end
 
 	elseif(C_IsButtonPressed(GUI["Menu"])) then
@@ -142,13 +142,14 @@ function Update(dt)
 				if (not C_IsTileOccupied()) then
 					local obj = selector.selected:New()
 					obj:LoadSprite(selector.sprite)
-					C_AddTile(#objects + 1)
+
+					C_AddTile(obj.id)
 
 					local vec = vector:New()			
-					vec.x, vec.y, vec.z = C_GetTilePos(#objects + 1)
+					vec.x, vec.y, vec.z = C_GetTilePos(obj.id)
 					obj:SetPosition(vec.x, vec.y, vec.z)
 
-					objects[#objects + 1] = obj
+					objects[obj.id] = obj
 
 					if (obj.type == "spawnpoint") then
 						obj:AddIcon()

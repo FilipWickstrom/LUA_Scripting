@@ -10,6 +10,7 @@ require('script/AllScenes')
 require('script/File')
 require('script/ProjectileHandler')
 
+local currentMap = "Level1.map"
 
 
 function Start()
@@ -30,16 +31,20 @@ function Start()
 
 	C_ToggleRenderUI(true)
 
-	objects = Load_File('maps/test1.txt')
+	objects = Load_Map(currentMap)
 
 	-- Go through all the objects
 	for i = 1, #objects do
 		local type = objects[i].type	
 
+		if (type == 'spawnpoint') then
+			local pos = objects[i].position
+			player:SetPosition(pos.x, player.position.y, pos.z)
+
 		-- Collidable tiles
-		if (type == 'wall' or 
-			type == 'door') then
-			table.insert(walls, objects[i])
+		elseif (type == 'wall' or 
+				type == 'door') then
+				table.insert(walls, objects[i])
 
 		-- Adds all enemies to the enemies table
 		elseif (type == 'bouncy'  or 

@@ -55,7 +55,7 @@ function Camera:UpdateMovement()
 	local dir = vector:New()
 	local power = 1.0
 
-	if (C_IsKeyDown(keys.SPACE)) then
+	if (C_IsKeyDown(keys.LSHIFT)) then
 		power = 5.0
 	end
 
