@@ -9,10 +9,6 @@ function DoorTile:New()
 	g.defaultsprite = 'doors_leaf_closed.png'
 	g.key = gameObject:New()
 	g.key.id = C_LoadSprite('key.png')
-	--C_SetSpriteVisible(g.key.id, false)
-
-	-- test position
-	g.key:SetPosition(35,0,0)
 
 	self.__index = DoorTile
 	setmetatable(g, self)
@@ -41,10 +37,13 @@ end
 function DoorTile:Update()
 
 	if C_CheckSpriteCollision(player.id, self.key.id) then
+		-- Remove the key
 		C_SetSpriteVisible(self.key.id, false)
-		C_SetSpriteVisible(self.id, false)
-		C_RemoveSprite(self.id)
 		C_RemoveSprite(self.key.id)
+
+		-- Change to open door
+		self:ChangeSprite("doors_leaf_open.png")
+		self:SetCollision(0)
 	end
 
 end

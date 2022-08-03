@@ -206,7 +206,15 @@ end
 
 
 -- Writes each relevant properties of the objects in table to file located in path
-function Save_Map(objects, path)
+function Save_Map(objects, filename)
+
+	local path = "map/" .. filename
+
+	-- Check file extension. Has to be ".map"
+	if (path:match("^.+(%..+)$") ~= fileExtension) then
+		print("The map file has to end with '" .. fileExtension .. "'...")
+		return
+	end
 
 	-- clear the file if it already exists.
 	io.open(path, "w"):close()

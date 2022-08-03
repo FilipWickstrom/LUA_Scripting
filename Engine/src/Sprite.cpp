@@ -69,6 +69,10 @@ irr::core::matrix4 Sprite::GetAbsoluteTransform()
 
 void Sprite::LoadTexture(const std::string& filename)
 {
+	irr::core::vector3df pos;
+	if (m_node)
+		pos = m_node->getPosition();
+
 	// Cleaning up before loading new
 	this->Remove();
 
@@ -81,7 +85,7 @@ void Sprite::LoadTexture(const std::string& filename)
 		m_size = static_cast<irr::core::dimension2df>(texture->getSize());
 
 	m_mesh = Graphics::GetGeometryCreator()->createPlaneMesh(m_size);
-	m_node = Graphics::GetSceneManager()->addMeshSceneNode(m_mesh);
+	m_node = Graphics::GetSceneManager()->addMeshSceneNode(m_mesh, 0, -1, pos);
 	
 	if (!m_node)
 		std::cout << "ERROR: Node not correct..." << std::endl;
