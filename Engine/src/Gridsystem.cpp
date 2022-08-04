@@ -138,10 +138,10 @@ int Gridsystem::GetTileObject(irr::core::vector3di& tilePos)
 	tilePos.Z = static_cast<int>(std::round(position.Z / TILE_SIZE));
 
 	if (this->OutOfBounds({ tilePos.X, tilePos.Z }))
-		return (unsigned int)-1;
+		return -1;
 
 	if (m_vec3ToID.find(tilePos) == m_vec3ToID.end())
-		return (unsigned int)-1;
+		return -1;
 
 	return m_vec3ToID.at(tilePos);
 }

@@ -136,6 +136,17 @@ function Update(dt)
 		C_UpdateText(GUI["LayerText"], "Layer: Entities")
 
 	else
+
+		-- Drag tile
+		if (C_IsKeyDown(keys.SPACE)) then
+
+			if (selectedObject == -1) then
+				selectedObject = C_GetTileObjectID()
+				--print(selectedObject)
+			end
+
+		end
+
 		-- place tile
 		if (C_IsKeyDown(keys.LBUTTON)) then
 			
@@ -156,8 +167,6 @@ function Update(dt)
 					if (obj.type == "spawnpoint") then
 						obj:AddIcon()
 					end
-				else -- Set selected object as the current one to update
-					selectedObject = C_GetTileObjectID()
 				end
 			else
 				
@@ -198,6 +207,7 @@ function Update(dt)
 		local vec = vector:New()	
 		C_UpdateTilePos(selectedObject)
 		vec.x, vec.y, vec.z = C_GetTilePos(objects[selectedObject].id)
+		--print(vec)
 		objects[selectedObject]:SetPosition(vec.x, vec.y, vec.z)
 
 	end
