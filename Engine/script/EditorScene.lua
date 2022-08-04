@@ -204,9 +204,9 @@ function Update(dt)
 	-- Update the position of the selected object
 	if selectedObject ~= -1 and objects[selectedObject] ~= nil then
 
-		local vec = vector:New()	
+		local vec = vector:New()
 		C_UpdateTilePos(selectedObject)
-		vec.x, vec.y, vec.z = C_GetTilePos(objects[selectedObject].id)
+		vec.x, vec.y, vec.z = C_GetTilePos(selectedObject)
 		--print(vec)
 		objects[selectedObject]:SetPosition(vec.x, vec.y, vec.z)
 

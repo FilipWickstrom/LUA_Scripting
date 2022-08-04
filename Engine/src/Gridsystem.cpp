@@ -168,9 +168,10 @@ void Gridsystem::UpdateTilePos(const unsigned int& id)
 
 	// Remove from current tile and place it on another tile.
 	m_vec3ToID.erase(m_idToVec3[id]);
+	m_idToVec3.erase(id);
+
 	m_idToVec3[id] = tilePos;
 	m_vec3ToID[tilePos] = id;
-
 }
 
 bool Gridsystem::AddTileAtMouse(const unsigned int& id)
