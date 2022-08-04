@@ -710,6 +710,33 @@ int L_RemoveTile(lua_State* L)
 	return 1;
 }
 
+int L_GetTileID(lua_State* L)
+{
+	int id = -1;
+
+	if (SceneHandler::GetGridsystem())
+	{
+		irr::core::vector3di vec;
+		id = SceneHandler::GetGridsystem()->GetTileObject(vec);
+	}
+
+	lua_pushnumber(L, id);
+
+	return 1;
+}
+
+int L_UpdateTilePos(lua_State* L)
+{
+	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
+
+	if (SceneHandler::GetGridsystem())
+	{
+		SceneHandler::GetGridsystem()->UpdateTilePos(id);
+	}
+
+	return 0;
+}
+
 int L_GetTilePos(lua_State* L)
 {
 	irr::core::vector3df vec(0, -1000, 0);

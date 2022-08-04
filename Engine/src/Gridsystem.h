@@ -33,6 +33,11 @@ public:
 	// Check if there is anything on this tile
 	bool IsTileOccupied(irr::core::vector3di& tilePos);
 
+	// Get the object at tilepos if it is used
+	int GetTileObject(irr::core::vector3di& tilePos);
+
+	void UpdateTilePos(const unsigned int& id);
+
 	// Add a tile to the grid at the mouse position
 	bool AddTileAtMouse(const unsigned int& id);
 	

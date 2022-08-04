@@ -192,6 +192,10 @@ void LuaHandler::LoadState()
 	lua_register(m_state, "C_SetGridLayer",					L_SetGridLayer);
 	// Param: none
 	lua_register(m_state, "C_GridUpdateHover",				L_GridUpdateHover);
+	// Param: none
+	lua_register(m_state, "C_GetTileObjectID",				L_GetTileID);
+	// Param: id{unsigned int}
+	lua_register(m_state, "C_UpdateTilePos",				L_UpdateTilePos);
 	
 	
 	// Param: id{unsigned int}

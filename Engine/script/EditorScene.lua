@@ -20,6 +20,7 @@ local GUI = {}
 local loadedMap = {}
 local savedMap = {}
 local camera = nil
+local selectedObject = -1
 
 -- Global so that it can be changed in the console if needed
 currentMap = "Level1.map"
@@ -138,7 +139,7 @@ function Update(dt)
 		-- place tile
 		if (C_IsKeyDown(keys.LBUTTON)) then
 			
-			if (selector.selected ~= nil) then
+			if (selector.selected ~= nil and selectedObject == -1) then
 
 				if (not C_IsTileOccupied()) then
 					local obj = selector.selected:New()
@@ -155,8 +156,15 @@ function Update(dt)
 					if (obj.type == "spawnpoint") then
 						obj:AddIcon()
 					end
+				else -- Set selected object as the current one to update
+					selectedObject = C_GetTileObjectID()
 				end
-			end		
+			else
+				
+				-- Stop updating the selected object
+				selectedObject = -1
+
+			end
 		
 		-- remove tile
 		elseif (C_IsKeyDown(keys.RBUTTON)) then
@@ -182,6 +190,16 @@ function Update(dt)
 		if (obj.type == "spawnpoint") then
 			obj:Update()
 		end
+	end
+
+	-- Update the position of the selected object
+	if selectedObject ~= -1 and objects[selectedObject] ~= nil then
+
+		local vec = vector:New()	
+		C_UpdateTilePos(selectedObject)
+		vec.x, vec.y, vec.z = C_GetTilePos(objects[selectedObject].id)
+		objects[selectedObject]:SetPosition(vec.x, vec.y, vec.z)
+
 	end
 
 end

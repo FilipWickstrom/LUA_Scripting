@@ -129,6 +129,50 @@ bool Gridsystem::IsTileOccupied(irr::core::vector3di& tilePos)
      return m_vec3ToID.find(tilePos) != m_vec3ToID.end();
 }
 
+int Gridsystem::GetTileObject(irr::core::vector3di& tilePos)
+{
+	irr::core::vector3df position = SceneHandler::GetWorldCoordFromScreen();
+
+	tilePos.X = static_cast<int>(std::round(position.X / TILE_SIZE));
+	tilePos.Y = m_layer;
+	tilePos.Z = static_cast<int>(std::round(position.Z / TILE_SIZE));
+
+	if (this->OutOfBounds({ tilePos.X, tilePos.Z }))
+		return (unsigned int)-1;
+
+	if (m_vec3ToID.find(tilePos) == m_vec3ToID.end())
+		return (unsigned int)-1;
+
+	return m_vec3ToID.at(tilePos);
+}
+
+void Gridsystem::UpdateTilePos(const unsigned int& id)
+{
+	if (m_idToVec3.find(id) == m_idToVec3.end())
+		return;
+
+	irr::core::vector3df position = SceneHandler::GetWorldCoordFromScreen();
+	irr::core::vector3di tilePos;
+
+	tilePos.X = static_cast<int>(std::round(position.X / TILE_SIZE));
+	tilePos.Y = m_layer;
+	tilePos.Z = static_cast<int>(std::round(position.Z / TILE_SIZE));
+
+	if (this->OutOfBounds({ tilePos.X, tilePos.Z }))
+		return;
+
+	if (m_vec3ToID.find(tilePos) != m_vec3ToID.end())
+		return;
+
+	// Tile isn't occupied, and is placeable.
+
+	// Remove from current tile and place it on another tile.
+	m_vec3ToID.erase(m_idToVec3[id]);
+	m_idToVec3[id] = tilePos;
+	m_vec3ToID[tilePos] = id;
+
+}
+
 bool Gridsystem::AddTileAtMouse(const unsigned int& id)
 {
     irr::core::vector3di tile;
