@@ -183,6 +183,7 @@ function Update(dt)
 				if (id ~= -1 and objects[id] ~= nil) then
 					objects[id]:OnEnd()
 					objects[id] = nil
+					selectedObject = -1
 				end
 			end
 		end
