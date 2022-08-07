@@ -20,7 +20,7 @@ local GUI = {}
 local loadedMap = {}
 local savedMap = {}
 local camera = nil
-local selectedObject = -1
+local movedObjID = -1
 
 -- Global so that it can be changed in the console if needed
 currentMap = "Level1.map"
@@ -137,20 +137,41 @@ function Update(dt)
 
 	else
 
-		-- Drag tile
-		if (C_IsKeyDown(keys.SPACE)) then
+		-- Drag/move a tile
+		if (C_IsKeyPressedOnce(keys.SPACE)) then
 
-			if (selectedObject == -1) then
-				selectedObject = C_GetTileObjectID()
-				--print(selectedObject)
+			-- Select a tile
+			if (movedObjID == -1) then
+				
+				movedObjID = C_GetTileObjectID()
+				if (movedObjID ~= -1) then
+					C_SetGridHoverSprite(objects[movedObjID].defaultsprite)
+					C_SetSpriteBlinking(objects[movedObjID].id, true)
+				end
+			end
+		
+		-- Releasing the held tile
+		elseif (C_IsKeyReleasedOnce(keys.SPACE)) then
+
+			if (movedObjID ~= -1) then
+				local vec = vector:New()
+				C_UpdateTilePos(movedObjID)
+				vec.x, vec.y, vec.z = C_GetTilePos(movedObjID)
+				objects[movedObjID]:SetPosition(vec.x, vec.y, vec.z)
+				C_SetSpriteBlinking(objects[movedObjID].id, false)
+
+				-- Stop updating the selected object
+				movedObjID = -1
+				-- Change back to previous sprite
+				C_SetGridHoverSprite(selector.sprite)
 			end
 
-		end
 
-		-- place tile
-		if (C_IsKeyDown(keys.LBUTTON)) then
+		-- Place a tile
+		elseif (C_IsKeyDown(keys.LBUTTON)) then
 			
-			if (selector.selected ~= nil and selectedObject == -1) then
+			--Check that a block is selected
+			if (selector.selected) then
 
 				if (not C_IsTileOccupied()) then
 					local obj = selector.selected:New()
@@ -168,22 +189,17 @@ function Update(dt)
 						obj:AddIcon()
 					end
 				end
-			else
-				
-				-- Stop updating the selected object
-				selectedObject = -1
-
+			
 			end
 		
-		-- remove tile
+		-- Remove a tile
 		elseif (C_IsKeyDown(keys.RBUTTON)) then
 			
 			if (C_IsTileOccupied()) then
 				local id = C_RemoveTile()
-				if (id ~= -1 and objects[id] ~= nil) then
+				if (id ~= -1 and objects[id]) then
 					objects[id]:OnEnd()
 					objects[id] = nil
-					selectedObject = -1
 				end
 			end
 		end
@@ -200,17 +216,6 @@ function Update(dt)
 		if (obj.type == "spawnpoint") then
 			obj:Update()
 		end
-	end
-
-	-- Update the position of the selected object
-	if selectedObject ~= -1 and objects[selectedObject] ~= nil then
-
-		local vec = vector:New()
-		C_UpdateTilePos(selectedObject)
-		vec.x, vec.y, vec.z = C_GetTilePos(selectedObject)
-		--print(vec)
-		objects[selectedObject]:SetPosition(vec.x, vec.y, vec.z)
-
 	end
 
 end

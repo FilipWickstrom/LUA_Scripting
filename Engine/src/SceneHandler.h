@@ -55,6 +55,7 @@ public:
 	static void SetSpriteScale(const unsigned int& id, const irr::core::vector3df& scl);
 	static void SetSpriteRotation(const unsigned int& id, const irr::core::vector3df& rot);
 	static Sprite* GetSprite(const unsigned int& id);
+	static void SetSpriteBlinking(const unsigned int& id, bool toggle);
 
 	/*
 		Collision - between sprites

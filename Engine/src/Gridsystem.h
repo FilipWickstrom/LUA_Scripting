@@ -27,6 +27,9 @@ public:
 	// Resize or change the size of the grid
 	void SetSize(const irr::core::vector2di& size);
 
+	// Set a sprite for the hover node
+	void SetHoverSprite(const std::string& spritename);
+
 	// Update the hover tile every frame so that it is on the right tile
 	void UpdateHoverEffect();
 

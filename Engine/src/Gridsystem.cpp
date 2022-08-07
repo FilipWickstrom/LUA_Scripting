@@ -18,8 +18,9 @@ Gridsystem::Gridsystem(const irr::core::vector2di& size)
     m_hoverMesh = Graphics::GetGeometryCreator()->createPlaneMesh({ TILE_SIZE, TILE_SIZE });
     m_hoverNode = Graphics::GetSceneManager()->addMeshSceneNode(m_hoverMesh);
     m_hoverNode->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_LIGHTING, false);
-    m_hoverNode->setMaterialType(irr::video::E_MATERIAL_TYPE::EMT_TRANSPARENT_VERTEX_ALPHA);
-    m_hoverNode->setVisible(false);
+    m_hoverNode->setMaterialFlag(irr::video::E_MATERIAL_FLAG::EMF_BILINEAR_FILTER, false);
+    m_hoverNode->setMaterialType(irr::video::E_MATERIAL_TYPE::EMT_TRANSPARENT_ALPHA_CHANNEL_REF);
+    m_hoverNode->setVisible(true);
 }
 
 Gridsystem::~Gridsystem()
@@ -84,6 +85,28 @@ void Gridsystem::SetSize(const irr::core::vector2di& size)
     this->LoadGrid();
 }
 
+void Gridsystem::SetHoverSprite(const std::string& spritename)
+{
+    // Default values
+    irr::core::vector3df scale = { 1.f, 0.01f, 1.f };
+    irr::video::ITexture* texture = nullptr;
+
+    // Check that we got a valid name
+    if (!spritename.empty())
+    {
+        texture = Graphics::GetDriver()->getTexture((SPRITEPATH + spritename).c_str());
+        if (texture)
+        {
+            irr::core::vector2df size = static_cast<irr::core::dimension2df>(texture->getOriginalSize());
+            scale.X = size.X / TILE_SIZE;
+            scale.Z = size.Y / TILE_SIZE;
+        }
+    }
+
+    m_hoverNode->setMaterialTexture(0, texture);
+    m_hoverNode->setScale(scale);
+}
+
 void Gridsystem::UpdateHoverEffect()
 {
     irr::core::vector3df position = SceneHandler::GetWorldCoordFromScreen();
@@ -108,7 +131,7 @@ void Gridsystem::UpdateHoverEffect()
      
         // Else if tile is not occupied set mesh to green
         else
-            Graphics::GetSceneManager()->getMeshManipulator()->setVertexColors(m_hoverMesh, irr::video::SColor(128, 0, 255, 0));
+            Graphics::GetSceneManager()->getMeshManipulator()->setVertexColors(m_hoverMesh, irr::video::SColor(128,255,255,255));
     }
 
     m_hoverNode->setPosition({ tilePos.X * TILE_SIZE, 4, tilePos.Z * TILE_SIZE });

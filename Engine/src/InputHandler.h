@@ -5,40 +5,42 @@
 */
 class InputHandler : public irr::IEventReceiver
 {
-public:
-	struct SMouseState
-	{
-		irr::core::position2di pos;
-		bool leftButtonDown;
-		bool rightButtonDown;
-		SMouseState()
-		{
-			leftButtonDown = false;
-			rightButtonDown = false;
-		}
-	}MouseState;
-
 private:
-	bool keyIsDown[irr::KEY_KEY_CODES_COUNT] = { false };
+	bool m_keyIsDown[irr::KEY_KEY_CODES_COUNT]		= { false };
+	bool m_keyPressed[irr::KEY_KEY_CODES_COUNT]		= { false };
+	bool m_keyReleased[irr::KEY_KEY_CODES_COUNT]	= { false };
 
 public:
-	InputHandler()
-	{
-		for (int i = 0; i < irr::KEY_KEY_CODES_COUNT; ++i)
-			keyIsDown[i] = false;
-	};
+	InputHandler() = default;
 	~InputHandler() = default;
 
 	virtual bool OnEvent(const irr::SEvent& e)
 	{
 		if (e.EventType == irr::EET_KEY_INPUT_EVENT)
 		{
-			keyIsDown[e.KeyInput.Key] = e.KeyInput.PressedDown;
+			irr::EKEY_CODE key = e.KeyInput.Key;
+
+			// Key is pressed now
+			if (m_keyIsDown[key])
+			{
+				// Key has been released at this moment
+				if (!e.KeyInput.PressedDown)
+					m_keyReleased[key] = true;
+			}
+			// Key is not pressed now
+			else
+			{	
+				// Key is changing state at this moment
+				if (e.KeyInput.PressedDown)
+					m_keyPressed[key] = true;
+			}
+
+			m_keyIsDown[key] = e.KeyInput.PressedDown;
 
 			// Return true as we do not want to click 
 			// gui buttons with space or return.
-			if (e.KeyInput.Key == irr::EKEY_CODE::KEY_SPACE ||
-				e.KeyInput.Key == irr::EKEY_CODE::KEY_RETURN)
+			if (key == irr::EKEY_CODE::KEY_SPACE ||
+				key == irr::EKEY_CODE::KEY_RETURN)
 				return true;
 		}
 		if (e.EventType == irr::EET_MOUSE_INPUT_EVENT)
@@ -47,32 +49,47 @@ public:
 			{
 			case irr::EMIE_LMOUSE_PRESSED_DOWN:
 			{
-				MouseState.leftButtonDown = true;
-				keyIsDown[irr::EKEY_CODE::KEY_LBUTTON] = true;
+				irr::EKEY_CODE key = irr::EKEY_CODE::KEY_LBUTTON;
+
+				// Check if key is changing state
+				if (!m_keyIsDown[key])
+					m_keyPressed[key] = true;
+
+				m_keyIsDown[key] = true;
 				break;
 			}
 			case irr::EMIE_LMOUSE_LEFT_UP:
 			{
-				MouseState.leftButtonDown = false;
-				keyIsDown[irr::EKEY_CODE::KEY_LBUTTON] = false;
+				irr::EKEY_CODE key = irr::EKEY_CODE::KEY_LBUTTON;
+
+				// Check if key is changing state
+				if (m_keyIsDown[key])
+					m_keyReleased[key] = true;
+
+				m_keyIsDown[key] = false;
 				break;
 			}
 			case irr::EMIE_RMOUSE_PRESSED_DOWN:
 			{
-				MouseState.rightButtonDown = true;
-				keyIsDown[irr::EKEY_CODE::KEY_RBUTTON] = true;
+				irr::EKEY_CODE key = irr::EKEY_CODE::KEY_RBUTTON;
+
+				// Check if key is changing state
+				if (!m_keyIsDown[key])
+					m_keyPressed[key] = true;
+
+				m_keyIsDown[key] = true;
 				break;
 			}
 			case irr::EMIE_RMOUSE_LEFT_UP:
 			{
-				MouseState.rightButtonDown = false;
-				keyIsDown[irr::EKEY_CODE::KEY_RBUTTON] = false;
-				break;
-			}
-			case irr::EMIE_MOUSE_MOVED:
-			{
-				MouseState.pos.X = e.MouseInput.X;
-				MouseState.pos.Y = e.MouseInput.Y;
+				irr::EKEY_CODE key = irr::EKEY_CODE::KEY_RBUTTON;
+
+				// Check if key is changing state
+				if (!m_keyIsDown[key])
+					m_keyReleased[key] = true;
+
+				m_keyIsDown[key] = false;
+
 				break;
 			}
 			}
@@ -83,7 +100,23 @@ public:
 
 	virtual bool IsKeyDown(irr::EKEY_CODE keyCode) const
 	{
-		return keyIsDown[keyCode];
+		return m_keyIsDown[keyCode];
+	}
+
+	virtual bool IsKeyReleasedOnce(irr::EKEY_CODE keyCode)
+	{
+		bool up = m_keyReleased[keyCode];
+		if (up)
+			m_keyReleased[keyCode] = false;
+		return up;
+	}
+
+	virtual bool IsKeyPressedOnce(irr::EKEY_CODE keyCode)
+	{
+		bool down = m_keyPressed[keyCode];
+		if (down)
+			m_keyPressed[keyCode] = false;
+		return down;
 	}
 };
 
@@ -101,6 +134,8 @@ private:
 
 public:
 	static bool IsKeyDown(irr::EKEY_CODE keyCode);
+	static bool IsKeyPressedOnce(irr::EKEY_CODE keyCode);
+	static bool IsKeyReleasedOnce(irr::EKEY_CODE keyCode);
 
 	static InputHandler& GetInputHandler();
 };
