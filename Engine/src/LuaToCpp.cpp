@@ -86,6 +86,17 @@ int L_SetSpriteRotation(lua_State* L)
 	return 0;
 }
 
+int L_SetSpriteBlinking(lua_State* L)
+{
+	if (lua_isnumber(L, -2) && lua_isboolean(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+		bool toggle = lua_toboolean(L, -1);
+		SceneHandler::SetSpriteBlinking(id, toggle);
+	}
+	return 0;
+}
+
 int L_CheckSpriteCollision(lua_State* L)
 {
 	// C_CheckSpriteCollision(id1, id2) 
@@ -538,7 +549,7 @@ int L_GetScreenCoords(lua_State* L)
 		Return: Pos[vector2di]
 	*/
 
-	irr::core::vector2di screenPos = Input::GetInputHandler().MouseState.pos;
+	irr::core::vector2di screenPos = Graphics::GetDevice()->getCursorControl()->getPosition();
 	lua_pushnumber(L, screenPos.X);
 	lua_pushnumber(L, screenPos.Y);
 
@@ -562,17 +573,43 @@ int L_GetWorldCoords(lua_State* L)
 
 int L_IsKeyDown(lua_State* L)
 {
-	bool isKeyDown = false;
+	bool down = false;
 
-	if (lua_type(L, -1) == LUA_TNUMBER)
+	if (lua_isnumber(L, -1))
 	{
 		irr::EKEY_CODE key = static_cast<irr::EKEY_CODE>((int)lua_tonumber(L, -1));
-
-		isKeyDown = Input::IsKeyDown(key);
+		down = Input::IsKeyDown(key);
 	}
 
-	lua_pushboolean(L, isKeyDown);
+	lua_pushboolean(L, down);
+	return 1;
+}
 
+int L_IsKeyPressedOnce(lua_State* L)
+{
+	bool pressed = false;
+
+	if (lua_isnumber(L, -1))
+	{
+		irr::EKEY_CODE key = static_cast<irr::EKEY_CODE>((int)lua_tonumber(L, -1));
+		pressed = Input::IsKeyPressedOnce(key);
+	}
+
+	lua_pushboolean(L, pressed);
+	return 1;
+}
+
+int L_IsKeyReleasedOnce(lua_State* L)
+{
+	bool released = false;
+
+	if (lua_isnumber(L, -1))
+	{
+		irr::EKEY_CODE key = static_cast<irr::EKEY_CODE>((int)lua_tonumber(L, -1));
+		released = Input::IsKeyReleasedOnce(key);
+	}
+
+	lua_pushboolean(L, released);
 	return 1;
 }
 
@@ -710,6 +747,33 @@ int L_RemoveTile(lua_State* L)
 	return 1;
 }
 
+int L_GetTileID(lua_State* L)
+{
+	int id = -1;
+
+	if (SceneHandler::GetGridsystem())
+	{
+		irr::core::vector3di vec;
+		id = SceneHandler::GetGridsystem()->GetTileObject(vec);
+	}
+
+	lua_pushnumber(L, id);
+
+	return 1;
+}
+
+int L_UpdateTilePos(lua_State* L)
+{
+	unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
+
+	if (SceneHandler::GetGridsystem())
+	{
+		SceneHandler::GetGridsystem()->UpdateTilePos(id);
+	}
+
+	return 0;
+}
+
 int L_GetTilePos(lua_State* L)
 {
 	irr::core::vector3df vec(0, -1000, 0);
@@ -778,6 +842,19 @@ int L_SetGridLayer(lua_State* L)
 		{
 			int layer = static_cast<int>(lua_tonumber(L, -1));
 			SceneHandler::GetGridsystem()->ChangeLayer(layer);
+		}
+	}
+	return 0;
+}
+
+int L_GridSetHoverSprite(lua_State* L)
+{
+	if (lua_isstring(L, -1))
+	{
+		if (SceneHandler::GetGridsystem())
+		{
+			std::string sprite = lua_tostring(L, -1);
+			SceneHandler::GetGridsystem()->SetHoverSprite(sprite);
 		}
 	}
 	return 0;

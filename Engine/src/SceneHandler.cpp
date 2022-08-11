@@ -188,6 +188,12 @@ Sprite* SceneHandler::GetSprite(const unsigned int& id)
     return toReturn;
 }
 
+void SceneHandler::SetSpriteBlinking(const unsigned int& id, bool toggle)
+{
+    if (Get().m_sprites.find(id) != Get().m_sprites.end())
+        Get().m_sprites.at(id)->EnableBlinkEffect(toggle);
+}
+
 void SceneHandler::SetColliderSize(const unsigned int& id, const float& width, const float& height)
 {
     if (Get().m_sprites.find(id) != Get().m_sprites.end())
@@ -467,7 +473,7 @@ void SceneHandler::SetImage2dScale(const unsigned int& index, const float& scale
 
 irr::core::vector3df SceneHandler::GetWorldCoordFromScreen()
 {
-    irr::core::vector2di screenPos = Input::GetInputHandler().MouseState.pos;
+    irr::core::vector2di screenPos = Graphics::GetDevice()->getCursorControl()->getPosition();
     irr::scene::ICameraSceneNode* cam = Graphics::GetSceneManager()->getActiveCamera();
 
     // Ray between the camera position and the far plane of the frustum

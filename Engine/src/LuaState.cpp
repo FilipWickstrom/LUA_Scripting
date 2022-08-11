@@ -59,6 +59,8 @@ void LuaHandler::LoadState()
 	lua_register(m_state, "C_SetSpriteScale",				L_SetSpriteScale);
 	// Param: id{uint}, x{float}, y{float}, z{float}
 	lua_register(m_state, "C_SetSpriteRotation",			L_SetSpriteRotation);
+	// Param: id{uint}, toggle{bool}
+	lua_register(m_state, "C_SetSpriteBlinking",			L_SetSpriteBlinking);
 
 
 	/*
@@ -160,6 +162,12 @@ void LuaHandler::LoadState()
 	// Param: keyCode{irr::EKEY_CODE}
 	// Return: isKeyDown{bool}
 	lua_register(m_state, "C_IsKeyDown",					L_IsKeyDown);
+	// Param: keyCode{irr::EKEY_CODE}
+	// Return: isKeyPressed{bool}
+	lua_register(m_state, "C_IsKeyPressedOnce",				L_IsKeyPressedOnce);
+	// Param: keyCode{irr::EKEY_CODE}
+	// Return: isKeyReleased{bool}
+	lua_register(m_state, "C_IsKeyReleasedOnce",			L_IsKeyReleasedOnce);
 
 	/*
 		Mouse position
@@ -178,10 +186,10 @@ void LuaHandler::LoadState()
 	lua_register(m_state, "C_AddGrid",						L_AddGridsystem);
 	// Return: status{bool}
 	lua_register(m_state, "C_IsTileOccupied",				L_IsTileOccupied);
-	// Param: id{unsigned int}
+	// Param: id{unsigned int}, posX{float}[optional], posY{float}[optional], posZ{float}[optional]
 	// Return: status{bool}
 	lua_register(m_state, "C_AddTile",						L_AddTile);
-	// Param: id{unsigned int}, posX{float}[optional], posY{float}[optional], posZ{float}[optional]
+	// Param: id{unsigned int}
 	// Return: posX{float}, posY{float}, posZ{float}
 	lua_register(m_state, "C_GetTilePos",					L_GetTilePos);
 	// Param: none
@@ -192,7 +200,12 @@ void LuaHandler::LoadState()
 	lua_register(m_state, "C_SetGridLayer",					L_SetGridLayer);
 	// Param: none
 	lua_register(m_state, "C_GridUpdateHover",				L_GridUpdateHover);
-	
+	// Param: none
+	lua_register(m_state, "C_GetTileObjectID",				L_GetTileID);
+	// Param: id{unsigned int}
+	lua_register(m_state, "C_UpdateTilePos",				L_UpdateTilePos);
+	// Param: sprite{string}
+	lua_register(m_state, "C_SetGridHoverSprite",			L_GridSetHoverSprite);
 	
 	// Param: id{unsigned int}
 	// Return: x{float}, y{float}

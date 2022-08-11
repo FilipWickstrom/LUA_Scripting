@@ -27,11 +27,19 @@ public:
 	// Resize or change the size of the grid
 	void SetSize(const irr::core::vector2di& size);
 
+	// Set a sprite for the hover node
+	void SetHoverSprite(const std::string& spritename);
+
 	// Update the hover tile every frame so that it is on the right tile
 	void UpdateHoverEffect();
 
 	// Check if there is anything on this tile
 	bool IsTileOccupied(irr::core::vector3di& tilePos);
+
+	// Get the object at tilepos if it is used
+	int GetTileObject(irr::core::vector3di& tilePos);
+
+	void UpdateTilePos(const unsigned int& id);
 
 	// Add a tile to the grid at the mouse position
 	bool AddTileAtMouse(const unsigned int& id);

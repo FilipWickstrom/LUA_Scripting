@@ -3,11 +3,13 @@
 class Sprite
 {
 private:
-	irr::scene::ISceneNode* m_node;
-	irr::scene::IMesh*		m_mesh;
-	irr::core::vector2df	m_size;
-	float					m_collisionRadius;
-	bool					m_hasCollision;
+	irr::scene::ISceneNode*				m_node;
+	irr::scene::IMesh*					m_mesh;
+	irr::video::ITexture*				m_texture;
+	irr::core::vector2df				m_size;
+	float								m_collisionRadius;
+	bool								m_hasCollision;
+	irr::scene::ISceneNodeAnimator*		m_blinkEffect;
 
 public:
 	Sprite();
@@ -39,4 +41,7 @@ public:
 
 	//Get the rectangle around the sprite
 	const irr::core::rectf GetBounds() const;
+
+	// Blinking animator
+	void EnableBlinkEffect(bool toggle = true);
 };

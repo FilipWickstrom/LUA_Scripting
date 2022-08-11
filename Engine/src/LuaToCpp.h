@@ -19,6 +19,7 @@ int L_SetSpriteVisible(lua_State* L);
 int L_SetSpritePosition(lua_State* L);
 int L_SetSpriteScale(lua_State* L);
 int L_SetSpriteRotation(lua_State* L);
+int L_SetSpriteBlinking(lua_State* L);
 
 /*
 	Collision
@@ -80,6 +81,8 @@ int L_ToggleRenderUI(lua_State* L);
 
 // Input
 int L_IsKeyDown(lua_State* L);
+int L_IsKeyPressedOnce(lua_State* L);
+int L_IsKeyReleasedOnce(lua_State* L);
 
 // Mouse position
 int L_GetScreenCoords(lua_State* L);
@@ -90,9 +93,13 @@ int L_AddGridsystem(lua_State* L);
 int L_IsTileOccupied(lua_State* L);
 int L_AddTile(lua_State* L);
 int L_RemoveTile(lua_State* L);
+int L_GetTileID(lua_State* L);
+int L_UpdateTilePos(lua_State* L);
 int L_GetTilePos(lua_State* L);
 int L_ResetGridsystem(lua_State* L);
 int L_SetGridLayer(lua_State* L);
+
+int L_GridSetHoverSprite(lua_State* L);
 int L_GridUpdateHover(lua_State* L);
 
 

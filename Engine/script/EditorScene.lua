@@ -20,6 +20,7 @@ local GUI = {}
 local loadedMap = {}
 local savedMap = {}
 local camera = nil
+local movedObjID = -1
 
 -- Global so that it can be changed in the console if needed
 currentMap = "Level1.map"
@@ -135,10 +136,42 @@ function Update(dt)
 		C_UpdateText(GUI["LayerText"], "Layer: Entities")
 
 	else
-		-- place tile
-		if (C_IsKeyDown(keys.LBUTTON)) then
+
+		-- Drag/move a tile
+		if (C_IsKeyPressedOnce(keys.SPACE)) then
+
+			-- Select a tile
+			if (movedObjID == -1) then
+				
+				movedObjID = C_GetTileObjectID()
+				if (movedObjID ~= -1) then
+					C_SetGridHoverSprite(objects[movedObjID].defaultsprite)
+					C_SetSpriteBlinking(objects[movedObjID].id, true)
+				end
+			end
+		
+		-- Releasing the held tile
+		elseif (C_IsKeyReleasedOnce(keys.SPACE)) then
+
+			if (movedObjID ~= -1) then
+				local vec = vector:New()
+				C_UpdateTilePos(movedObjID)
+				vec.x, vec.y, vec.z = C_GetTilePos(movedObjID)
+				objects[movedObjID]:SetPosition(vec.x, vec.y, vec.z)
+				C_SetSpriteBlinking(objects[movedObjID].id, false)
+
+				-- Stop updating the selected object
+				movedObjID = -1
+				-- Change back to previous sprite
+				C_SetGridHoverSprite(selector.sprite)
+			end
+
+
+		-- Place a tile
+		elseif (C_IsKeyDown(keys.LBUTTON)) then
 			
-			if (selector.selected ~= nil) then
+			--Check that a block is selected
+			if (selector.selected) then
 
 				if (not C_IsTileOccupied()) then
 					local obj = selector.selected:New()
@@ -156,14 +189,15 @@ function Update(dt)
 						obj:AddIcon()
 					end
 				end
-			end		
+			
+			end
 		
-		-- remove tile
+		-- Remove a tile
 		elseif (C_IsKeyDown(keys.RBUTTON)) then
 			
 			if (C_IsTileOccupied()) then
 				local id = C_RemoveTile()
-				if (id ~= -1 and objects[id] ~= nil) then
+				if (id ~= -1 and objects[id]) then
 					objects[id]:OnEnd()
 					objects[id] = nil
 				end

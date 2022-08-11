@@ -62,6 +62,30 @@ const irr::core::rectf Sprite::GetBounds() const
 							irr::core::vector2df(pos.X + halfXSize, pos.Y + halfYSize));
 }
 
+void Sprite::EnableBlinkEffect(bool toggle)
+{
+	// Create animator that blinks every 500 ms
+	if (toggle)
+	{
+		irr::core::array<irr::video::ITexture*> allTextures(2);
+		allTextures.push_back(m_texture);
+		allTextures.push_back(nullptr);
+		m_blinkEffect = Graphics::GetSceneManager()->createTextureAnimator(allTextures, 500, true);
+		m_node->addAnimator(m_blinkEffect);
+	}
+	// Remove the animator
+	else
+	{
+		if (m_blinkEffect)
+		{
+			m_node->setMaterialTexture(0, m_texture);
+			m_node->removeAnimator(m_blinkEffect);
+			m_blinkEffect->drop();
+			m_blinkEffect = nullptr;
+		}
+	}
+}
+
 irr::core::matrix4 Sprite::GetAbsoluteTransform()
 {
 	return m_node->getAbsoluteTransformation();
@@ -76,13 +100,11 @@ void Sprite::LoadTexture(const std::string& filename)
 	// Cleaning up before loading new
 	this->Remove();
 
-	irr::video::ITexture* texture = nullptr;
-
 	if (!filename.empty())
-		texture = Graphics::GetDriver()->getTexture((SPRITEPATH + filename).c_str());
-	
-	if (texture)
-		m_size = static_cast<irr::core::dimension2df>(texture->getSize());
+		m_texture = Graphics::GetDriver()->getTexture((SPRITEPATH + filename).c_str());
+
+	if (m_texture)
+		m_size = static_cast<irr::core::dimension2df>(m_texture->getSize());
 
 	m_mesh = Graphics::GetGeometryCreator()->createPlaneMesh(m_size);
 	m_node = Graphics::GetSceneManager()->addMeshSceneNode(m_mesh, 0, -1, pos);
@@ -91,8 +113,8 @@ void Sprite::LoadTexture(const std::string& filename)
 		std::cout << "ERROR: Node not correct..." << std::endl;
 
 	// Set material to the texture
-	if (texture)
-		m_node->setMaterialTexture(0, texture);
+	if (m_texture)
+		m_node->setMaterialTexture(0, m_texture);
 	// Load a default material
 	else
 		Graphics::GetSceneManager()->getMeshManipulator()->setVertexColors(m_mesh, irr::video::SColor(255, 255, 20, 147));

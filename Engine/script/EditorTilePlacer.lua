@@ -17,21 +17,8 @@ local tilePlacer = {}
 
 function tilePlacer:Initialize()
 
-	local window = { X = C_WinWidth(), Y = C_WinHeight() }
-	local textField = { X = 150, Y = 50 }
-	local yPos = 275
-
-
 	-- start with the wall tile
-	self.selected = wallTile:New()
-	self.sprite = self.selected.defaultsprite
-	self.selected.spritename = self.sprite
-	self.indicator = C_AddImage2d(self.selected.spritename)
-	C_SetImage2dPosition(self.indicator, window.X-(textField.X/2), yPos)
-	C_SetImage2dScale(self.indicator, 1.5)
-
-	self.indicatorText = C_AddText('Block: ', "roboto_12.xml", window.X-(textField.X/2), yPos, textField.X, textField.Y)
-	C_SetTextAlignment(self.indicatorText, "left")
+	self:SetBlock(wallTile)
 
 end
 
@@ -39,8 +26,7 @@ function tilePlacer:SetBlock(block)
 	self.selected = block
 	self.sprite = block.defaultsprite
 
-	C_ChangeImage2d(self.indicator, self.sprite)
-	C_SetImage2dScale(self.indicator, 1.5)
+	C_SetGridHoverSprite(self.sprite)
 end
 
 function tilePlacer:Update()
@@ -56,7 +42,6 @@ function tilePlacer:Update()
 		monster:RandomSprite()
 		self:SetBlock(monster)
 		
-
 	elseif (C_IsKeyDown(keys.FOUR)) then
 		self:SetBlock(monkey)
 
