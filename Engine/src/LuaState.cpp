@@ -125,10 +125,25 @@ void LuaHandler::LoadState()
 	lua_register(m_state, "C_RemoveUI",						L_RemoveUI);
 	// Param: id{uint}, isVisible{bool}
 	lua_register(m_state, "C_SetVisibleUI",					L_SetHealthbarVisibility);
-	// Param: text{string}, font{string}, posX{float}, posY{float}, sizeX{float}, sizeY{float}
+	// Param: shouldRender{boolean}
+	lua_register(m_state, "C_ToggleRenderUI",				L_ToggleRenderUI);
+	
+	
+	// Param: text{string}
 	// Return: id{uint}
 	lua_register(m_state, "C_AddText",						GUI::L_AddText);
-	// Param: text{string}, font{string}, posX{float}, posY{float}, sizeX{float}, sizeY{float}
+	// Param: id{uint}, upperLeftX{int}, upperLeftY{int}
+	lua_register(m_state, "C_SetTextPosition",				GUI::L_SetTextPosition);
+	// Param: id{uint}, width{int}, height{int}
+	lua_register(m_state, "C_SetTextSize",					GUI::L_SetTextSize);
+	// Param: id{uint}, text{string}
+	lua_register(m_state, "C_UpdateText",					GUI::L_UpdateText);
+	// Param: id{uint}, alignment{string}
+	lua_register(m_state, "C_SetTextAlignment",				GUI::L_SetTextAlignment);
+	// Param: id{uint}, fontname{string}
+	lua_register(m_state, "C_SetTextFont",					GUI::L_SetTextFont);
+	
+	// Param: none
 	// Return: id{uint}
 	lua_register(m_state, "C_AddButton",					GUI::L_AddButton);
 	// Param: id{uint}
@@ -136,13 +151,18 @@ void LuaHandler::LoadState()
 	// Param: id{uint}
 	// Return: isPressed{bool}
 	lua_register(m_state, "C_IsButtonPressed",				GUI::L_IsButtonPressed);
+	// Param: id{uint}, sizeX{int}, sizeY{int}
+	lua_register(m_state, "C_SetButtonSize",				GUI::L_SetButtonSize);
+	// Param: id{uint}, posX{int}, posY{int}
+	lua_register(m_state, "C_SetButtonPosition",			GUI::L_SetButtonPosition);
 	// Param: id{uint}, text{string}
-	lua_register(m_state, "C_UpdateText",					GUI::L_UpdateText);
-	// Param: id{uint}, alignment{string}
-	lua_register(m_state, "C_SetTextAlignment",				GUI::L_SetTextAlignment);
-	// Param: shouldRender{boolean}
-	lua_register(m_state, "C_ToggleRenderUI",				L_ToggleRenderUI);
-	
+	lua_register(m_state, "C_SetButtonText",				GUI::L_SetButtonText);
+	// Param: id{uint}, fontname{string}
+	lua_register(m_state, "C_SetButtonFont",				GUI::L_SetButtonFont);
+	// Param: id{uint}, filename{string}
+	lua_register(m_state, "C_SetButtonImage",				GUI::L_SetButtonImage);
+
+
 	// Param: filepath{string}
 	// Return: id{unsigned int}
 	lua_register(m_state, "C_AddImage2d",					GUI::L_Add2dImage);

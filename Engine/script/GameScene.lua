@@ -65,12 +65,6 @@ end
 
 -- Game loop
 function Update(dt)
-	-- Go back to menu when player dies
-	if(player:IsAlive() == false) then
-		C_ChangeScene(Scenes.GAMEOVER)
-		return
-	end
-
 	deltatime = dt
 	-- Loop through all objects
 	for num, obj in pairs(objects) do
@@ -94,11 +88,15 @@ function Update(dt)
 	goldText:Update()
 
 	camera:SetPosition(player.position.x, player.position.z)
-	camera:UpdateZoom()
 	
 	-- Go back to menu when player dies
 	if (not player:IsAlive()) then
 		C_ChangeScene(Scenes.GAMEOVER)
+	end
+
+	-- Go back to menu by pressing escape
+	if C_IsKeyDown(keys.ESCAPE) then
+		C_ChangeScene(Scenes.MENU)
 	end
 end
 

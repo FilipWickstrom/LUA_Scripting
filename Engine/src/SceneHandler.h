@@ -77,19 +77,24 @@ public:
 	/*
 		GUI
 	*/
-	static unsigned int AddText(const std::string& text, const std::string& font,
-								irr::core::vector2di pos, irr::core::vector2di size);
+	static unsigned int AddText( const std::string& text);
+	static void SetTextPosition( const unsigned int& id, const irr::core::vector2di& pos);
+	static void SetTextSize(	 const unsigned int& id, const irr::core::vector2d<irr::u32>& size);
 	static void SetTextAlignment(const unsigned int& id, const irr::gui::EGUI_ALIGNMENT& alignment);
-	static void UpdateText(unsigned int& id, const std::string& text);
+	static void UpdateText(		 const unsigned int& id, const std::string& text);
+	static void SetTextFont(	 const unsigned int& id, const std::string& fontname);
 	
-	static unsigned int AddButton(const std::string& text, const std::string& font,
-								 irr::core::vector2di pos, irr::core::vector2di size);
-	static void RemoveButton(const unsigned int& id);
-	static bool IsButtonPressed(unsigned int id);
+	// Button
+	static unsigned int AddButton();
+	static void RemoveButton(		const unsigned int& id);
+	static bool IsButtonPressed(	const unsigned int& id);
+	static void SetButtonText(		const unsigned int& id,	const std::string& text);
+	static void SetButtonFont(		const unsigned int& id,	const std::string& fontname);
+	static void SetButtonPosition(	const unsigned int& id,	const irr::core::vector2di& pos);
+	static void SetButtonSize(		const unsigned int& id,	const irr::core::vector2d<irr::u32> size);
+	static void SetButtonImage(		const unsigned int& id,	const std::string& filename);
 
-	/*
-		Image 2d
-	*/
+	// Image 2d
 	static const unsigned int AddImage2d(const std::string& filepath);
 	static void RemoveImage2d(const unsigned int& index);
 	static void ChangeImage2d(const unsigned int& index, const std::string& filepath);

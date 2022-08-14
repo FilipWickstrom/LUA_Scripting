@@ -26,37 +26,64 @@ local movedObjID = -1
 currentMap = "Level1.map"
 
 function Start()
-	local window = { X = C_WinWidth(), Y = C_WinHeight() }
+	local window	= { X = C_WinWidth(),	 Y = C_WinHeight() }
+	local titleSize = { X = window.X * 0.2,	 Y = window.Y * 0.07}
+	local btnSize	= { X = 0.07 * window.X, Y = 0.05 * window.Y }
+	local guiID
 
-	GUI["Title"] = C_AddText("Level editor", "roboto_28.xml", window.X/2, 25, 250, 75)
+	-- Level editor textfield
+	GUI["Title"] = C_AddText("Level Editor")
+	guiID = GUI["Title"]
+	C_SetTextSize(guiID, titleSize.X, titleSize.Y)
+	C_SetTextPosition(guiID, (window.X - titleSize.X)/2, 0)
 
-	-- Buttons: New, Load, Save
-	local editBtn = { X = 100, Y = 50 }
-	local xSpace = 0;
-	GUI["New"] = C_AddButton("New", "roboto_12.xml", editBtn.X/2, editBtn.Y/2, editBtn.X, editBtn.Y)
-	xSpace = xSpace + editBtn.X
-	GUI["Load"] = C_AddButton("Load", "roboto_12.xml", editBtn.X/2 + xSpace, editBtn.Y/2, editBtn.X, editBtn.Y)
-	xSpace = xSpace + editBtn.X
-	GUI["Save"] = C_AddButton("Save", "roboto_12.xml", editBtn.X/2 + xSpace, editBtn.Y/2, editBtn.X, editBtn.Y)
+	-- New button
+	GUI["New"] = C_AddButton()
+	guiID = GUI["New"]
+	C_SetButtonPosition(guiID, 0, 0)
+	C_SetButtonSize(guiID, btnSize.X, btnSize.Y)
+	C_SetButtonText(guiID, "New")
 
-	-- Buttons: Back to menu
-	local menuBtn = { X = 150, Y = 50 }
-	GUI["Menu"] = C_AddButton("Back to menu", "roboto_12.xml", window.X-(menuBtn.X/2), menuBtn.Y/2, menuBtn.X, menuBtn.Y)
+	-- Load button
+	GUI["Load"] = C_AddButton()
+	guiID = GUI["Load"]
+	C_SetButtonPosition(guiID, btnSize.X, 0)
+	C_SetButtonSize(guiID, btnSize.X, btnSize.Y)
+	C_SetButtonText(guiID, "Load")
+
+	-- Save button
+	GUI["Save"] = C_AddButton()
+	guiID = GUI["Save"]
+	C_SetButtonPosition(guiID, 2*btnSize.X, 0)
+	C_SetButtonSize(guiID, btnSize.X, btnSize.Y)
+	C_SetButtonText(guiID, "Save")
+
 
 	-- Layers
-	local ySpace = 75
-	GUI["LayerText"] = C_AddText("Layer: Ground", "roboto_12.xml", window.X-75, ySpace, 150, 50)
-	C_SetTextAlignment(GUI["LayerText"], "left")
-	ySpace = ySpace + editBtn.Y
-	
-	GUI["Layer0"] = C_AddButton("Ground", "roboto_12.xml", window.X-(menuBtn.X/2), ySpace, menuBtn.X, menuBtn.Y)
-	ySpace = ySpace + editBtn.Y
-	
-	GUI["Layer1"] = C_AddButton("Items", "roboto_12.xml", window.X-(menuBtn.X/2), ySpace, menuBtn.X, menuBtn.Y)
-	ySpace = ySpace + editBtn.Y
-	
-	GUI["Layer2"] = C_AddButton("Entities", "roboto_12.xml", window.X-(menuBtn.X/2), ySpace, menuBtn.X, menuBtn.Y)
-	ySpace = ySpace + editBtn.Y
+	btnSize.X = 0.1 * window.X
+	GUI["LayerText"] = C_AddText("Layer: Ground")
+	guiID = GUI["LayerText"]
+	C_SetTextSize(guiID, btnSize.X, btnSize.Y)
+	C_SetTextPosition(guiID, (window.X - btnSize.X), 0)
+
+	GUI["Layer0"] = C_AddButton()
+	guiID = GUI["Layer0"]
+	C_SetButtonPosition(guiID, window.X-btnSize.X, btnSize.Y)
+	C_SetButtonSize(guiID, btnSize.X, btnSize.Y)
+	C_SetButtonText(guiID, "Ground")
+
+	GUI["Layer1"] = C_AddButton()
+	guiID = GUI["Layer1"]
+	C_SetButtonPosition(guiID, window.X-btnSize.X, btnSize.Y*2)
+	C_SetButtonSize(guiID, btnSize.X, btnSize.Y)
+	C_SetButtonText(guiID, "Items")
+
+	GUI["Layer2"] = C_AddButton()
+	guiID = GUI["Layer2"]
+	C_SetButtonPosition(guiID, window.X-btnSize.X, btnSize.Y*3)
+	C_SetButtonSize(guiID, btnSize.X, btnSize.Y)
+	C_SetButtonText(guiID, "Entities")
+
 
 	-- Create a camera
 	camera = Camera:New()
@@ -121,8 +148,10 @@ function Update(dt)
 			savedMap = MapShallowCopy(objects)
 		end
 
-	elseif(C_IsButtonPressed(GUI["Menu"])) then
+	-- Go back to menu by pressing escape
+	elseif C_IsKeyDown(keys.ESCAPE) then
 		C_ChangeScene(Scenes.MENU)
+		return
 
 	-- Change what layer we want to place on
 	elseif (C_IsButtonPressed(GUI["Layer0"])) then
@@ -134,6 +163,10 @@ function Update(dt)
 	elseif (C_IsButtonPressed(GUI["Layer2"])) then
 		C_SetGridLayer(2)
 		C_UpdateText(GUI["LayerText"], "Layer: Entities")
+
+	-- One of the buttons in selector has been updated
+	elseif(selector:Update()) then
+		--Should not go into else as it has "leftclick" inside of it
 
 	else
 
@@ -175,7 +208,7 @@ function Update(dt)
 
 				if (not C_IsTileOccupied()) then
 					local obj = selector.selected:New()
-					obj:LoadSprite(selector.sprite)
+					obj:LoadSprite(obj.defaultsprite)
 
 					C_AddTile(obj.id)
 
@@ -208,7 +241,6 @@ function Update(dt)
 
 	camera:UpdateMovement()
 	camera:UpdateZoom()
-	selector:Update()
 	C_GridUpdateHover()
 
 	for num, obj in pairs(objects) do

@@ -91,10 +91,6 @@ function Monster:Hit(player)
 	end
 end
 
-function Monster:RandomSprite()
-	self.defaultsprite = monsters[math.random(#monsters)]
-end
-
 function Monster:Update()
 	self:Chase(player.position)
 	self:Hit(player)

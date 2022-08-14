@@ -3,23 +3,42 @@ require('script/AllScenes')
 local GUI	= {}
 
 function Start()
-	local window = { X = C_WinWidth(), Y = C_WinHeight() }
-	local btnSize	= { X = 250, Y = 100 }
+	local window	= { X = C_WinWidth(),		Y = C_WinHeight() }
+	local titleSize = { X = window.X * 0.6,		Y = window.Y * 0.2}
+	local btnSize	= { X = window.X * 0.15,	Y = window.Y * 0.1 }
+	local guiID
+
+	local yDistance = 0.10 * window.Y
+	GUI["Title"] = C_AddText("Budget Binding of Isaac")
+	guiID = GUI["Title"]
+	C_SetTextSize(guiID, titleSize.X, titleSize.Y)
+	C_SetTextPosition(guiID, (window.X - titleSize.X)/2, 0.10 * window.Y)
 
 	-- Space between the GUI
-	local verticalSpace	= btnSize.Y * 1.5
-	
-	local yDistance = 0.20 * window.Y
-	GUI["Title"]= C_AddText("Budget Binding of Isaac", "roboto_48.xml", window.X/2, yDistance, 800, 200)
+	yDistance = yDistance + titleSize.Y
 
-	yDistance	= yDistance + verticalSpace
-	GUI["Play"] = C_AddButton("Play", "roboto_28.xml", window.X/2, yDistance, btnSize.X, btnSize.Y)
-	
-	yDistance	= yDistance + verticalSpace
-	GUI["Edit"] = C_AddButton("Edit", "roboto_28.xml", window.X/2, yDistance, btnSize.X, btnSize.Y)
-	
-	yDistance	= yDistance + verticalSpace
-	GUI["Quit"] = C_AddButton("Quit", "roboto_28.xml", window.X/2, yDistance, btnSize.X, btnSize.Y)
+	-- Play button
+	GUI["Play"] = C_AddButton()
+	guiID = GUI["Play"]
+	C_SetButtonPosition(guiID, (window.X - btnSize.X)/2, yDistance)
+	C_SetButtonSize(guiID, btnSize.X, btnSize.Y)
+	C_SetButtonText(guiID, "Play")
+	yDistance = yDistance + (btnSize.Y * 1.5)
+
+	-- Edit button
+	GUI["Edit"] = C_AddButton()
+	guiID = GUI["Edit"]
+	C_SetButtonPosition(guiID, (window.X - btnSize.X)/2, yDistance)
+	C_SetButtonSize(guiID, btnSize.X, btnSize.Y)
+	C_SetButtonText(guiID, "Edit")
+	yDistance = yDistance + (btnSize.Y * 1.5)
+
+	-- Quit button
+	GUI["Quit"] = C_AddButton()
+	guiID = GUI["Quit"]
+	C_SetButtonPosition(guiID, (window.X - btnSize.X)/2, yDistance)
+	C_SetButtonSize(guiID, btnSize.X, btnSize.Y)
+	C_SetButtonText(guiID, "Quit")
 
 end
 

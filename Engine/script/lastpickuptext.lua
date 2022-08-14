@@ -4,8 +4,11 @@ local lpText = {}
 function lpText:Initialize()
 
 	lpText.playerRef = player
-	lpText.id = C_AddText("Last Pickup: None", "roboto_28.xml", 245, 200, 450, 100)
-	C_SetTextAlignment(lpText.id, "left")
+	lpText.id = C_AddText("Last pickup: None")
+	local id = lpText.id
+	C_SetTextSize(id, 400, 50)
+	C_SetTextPosition(id, 10, 225)
+	C_SetTextAlignment(id, "left")
 
 end
 

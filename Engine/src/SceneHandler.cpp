@@ -1,6 +1,7 @@
 #include "PCH.h"
 #include "SceneHandler.h"
 #include "CppToLua.h"
+//#include "CGUITTFont.h"
 
 SceneHandler::SceneHandler()
 {
@@ -319,40 +320,110 @@ irr::scene::ICameraSceneNode* SceneHandler::GetCamera()
     return Get().m_camera;
 }
 
-unsigned int SceneHandler::AddText(const std::string& text, const std::string& font, irr::core::vector2di pos, irr::core::vector2di size)
+unsigned int SceneHandler::AddText(const std::string& text)
 {
-    std::wstring wstring(text.begin(), text.end());
+    //Get an ID for the GUI
+    unsigned int id = Get().m_textUID++;
+
+    // Default values
+    irr::core::vector2di pos = { 0,0 };
+    irr::core::vector2di size = { 150, 50 };
+
+    std::wstring wtext(text.begin(), text.end());
+
     irr::gui::IGUIStaticText* irrText = Graphics::GetGUIEnvironment()->addStaticText
     (
-        wstring.c_str(),
-        irr::core::rect<irr::s32>(
-            pos.X - (size.X / 2),
-            pos.Y - (size.Y / 2),
-            pos.X + (size.X / 2),
-            pos.Y + (size.Y / 2)),
-        false, false
+        wtext.c_str(),
+        irr::core::recti(pos.X,
+                         pos.Y,
+                         pos.X + size.X,
+                         pos.Y + size.Y),
+        0, id
     );
+    Get().m_texts[id] = irrText;
+
 #if DEBUG_UI
     irrText->setDrawBackground(true);
 #endif
 
-    //Set color of the text to white
-    irrText->setOverrideColor(irr::video::SColor(255, 255, 255, 255));
-    //Center text by default
     irrText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
+    irrText->setOverrideColor(irr::video::SColor(255, 255, 255, 255));
 
-    //Set an ID for the GUI
-    unsigned int id = Get().m_textUID++;
-    irrText->setID(id);
-
-    std::string fontstr = FONTPATH + font;
-    irr::gui::IGUIFont* irrfont = Graphics::GetGUIEnvironment()->getFont(fontstr.c_str());
-    if (irrfont)
-        irrText->setOverrideFont(irrfont);
-
-    Get().m_texts[id] = irrText;
+//    std::wstring wstring(text.begin(), text.end());
+//    irr::gui::IGUIStaticText* irrText = Graphics::GetGUIEnvironment()->addStaticText
+//    (
+//        wstring.c_str(),
+//        irr::core::rect<irr::s32>(
+//            pos.X - (size.X / 2),
+//            pos.Y - (size.Y / 2),
+//            pos.X + (size.X / 2),
+//            pos.Y + (size.Y / 2)),
+//        false, false
+//    );
+//#if DEBUG_UI
+//    irrText->setDrawBorder(true);
+//#endif
+//
+//    //Set color of the text to white
+//    irrText->setOverrideColor(irr::video::SColor(255, 255, 255, 255));
+//    //Center text by default
+//    irrText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
+//
+//    //Set an ID for the GUI
+//    unsigned int id = Get().m_textUID++;
+//    irrText->setID(id);
+//
+//    std::string fontstr = FONTPATH + font;
+//    irr::gui::IGUIFont* irrfont = Graphics::GetGUIEnvironment()->getFont(fontstr.c_str());
+//    if (irrfont)
+//        irrText->setOverrideFont(irrfont);
+//
+//    Get().m_texts[id] = irrText;
 
     return id;
+}
+
+void SceneHandler::SetTextPosition(const unsigned int& id, const irr::core::vector2di& pos)
+{
+    if (Get().m_texts.find(id) != Get().m_texts.end())
+        Get().m_texts.at(id)->setRelativePosition(pos);
+}
+
+void SceneHandler::SetTextSize(const unsigned int& id, const irr::core::vector2d<irr::u32>& size)
+{
+    if (Get().m_texts.find(id) != Get().m_texts.end())
+    {
+        irr::gui::IGUIStaticText* text = Get().m_texts.at(id);
+        text->setMinSize(size);
+        text->setMaxSize(size);
+
+        // Change font size to fit with the textfield
+        irr::gui::IGUIFont* irrfont = nullptr;
+        
+        /*
+            Get a font that fits with the text
+        */
+        // Load in font that fits with the button size
+        std::array<std::string, 4> fontnames = { "small.xml", "medium.xml", "large.xml", "huge.xml" };
+        for (int i = 0; i < fontnames.size(); i++)
+        {
+            irr::gui::IGUIFont* tempfont = Graphics::GetGUIEnvironment()->getFont((FONTPATH + fontnames.at(i)).c_str());
+            if (tempfont)
+            {
+                irr::core::dimension2du dimension = tempfont->getDimension(text->getText());
+
+                // Check to see that we are not outside of the button
+                if (dimension.Width < (irr::u32)size.X && dimension.Height < (irr::u32)size.Y)
+                    irrfont = tempfont;
+
+                // Has reached over limit - end here
+                else
+                    break;
+            }
+        }
+
+        text->setOverrideFont(irrfont);
+    }
 }
 
 void SceneHandler::SetTextAlignment(const unsigned int& id, const irr::gui::EGUI_ALIGNMENT& alignment)
@@ -361,7 +432,7 @@ void SceneHandler::SetTextAlignment(const unsigned int& id, const irr::gui::EGUI
         Get().m_texts.at(id)->setTextAlignment(alignment, irr::gui::EGUIA_CENTER);
 }
 
-void SceneHandler::UpdateText(unsigned int& id, const std::string& text)
+void SceneHandler::UpdateText(const unsigned int& id, const std::string& text)
 {
     if (Get().m_texts.find(id) != Get().m_texts.end())
     {
@@ -370,28 +441,34 @@ void SceneHandler::UpdateText(unsigned int& id, const std::string& text)
     }
 }
 
-unsigned int SceneHandler::AddButton(const std::string& text, const std::string& font, irr::core::vector2di pos, irr::core::vector2di size)
+void SceneHandler::SetTextFont(const unsigned int& id, const std::string& fontname)
 {
-    std::wstring wstring(text.begin(), text.end());
+    if (Get().m_texts.find(id) != Get().m_texts.end())
+    {
+        irr::gui::IGUIFont* font = Graphics::GetGUIEnvironment()->getFont((FONTPATH + fontname).c_str());
+        if (font)
+           Get().m_texts.at(id)->setOverrideFont(font);
+    }
+}
+
+unsigned int SceneHandler::AddButton()
+{
+    //Get an ID for the GUI
+    unsigned int id = Get().m_buttonUID++;
+
+    // Default values
+    irr::core::vector2di pos = { 0,0 };
+    irr::core::vector2di size = { 150, 100 };
+
     irr::gui::IGUIButton* irrButton = Graphics::GetGUIEnvironment()->addButton
     (
-        irr::core::rect<irr::s32>(
-            pos.X - (size.X / 2),
-            pos.Y - (size.Y / 2),
-            pos.X + (size.X / 2),
-            pos.Y + (size.Y / 2)),
-        0, -1, wstring.c_str()
+        irr::core::recti(pos.X,
+                         pos.Y,
+                         pos.X + size.X,
+                         pos.Y + size.Y),
+                         0, id
     );
-
-    //Set an ID for the GUI
-    unsigned int id = Get().m_buttonUID++;
-    irrButton->setID(id);
-
-    std::string fontstr = FONTPATH + font;
-    irr::gui::IGUIFont* irrfont = Graphics::GetGUIEnvironment()->getFont(fontstr.c_str());
-    if (irrfont)
-        irrButton->setOverrideFont(irrfont);
-
+    irrButton->setDrawBorder(true);
     Get().m_buttons[id] = irrButton;
 
     return id;
@@ -406,14 +483,141 @@ void SceneHandler::RemoveButton(const unsigned int& id)
     }
 }
 
-
-bool SceneHandler::IsButtonPressed(unsigned int id)
+bool SceneHandler::IsButtonPressed(const unsigned int& id)
 {
     if (Get().m_buttons.find(id) != Get().m_buttons.end())
     {
         return Get().m_buttons.at(id)->isPressed();
     }
     return false;
+}
+
+void SceneHandler::SetButtonText(const unsigned int& id, const std::string& text)
+{
+    if (Get().m_buttons.find(id) != Get().m_buttons.end())
+    {
+        irr::gui::IGUIButton* button = Get().m_buttons.at(id);
+        irr::gui::IGUIFont* irrfont = nullptr;
+        std::wstring wtext(text.begin(), text.end());
+        irr::core::vector2di size = button->getAbsoluteClippingRect().getSize();
+
+        /*
+            Get a font that fits with the text
+        */
+        // Load in font that fits with the button size
+        std::array<std::string, 4> fontnames = { "small.xml", "medium.xml", "large.xml", "huge.xml" };
+        for (int i = 0; i < fontnames.size(); i++)
+        {
+            irr::gui::IGUIFont* tempfont = Graphics::GetGUIEnvironment()->getFont((FONTPATH + fontnames.at(i)).c_str());
+            if (tempfont)
+            {
+                irr::core::dimension2du dimension = tempfont->getDimension(wtext.c_str());
+
+                // Check to see that we are not outside of the button
+                if (dimension.Width < (irr::u32)size.X && dimension.Height < (irr::u32)size.Y)
+                    irrfont = tempfont;
+
+                // Has reached over limit - end here
+                else
+                    break;
+            }
+        }
+
+        /*
+            Add a text
+        */
+        // Text get id 0 for this button
+        irr::gui::IGUIStaticText* irrText = Graphics::GetGUIEnvironment()->addStaticText(wtext.c_str(),
+                                            irr::core::recti(0, 0, size.X, size.Y),
+                                            false, false, button, 0);
+
+        irrText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
+        irrText->setOverrideFont(irrfont);
+        irrText->setOverrideColor(irr::video::SColor(255, 255, 255, 255));
+    }
+}
+
+void SceneHandler::SetButtonFont(const unsigned int& id, const std::string& fontname)
+{
+    if (Get().m_buttons.find(id) != Get().m_buttons.end())
+    {
+        irr::gui::IGUIButton* button = Get().m_buttons.at(id);
+
+        irr::gui::IGUIFont* irrfont = Graphics::GetGUIEnvironment()->getFont((FONTPATH + fontname).c_str());
+        if (irrfont)
+        {
+            // Text is always placed at id 0 at the button
+            irr::gui::IGUIElement* guielem = button->getElementFromId(0);
+            if (guielem)
+            {
+                irr::gui::IGUIStaticText* text = static_cast<irr::gui::IGUIStaticText*>(guielem);
+                
+                // Adjust the text
+                text->setOverrideFont(irrfont);
+            }
+        }
+    }
+}
+
+void SceneHandler::SetButtonPosition(const unsigned int& id, const irr::core::vector2di& pos)
+{
+    if (Get().m_buttons.find(id) != Get().m_buttons.end())
+    {
+        irr::gui::IGUIButton* button = Get().m_buttons.at(id);
+        button->setRelativePosition(pos);
+    }
+}
+
+void SceneHandler::SetButtonSize(const unsigned int& id, const irr::core::vector2d<irr::u32> size)
+{
+    if (Get().m_buttons.find(id) != Get().m_buttons.end())
+    {
+        irr::gui::IGUIButton* button = Get().m_buttons.at(id);
+        button->setMinSize(size);
+        button->setMaxSize(size);
+    }
+}
+
+void SceneHandler::SetButtonImage(const unsigned int& id, const std::string& filename)
+{
+    if (Get().m_buttons.find(id) != Get().m_buttons.end())
+    {
+        //Get button and some information about it
+        irr::gui::IGUIButton* button = Get().m_buttons.at(id);
+        irr::core::vector2di buttonSize(button->getAbsoluteClippingRect().getWidth(),
+                                        button->getAbsoluteClippingRect().getHeight());
+
+        // Get texture and calculate the aspectRatio
+        irr::video::ITexture* texture = Graphics::GetDriver()->getTexture((SPRITEPATH + filename).c_str());
+        irr::core::vector2df textureSize(static_cast<irr::f32>(texture->getSize().Width),
+                                         static_cast<irr::f32>(texture->getSize().Height));
+        float aspectRatio = textureSize.X / textureSize.Y;
+
+        // Size of the image inside of the button 
+        // Maximize in Height
+        irr::core::dimension2du imageDimension(static_cast<irr::u32>(buttonSize.Y * aspectRatio),
+                                               static_cast<irr::u32>(buttonSize.Y));
+
+        // Add and adjust the image
+        // Image has id 1 for the parent
+        irr::gui::IGUIImage* image = Graphics::GetGUIEnvironment()->addImage(texture, { 0,0 }, true, button, 1);
+        image->setRelativePosition({ (buttonSize.X / 2) - static_cast<irr::s32>(imageDimension.Width / 2), 0 });
+        image->setMinSize(imageDimension);
+        image->setScaleImage(true);
+
+        // Image is in the background
+        button->sendToBack(image);
+
+        // Adjust the text to be at top of the button
+        irr::gui::IGUIElement* guielem = button->getElementFromId(0);
+        if (guielem)
+        {
+            irr::gui::IGUIStaticText* text = static_cast<irr::gui::IGUIStaticText*>(guielem);
+            text->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_UPPERLEFT);
+
+            // [TODO] Check if texture is light or dark and change text color to the opposite.
+        }
+    }
 }
 
 const unsigned int SceneHandler::AddImage2d(const std::string& filepath)

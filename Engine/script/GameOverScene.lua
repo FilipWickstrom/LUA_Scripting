@@ -3,20 +3,34 @@ require('script/AllScenes')
 local GUI = {}
 
 function Start()
-	local window = { X = C_WinWidth(), Y = C_WinHeight() }
-	local btnSize	= { X = 400, Y = 100 }
+	local window	= { X = C_WinWidth(),		Y = C_WinHeight() }
+	local btnSize	= { X = window.X * 0.25,	Y = window.Y * 0.1 }
+	local textSize	= { X = window.X * 0.5,		Y = window.Y * 0.15 }
+	local guiID
 
-	-- Space between the GUI
-	local verticalSpace	= btnSize.Y * 1.5
-	
-	local yDistance = 0.20 * window.Y
-	GUI["Title"]= C_AddText("Game Over...", "roboto_48.xml", window.X/2, yDistance, 800, 200)
+	local yDistance = 0.10 * window.Y
+	local verticalSpace	= textSize.Y * 2
 
-	yDistance	= yDistance + verticalSpace
-	GUI["UnderTitle"]= C_AddText("Score: 0", "roboto_28.xml", window.X/2, yDistance, 800, 200)
+	-- Main text
+	GUI["Title"] = C_AddText("Game Over...")
+	guiID = GUI["Title"]
+	C_SetTextSize(guiID, textSize.X, textSize.Y)
+	C_SetTextPosition(guiID, (window.X - textSize.X)/2, yDistance)
+	yDistance = yDistance + verticalSpace
 
-	yDistance	= yDistance + verticalSpace
-	GUI["ReturnToMenu"] = C_AddButton("Return to menu", "roboto_28.xml", window.X/2, yDistance, btnSize.X, btnSize.Y)
+	-- Undertitle
+	GUI["UnderTitle"] = C_AddText("Score: 0")
+	guiID = GUI["UnderTitle"]
+	C_SetTextSize(guiID, btnSize.X, btnSize.Y)
+	C_SetTextPosition(guiID, (window.X - btnSize.X)/2, yDistance)
+	yDistance = yDistance + verticalSpace
+
+	-- Button to get back to menu
+	GUI["ReturnToMenu"] = C_AddButton()
+	guiID = GUI["ReturnToMenu"]
+	C_SetButtonPosition(guiID, (window.X - btnSize.X)/2, yDistance)
+	C_SetButtonSize(guiID, btnSize.X, btnSize.Y)
+	C_SetButtonText(guiID, "Return to menu")
 
 end
 

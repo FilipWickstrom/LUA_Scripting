@@ -3,8 +3,11 @@ local goldText = {}
 
 function goldText:Initialize()
 
-	goldText.id = C_AddText("Gold: 0", "roboto_28.xml", 120, 100, 200, 100)
-	C_SetTextAlignment(goldText.id, "left")
+	goldText.id = C_AddText("Gold: XXX")
+	local id = goldText.id
+	C_SetTextSize(id, 400, 50)
+	C_SetTextPosition(id, 10, 75)
+	C_SetTextAlignment(id, "left")
 
 end
 

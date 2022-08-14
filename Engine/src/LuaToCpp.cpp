@@ -395,36 +395,46 @@ int L_ChangeScene(lua_State* L)
 
 int GUI::L_AddText(lua_State* L)
 {
-	/*
-		Arguments:	Text[string], Font[string], Pos[vector2di], Size[vector2di]
-		Return:		ID[int]
-	*/
-
-	//Default values
-	std::string text = "";
-	std::string fontfile = "";
-	irr::core::vector2di pos = { 0,0 };
-	irr::core::vector2di size = { 100,50 };
-
-	// Get the data from LUA-stack
-	if (lua_type(L, -6) == LUA_TSTRING)
-		text = lua_tostring(L, -6);
-	if (lua_type(L, -5) == LUA_TSTRING)
-		fontfile = lua_tostring(L, -5);
-	if (lua_type(L, -4) == LUA_TNUMBER)
-		pos.X = static_cast<int>(lua_tonumber(L, -4));
-	if (lua_type(L, -3) == LUA_TNUMBER)
-		pos.Y = static_cast<int>(lua_tonumber(L, -3));
-	if (lua_type(L, -2) == LUA_TNUMBER)
-		size.X = static_cast<int>(lua_tonumber(L, -2));
-	if (lua_type(L, -1) == LUA_TNUMBER)
-		size.Y = static_cast<int>(lua_tonumber(L, -1));
-
-	unsigned int id = SceneHandler::AddText(text, fontfile, pos, size);
+	unsigned int id = 0;
+	if (lua_isstring(L, -1))
+	{
+		std::string text = lua_tostring(L, -1);
+		id = SceneHandler::AddText(text);
+	}
 
 	//Return the id to LUA
 	lua_pushnumber(L, id);
 	return 1;
+}
+
+int GUI::L_SetTextPosition(lua_State* L)
+{
+	if (lua_isnumber(L, -1) &&
+		lua_isnumber(L, -2) &&
+		lua_isnumber(L, -3))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -3));
+		irr::core::vector2di pos;
+		pos.X = static_cast<int>(lua_tonumber(L, -2));
+		pos.Y = static_cast<int>(lua_tonumber(L, -1));
+		SceneHandler::SetTextPosition(id, pos);
+	}
+	return 0;
+}
+
+int GUI::L_SetTextSize(lua_State* L)
+{
+	if (lua_isnumber(L, -1) &&
+		lua_isnumber(L, -2) &&
+		lua_isnumber(L, -3))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -3));
+		irr::core::vector2d<irr::u32> size;
+		size.X = static_cast<unsigned int>(lua_tonumber(L, -2));
+		size.Y = static_cast<unsigned int>(lua_tonumber(L, -1));
+		SceneHandler::SetTextSize(id, size);
+	}
+	return 0;
 }
 
 int GUI::L_UpdateText(lua_State* L)
@@ -475,6 +485,18 @@ int GUI::L_SetTextAlignment(lua_State* L)
 			alignment = irr::gui::EGUI_ALIGNMENT::EGUIA_CENTER;
 		}
 		SceneHandler::SetTextAlignment(id, alignment);
+	}
+	return 0;
+}
+
+int GUI::L_SetTextFont(lua_State* L)
+{
+	if (lua_isnumber(L, -2) &&
+		lua_isstring(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+		std::string fontname = lua_tostring(L, -1);
+		SceneHandler::SetTextFont(id, fontname);
 	}
 	return 0;
 }
@@ -615,32 +637,7 @@ int L_IsKeyReleasedOnce(lua_State* L)
 
 int GUI::L_AddButton(lua_State* L)
 {
-	/*
-		Arguments:	Text[string], Font[string], Pos[vector2di], Size[vector2di]
-		Return:		ID[int]
-	*/
-
-	//Default values
-	std::string text = "";
-	std::string fontfile = "";
-	irr::core::vector2di pos = { 0,0 };
-	irr::core::vector2di size = { 100,50 };
-
-	// Get the data from LUA-stack
-	if (lua_type(L, -6) == LUA_TSTRING)
-		text = lua_tostring(L, -6);
-	if (lua_type(L, -5) == LUA_TSTRING)
-		fontfile = lua_tostring(L, -5);
-	if (lua_type(L, -4) == LUA_TNUMBER)
-		pos.X = static_cast<int>(lua_tonumber(L, -4));
-	if (lua_type(L, -3) == LUA_TNUMBER)
-		pos.Y = static_cast<int>(lua_tonumber(L, -3));
-	if (lua_type(L, -2) == LUA_TNUMBER)
-		size.X = static_cast<int>(lua_tonumber(L, -2));
-	if (lua_type(L, -1) == LUA_TNUMBER)
-		size.Y = static_cast<int>(lua_tonumber(L, -1));
-
-	unsigned int id = SceneHandler::AddButton(text, fontfile, pos, size);
+	unsigned int id = SceneHandler::AddButton();
 
 	//Return the id to LUA
 	lua_pushnumber(L, id);
@@ -669,6 +666,69 @@ int GUI::L_RemoveButton(lua_State* L)
 	{
 		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -1));
 		SceneHandler::RemoveButton(id);
+	}
+	return 0;
+}
+
+int GUI::L_SetButtonPosition(lua_State* L)
+{
+	if (lua_isnumber(L, -1) &&
+		lua_isnumber(L, -2) &&
+		lua_isnumber(L, -3))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -3));
+		irr::core::vector2di pos;
+		pos.X = static_cast<int>(lua_tonumber(L, -2));
+		pos.Y = static_cast<int>(lua_tonumber(L, -1));
+		SceneHandler::SetButtonPosition(id, pos);
+	}
+	return 0;
+}
+
+int GUI::L_SetButtonSize(lua_State* L)
+{
+	if (lua_isnumber(L, -1) &&
+		lua_isnumber(L, -2) &&
+		lua_isnumber(L, -3))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -3));
+		irr::core::vector2d<irr::u32> size;
+		size.X = static_cast<unsigned int>(lua_tonumber(L, -2));
+		size.Y = static_cast<unsigned int>(lua_tonumber(L, -1));
+		SceneHandler::SetButtonSize(id, size);
+	}
+	return 0;
+}
+
+int GUI::L_SetButtonText(lua_State* L)
+{
+	if (lua_isnumber(L, -2) && lua_isstring(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+		std::string text = lua_tostring(L, -1);
+		SceneHandler::SetButtonText(id, text);
+	}
+	return 0;
+}
+
+int GUI::L_SetButtonFont(lua_State* L)
+{
+	if (lua_isnumber(L, -2) && lua_isstring(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+		std::string fontname = lua_tostring(L, -1);
+		SceneHandler::SetButtonFont(id, fontname);
+	}
+	return 0;
+}
+
+int GUI::L_SetButtonImage(lua_State* L)
+{
+	if (lua_isnumber(L, -2) && lua_isstring(L, -1))
+	{
+		unsigned int id = static_cast<unsigned int>(lua_tonumber(L, -2));
+		std::string filename = lua_tostring(L, -1);
+		SceneHandler::SetButtonImage(id, filename);
 	}
 	return 0;
 }
