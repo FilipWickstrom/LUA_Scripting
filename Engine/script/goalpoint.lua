@@ -22,7 +22,7 @@ function goalPoint:Update()
 
 		if C_CheckSpriteCollision(self.id, player.id) then
 
-			C_ChangeScene(Scenes.GAMEOVER)
+			C_ChangeScene(Scenes.WIN)
 
 		end
 

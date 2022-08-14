@@ -12,14 +12,14 @@ function Start()
 	local verticalSpace	= textSize.Y * 2
 
 	-- Main text
-	GUI["Title"] = C_AddText("Game Over...")
+	GUI["Title"] = C_AddText("You win!")
 	guiID = GUI["Title"]
 	C_SetTextSize(guiID, textSize.X, textSize.Y)
 	C_SetTextPosition(guiID, (window.X - textSize.X)/2, yDistance)
 	yDistance = yDistance + verticalSpace
 
 	-- Undertitle
-	GUI["UnderTitle"] = C_AddText("You died :(")
+	GUI["UnderTitle"] = C_AddText("You escaped the dungeon :)")
 	guiID = GUI["UnderTitle"]
 	C_SetTextSize(guiID, btnSize.X, btnSize.Y)
 	C_SetTextPosition(guiID, (window.X - btnSize.X)/2, yDistance)

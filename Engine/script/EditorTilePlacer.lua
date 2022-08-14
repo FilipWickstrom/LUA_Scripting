@@ -74,43 +74,43 @@ end
 
 function tilePlacer:Update()
 
-	if (C_IsButtonPressed(GUI[wallTile.type])) then
+	if (C_IsButtonPressed(GUI[wallTile.type]) or C_IsKeyDown(keys.ONE)) then
 		self:SetBlock(wallTile)
 		return true
 
-	elseif (C_IsButtonPressed(GUI[doorTile.type])) then
+	elseif (C_IsButtonPressed(GUI[doorTile.type]) or C_IsKeyDown(keys.TWO)) then
 		self:SetBlock(doorTile)
 		return true
 
-	elseif (C_IsButtonPressed(GUI[floorTile.type])) then
+	elseif (C_IsButtonPressed(GUI[floorTile.type]) or C_IsKeyDown(keys.THREE)) then
 		self:SetBlock(floorTile)
 		return true
 
-	elseif (C_IsButtonPressed(GUI[spawnpoint.type])) then
+	elseif (C_IsButtonPressed(GUI[spawnpoint.type]) or C_IsKeyDown(keys.FOUR)) then
 		self:SetBlock(spawnpoint)
 		return true
 
-	elseif (C_IsButtonPressed(GUI[goalpoint.type])) then
+	elseif (C_IsButtonPressed(GUI[goalpoint.type])or C_IsKeyDown(keys.FIVE)) then
 		self:SetBlock(goalpoint)
 		return true
 
-	elseif (C_IsButtonPressed(GUI[powerup.type])) then
+	elseif (C_IsButtonPressed(GUI[powerup.type]) or C_IsKeyDown(keys.SIX)) then
 		self:SetBlock(powerup)
 		return true
 
-	elseif (C_IsButtonPressed(GUI[monster.type])) then
+	elseif (C_IsButtonPressed(GUI[monster.type]) or C_IsKeyDown(keys.SEVEN)) then
 		self:SetBlock(monster)
 		return true
 
-	elseif (C_IsButtonPressed(GUI[monkey.type])) then
+	elseif (C_IsButtonPressed(GUI[monkey.type]) or C_IsKeyDown(keys.EIGHT)) then
 		self:SetBlock(monkey)
 		return true
 
-	elseif (C_IsButtonPressed(GUI[shooter.type])) then
+	elseif (C_IsButtonPressed(GUI[shooter.type]) or C_IsKeyDown(keys.NINE)) then
 		self:SetBlock(shooter)
 		return true
 
-	elseif (C_IsButtonPressed(GUI[bouncy.type])) then
+	elseif (C_IsButtonPressed(GUI[bouncy.type]) or C_IsKeyDown(keys.ZERO)) then
 		self:SetBlock(bouncy)
 		return true
 

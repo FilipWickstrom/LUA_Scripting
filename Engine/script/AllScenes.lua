@@ -6,7 +6,8 @@ Scenes =
    MENU		= "MenuScene.lua",
    GAME		= "GameScene.lua",
    EDITOR	= "EditorScene.lua",
-   GAMEOVER = "GameOverScene.lua"
+   GAMEOVER = "GameOverScene.lua",
+   WIN		= "WinScene.lua"
 }
 
 -- Starting in this scene
