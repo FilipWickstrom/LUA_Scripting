@@ -6,7 +6,7 @@ function goalPoint:New()
 
 	local g = gameObject:New()
 	g.type = 'goalpoint'
-	g.defaultsprite = 'hole.png'
+	g.defaultsprite = 'floor_ladder.png'
 
 	self.__index = goalPoint
 	setmetatable(g, self)

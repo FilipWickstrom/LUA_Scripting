@@ -6,7 +6,7 @@ function spawnPoint:New()
 
 	local g = gameObject:New()
 	g.type = 'spawnpoint'
-	g.defaultsprite = 'column_top.png'
+	g.defaultsprite = 'wall_banner_yellow.png'
 	g.image2d = -1
 
 	self.__index = spawnPoint

@@ -18,16 +18,16 @@ local GUI = {}
 
 function tilePlacer:Initialize()
 
-	-- start with the wall tile
-	self:SetBlock(wallTile)
+	-- start with the floor tile
+	self:SetBlock(floorTile)
 
 	local tiles = { 
 		-- Ground
-		{ name = wallTile.type,		image = wallTile.defaultsprite},
-		{ name = doorTile.type,		image = doorTile.defaultsprite},
 		{ name = floorTile.type,	image = floorTile.defaultsprite},
+		{ name = wallTile.type,		image = wallTile.defaultsprite},
 		{ name = spawnpoint.type,	image = spawnpoint.defaultsprite},
 		{ name = goalpoint.type,	image = goalpoint.defaultsprite},
+		{ name = doorTile.type,		image = doorTile.defaultsprite},
 
 		-- Items
 		{ name = powerup.type,		image = powerup.defaultsprite},
@@ -74,24 +74,24 @@ end
 
 function tilePlacer:Update()
 
-	if (C_IsButtonPressed(GUI[wallTile.type]) or C_IsKeyDown(keys.ONE)) then
+	if (C_IsButtonPressed(GUI[floorTile.type]) or C_IsKeyDown(keys.ONE)) then
+		self:SetBlock(floorTile)
+		return true
+	
+	elseif (C_IsButtonPressed(GUI[wallTile.type]) or C_IsKeyDown(keys.TWO)) then
 		self:SetBlock(wallTile)
 		return true
 
-	elseif (C_IsButtonPressed(GUI[doorTile.type]) or C_IsKeyDown(keys.TWO)) then
-		self:SetBlock(doorTile)
-		return true
-
-	elseif (C_IsButtonPressed(GUI[floorTile.type]) or C_IsKeyDown(keys.THREE)) then
-		self:SetBlock(floorTile)
-		return true
-
-	elseif (C_IsButtonPressed(GUI[spawnpoint.type]) or C_IsKeyDown(keys.FOUR)) then
+	elseif (C_IsButtonPressed(GUI[spawnpoint.type]) or C_IsKeyDown(keys.THREE)) then
 		self:SetBlock(spawnpoint)
 		return true
 
-	elseif (C_IsButtonPressed(GUI[goalpoint.type])or C_IsKeyDown(keys.FIVE)) then
+	elseif (C_IsButtonPressed(GUI[goalpoint.type])or C_IsKeyDown(keys.FOUR)) then
 		self:SetBlock(goalpoint)
+		return true
+
+	elseif (C_IsButtonPressed(GUI[doorTile.type]) or C_IsKeyDown(keys.FIVE)) then
+		self:SetBlock(doorTile)
 		return true
 
 	elseif (C_IsButtonPressed(GUI[powerup.type]) or C_IsKeyDown(keys.SIX)) then

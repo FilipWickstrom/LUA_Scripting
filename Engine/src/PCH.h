@@ -57,7 +57,6 @@ const float TILE_SIZE = 16.f;
 #define DEBUG_UI 0
 #define DEBUG_AABB_HITBOXES 0
 #define DEBUG_CIRCULAR_HITBOXES 0
-
 #define DEBUG_LUA_GLOBALS 0
 
 /*
