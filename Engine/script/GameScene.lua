@@ -71,6 +71,9 @@ function Update(dt)
 		return
 	end
 
+	weaponText:Update()
+	goldText:Update()
+
 	deltatime = dt
 	-- Loop through all objects
 	for num, obj in pairs(objects) do
@@ -90,8 +93,6 @@ function Update(dt)
 	UpdateProjectiles()
 
 	weaponDrops:Update()
-	weaponText:Update()
-	goldText:Update()
 
 	camera:SetPosition(player.position.x, player.position.z)
 	camera:UpdateZoom()
