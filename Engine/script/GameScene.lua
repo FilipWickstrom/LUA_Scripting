@@ -84,6 +84,7 @@ function Update(dt)
 
 	-- Update player
 	player:Update()
+	weaponDrops:Update()
 	UpdateProjectiles()
 
 	camera:SetPosition(player.position.x, player.position.z)
