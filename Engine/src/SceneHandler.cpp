@@ -1,7 +1,6 @@
 #include "PCH.h"
 #include "SceneHandler.h"
 #include "CppToLua.h"
-//#include "CGUITTFont.h"
 
 SceneHandler::SceneHandler()
 {
@@ -348,37 +347,6 @@ unsigned int SceneHandler::AddText(const std::string& text)
 
     irrText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
     irrText->setOverrideColor(irr::video::SColor(255, 255, 255, 255));
-
-//    std::wstring wstring(text.begin(), text.end());
-//    irr::gui::IGUIStaticText* irrText = Graphics::GetGUIEnvironment()->addStaticText
-//    (
-//        wstring.c_str(),
-//        irr::core::rect<irr::s32>(
-//            pos.X - (size.X / 2),
-//            pos.Y - (size.Y / 2),
-//            pos.X + (size.X / 2),
-//            pos.Y + (size.Y / 2)),
-//        false, false
-//    );
-//#if DEBUG_UI
-//    irrText->setDrawBorder(true);
-//#endif
-//
-//    //Set color of the text to white
-//    irrText->setOverrideColor(irr::video::SColor(255, 255, 255, 255));
-//    //Center text by default
-//    irrText->setTextAlignment(irr::gui::EGUIA_CENTER, irr::gui::EGUIA_CENTER);
-//
-//    //Set an ID for the GUI
-//    unsigned int id = Get().m_textUID++;
-//    irrText->setID(id);
-//
-//    std::string fontstr = FONTPATH + font;
-//    irr::gui::IGUIFont* irrfont = Graphics::GetGUIEnvironment()->getFont(fontstr.c_str());
-//    if (irrfont)
-//        irrText->setOverrideFont(irrfont);
-//
-//    Get().m_texts[id] = irrText;
 
     return id;
 }

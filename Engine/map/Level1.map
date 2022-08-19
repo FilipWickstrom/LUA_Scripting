@@ -2488,14 +2488,6 @@ collision=1
 
 {
 type=floor
-sprite=floor_1.png
-pos=-64.0 0.0 -432.0
-visible=1
-collision=1
-}
-
-{
-type=floor
 sprite=floor_3.png
 pos=-64.0 0.0 -448.0
 visible=1
@@ -2610,14 +2602,6 @@ collision=1
 type=floor
 sprite=floor_6.png
 pos=128.0 0.0 -480.0
-visible=1
-collision=1
-}
-
-{
-type=floor
-sprite=floor_3.png
-pos=144.0 0.0 -480.0
 visible=1
 collision=1
 }
@@ -4625,22 +4609,6 @@ collision=1
 {
 type=powerup
 sprite=chest.png
-pos=-64.0 1.0 -416.0
-visible=1
-collision=1
-}
-
-{
-type=powerup
-sprite=chest.png
-pos=-64.0 1.0 -432.0
-visible=1
-collision=1
-}
-
-{
-type=powerup
-sprite=chest.png
 pos=-256.0 1.0 -464.0
 visible=1
 collision=1
@@ -4666,22 +4634,6 @@ collision=1
 type=bouncy
 sprite=ogre.png
 pos=48.0 2.0 -192.0
-visible=1
-collision=1
-}
-
-{
-type=shooter
-sprite=zombie_big.png
-pos=128.0 2.0 -464.0
-visible=1
-collision=1
-}
-
-{
-type=monkey
-sprite=necromancer.png
-pos=-112.0 2.0 -464.0
 visible=1
 collision=1
 }
@@ -4945,7 +4897,7 @@ collision=1
 {
 type=floor
 sprite=floor_3.png
-pos=-96.0 0.0 32.0
+pos=-80.0 0.0 32.0
 visible=1
 collision=1
 }
@@ -4977,7 +4929,7 @@ collision=1
 {
 type=floor
 sprite=floor_5.png
-pos=-80.0 0.0 16.0
+pos=-96.0 0.0 32.0
 visible=1
 collision=1
 }
@@ -5793,15 +5745,7 @@ collision=1
 {
 type=spawnpoint
 sprite=wall_banner_yellow.png
-pos=-80.0 0.0 32.0
-visible=1
-collision=1
-}
-
-{
-type=goalpoint
-sprite=floor_ladder.png
-pos=144.0 0.0 -432.0
+pos=-80.0 0.0 16.0
 visible=1
 collision=1
 }
@@ -6946,6 +6890,70 @@ collision=1
 type=floor
 sprite=floor_5.png
 pos=32.0 0.0 -176.0
+visible=1
+collision=1
+}
+
+{
+type=shooter
+sprite=zombie_big.png
+pos=48.0 2.0 -448.0
+visible=1
+collision=1
+}
+
+{
+type=goalpoint
+sprite=floor_ladder.png
+pos=144.0 0.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_8.png
+pos=144.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=monkey
+sprite=necromancer.png
+pos=-80.0 2.0 -224.0
+visible=1
+collision=1
+}
+
+{
+type=monster
+sprite=swampy.png
+pos=-64.0 2.0 -480.0
+visible=1
+collision=1
+}
+
+{
+type=floor
+sprite=floor_8.png
+pos=-64.0 0.0 -432.0
+visible=1
+collision=1
+}
+
+{
+type=powerup
+sprite=chest.png
+pos=-48.0 1.0 -384.0
+visible=1
+collision=1
+}
+
+{
+type=powerup
+sprite=chest.png
+pos=144.0 1.0 -432.0
 visible=1
 collision=1
 }

@@ -9,7 +9,7 @@ function BasicBoss:New()
 	g.worth = 30
 	g.xp = 25
 	g.damage = 25
-	g.speed = 5
+	g.speed = 25
 	g.type = "bouncy"
 	g.name = "enemy"
 	g.defaultsprite = 'ogre.png'
@@ -49,30 +49,6 @@ function BasicBoss:Chase()
 
 	self:Move(self.direction)
 
-	-- [DOES NOT WORK] temporary bounce that works better than the one above.
-	-- loop through all objects, any collision?
-	--[[
-	for num, obj in pairs(objects) do
-
-		if C_CheckSpriteCollision(self.id, obj.id) and self.id ~= obj.id then
-			if self.position.x < obj.position.x then
-				self.direction.x = -1 
-			else
-				self.direction.x = 1
-			end
-
-			if self.position.z < obj.position.z then
-				self.direction.z = -1
-			else
-				self.direction.z = 1
-			end
-
-		end
-
-	end
-	]]--
-
-	self:Move(self.direction)
 end
 
 function BasicBoss:Attack()

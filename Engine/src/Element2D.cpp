@@ -1,6 +1,5 @@
 #include "PCH.h"
 #include "Element2D.h"
-#include <utility>
 
 Element2D::Element2D()
 {

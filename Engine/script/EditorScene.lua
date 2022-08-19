@@ -1,18 +1,8 @@
 require('script/AllScenes')
+require('script/File')
 local vector = require('script/Vector')
 local Camera = require('script/Camera')
-local selectedBlock = require('script/WallTile')
-require('script/File')
-
--- Placing tiles 'requires'
 local selector	= require('script/EditorTilePlacer')
-local wallTile	= require('script/WallTile')
-local doorTile	= require('script/DoorTile')
-local monster	= require('script/Monster')
-local monkey	= require('script/ThrowingEnemy')
-local bouncy	= require('script/BasicBossEnemy')
-local shooter	= require('script/ThrowingBoss')
-local powerup	= require('script/Powerups')
 
 -- "Globals" in this scope
 local objects = {}

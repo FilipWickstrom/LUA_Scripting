@@ -12,12 +12,13 @@ function ThrowBoss:New()
 	g.worth = 30
 	g.xp = 25
 	g.damage = 5
-	g.speed = math.random(5) + 1
+	g.speed = 25
 	g.type = "shooter"
 	g.name = "enemy"
 	g.defaultsprite = 'zombie_big.png'
 
 	g.direction = Vector:New()
+	g.direction.x = 1
 	g.gid = C_AddHealthbar(0.0, 0.0, 145.0, 50.0, g.hp)
 
 	--g.id = C_LoadSprite('ogre.png')
@@ -49,24 +50,15 @@ end
 
 function ThrowBoss:Chase()
 
-	-- loop through all objects, any collision?
-	for num, obj in pairs(objects) do
+	-- Go through all the wall tiles
+	for i = 1, #walls do
 
-		if C_CheckSpriteCollision(self.id, obj.id) and self.id ~= obj.id then
-			if self.position.x < obj.position.x then
-				self.direction.x = -1 
-			else
-				self.direction.x = 1
-			end
-
-			if self.position.z > obj.position.z then
-				self.direction.z = -1
-			else
-				self.direction.z = 1
-			end
-
+		-- Not the best collision :(
+		if C_CheckSpriteCollision(self.id, walls[i].id) then
+			self.direction.x = self.direction.x * -1
+			self.direction.z = self.direction.z * -1
+			break
 		end
-
 	end
 
 	self:Move(self.direction)
