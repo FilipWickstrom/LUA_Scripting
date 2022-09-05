@@ -1,19 +1,26 @@
 # Scripting project
-This is a project where we made a small game with a level editor using C++ and LUA.
+This is a project where we made a small game and a level editor using C++ and LUA.
 
-Main functionality is done in C++ and most of the game logic is within LUA. 
+Main functionality is done in C++ and all of the game logic is within LUA. 
 
 All of the C++ functions that can be used in LUA is starting with "C_"... in the function name.
 
+# Minimum requirements
+* Windows 10
+* Visual Studio 2019
+
 # How to build and run
 Build the visual studio project with "build.bat". 
-It is building for VS2019, but can be easily changed to other versions of VS as well if needed by editing the file. 
+It is building for VS2019, but can be easily changed to other versions of VS (2019 and 2022 has been tested) as well if needed by editing the file. 
 Run the program in visual studio in "release" for best performance.
 
 # Game
 Movement is with "WASD" and "mouse1" is for shooting projectiles.
 "Escape" can be used to go back to menu.
 The goal of the game is to reach the finishline while avoiding all the dangerous monsters and escape the dungeon.
+
+![Game](https://github.com/davidwingqvist/Skriptning_DV1570_Grupp5/blob/master/Images/Game.png)
+![Game2](https://github.com/davidwingqvist/Skriptning_DV1570_Grupp5/blob/master/Images/Game2.png)
 
 # Level editor
 It is possible to move the camera with "WASD" and zoom in with "+" and out with "-" on the keyboard.
@@ -31,6 +38,9 @@ With the buttons in the top left corner it is possible to:
 1. Create a new level.
 2. Load the saved level.
 3. Save the current level to a file.
+
+![Editor](https://github.com/davidwingqvist/Skriptning_DV1570_Grupp5/blob/master/Images/Editor.png)
+![Editor2](https://github.com/davidwingqvist/Skriptning_DV1570_Grupp5/blob/master/Images/Editor2.png)
 
 # Libraries and third parties
 * [Irrlicht Engine (1.8.5)](https://irrlicht.sourceforge.io/)
